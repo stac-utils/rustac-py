@@ -1,6 +1,6 @@
 # stacrs
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/gadomski/stacrs/ci.yml?branch=main&style=for-the-badge)](https://github.com/gadomski/stacrs/actions/workflows/ci.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/gadomski/stacrs/ci.yaml?branch=main&style=for-the-badge)](https://github.com/gadomski/stacrs/actions/workflows/ci.yaml)
 [![PyPI - Version](https://img.shields.io/pypi/v/stacrs?style=for-the-badge)](https://pypi.org/project/stacrs)
 ![PyPI - License](https://img.shields.io/pypi/l/stacrs?style=for-the-badge)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
