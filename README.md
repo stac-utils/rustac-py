@@ -5,7 +5,7 @@
 ![PyPI - License](https://img.shields.io/pypi/l/stacrs?style=for-the-badge)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
 
-A no-dependency Python package for [STAC](https://stacspec.org/), using Rust under the hood.
+A small no-dependency Python package for [STAC](https://stacspec.org/), using Rust under the hood.
 
 ## Usage
 
