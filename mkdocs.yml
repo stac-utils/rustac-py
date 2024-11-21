@@ -1,0 +1,66 @@
+site_name: stacrs
+site_description: A small no-dependency Python package for STAC, using Rust under the hood.
+site_url: https://gadom.ski/stacrs
+repo_url: https://github.com/gadomski/stacrs
+theme:
+  name: material
+  logo: img/stac-ferris.png
+  icon:
+    repo: fontawesome/brands/github
+  favicon: img/stac-ferris.png
+  features:
+    - navigation.indexes
+    - navigation.footer
+  palette:
+    scheme: stac
+    primary: custom
+
+nav:
+  - Home: index.md
+  - Example notebook: example.ipynb
+  - API:
+      - api/index.md
+      - migrate: api/migrate.md
+      - read: api/read.md
+      - search: api/search.md
+      - validate: api/validate.md
+      - version: api/version.md
+      - write: api/write.md
+  - CONTRIBUTING.md
+
+plugins:
+  - mike
+  - mkdocs-jupyter
+  - mkdocstrings:
+      enable_inventory: true
+      handlers:
+        python:
+          load_external_modules: false
+          options:
+            show_root_heading: true
+            show_signature: true
+            show_signature_annotations: true
+            separate_signature: true
+  - search
+  - social:
+      cards_layout_options:
+        color: rgb(26, 78, 99)
+        background_color: rgb(228, 246, 251)
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+
+extra:
+  version:
+    provider: mike
+
+extra_css:
+  - stylesheets/extra.css
