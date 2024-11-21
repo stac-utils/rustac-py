@@ -66,8 +66,8 @@ Then:
 ```shell
 git clone git@github.com:gadomski/stacrs.git
 cd stacrs
-uv sync
-pytest
+uv sync  # This will take a little while while the Rust dependencies build
+uv run pytest
 ```
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information about contributing to this project.
