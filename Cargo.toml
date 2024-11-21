@@ -26,3 +26,4 @@ tokio = { version = "1.41.1", features = ["rt"] }
 # We don't use duckdb directly, but we need to pin the version to v1.0 for now: https://github.com/stac-utils/stac-rs/issues/385
 duckdb = { version = "=1.0.0", features = ["bundled"] }
 libduckdb-sys = "=1.0.0"
+openssl = { version = "0.10.68", features = ["vendored"] }
