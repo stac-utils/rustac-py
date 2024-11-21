@@ -17,7 +17,7 @@ jobs:
       - name: Sync
         run: uv sync
       - name: Deploy
-        run: mike deploy ${{ github.ref_name }} latest --push
+        run: uv run mike deploy ${{ github.ref_name }} latest --push
         env:
           GIT_COMMITTER_NAME: ci-bot
           GIT_COMMITTER_EMAIL: ci-bot@example.com
