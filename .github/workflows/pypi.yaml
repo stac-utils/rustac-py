@@ -26,8 +26,6 @@ jobs:
           - runner: ubuntu-latest
             target: armv7
           - runner: ubuntu-latest
-            target: s390x
-          - runner: ubuntu-latest
             target: ppc64le
     steps:
       - uses: actions/checkout@v4
