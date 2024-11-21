@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.3.0] - 2024-11-21
+
 ### Removed
 
 - Validation, pending <https://github.com/stac-utils/stac-rs/issues/517>
@@ -85,7 +87,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/stac-utils/stac-rs/compare/python-v0.2.2...main
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.3.0...main
+[0.3.0]: https://github.com/gadomski/stacrs/releases/tag/v0.3.0
 [0.2.2]: https://github.com/stac-utils/stac-rs/compare/python-v0.2.1...python-v0.2.2
 [0.2.1]: https://github.com/stac-utils/stac-rs/compare/python-v0.2.0...python-v0.2.1
 [0.2.0]: https://github.com/stac-utils/stac-rs/compare/python-v0.1.3...python-v0.2.0
