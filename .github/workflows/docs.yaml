@@ -17,7 +17,10 @@ jobs:
       - name: Sync
         run: uv sync
       - name: Deploy
-        run: mike deploy ${{ github.ref_name }} latest
+        run: mike deploy ${{ github.ref_name }} latest --push
+        env:
+          GIT_COMMITTER_NAME: ci-bot
+          GIT_COMMITTER_EMAIL: ci-bot@example.com
       - name: Checkout gh-pages
         run: git checkout gh-pages
       - uses: actions/upload-pages-artifact@v3
