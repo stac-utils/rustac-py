@@ -2340,25 +2340,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "python"
-version = "0.3.0"
-dependencies = [
- "duckdb",
- "geojson",
- "libduckdb-sys",
- "openssl",
- "pyo3",
- "pythonize",
- "serde",
- "serde_json",
- "stac",
- "stac-api",
- "stac-duckdb",
- "stac-types",
- "tokio",
-]
-
-[[package]]
 name = "pythonize"
 version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3058,6 +3039,25 @@ dependencies = [
  "thiserror 1.0.69",
  "tracing",
  "url",
+]
+
+[[package]]
+name = "stacrs"
+version = "0.3.0"
+dependencies = [
+ "duckdb",
+ "geojson",
+ "libduckdb-sys",
+ "openssl",
+ "pyo3",
+ "pythonize",
+ "serde",
+ "serde_json",
+ "stac",
+ "stac-api",
+ "stac-duckdb",
+ "stac-types",
+ "tokio",
 ]
 
 [[package]]

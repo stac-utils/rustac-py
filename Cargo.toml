@@ -1,5 +1,5 @@
 [package]
-name = "python"
+name = "stacrs"
 version = "0.3.0"
 edition = "2021"
 publish = false
