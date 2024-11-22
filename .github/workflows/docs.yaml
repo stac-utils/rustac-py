@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -19,6 +20,7 @@ jobs:
       - name: Sync
         run: uv sync
       - name: Deploy
+        if: github.event_name == 'push'
         run: uv run mike deploy ${{ github.ref_name }} latest --push
         env:
           GIT_COMMITTER_NAME: ci-bot
