@@ -17,6 +17,7 @@ jobs:
         with:
           fetch-depth: 0 # to get gh-pages
       - uses: astral-sh/setup-uv@v3
+      - uses: Swatinem/rust-cache@v2
       - name: Sync
         run: uv sync
       - name: Deploy
