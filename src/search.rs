@@ -129,7 +129,65 @@ fn search_items<'py>(
     query: Option<Bound<'py, PyDict>>,
     use_duckdb: Option<bool>,
 ) -> PyResult<Vec<Item>> {
-    // TODO refactor to use https://github.com/gadomski/stacrs/blob/1528d7e1b7185a86efe9fc7c42b0620093c5e9c6/src/search.rs#L128-L162
+    let mut search = build_search(
+        py,
+        intersects,
+        ids,
+        collections,
+        limit,
+        bbox,
+        datetime,
+        include,
+        exclude,
+        sortby,
+        filter,
+        query,
+    )?;
+    if use_duckdb
+        .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))))
+    {
+        if let Some(max_items) = max_items {
+            search.items.limit = Some(max_items.try_into()?);
+        }
+        let client = Client::from_href(href).map_err(Error::from)?;
+        client
+            .search_to_json(search)
+            .map(|item_collection| item_collection.items)
+            .map_err(Error::from)
+            .map_err(PyErr::from)
+    } else {
+        let client = BlockingClient::new(&href).map_err(Error::from)?;
+        let items = client.search(search).map_err(Error::from)?;
+        if let Some(max_items) = max_items {
+            items
+                .take(max_items)
+                .collect::<Result<_, _>>()
+                .map_err(Error::from)
+                .map_err(PyErr::from)
+        } else {
+            items
+                .collect::<Result<_, _>>()
+                .map_err(Error::from)
+                .map_err(PyErr::from)
+        }
+    }
+}
+
+/// Builds a [Search] from Python arguments.
+pub fn build_search<'py>(
+    py: Python<'py>,
+    intersects: Option<StringOrDict>,
+    ids: Option<StringOrList>,
+    collections: Option<StringOrList>,
+    limit: Option<u64>,
+    bbox: Option<Vec<f64>>,
+    datetime: Option<String>,
+    include: Option<StringOrList>,
+    exclude: Option<StringOrList>,
+    sortby: Option<StringOrList>,
+    filter: Option<StringOrDict>,
+    query: Option<Bound<'py, PyDict>>,
+) -> PyResult<Search> {
     let mut fields = Fields::default();
     if let Some(include) = include {
         fields.include = include.into();
@@ -188,40 +246,12 @@ fn search_items<'py>(
         .transpose()?;
     let ids = ids.map(|ids| ids.into());
     let collections = collections.map(|ids| ids.into());
-    let mut search = Search {
+    Ok(Search {
         items,
         intersects,
         ids,
         collections,
-    };
-    if use_duckdb
-        .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))))
-    {
-        if let Some(max_items) = max_items {
-            search.items.limit = Some(max_items.try_into()?);
-        }
-        let client = Client::from_href(href).map_err(Error::from)?;
-        client
-            .search_to_json(search)
-            .map(|item_collection| item_collection.items)
-            .map_err(Error::from)
-            .map_err(PyErr::from)
-    } else {
-        let client = BlockingClient::new(&href).map_err(Error::from)?;
-        let items = client.search(search).map_err(Error::from)?;
-        if let Some(max_items) = max_items {
-            items
-                .take(max_items)
-                .collect::<Result<_, _>>()
-                .map_err(Error::from)
-                .map_err(PyErr::from)
-        } else {
-            items
-                .collect::<Result<_, _>>()
-                .map_err(Error::from)
-                .map_err(PyErr::from)
-        }
-    }
+    })
 }
 
 #[derive(FromPyObject)]
