@@ -40,7 +40,7 @@ pub fn write<'py>(
         })
         .map_err(Error::from)?;
     if let Some(put_result) = put_result {
-        let dict = PyDict::new_bound(py);
+        let dict = PyDict::new(py);
         if let Some(e_tag) = put_result.e_tag {
             dict.set_item("e_tag", e_tag)?;
         }
