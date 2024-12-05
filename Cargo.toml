@@ -11,7 +11,6 @@ crate-type = ["cdylib"]
 geojson = "0.24.1"
 pyo3 = "0.23.3"
 pythonize = "0.23.0"
-serde = "1.0.215"
 serde_json = "1.0.133"
 stac = { version = "0.11.0", features = [
     "geoparquet-compression",
@@ -20,6 +19,7 @@ stac = { version = "0.11.0", features = [
 stac-api = { version = "0.6.2", features = ["client"] }
 stac-duckdb = "0.0.3"
 stac-types = "0.1.0"
+thiserror = "2.0.4"
 tokio = { version = "1.42.0", features = ["rt"] }
 
 # We don't use duckdb directly, but we need to pin the version to v1.0 for now: https://github.com/stac-utils/stac-rs/issues/385

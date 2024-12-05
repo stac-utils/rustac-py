@@ -11,9 +11,7 @@ pub fn migrate<'py>(
     let py = value.py();
     let value: Value = pythonize::depythonize(value)?;
     let version = version
-        .map(|version| version.parse())
-        .transpose()
-        .map_err(Error::from)?
+        .map(|version| version.parse().unwrap())
         .unwrap_or_default();
     let value = value.migrate(&version).map_err(Error::from)?;
     let value = pythonize::pythonize(py, &value)?;
@@ -29,9 +27,7 @@ pub fn migrate_href<'py>(
 ) -> PyResult<Bound<'py, PyDict>> {
     let value: Value = stac::read(href).map_err(Error::from)?;
     let version = version
-        .map(|version| version.parse())
-        .transpose()
-        .map_err(Error::from)?
+        .map(|version| version.parse().unwrap())
         .unwrap_or_default();
     let value = value.migrate(&version).map_err(Error::from)?;
     let value = pythonize::pythonize(py, &value)?;

@@ -1,53 +1,40 @@
-use std::convert::Infallible;
-
 use pyo3::{exceptions::PyException, PyErr};
+use thiserror::Error;
 
-pub struct Error(pub String);
+#[derive(Debug, Error)]
+pub enum Error {
+    #[error(transparent)]
+    Geojson(#[from] geojson::Error),
 
-impl From<stac::Error> for Error {
-    fn from(value: stac::Error) -> Self {
-        Error(value.to_string())
-    }
-}
+    #[error(transparent)]
+    Pythonize(#[from] pythonize::PythonizeError),
 
-impl From<stac_api::Error> for Error {
-    fn from(value: stac_api::Error) -> Self {
-        Error(value.to_string())
-    }
-}
+    #[error(transparent)]
+    SerdeJson(#[from] serde_json::Error),
 
-impl From<stac_duckdb::Error> for Error {
-    fn from(value: stac_duckdb::Error) -> Self {
-        Error(value.to_string())
-    }
-}
+    #[error(transparent)]
+    Stac(#[from] stac::Error),
 
-impl From<stac_types::Error> for Error {
-    fn from(value: stac_types::Error) -> Self {
-        Error(value.to_string())
-    }
-}
+    #[error(transparent)]
+    StacApi(#[from] stac_api::Error),
 
-impl From<geojson::Error> for Error {
-    fn from(value: geojson::Error) -> Self {
-        Error(value.to_string())
-    }
-}
+    #[error(transparent)]
+    StacDuckdb(#[from] stac_duckdb::Error),
 
-impl From<serde_json::Error> for Error {
-    fn from(value: serde_json::Error) -> Self {
-        Error(value.to_string())
-    }
-}
-
-impl From<Infallible> for Error {
-    fn from(_: Infallible) -> Self {
-        unreachable!()
-    }
+    #[error(transparent)]
+    StacTypes(#[from] stac_types::Error),
 }
 
 impl From<Error> for PyErr {
     fn from(value: Error) -> Self {
-        PyException::new_err(value.0)
+        match value {
+            Error::Geojson(err) => PyException::new_err(err.to_string()),
+            Error::Pythonize(err) => PyException::new_err(err.to_string()),
+            Error::SerdeJson(err) => PyException::new_err(err.to_string()),
+            Error::Stac(err) => PyException::new_err(err.to_string()),
+            Error::StacApi(err) => PyException::new_err(err.to_string()),
+            Error::StacDuckdb(err) => PyException::new_err(err.to_string()),
+            Error::StacTypes(err) => PyException::new_err(err.to_string()),
+        }
     }
 }
