@@ -1,12 +1,13 @@
 use crate::Error;
-use geojson::Geometry;
 use pyo3::{
     prelude::*,
     types::{PyDict, PyList},
 };
-use stac::{Bbox, Format};
-use stac_api::{BlockingClient, Fields, Item, ItemCollection, Items, Search};
-use stac_api::{Filter, Sortby};
+use stac::Format;
+use stac_api::{
+    python::{StringOrDict, StringOrList},
+    BlockingClient, Item, ItemCollection,
+};
 use stac_duckdb::Client;
 use tokio::runtime::Builder;
 
@@ -31,7 +32,6 @@ pub fn search<'py>(
     use_duckdb: Option<bool>,
 ) -> PyResult<Bound<'py, PyList>> {
     let items = search_items(
-        py,
         href,
         intersects,
         ids,
@@ -56,7 +56,6 @@ pub fn search<'py>(
 #[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, format=None, options=None, use_duckdb=None))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_to<'py>(
-    py: Python<'py>,
     outfile: String,
     href: String,
     intersects: Option<StringOrDict>,
@@ -76,7 +75,6 @@ pub fn search_to<'py>(
     use_duckdb: Option<bool>,
 ) -> PyResult<usize> {
     let items = search_items(
-        py,
         href,
         intersects,
         ids,
@@ -113,7 +111,6 @@ pub fn search_to<'py>(
 
 #[allow(clippy::too_many_arguments)]
 fn search_items<'py>(
-    py: Python<'py>,
     href: String,
     intersects: Option<StringOrDict>,
     ids: Option<StringOrList>,
@@ -129,8 +126,7 @@ fn search_items<'py>(
     query: Option<Bound<'py, PyDict>>,
     use_duckdb: Option<bool>,
 ) -> PyResult<Vec<Item>> {
-    let mut search = build_search(
-        py,
+    let mut search = stac_api::python::search(
         intersects,
         ids,
         collections,
@@ -169,108 +165,6 @@ fn search_items<'py>(
                 .collect::<Result<_, _>>()
                 .map_err(Error::from)
                 .map_err(PyErr::from)
-        }
-    }
-}
-
-/// Builds a [Search] from Python arguments.
-pub fn build_search<'py>(
-    py: Python<'py>,
-    intersects: Option<StringOrDict>,
-    ids: Option<StringOrList>,
-    collections: Option<StringOrList>,
-    limit: Option<u64>,
-    bbox: Option<Vec<f64>>,
-    datetime: Option<String>,
-    include: Option<StringOrList>,
-    exclude: Option<StringOrList>,
-    sortby: Option<StringOrList>,
-    filter: Option<StringOrDict>,
-    query: Option<Bound<'py, PyDict>>,
-) -> PyResult<Search> {
-    let mut fields = Fields::default();
-    if let Some(include) = include {
-        fields.include = include.into();
-    }
-    if let Some(exclude) = exclude {
-        fields.exclude = exclude.into();
-    }
-    let fields = if fields.include.is_empty() && fields.exclude.is_empty() {
-        None
-    } else {
-        Some(fields)
-    };
-    let query = query
-        .map(|query| pythonize::depythonize(&query))
-        .transpose()?;
-    let bbox = bbox
-        .map(|bbox| Bbox::try_from(bbox))
-        .transpose()
-        .map_err(Error::from)?;
-    let sortby = sortby.map(|sortby| {
-        Vec::<String>::from(sortby)
-            .into_iter()
-            .map(|s| s.parse::<Sortby>().unwrap()) // the parse is infallible
-            .collect::<Vec<_>>()
-    });
-    let filter = filter
-        .map(|filter| match filter {
-            StringOrDict::Dict(cql_json) => {
-                pythonize::depythonize(&cql_json.bind_borrowed(py)).map(Filter::Cql2Json)
-            }
-            StringOrDict::String(cql2_text) => Ok(Filter::Cql2Text(cql2_text)),
-        })
-        .transpose()?;
-    let filter = filter
-        .map(|filter| filter.into_cql2_json())
-        .transpose()
-        .map_err(Error::from)?;
-    let items = Items {
-        limit,
-        bbox,
-        datetime,
-        query,
-        fields,
-        sortby,
-        filter,
-        ..Default::default()
-    };
-
-    let intersects = intersects
-        .map(|intersects| match intersects {
-            StringOrDict::Dict(json) => pythonize::depythonize(&json.bind_borrowed(py))
-                .map_err(Error::from)
-                .and_then(|json| Geometry::from_json_object(json).map_err(Error::from)),
-            StringOrDict::String(s) => s.parse().map_err(Error::from),
-        })
-        .transpose()?;
-    let ids = ids.map(|ids| ids.into());
-    let collections = collections.map(|ids| ids.into());
-    Ok(Search {
-        items,
-        intersects,
-        ids,
-        collections,
-    })
-}
-
-#[derive(FromPyObject)]
-pub enum StringOrDict {
-    String(String),
-    Dict(Py<PyDict>),
-}
-
-#[derive(FromPyObject)]
-pub enum StringOrList {
-    String(String),
-    List(Vec<String>),
-}
-
-impl From<StringOrList> for Vec<String> {
-    fn from(value: StringOrList) -> Vec<String> {
-        match value {
-            StringOrList::List(list) => list,
-            StringOrList::String(s) => vec![s],
         }
     }
 }

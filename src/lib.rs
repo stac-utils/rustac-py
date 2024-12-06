@@ -12,7 +12,6 @@ use error::Error;
 use libduckdb_sys as _;
 use openssl as _;
 use pyo3::prelude::*;
-pub use search::build_search;
 
 type Result<T> = std::result::Result<T, Error>;
 
