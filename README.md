@@ -49,7 +49,7 @@ stacrs.search_to(
 ```
 
 See [the documentation](https://www.gadom.ski/stacrs) for details.
-In particular, our [example notebook](https://gadom.ski/stacrs/latest/example/) demonstrates some of the more interesting features.
+In particular, our [example notebook](https://www.gadom.ski/stacrs/latest/example/) demonstrates some of the more interesting features.
 
 ## Comparisons
 
