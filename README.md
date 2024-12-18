@@ -3,6 +3,7 @@
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/gadomski/stacrs/ci.yaml?branch=main&style=for-the-badge)](https://github.com/gadomski/stacrs/actions/workflows/ci.yaml)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/gadomski/stacrs/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://www.gadom.ski/stacrs/latest/)
 [![PyPI - Version](https://img.shields.io/pypi/v/stacrs?style=for-the-badge)](https://pypi.org/project/stacrs)
+[![Conda Downloads](https://img.shields.io/conda/d/conda-forge/stacrs?style=for-the-badge)](https://anaconda.org/conda-forge/stacrs)
 ![PyPI - License](https://img.shields.io/pypi/l/stacrs?style=for-the-badge)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
 
