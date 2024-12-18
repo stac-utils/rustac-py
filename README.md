@@ -17,7 +17,7 @@ Install via **pip**:
 python -m pip install stacrs
 ```
 
-Or:
+Or via **conda**:
 
 ```shell
 conda install conda-forge::stacrs
