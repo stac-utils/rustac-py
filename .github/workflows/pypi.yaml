@@ -41,6 +41,7 @@ jobs:
           args: --release --out dist --find-interpreter
           sccache: "true"
           manylinux: "2_28"
+          before-script-linux: python -m ensurepip
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
