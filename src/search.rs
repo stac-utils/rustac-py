@@ -145,9 +145,9 @@ fn search_items<'py>(
         if let Some(max_items) = max_items {
             search.items.limit = Some(max_items.try_into()?);
         }
-        let client = Client::from_href(href).map_err(Error::from)?;
+        let client = Client::new().map_err(Error::from)?;
         client
-            .search_to_json(search)
+            .search_to_json(&href, search)
             .map(|item_collection| item_collection.items)
             .map_err(Error::from)
             .map_err(PyErr::from)

@@ -7,10 +7,7 @@ mod search;
 mod version;
 mod write;
 
-use duckdb as _;
 use error::Error;
-use libduckdb_sys as _;
-use openssl as _;
 use pyo3::prelude::*;
 
 type Result<T> = std::result::Result<T, Error>;

@@ -20,9 +20,6 @@ pub enum Error {
 
     #[error(transparent)]
     StacDuckdb(#[from] stac_duckdb::Error),
-
-    #[error(transparent)]
-    StacTypes(#[from] stac_types::Error),
 }
 
 impl From<Error> for PyErr {
@@ -34,7 +31,6 @@ impl From<Error> for PyErr {
             Error::Stac(err) => PyException::new_err(err.to_string()),
             Error::StacApi(err) => PyException::new_err(err.to_string()),
             Error::StacDuckdb(err) => PyException::new_err(err.to_string()),
-            Error::StacTypes(err) => PyException::new_err(err.to_string()),
         }
     }
 }
