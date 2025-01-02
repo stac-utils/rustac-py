@@ -38,7 +38,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --find-interpreter
+          args: --release --out dist --find-interpreter --uv
           sccache: "true"
           manylinux: "2_24"
       - name: Upload wheels
