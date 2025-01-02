@@ -27,6 +27,8 @@ jobs:
             target: armv7
           - runner: ubuntu-latest
             target: ppc64le
+          - runner: ubuntu-latest
+            target: aarch64
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
