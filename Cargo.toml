@@ -8,24 +8,19 @@ name = "stacrs"
 crate-type = ["cdylib"]
 
 [dependencies]
+duckdb = { version = "1.1.1", features = ["bundled"] }
 geojson = "0.24.1"
 pyo3 = "0.23.3"
 pythonize = "0.23.0"
-serde_json = "1.0.133"
-stac = { version = "0.11.0", features = [
+serde_json = "1.0.134"
+stac = { version = "0.11.1", features = [
     "geoparquet-compression",
     "object-store-all",
 ], git = "https://github.com/stac-utils/stac-rs" }
-stac-api = { version = "0.6.2", features = [
+stac-api = { version = "0.7.0", features = [
     "client",
     "python",
 ], git = "https://github.com/stac-utils/stac-rs" }
-stac-duckdb = { version = "0.0.3", git = "https://github.com/stac-utils/stac-rs" }
-stac-types = { version = "0.1.0", git = "https://github.com/stac-utils/stac-rs" }
-thiserror = "2.0.4"
+stac-duckdb = { version = "0.1.0", git = "https://github.com/stac-utils/stac-rs" }
+thiserror = "2.0.9"
 tokio = { version = "1.42.0", features = ["rt"] }
-
-# We don't use duckdb directly, but we need to pin the version to v1.0 for now: https://github.com/stac-utils/stac-rs/issues/385
-duckdb = { version = "=1.0.0", features = ["bundled"] }
-libduckdb-sys = "=1.0.0"
-openssl = { version = "0.10.68", features = ["vendored"] }
