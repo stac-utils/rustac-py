@@ -17,6 +17,7 @@ type Result<T> = std::result::Result<T, Error>;
 /// A collection of functions for working with STAC, using Rust under the hood.
 #[pymodule]
 fn stacrs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    pyo3_log::init();
     m.add_class::<duckdb::DuckdbClient>()?;
     m.add_function(wrap_pyfunction!(migrate::migrate, m)?)?;
     m.add_function(wrap_pyfunction!(migrate::migrate_href, m)?)?;
