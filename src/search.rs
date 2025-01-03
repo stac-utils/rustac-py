@@ -12,7 +12,7 @@ use stac_duckdb::Client;
 use tokio::runtime::Builder;
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, use_duckdb=None))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search<'py>(
     py: Python<'py>,
@@ -30,6 +30,7 @@ pub fn search<'py>(
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
     use_duckdb: Option<bool>,
+    kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Bound<'py, PyList>> {
     let items = search_items(
         href,
@@ -46,6 +47,7 @@ pub fn search<'py>(
         filter,
         query,
         use_duckdb,
+        kwargs,
     )?;
     pythonize::pythonize(py, &items)
         .map_err(PyErr::from)
@@ -53,7 +55,7 @@ pub fn search<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, format=None, options=None, use_duckdb=None))]
+#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, format=None, options=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_to<'py>(
     outfile: String,
@@ -73,6 +75,7 @@ pub fn search_to<'py>(
     format: Option<String>,
     options: Option<Vec<(String, String)>>,
     use_duckdb: Option<bool>,
+    kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<usize> {
     let items = search_items(
         href,
@@ -89,6 +92,7 @@ pub fn search_to<'py>(
         filter,
         query,
         use_duckdb,
+        kwargs,
     )?;
     let format = format
         .map(|s| s.parse())
@@ -125,6 +129,7 @@ fn search_items<'py>(
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
     use_duckdb: Option<bool>,
+    kwargs: Option<Bound<'py, PyDict>>,
 ) -> PyResult<Vec<Item>> {
     let mut search = stac_api::python::search(
         intersects,
@@ -138,6 +143,7 @@ fn search_items<'py>(
         sortby,
         filter,
         query,
+        kwargs,
     )?;
     if use_duckdb
         .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))))

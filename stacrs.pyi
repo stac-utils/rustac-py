@@ -90,6 +90,7 @@ def search(
     filter: Optional[str | dict[str, Any]] = None,
     query: Optional[dict[str, Any]] = None,
     use_duckdb: Optional[bool] = None,
+    **kwargs: str,
 ) -> list[dict[str, Any]]:
     """
     Searches a STAC API server.
@@ -126,6 +127,7 @@ def search(
         use_duckdb (bool | None): Query with DuckDB. If None and the href has a
             'parquet' or 'geoparquet' extension, will be set to True. Defaults
             to None.
+        kwargs: Additional parameters to pass in to the search.
 
     Returns:
         list[dict[str, Any]]: A list of the returned STAC items.
