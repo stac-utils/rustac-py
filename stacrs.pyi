@@ -1,5 +1,27 @@
 from typing import Any, Optional, Tuple
 
+class DuckdbClient:
+    """A client for querying stac-geoparquet with DuckDB."""
+
+    def search(
+        href: str,
+        *,
+        intersects: Optional[str | dict[str, Any]] = None,
+        ids: Optional[str | list[str]] = None,
+        collections: Optional[str | list[str]] = None,
+        max_items: Optional[int] = None,
+        limit: Optional[int] = None,
+        bbox: Optional[list[float]] = None,
+        datetime: Optional[str] = None,
+        include: Optional[str | list[str]] = None,
+        exclude: Optional[str | list[str]] = None,
+        sortby: Optional[str | list[str]] = None,
+        filter: Optional[str | dict[str, Any]] = None,
+        query: Optional[dict[str, Any]] = None,
+        **kwargs: str,
+    ):
+        """Search a stac-geoparquet file with duckdb"""
+
 def migrate_href(href: str, version: Optional[str] = None) -> dict[str, Any]:
     """
     Migrates a STAC dictionary at the given href to another version.
