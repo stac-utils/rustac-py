@@ -4,6 +4,7 @@ class DuckdbClient:
     """A client for querying stac-geoparquet with DuckDB."""
 
     def search(
+        self,
         href: str,
         *,
         intersects: Optional[str | dict[str, Any]] = None,
