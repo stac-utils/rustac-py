@@ -19,8 +19,8 @@ class DuckdbClient:
         filter: Optional[str | dict[str, Any]] = None,
         query: Optional[dict[str, Any]] = None,
         **kwargs: str,
-    ):
-        """Search a stac-geoparquet file with duckdb"""
+    ) -> dict[str, Any]:
+        """Search a stac-geoparquet file with duckdb, returning an item collection"""
 
 def migrate_href(href: str, version: Optional[str] = None) -> dict[str, Any]:
     """
