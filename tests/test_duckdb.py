@@ -28,3 +28,8 @@ def test_search_offset(client: DuckdbClient) -> None:
         item_collection["features"][0]["id"]
         == "S2A_MSIL2A_20241201T175721_R141_T13TDE_20241201T213150"
     )
+
+
+def test_get_collections(client: DuckdbClient) -> None:
+    collections = client.get_collections("data/100-sentinel-2-items.parquet")
+    assert len(collections) == 1
