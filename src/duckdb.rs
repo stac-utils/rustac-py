@@ -1,5 +1,9 @@
 use crate::{Error, Result};
-use pyo3::{exceptions::PyException, prelude::*, types::PyDict};
+use pyo3::{
+    exceptions::PyException,
+    prelude::*,
+    types::{PyDict, PyList},
+};
 use stac_api::python::{StringOrDict, StringOrList};
 use stac_duckdb::Client;
 use std::sync::Mutex;
@@ -56,5 +60,14 @@ impl DuckdbClient {
         };
         let dict = pythonize::pythonize(py, &item_collection)?;
         dict.extract()
+    }
+
+    fn get_collections<'py>(&self, py: Python<'py>, href: String) -> PyResult<Bound<'py, PyList>> {
+        let client = self
+            .0
+            .lock()
+            .map_err(|err| PyException::new_err(err.to_string()))?;
+        let collections = client.collections(&href).map_err(Error::from)?;
+        pythonize::pythonize(py, &collections)?.extract()
     }
 }

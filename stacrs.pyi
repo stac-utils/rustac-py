@@ -7,10 +7,9 @@ class DuckdbClient:
         self,
         href: str,
         *,
-        intersects: Optional[str | dict[str, Any]] = None,
         ids: Optional[str | list[str]] = None,
         collections: Optional[str | list[str]] = None,
-        max_items: Optional[int] = None,
+        intersects: Optional[str | dict[str, Any]] = None,
         limit: Optional[int] = None,
         bbox: Optional[list[float]] = None,
         datetime: Optional[str] = None,
@@ -21,7 +20,52 @@ class DuckdbClient:
         query: Optional[dict[str, Any]] = None,
         **kwargs: str,
     ) -> dict[str, Any]:
-        """Search a stac-geoparquet file with duckdb, returning an item collection"""
+        """Search a stac-geoparquet file with duckdb, returning an item collection.
+
+        Args:
+            href: The stac-geoparquet file.
+            ids: Array of Item ids to return.
+            collections: Array of one or more Collection IDs that each matching
+                Item must be in.
+            intersects: Searches items by performing intersection between their
+                geometry and provided GeoJSON geometry.
+            limit: The page size returned from the server. Use `max_items` to
+                actually limit the number of items returned from this function.
+            bbox: Requested bounding box.
+            datetime: Single date+time, or a range (`/` separator), formatted to
+                RFC 3339, section 5.6.  Use double dots .. for open date ranges.
+            include: fields to include in the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+                for more on the semantics).
+            exclude: fields to exclude from the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+                for more on the semantics).
+            sortby: Fields by which to sort results (use `-field` to sort descending).
+            filter: CQL2 filter expression. Strings will be interpreted as
+                cql2-text, dictionaries as cql2-json.
+            query: Additional filtering based on properties.  It is recommended
+                to use filter instead, if possible.
+            kwargs: Additional parameters to pass in to the search.
+
+        Returns:
+            dict[str, Any]: A feature collection of STAC items.
+        """
+
+    def get_collections(self, href: str) -> list[dict[str, Any]]:
+        """Returns all collections in this stac-geoparquet file.
+
+        These collections will be auto-generated from the STAC items, one
+        collection per id in the `collections` column.
+
+        Eventually, these collections might be stored in the stac-geoparquet
+        metadata and retrieved from there, but that's not the case yet.
+
+        Args:
+            href: The stac-geoparquet file to build the collections from.
+
+        Returns:
+            A list of STAC Collections
+        """
 
 def migrate_href(href: str, version: Optional[str] = None) -> dict[str, Any]:
     """
