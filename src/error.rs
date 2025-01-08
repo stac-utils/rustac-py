@@ -1,5 +1,11 @@
-use pyo3::{exceptions::PyException, PyErr};
+use pyo3::{
+    create_exception,
+    exceptions::{PyException, PyIOError},
+    PyErr,
+};
 use thiserror::Error;
+
+create_exception!(stacrs, StacrsError, PyException);
 
 #[derive(Debug, Error)]
 pub enum Error {
@@ -7,7 +13,13 @@ pub enum Error {
     Geojson(#[from] geojson::Error),
 
     #[error(transparent)]
+    Io(#[from] std::io::Error),
+
+    #[error(transparent)]
     Pythonize(#[from] pythonize::PythonizeError),
+
+    #[error(transparent)]
+    Py(#[from] PyErr),
 
     #[error(transparent)]
     SerdeJson(#[from] serde_json::Error),
@@ -23,14 +35,11 @@ pub enum Error {
 }
 
 impl From<Error> for PyErr {
-    fn from(value: Error) -> Self {
-        match value {
-            Error::Geojson(err) => PyException::new_err(err.to_string()),
-            Error::Pythonize(err) => PyException::new_err(err.to_string()),
-            Error::SerdeJson(err) => PyException::new_err(err.to_string()),
-            Error::Stac(err) => PyException::new_err(err.to_string()),
-            Error::StacApi(err) => PyException::new_err(err.to_string()),
-            Error::StacDuckdb(err) => PyException::new_err(err.to_string()),
+    fn from(err: Error) -> Self {
+        match err {
+            Error::Py(err) => err,
+            Error::Io(err) => PyIOError::new_err(err.to_string()),
+            _ => StacrsError::new_err(err.to_string()),
         }
     }
 }

@@ -1,6 +1,6 @@
 [project]
 name = "stacrs"
-description = "A no-dependency Python package for STAC, using Rust under the hood."
+description = "A small, no-dependency Python package for STAC, using Rust under the hood."
 readme = "README.md"
 authors = [{ name = "Pete Gadomski", email = "pete.gadomski@gmail.com" }]
 requires-python = ">=3.10"
@@ -26,9 +26,16 @@ Repository = "https://github.com/gadomski/stacrs"
 Documentation = "https://gadom.ski/stacrs"
 Issues = "https://github.com/gadomski/stacrs/issues"
 
+[tool.mypy]
+files = "**/*.py"
+
 [[tool.mypy.overrides]]
 module = "pyarrow.*"
 ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
 
 [tool.uv]
 dev-dependencies = [
@@ -38,7 +45,10 @@ dev-dependencies = [
     "mkdocs-material[imaging]>=9.5.45",
     "mkdocstrings[python]>=0.27.0",
     "mypy>=1.11.2",
+    "pyarrow>=18.0.0",
+    "pystac[validation]>=1.11.0",
     "pytest>=8.3.3",
+    "pytest-asyncio>=0.25.1",
     "ruff>=0.6.9",
     "stac-geoparquet>=0.6.0",
 ]

@@ -11,9 +11,11 @@ crate-type = ["cdylib"]
 duckdb = { version = "1.1.1", features = ["bundled"] }
 geojson = "0.24.1"
 pyo3 = "0.23.3"
+pyo3-async-runtimes = { version = "0.23.0", features = ["tokio", "tokio-runtime"] }
 pyo3-log = "0.12.1"
 pythonize = "0.23.0"
-serde_json = "1.0.134"
+serde = "1.0.217"
+serde_json = "1.0.135"
 stac = { version = "0.11.1", features = [
     "geoparquet-compression",
     "object-store-all",

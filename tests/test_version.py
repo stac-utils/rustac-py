@@ -2,8 +2,7 @@ import stacrs
 
 
 def test_version() -> None:
-    stacrs.version()
-    stacrs.version("stac")
-    stacrs.version("stac-api")
-    stacrs.version("stac-duckdb")
-    stacrs.version("duckdb")
+    assert stacrs.version() is not None
+    assert stacrs.version("stac") is not None
+    assert stacrs.version("stac-api") is not None
+    assert stacrs.version("stac-duckdb") is not None
