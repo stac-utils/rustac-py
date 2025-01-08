@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - DuckDB client ([#15](https://github.com/gadomski/stacrs/pull/15))
 
+### Changed
+
+- `read` and `write` are now async ([#18](https://github.com/gadomski/stacrs/pull/18))
+
 ## [0.3.0] - 2024-11-21
 
 ### Removed
