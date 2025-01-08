@@ -2,6 +2,6 @@
 
 set -e 
 
-ruff check
-ruff format --check
-mypy
+uv run ruff check
+uv run ruff format --check
+uv run mypy
