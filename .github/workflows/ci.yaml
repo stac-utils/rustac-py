@@ -27,5 +27,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Sync
         run: uv sync
+      - name: Lint
+        run: scripts/lint
       - name: Test
-        run: uv run pytest
+        run: scripts/test
