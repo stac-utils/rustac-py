@@ -1,4 +1,4 @@
-use crate::Error;
+use crate::{Error, Result};
 use pyo3::{prelude::*, types::PyDict};
 use stac::{Migrate, Value};
 
@@ -7,7 +7,7 @@ use stac::{Migrate, Value};
 pub fn migrate<'py>(
     value: &Bound<'py, PyDict>,
     version: Option<&str>,
-) -> PyResult<Bound<'py, PyDict>> {
+) -> Result<Bound<'py, PyDict>> {
     let py = value.py();
     let value: Value = pythonize::depythonize(value)?;
     let version = version
@@ -15,7 +15,8 @@ pub fn migrate<'py>(
         .unwrap_or_default();
     let value = value.migrate(&version).map_err(Error::from)?;
     let value = pythonize::pythonize(py, &value)?;
-    value.downcast_into().map_err(PyErr::from)
+    let value = value.extract()?;
+    Ok(value)
 }
 
 #[pyfunction]
@@ -24,12 +25,13 @@ pub fn migrate_href<'py>(
     py: Python<'py>,
     href: &str,
     version: Option<&str>,
-) -> PyResult<Bound<'py, PyDict>> {
+) -> Result<Bound<'py, PyDict>> {
     let value: Value = stac::read(href).map_err(Error::from)?;
     let version = version
         .map(|version| version.parse().unwrap())
         .unwrap_or_default();
-    let value = value.migrate(&version).map_err(Error::from)?;
+    let value = value.migrate(&version)?;
     let value = pythonize::pythonize(py, &value)?;
-    value.downcast_into().map_err(PyErr::from)
+    let value = value.extract()?;
+    Ok(value)
 }

@@ -20,10 +20,10 @@ nav:
   - Example notebook: example.ipynb
   - API:
       - api/index.md
+      - duckdb: api/duckdb.md
       - migrate: api/migrate.md
       - read: api/read.md
       - search: api/search.md
-      - validate: api/validate.md
       - version: api/version.md
       - write: api/write.md
   - CONTRIBUTING.md
@@ -37,10 +37,16 @@ plugins:
         python:
           load_external_modules: false
           options:
-            show_root_heading: true
-            show_signature: true
-            show_signature_annotations: true
+            allow_inspection: false
+            docstring_section_style: list
+            docstring_style: google
+            line_length: 80
             separate_signature: true
+            show_root_heading: true
+            show_signature_annotations: true
+            show_source: false
+            show_symbol_type_toc: true
+            signature_crossrefs: true
   - search
   - social:
       cards_layout_options:

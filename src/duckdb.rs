@@ -1,4 +1,4 @@
-use crate::{Error, Result};
+use crate::Result;
 use pyo3::{
     exceptions::PyException,
     prelude::*,
@@ -36,7 +36,7 @@ impl DuckdbClient {
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
         kwargs: Option<Bound<'py, PyDict>>,
-    ) -> PyResult<Bound<'py, PyDict>> {
+    ) -> Result<Bound<'py, PyDict>> {
         let search = stac_api::python::search(
             intersects,
             ids,
@@ -56,18 +56,20 @@ impl DuckdbClient {
                 .0
                 .lock()
                 .map_err(|err| PyException::new_err(err.to_string()))?;
-            client.search(&href, search).map_err(Error::from)?
+            client.search(&href, search)?
         };
         let dict = pythonize::pythonize(py, &item_collection)?;
-        dict.extract()
+        let dict = dict.extract()?;
+        Ok(dict)
     }
 
-    fn get_collections<'py>(&self, py: Python<'py>, href: String) -> PyResult<Bound<'py, PyList>> {
+    fn get_collections<'py>(&self, py: Python<'py>, href: String) -> Result<Bound<'py, PyList>> {
         let client = self
             .0
             .lock()
             .map_err(|err| PyException::new_err(err.to_string()))?;
-        let collections = client.collections(&href).map_err(Error::from)?;
-        pythonize::pythonize(py, &collections)?.extract()
+        let collections = client.collections(&href)?;
+        let collections = pythonize::pythonize(py, &collections)?.extract()?;
+        Ok(collections)
     }
 }

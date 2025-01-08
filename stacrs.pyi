@@ -11,6 +11,7 @@ class DuckdbClient:
         collections: Optional[str | list[str]] = None,
         intersects: Optional[str | dict[str, Any]] = None,
         limit: Optional[int] = None,
+        offset: Optional[int] = None,
         bbox: Optional[list[float]] = None,
         datetime: Optional[str] = None,
         include: Optional[str | list[str]] = None,
@@ -29,8 +30,8 @@ class DuckdbClient:
                 Item must be in.
             intersects: Searches items by performing intersection between their
                 geometry and provided GeoJSON geometry.
-            limit: The page size returned from the server. Use `max_items` to
-                actually limit the number of items returned from this function.
+            limit: The number of items to return.
+            offset: The number of items to skip before returning.
             bbox: Requested bounding box.
             datetime: Single date+time, or a range (`/` separator), formatted to
                 RFC 3339, section 5.6.  Use double dots .. for open date ranges.
@@ -118,7 +119,7 @@ def migrate(value: dict[str, Any], version: Optional[str] = None) -> dict[str, A
         >>> assert item["stac_version"] == "1.1.0-beta.1"
     """
 
-def read(
+async def read(
     href: str,
     *,
     format: str | None = None,
@@ -138,7 +139,7 @@ def read(
         dict[str, Any]: The STAC value
 
     Examples:
-        >>> item = stacrs.read("item.json")
+        >>> item = await stacrs.read("item.json")
     """
 
 def search(
@@ -283,41 +284,7 @@ def search_to(
         ... )
     """
 
-def validate_href(href: str) -> None:
-    """
-    Validates a single href with json-schema.
-
-    Args:
-        href (str): The href of the STAC value to validate
-
-    Raises:
-        Exception: On any input/output error, or on a validation error
-
-    Examples:
-        >>> stacrs.validate_href("examples/simple-item.json")
-        >>> stacrs.validate_href("data/invalid-item.json")
-        Traceback (most recent call last):
-        File "<stdin>", line 1, in <module>
-        Exception: Validation errors: "collection" is a required property
-    """
-
-def validate(value: dict[str, Any]) -> None:
-    """
-    Validates a STAC dictionary with json-schema.
-
-    Args:
-        value (dict[str, Any]): The STAC value to validate
-
-    Raises:
-        Exception: On a validation error
-
-    Examples:
-        >>> with open("examples/simple-item.json") as f:
-        >>>     data = json.load(f)
-        >>> stacrs.validate(data)
-    """
-
-def write(
+async def write(
     href: str,
     value: dict[str, Any] | list[dict[str, Any]],
     *,
@@ -344,7 +311,7 @@ def write(
     Examples:
         >>> with open("items.json") as f:
         ...     items = json.load(f)
-        >>> stacrs.write("items.parquet", items)
+        >>> await stacrs.write("items.parquet", items)
     """
 
 def version(name: str | None = None) -> str | None:

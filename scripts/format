@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+set -e
+
+ruff check --fix
+ruff format

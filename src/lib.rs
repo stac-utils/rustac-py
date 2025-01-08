@@ -1,4 +1,4 @@
-#![deny(unused_crate_dependencies, warnings)]
+#![deny(unused_crate_dependencies)]
 
 mod duckdb;
 mod error;
@@ -14,11 +14,14 @@ use pyo3::prelude::*;
 
 type Result<T> = std::result::Result<T, Error>;
 
-/// A collection of functions for working with STAC, using Rust under the hood.
 #[pymodule]
-fn stacrs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn stacrs(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     pyo3_log::init();
+
+    m.add("StacrsError", py.get_type::<error::StacrsError>())?;
+
     m.add_class::<duckdb::DuckdbClient>()?;
+
     m.add_function(wrap_pyfunction!(migrate::migrate, m)?)?;
     m.add_function(wrap_pyfunction!(migrate::migrate_href, m)?)?;
     m.add_function(wrap_pyfunction!(read::read, m)?)?;
@@ -26,5 +29,17 @@ fn stacrs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(search::search_to, m)?)?;
     m.add_function(wrap_pyfunction!(version::version, m)?)?;
     m.add_function(wrap_pyfunction!(write::write, m)?)?;
+
     Ok(())
+}
+
+struct Json<T: serde::Serialize>(T);
+
+impl<'py, T: serde::Serialize> IntoPyObject<'py> for Json<T> {
+    type Error = pythonize::PythonizeError;
+    type Output = Bound<'py, PyAny>;
+    type Target = PyAny;
+    fn into_pyobject(self, py: Python<'py>) -> std::result::Result<Self::Output, Self::Error> {
+        pythonize::pythonize(py, &self.0)
+    }
 }
