@@ -1,6 +1,6 @@
 [package]
 name = "stacrs"
-version = "0.3.0"
+version = "0.4.0"
 edition = "2021"
 
 [lib]
@@ -10,8 +10,11 @@ crate-type = ["cdylib"]
 [dependencies]
 duckdb = { version = "1.1.1", features = ["bundled"] }
 geojson = "0.24.1"
-pyo3 = "0.23.3"
-pyo3-async-runtimes = { version = "0.23.0", features = ["tokio", "tokio-runtime"] }
+pyo3 = "0.23.4"
+pyo3-async-runtimes = { version = "0.23.0", features = [
+    "tokio",
+    "tokio-runtime",
+] }
 pyo3-log = "0.12.1"
 pythonize = "0.23.0"
 serde = "1.0.217"
@@ -25,5 +28,5 @@ stac-api = { version = "0.7.0", features = [
     "python",
 ], git = "https://github.com/stac-utils/stac-rs" }
 stac-duckdb = { version = "0.1.0", git = "https://github.com/stac-utils/stac-rs" }
-thiserror = "2.0.9"
-tokio = { version = "1.42.0", features = ["rt"] }
+thiserror = "2.0.11"
+tokio = { version = "1.43.0", features = ["rt"] }
