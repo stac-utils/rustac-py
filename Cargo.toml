@@ -9,7 +9,7 @@ name = "stacrs"
 crate-type = ["cdylib"]
 
 [dependencies]
-duckdb = { version = "1.1.1", features = ["bundled"] }
+duckdb = { version = "1.1.1" }
 geojson = "0.24.1"
 pyo3 = "0.23.4"
 pyo3-async-runtimes = { version = "0.23.0", features = [
