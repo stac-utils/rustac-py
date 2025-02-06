@@ -166,6 +166,9 @@ jobs:
       # - windows
       - macos
       - sdist
+    environment:
+      name: pypi
+      url: https://pypi.org/p/stacrs
     permissions:
       id-token: write
       contents: write
