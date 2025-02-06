@@ -46,12 +46,12 @@ pub fn search<'py>(
     {
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
             let value = search_duckdb(href, search, max_items)?;
-            Ok(value)
+            Ok(Json(value.items))
         })
     } else {
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
             let value = search_api(href, search, max_items).await?;
-            Ok(value)
+            Ok(Json(value.items))
         })
     }
 }
@@ -105,16 +105,25 @@ pub fn search_to<'py>(
     {
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
             let value = search_duckdb(href, search, max_items)?;
-            Ok(value)
+            let count = value.items.len();
+            let _ = format
+                .put_opts(
+                    outfile,
+                    serde_json::to_value(value).map_err(Error::from)?,
+                    options.unwrap_or_default(),
+                )
+                .await
+                .map_err(Error::from)?;
+            Ok(count)
         })
     } else {
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
             let value = search_api(href, search, max_items).await?;
-            let count = value.0.items.len();
+            let count = value.items.len();
             let _ = format
                 .put_opts(
                     outfile,
-                    serde_json::to_value(value.0).map_err(Error::from)?,
+                    serde_json::to_value(value).map_err(Error::from)?,
                     options.unwrap_or_default(),
                 )
                 .await
@@ -128,16 +137,16 @@ fn search_duckdb(
     href: String,
     search: Search,
     max_items: Option<usize>,
-) -> Result<Json<stac_api::ItemCollection>> {
+) -> Result<stac_api::ItemCollection> {
     let value = stac_duckdb::search(&href, search, max_items)?;
-    Ok(Json(value))
+    Ok(value)
 }
 
 async fn search_api(
     href: String,
     search: Search,
     max_items: Option<usize>,
-) -> Result<Json<stac_api::ItemCollection>> {
+) -> Result<stac_api::ItemCollection> {
     let value = stac_api::client::search(&href, search, max_items).await?;
-    Ok(Json(value))
+    Ok(value)
 }

@@ -7,14 +7,14 @@ import stacrs
 
 
 async def test_search() -> None:
-    item_collection = await stacrs.search(
+    items = await stacrs.search(
         "https://landsatlook.usgs.gov/stac-server",
         collections="landsat-c2l2-sr",
         intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
         sortby="-properties.datetime",
         max_items=1,
     )
-    assert len(item_collection["features"]) == 1
+    assert len(items) == 1
 
 
 async def test_search_to(tmp_path: Path) -> None:
@@ -47,5 +47,5 @@ async def test_search_to_geoparquet(tmp_path: Path) -> None:
 
 
 async def test_search_geoparquet(data: Path) -> None:
-    item_collection = await stacrs.search(str(data / "extended-item.parquet"))
-    assert len(item_collection["features"]) == 1
+    items = await stacrs.search(str(data / "extended-item.parquet"))
+    assert len(items) == 1

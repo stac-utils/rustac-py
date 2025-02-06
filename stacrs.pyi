@@ -272,10 +272,10 @@ async def search_to(
             to None.
 
     Returns:
-        list[dict[str, Any]]: A list of the returned STAC items.
+        int: The number of items written
 
     Examples:
-        >>> items = await stacrs.search_to("out.parquet",
+        >>> count = await stacrs.search_to("out.parquet",
         ...     "https://landsatlook.usgs.gov/stac-server",
         ...     collections=["landsat-c2l2-sr"],
         ...     intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
