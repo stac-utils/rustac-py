@@ -29,7 +29,7 @@ Then:
 import stacrs
 
 # Search a STAC API
-items = stacrs.search(
+items = await stacrs.search(
     "https://landsatlook.usgs.gov/stac-server",
     collections="landsat-c2l2-sr",
     intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
@@ -38,14 +38,14 @@ items = stacrs.search(
 )
 
 # Write items to a stac-geoparquet file
-stacrs.write("items.parquet", items)
+await stacrs.write("items.parquet", items)
 
 # Read items from a stac-geoparquet file as an item collection
-item_collection = stacrs.read("items.parquet")
+item_collection = await stacrs.read("items.parquet")
 
 # Use `search_to` for better performance if you know you'll be writing the items
 # to a file
-stacrs.search_to(
+await stacrs.search_to(
     "items.parquet",
     "https://landsatlook.usgs.gov/stac-server",
     collections="landsat-c2l2-sr",
