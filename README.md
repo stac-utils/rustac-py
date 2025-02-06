@@ -43,6 +43,9 @@ await stacrs.write("items.parquet", items)
 # Read items from a stac-geoparquet file as an item collection
 item_collection = await stacrs.read("items.parquet")
 
+# You can search geoparquet files using DuckDB
+item_collection = await stacrs.search("items.parquet", ...)
+
 # Use `search_to` for better performance if you know you'll be writing the items
 # to a file
 await stacrs.search_to(
