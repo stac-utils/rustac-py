@@ -142,7 +142,7 @@ async def read(
         >>> item = await stacrs.read("item.json")
     """
 
-def search(
+async def search(
     href: str,
     *,
     intersects: Optional[str | dict[str, Any]] = None,
@@ -210,7 +210,7 @@ def search(
         ... )
     """
 
-def search_to(
+async def search_to(
     outfile: str,
     href: str,
     *,

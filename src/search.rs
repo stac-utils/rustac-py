@@ -1,15 +1,10 @@
-use crate::Error;
-use pyo3::{
-    prelude::*,
-    types::{PyDict, PyList},
-};
+use crate::{Error, Json, Result};
+use pyo3::{prelude::*, types::PyDict};
 use stac::Format;
 use stac_api::{
     python::{StringOrDict, StringOrList},
-    BlockingClient, Item, ItemCollection,
+    Search,
 };
-use stac_duckdb::Client;
-use tokio::runtime::Builder;
 
 #[pyfunction]
 #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, use_duckdb=None, **kwargs))]
@@ -31,13 +26,11 @@ pub fn search<'py>(
     query: Option<Bound<'py, PyDict>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
-) -> PyResult<Bound<'py, PyList>> {
-    let items = search_items(
-        href,
+) -> PyResult<Bound<'py, PyAny>> {
+    let search = stac_api::python::search(
         intersects,
         ids,
         collections,
-        max_items,
         limit,
         bbox,
         datetime,
@@ -46,18 +39,28 @@ pub fn search<'py>(
         sortby,
         filter,
         query,
-        use_duckdb,
         kwargs,
     )?;
-    pythonize::pythonize(py, &items)
-        .map_err(PyErr::from)
-        .and_then(|v| v.extract())
+    if use_duckdb
+        .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))))
+    {
+        pyo3_async_runtimes::tokio::future_into_py(py, async move {
+            let value = search_duckdb(href, search, max_items)?;
+            Ok(value)
+        })
+    } else {
+        pyo3_async_runtimes::tokio::future_into_py(py, async move {
+            let value = search_api(href, search, max_items).await?;
+            Ok(value)
+        })
+    }
 }
 
 #[pyfunction]
 #[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, format=None, options=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_to<'py>(
+    py: Python<'py>,
     outfile: String,
     href: String,
     intersects: Option<StringOrDict>,
@@ -76,13 +79,11 @@ pub fn search_to<'py>(
     options: Option<Vec<(String, String)>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
-) -> PyResult<usize> {
-    let items = search_items(
-        href,
+) -> PyResult<Bound<'py, PyAny>> {
+    let search = stac_api::python::search(
         intersects,
         ids,
         collections,
-        max_items,
         limit,
         bbox,
         datetime,
@@ -91,7 +92,6 @@ pub fn search_to<'py>(
         sortby,
         filter,
         query,
-        use_duckdb,
         kwargs,
     )?;
     let format = format
@@ -100,77 +100,44 @@ pub fn search_to<'py>(
         .map_err(Error::from)?
         .or_else(|| Format::infer_from_href(&outfile))
         .unwrap_or_default();
-    let item_collection = ItemCollection::from(items);
-    let count = item_collection.items.len();
-    Builder::new_current_thread()
-        .build()?
-        .block_on(format.put_opts(
-            outfile,
-            serde_json::to_value(item_collection).map_err(Error::from)?,
-            options.unwrap_or_default(),
-        ))
-        .map_err(Error::from)?;
-    Ok(count)
-}
-
-#[allow(clippy::too_many_arguments)]
-fn search_items<'py>(
-    href: String,
-    intersects: Option<StringOrDict>,
-    ids: Option<StringOrList>,
-    collections: Option<StringOrList>,
-    max_items: Option<usize>,
-    limit: Option<u64>,
-    bbox: Option<Vec<f64>>,
-    datetime: Option<String>,
-    include: Option<StringOrList>,
-    exclude: Option<StringOrList>,
-    sortby: Option<StringOrList>,
-    filter: Option<StringOrDict>,
-    query: Option<Bound<'py, PyDict>>,
-    use_duckdb: Option<bool>,
-    kwargs: Option<Bound<'py, PyDict>>,
-) -> PyResult<Vec<Item>> {
-    let mut search = stac_api::python::search(
-        intersects,
-        ids,
-        collections,
-        limit,
-        bbox,
-        datetime,
-        include,
-        exclude,
-        sortby,
-        filter,
-        query,
-        kwargs,
-    )?;
     if use_duckdb
         .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))))
     {
-        if let Some(max_items) = max_items {
-            search.items.limit = Some(max_items.try_into()?);
-        }
-        let client = Client::new().map_err(Error::from)?;
-        client
-            .search_to_json(&href, search)
-            .map(|item_collection| item_collection.items)
-            .map_err(Error::from)
-            .map_err(PyErr::from)
+        pyo3_async_runtimes::tokio::future_into_py(py, async move {
+            let value = search_duckdb(href, search, max_items)?;
+            Ok(value)
+        })
     } else {
-        let client = BlockingClient::new(&href).map_err(Error::from)?;
-        let items = client.search(search).map_err(Error::from)?;
-        if let Some(max_items) = max_items {
-            items
-                .take(max_items)
-                .collect::<Result<_, _>>()
-                .map_err(Error::from)
-                .map_err(PyErr::from)
-        } else {
-            items
-                .collect::<Result<_, _>>()
-                .map_err(Error::from)
-                .map_err(PyErr::from)
-        }
+        pyo3_async_runtimes::tokio::future_into_py(py, async move {
+            let value = search_api(href, search, max_items).await?;
+            let count = value.0.items.len();
+            let _ = format
+                .put_opts(
+                    outfile,
+                    serde_json::to_value(value.0).map_err(Error::from)?,
+                    options.unwrap_or_default(),
+                )
+                .await
+                .map_err(Error::from)?;
+            Ok(count)
+        })
     }
+}
+
+fn search_duckdb(
+    href: String,
+    search: Search,
+    max_items: Option<usize>,
+) -> Result<Json<stac_api::ItemCollection>> {
+    let value = stac_duckdb::search(&href, search, max_items)?;
+    Ok(Json(value))
+}
+
+async fn search_api(
+    href: String,
+    search: Search,
+    max_items: Option<usize>,
+) -> Result<Json<stac_api::ItemCollection>> {
+    let value = stac_api::client::search(&href, search, max_items).await?;
+    Ok(Json(value))
 }

@@ -19,15 +19,14 @@ pyo3-async-runtimes = { version = "0.23.0", features = [
 pyo3-log = "0.12.1"
 pythonize = "0.23.0"
 serde = "1.0.217"
-serde_json = "1.0.135"
-stac = { version = "0.11.1", features = [
+serde_json = "1.0.138"
+stac = { version = "0.12.0", features = [
     "geoparquet-compression",
     "object-store-all",
 ], git = "https://github.com/stac-utils/stac-rs" }
-stac-api = { version = "0.7.0", features = [
+stac-api = { version = "0.7.1", features = [
     "client",
     "python",
 ], git = "https://github.com/stac-utils/stac-rs" }
 stac-duckdb = { version = "0.1.0", git = "https://github.com/stac-utils/stac-rs" }
 thiserror = "2.0.11"
-tokio = { version = "1.43.0", features = ["rt"] }
