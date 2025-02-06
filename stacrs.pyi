@@ -201,7 +201,7 @@ async def search(
         list[dict[str, Any]]: A list of the returned STAC items.
 
     Examples:
-        >>> items = stacrs.search(
+        >>> items = await stacrs.search(
         ...     "https://landsatlook.usgs.gov/stac-server",
         ...     collections=["landsat-c2l2-sr"],
         ...     intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
@@ -275,7 +275,7 @@ async def search_to(
         list[dict[str, Any]]: A list of the returned STAC items.
 
     Examples:
-        >>> items = stacrs.search_to("out.parquet",
+        >>> items = await stacrs.search_to("out.parquet",
         ...     "https://landsatlook.usgs.gov/stac-server",
         ...     collections=["landsat-c2l2-sr"],
         ...     intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
