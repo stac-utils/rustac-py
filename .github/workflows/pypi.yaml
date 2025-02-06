@@ -23,16 +23,22 @@ jobs:
         platform:
           - runner: ubuntu-22.04
             target: x86_64
+            manylinux: auto
           - runner: ubuntu-22.04
             target: x86
+            manylinux: auto
           - runner: ubuntu-22.04
             target: aarch64
+            manylinux: "2_28"
           - runner: ubuntu-22.04
             target: armv7
+            manylinux: auto
           - runner: ubuntu-22.04
             target: s390x
+            manylinux: auto
           - runner: ubuntu-22.04
             target: ppc64le
+            manylinux: auto
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -44,7 +50,7 @@ jobs:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter -F duckdb/bundled
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
-          manylinux: auto
+          manylinux: ${{ matrix.platform.manylinux }}
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
