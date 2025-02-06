@@ -17,6 +17,7 @@ jobs:
   linux:
     runs-on: ${{ matrix.platform.runner }}
     strategy:
+      fail-fast: false
       matrix:
         platform:
           - runner: ubuntu-latest
@@ -39,14 +40,14 @@ jobs:
             manylinux: auto
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
+      - uses: astral-sh/setup-uv@v5
+      - name: Install Python versions
+        run: uv python install 3.10 3.11 3.12 3.13 pypy3.10
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --find-interpreter -F duckdb/bundled
+          args: --release --out dist -i 3.10 -i 3.11 -i 3.12 -i 3.13 -i pypy3.10 -F duckdb/bundled
           sccache: "true"
           manylinux: ${{ matrix.platform.manylinux }}
       - name: Upload wheels
