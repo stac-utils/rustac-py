@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.5.0] - 2025-02-09
+
+### Changed
+
+- `search` and `search_to` are now async ([#24](https://github.com/gadomski/stacrs/pull/24))
+
 ## [0.4.0] - 2025-01-13
 
 ### Added
@@ -97,7 +103,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.4.0...main
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.0...main
+[0.5.0]: https://github.com/gadomski/stacrs/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/gadomski/stacrs/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/gadomski/stacrs/releases/tag/v0.3.0
 [0.2.2]: https://github.com/stac-utils/stac-rs/compare/python-v0.2.1...python-v0.2.2
