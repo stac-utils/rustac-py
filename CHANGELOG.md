@@ -6,9 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.5.3] - 2025-02-07
+
 ### Changed
 
 - Use only abi3 wheels ([#36](https://github.com/gadomski/stacrs/pull/36))
+
+> [!WARNING]
+> All versions older than v0.5.3 were deleted from PyPI, but some tags still exist on this repo.
+> See <https://github.com/gadomski/stacrs/discussions/37> for more.
 
 ## [0.5.2] - 2025-02-07
 
@@ -119,7 +125,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.2...main
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.3...main
+[0.5.3]: https://github.com/gadomski/stacrs/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/gadomski/stacrs/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/gadomski/stacrs/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/gadomski/stacrs/compare/v0.4.0...v0.5.0
