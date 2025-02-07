@@ -44,7 +44,8 @@ await stacrs.write("items.parquet", items)
 item_collection = await stacrs.read("items.parquet")
 
 # You can search geoparquet files using DuckDB
-item_collection = await stacrs.search("items.parquet", ...)
+# If you want to search a file on s3, make sure to configure your AWS environment first
+item_collection = await stacrs.search("s3://bucket/items.parquet", ...)
 
 # Use `search_to` for better performance if you know you'll be writing the items
 # to a file
