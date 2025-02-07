@@ -78,7 +78,8 @@ Then:
 ```shell
 git clone git@github.com:gadomski/stacrs.git
 cd stacrs
-scripts/test  # This will take a little while while the Rust dependencies build, especially DuckDB
+uv sync
+uv run pytest
 ```
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information about contributing to this project.
