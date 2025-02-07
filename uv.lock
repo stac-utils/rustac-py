@@ -1558,6 +1558,20 @@ validation = [
 ]
 
 [[package]]
+name = "pystac-client"
+version = "0.8.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pystac", extra = ["validation"] },
+    { name = "python-dateutil" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a2/0a/7f25bbad05b72602789f08b8ea444f362440e70e330b36c642ac1440e242/pystac_client-0.8.5.tar.gz", hash = "sha256:7fba8d4f3c641ff7e840084fc3a53c96443a227f8a5889ae500fc38183ccd994", size = 52367 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d8/25/1130b9916f7ff42fae3719c479ba4d7038659e3b6b681b736a3c936d5cc1/pystac_client-0.8.5-py3-none-any.whl", hash = "sha256:0da63244e46dae45f66b6bd6e40eb94c03cb6e4850536ef3ebd58a7efeb48f69", size = 41863 },
+]
+
+[[package]]
 name = "pytest"
 version = "8.3.3"
 source = { registry = "https://pypi.org/simple" }
@@ -2045,10 +2059,6 @@ source = { editable = "." }
 [package.dev-dependencies]
 dev = [
     { name = "maturin" },
-    { name = "mike" },
-    { name = "mkdocs-jupyter" },
-    { name = "mkdocs-material", extra = ["imaging"] },
-    { name = "mkdocstrings", extra = ["python"] },
     { name = "mypy" },
     { name = "pyarrow" },
     { name = "pystac", extra = ["validation"] },
@@ -2057,16 +2067,19 @@ dev = [
     { name = "ruff" },
     { name = "stac-geoparquet" },
 ]
+docs = [
+    { name = "mike" },
+    { name = "mkdocs-jupyter" },
+    { name = "mkdocs-material", extra = ["imaging"] },
+    { name = "mkdocstrings", extra = ["python"] },
+    { name = "pystac-client" },
+]
 
 [package.metadata]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "maturin", specifier = ">=1.7.4" },
-    { name = "mike", specifier = ">=2.1.3" },
-    { name = "mkdocs-jupyter", specifier = ">=0.25.1" },
-    { name = "mkdocs-material", extras = ["imaging"], specifier = ">=9.5.45" },
-    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.27.0" },
     { name = "mypy", specifier = ">=1.11.2" },
     { name = "pyarrow", specifier = ">=18.0.0" },
     { name = "pystac", extras = ["validation"], specifier = ">=1.11.0" },
@@ -2074,6 +2087,13 @@ dev = [
     { name = "pytest-asyncio", specifier = ">=0.25.1" },
     { name = "ruff", specifier = ">=0.6.9" },
     { name = "stac-geoparquet", specifier = ">=0.6.0" },
+]
+docs = [
+    { name = "mike", specifier = ">=2.1.3" },
+    { name = "mkdocs-jupyter", specifier = ">=0.25.1" },
+    { name = "mkdocs-material", extras = ["imaging"], specifier = ">=9.5.45" },
+    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.27.0" },
+    { name = "pystac-client", specifier = ">=0.8.5" },
 ]
 
 [[package]]
