@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Use only abi3 wheels ([#36](https://github.com/gadomski/stacrs/pull/36))
+
 ## [0.5.2] - 2025-02-07
 
 ### Changed
