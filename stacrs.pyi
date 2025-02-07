@@ -130,8 +130,8 @@ async def read(
 
     Args:
         href (str): The href to write to
-        format (str | None): The output format to write. If not provided, will be
-            inferred from the href's extension.
+        format (str | None): The input format. If not provided, will be inferred
+            from the href's extension.
         options (list[tuple[str, str]] | None): Options for configuring an
             object store, e.g. your AWS credentials.
 
