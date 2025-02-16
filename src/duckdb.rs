@@ -5,7 +5,7 @@ use pyo3::{
     types::{PyDict, PyList},
 };
 use stac_api::python::{StringOrDict, StringOrList};
-use stac_duckdb::Client;
+use stac_duckdb::{Client, Config};
 use std::sync::Mutex;
 
 #[pyclass(frozen)]
@@ -14,8 +14,13 @@ pub struct DuckdbClient(Mutex<Client>);
 #[pymethods]
 impl DuckdbClient {
     #[new]
-    fn new() -> Result<DuckdbClient> {
-        let client = Client::new()?;
+    #[pyo3(signature = (use_s3_credential_chain=true, use_hive_partitioning=false))]
+    fn new(use_s3_credential_chain: bool, use_hive_partitioning: bool) -> Result<DuckdbClient> {
+        let config = Config {
+            use_s3_credential_chain,
+            use_hive_partitioning,
+        };
+        let client = Client::with_config(config)?;
         Ok(DuckdbClient(Mutex::new(client)))
     }
 
