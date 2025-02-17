@@ -9,6 +9,16 @@
 
 A small no-dependency Python package for [STAC](https://stacspec.org/), using Rust under the hood.
 
+## Why?
+
+Why make a new STAC Python library, when we already have [PySTAC](https://github.com/stac-utils/pystac)?
+Well, we've built some things in [stac-rs](https://github.com/stac-utils/stac-rs) (a collection of STAC Rust libraries) that we want to provide to the Python ecosystem, such as:
+
+- Read, write, and search [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet)
+- `async` functions
+
+If you don't need those things, **stacrs** probably isn't for you — use **pystac** and its friend, [pystac-client](https://github.com/stac-utils/pystac-client), instead.
+
 ## Usage
 
 Install via **pip**:
@@ -69,6 +79,17 @@ This package (intentionally) has limited functionality, as it is _not_ intended 
 For querying STAC APIs, [pystac-client](https://pystac-client.readthedocs.io) is more feature-rich than our simplistic `stacrs.search`.
 
 That being said, it is hoped that **stacrs** will be a nice complement to the existing Python STAC ecosystem by providing a no-dependency package with unique capabilities, such as searching directly into a stac-geoparquet file.
+
+### stac-geoparquet
+
+**stacrs** also replicates much of the behavior in the [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet) library, and even uses some of the same Rust dependencies.
+We believe there are a couple of issues with **stac-geoparquet** that make **stacrs** a worthy replacement:
+
+- The **stac-geoparquet** repo includes Python dependencies
+- It doesn't have a nice one-shot API for reading and writing
+- It includes some leftover code and logic from its gensis as a tool for the [Microsoft Planetary Computer](https://planetarycomputer.microsoft.com/)
+
+We test to ensure [compatibility](https://github.com/stac-utils/stac-rs/blob/main/scripts/validate-stac-geoparquet) between the two libraries, and we intend to consolidate to a single "stac-geoparquet" library at some point in the future.
 
 ## Development
 
