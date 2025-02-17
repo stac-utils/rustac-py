@@ -1,7 +1,7 @@
 # stacrs
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/gadomski/stacrs/ci.yaml?branch=main&style=for-the-badge)](https://github.com/gadomski/stacrs/actions/workflows/ci.yaml)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/gadomski/stacrs/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://www.gadom.ski/stacrs/latest/)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/stacrs/ci.yaml?branch=main&style=for-the-badge)](https://github.com/stac-utils/stacrs/actions/workflows/ci.yaml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/stacrs/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://www.gadom.ski/stacrs/latest/)
 [![PyPI - Version](https://img.shields.io/pypi/v/stacrs?style=for-the-badge)](https://pypi.org/project/stacrs)
 [![Conda Downloads](https://img.shields.io/conda/d/conda-forge/stacrs?style=for-the-badge)](https://anaconda.org/conda-forge/stacrs)
 ![PyPI - License](https://img.shields.io/pypi/l/stacrs?style=for-the-badge)
@@ -97,7 +97,7 @@ Get [Rust](https://rustup.rs/) and [uv](https://docs.astral.sh/uv/getting-starte
 Then:
 
 ```shell
-git clone git@github.com:gadomski/stacrs.git
+git clone git@github.com:stac-utils/stacrs.git
 cd stacrs
 scripts/test  # This will take a little while while the Rust dependencies build, especially DuckDB
 ```

@@ -20,7 +20,7 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          # https://github.com/gadomski/stacrs/issues/1
+          # https://github.com/stac-utils/stacrs/issues/1
           # - windows-latest
     steps:
       - uses: actions/checkout@v4

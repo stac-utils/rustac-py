@@ -22,9 +22,9 @@ keywords = ["stac", "geospatial"]
 dynamic = ["version"]
 
 [project.urls]
-Repository = "https://github.com/gadomski/stacrs"
+Repository = "https://github.com/stac-utils/stacrs"
 Documentation = "https://www.gadom.ski/stacrs"
-Issues = "https://github.com/gadomski/stacrs/issues"
+Issues = "https://github.com/stac-utils/issues"
 
 [tool.mypy]
 files = "**/*.py"
