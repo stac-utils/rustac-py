@@ -27,7 +27,9 @@ jobs:
       - uses: astral-sh/setup-uv@v3
       - uses: Swatinem/rust-cache@v2
       - name: Sync
-        run: uv sync
+        run: uv sync --no-install-project
+      - name: Build directly with maturin
+        run: maturin dev --uv
       - name: Lint
         run: scripts/lint
       - name: Test
