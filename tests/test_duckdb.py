@@ -33,3 +33,7 @@ def test_search_offset(client: DuckdbClient) -> None:
 def test_get_collections(client: DuckdbClient) -> None:
     collections = client.get_collections("data/100-sentinel-2-items.parquet")
     assert len(collections) == 1
+
+
+def test_init_with_config() -> None:
+    DuckdbClient(use_s3_credential_chain=True, use_hive_partitioning=True)

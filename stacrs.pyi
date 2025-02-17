@@ -3,6 +3,18 @@ from typing import Any, Optional, Tuple
 class DuckdbClient:
     """A client for querying stac-geoparquet with DuckDB."""
 
+    def __init__(
+        self, use_s3_credential_chain: bool = True, use_hive_partitioning: bool = False
+    ) -> None:
+        """Creates a new duckdb client.
+
+        Args:
+            use_s3_credential_chain: If true, configures DuckDB to correctly
+                handle s3:// urls.
+            use_hive_partitioning: If true, enables queries on hive partitioned
+                geoparquet files.
+        """
+
     def search(
         self,
         href: str,
