@@ -13,7 +13,7 @@ default = ["duckdb-bundled"]
 duckdb-bundled = ["duckdb/bundled"]
 
 [dependencies]
-duckdb = { version = "1.1.1" }
+duckdb = { version = "=1.1.1" }
 geojson = "0.24.1"
 pyo3 = { version = "0.23.4", features = ["abi3-py310"] }
 pyo3-async-runtimes = { version = "0.23.0", features = [
