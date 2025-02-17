@@ -23,7 +23,7 @@ dynamic = ["version"]
 
 [project.urls]
 Repository = "https://github.com/stac-utils/stacrs"
-Documentation = "https://www.gadom.ski/stacrs"
+Documentation = "https://stac-utils.github.io/stacrs"
 Issues = "https://github.com/stac-utils/issues"
 
 [tool.mypy]

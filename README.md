@@ -1,7 +1,7 @@
 # stacrs
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/stacrs/ci.yaml?branch=main&style=for-the-badge)](https://github.com/stac-utils/stacrs/actions/workflows/ci.yaml)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/stacrs/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://www.gadom.ski/stacrs/latest/)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/stacrs/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://stac-utils.github.io/stacrs/latest/)
 [![PyPI - Version](https://img.shields.io/pypi/v/stacrs?style=for-the-badge)](https://pypi.org/project/stacrs)
 [![Conda Downloads](https://img.shields.io/conda/d/conda-forge/stacrs?style=for-the-badge)](https://anaconda.org/conda-forge/stacrs)
 ![PyPI - License](https://img.shields.io/pypi/l/stacrs?style=for-the-badge)
@@ -69,8 +69,8 @@ await stacrs.search_to(
 )
 ```
 
-See [the documentation](https://www.gadom.ski/stacrs) for details.
-In particular, our [example notebook](https://www.gadom.ski/stacrs/latest/example/) demonstrates some of the more interesting features.
+See [the documentation](https://stac-utils.github.io/stacrs) for details.
+In particular, our [example notebook](https://stac-utils.github.io/stacrs/latest/example/) demonstrates some of the more interesting features.
 
 ## Comparisons
 
