@@ -10,6 +10,7 @@ mod write;
 
 use ::duckdb as _;
 use error::Error;
+use libduckdb_sys as _;
 use pyo3::prelude::*;
 
 type Result<T> = std::result::Result<T, Error>;

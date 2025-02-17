@@ -1813,9 +1813,9 @@ checksum = "b5aba8db14291edd000dfcc4d620c7ebfb122c613afb886ca8803fa4e128a20a"
 
 [[package]]
 name = "libduckdb-sys"
-version = "1.2.0"
+version = "1.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc4020eaf07df4927b5205cd200ca2a5ed0798b49652dec22e09384ba8efa163"
+checksum = "eac2de5219db852597558df5dcd617ffccd5cbd7b9f5402ccbf899aca6cb6047"
 dependencies = [
  "autocfg",
  "cc",
@@ -3098,7 +3098,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "stac"
 version = "0.12.0"
-source = "git+https://github.com/stac-utils/stac-rs#ea6efd1b9b64e2dcbf97777126a1f62e6cbc7b48"
+source = "git+https://github.com/stac-utils/stac-rs#bc89452934d68a93f8772e9fc7492aef5fc0c70f"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3126,7 +3126,7 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.7.1"
-source = "git+https://github.com/stac-utils/stac-rs#ea6efd1b9b64e2dcbf97777126a1f62e6cbc7b48"
+source = "git+https://github.com/stac-utils/stac-rs#bc89452934d68a93f8772e9fc7492aef5fc0c70f"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3151,7 +3151,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.2.0"
-source = "git+https://github.com/stac-utils/stac-rs#ea6efd1b9b64e2dcbf97777126a1f62e6cbc7b48"
+source = "git+https://github.com/stac-utils/stac-rs#bc89452934d68a93f8772e9fc7492aef5fc0c70f"
 dependencies = [
  "quote",
  "syn 2.0.98",
@@ -3160,7 +3160,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.1.1"
-source = "git+https://github.com/stac-utils/stac-rs#ea6efd1b9b64e2dcbf97777126a1f62e6cbc7b48"
+source = "git+https://github.com/stac-utils/stac-rs#bc89452934d68a93f8772e9fc7492aef5fc0c70f"
 dependencies = [
  "arrow",
  "chrono",
@@ -3181,6 +3181,7 @@ version = "0.5.3"
 dependencies = [
  "duckdb",
  "geojson",
+ "libduckdb-sys",
  "pyo3",
  "pyo3-async-runtimes",
  "pyo3-log",
