@@ -72,6 +72,18 @@ await stacrs.search_to(
 See [the documentation](https://stac-utils.github.io/stacrs) for details.
 In particular, our [example notebook](https://stac-utils.github.io/stacrs/latest/example/) demonstrates some of the more interesting features.
 
+## CLI
+
+We have a pip-installable command-line interface (CLI) that exposes much of the same functionality:
+
+```shell
+python -m pip install stacrs-cli
+stacrs -h
+
+```
+
+The code for the CLI lives in the [stac-rs](https://github.com/stac-utils/stac-rs) repo, so please open any issues or feature requests over there, if possible.
+
 ## Comparisons
 
 This package (intentionally) has limited functionality, as it is _not_ intended to be a replacement for existing Python STAC packages.
