@@ -77,9 +77,32 @@ In particular, our [example notebook](https://stac-utils.github.io/stacrs/latest
 We have a pip-installable command-line interface (CLI) that exposes much of the same functionality:
 
 ```shell
-python -m pip install stacrs-cli
-stacrs -h
+$ python -m pip install stacrs-cli
+$ stacrs -h
+stacrs: A command-line interface for the SpatioTemporal Asset Catalog (STAC)
 
+Usage: stacrs [OPTIONS] <COMMAND>
+
+Commands:
+  translate  Translates STAC from one format to another
+  search     Searches a STAC API or stac-geoparquet file
+  serve      Serves a STAC API
+  validate   Validates a STAC value
+  help       Print this message or the help of the given subcommand(s)
+
+Options:
+  -i, --input-format <INPUT_FORMAT>
+          The input format.
+      --opt <OPTIONS>
+          Options for getting and putting files from object storage.
+  -o, --output-format <OUTPUT_FORMAT>
+          The output format.
+  -c, --compact-json <COMPACT_JSON>
+          Whether to print compact JSON output [possible values: true, false]
+      --parquet-compression <PARQUET_COMPRESSION>
+          The parquet compression to use when writing stac-geoparquet.
+  -h, --help
+          Print help (see more with '--help')
 ```
 
 The code for the CLI lives in the [stac-rs](https://github.com/stac-utils/stac-rs) repo, so please open any issues or feature requests over there, if possible.
