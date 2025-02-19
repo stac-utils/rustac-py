@@ -21,6 +21,9 @@ classifiers = [
 keywords = ["stac", "geospatial"]
 dynamic = ["version"]
 
+[project.scripts]
+stacrs = "stacrs_cli:main"
+
 [project.urls]
 Repository = "https://github.com/stac-utils/stacrs"
 Documentation = "https://stac-utils.github.io/stacrs"
