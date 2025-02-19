@@ -4,3 +4,4 @@ set -e
 
 uv run maturin dev --uv
 uv run pytest "$@"
+uv run stacrs --help
