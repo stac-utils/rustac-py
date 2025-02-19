@@ -13,6 +13,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Rust",
@@ -22,7 +23,7 @@ keywords = ["stac", "geospatial"]
 dynamic = ["version"]
 
 [project.scripts]
-stacrs = "stacrs_cli:main"
+stacrs = "stacrs:main"
 
 [project.urls]
 Repository = "https://github.com/stac-utils/stacrs"
