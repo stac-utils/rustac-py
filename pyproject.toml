@@ -43,6 +43,7 @@ asyncio_default_fixture_loop_scope = "function"
 
 [dependency-groups]
 dev = [
+    "geopandas>=1.0.1",
     "maturin>=1.7.4",
     "mypy>=1.11.2",
     "pyarrow>=19.0.1",
