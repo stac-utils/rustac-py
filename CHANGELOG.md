@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.5.4] - 2025-02-19
+
+### Added
+
+- CLI ([#46](https://github.com/stac-utils/stacrs/pull/46))
+- Config args to DuckDB client ([#42](https://github.com/stac-utils/stacrs/pull/42))
+
 ## [0.5.3] - 2025-02-07
 
 ### Changed
@@ -125,7 +132,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.3...main
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.4...main
+[0.5.4]: https://github.com/gadomski/stacrs/compare/v0.5.3...v0.5.4
 [0.5.3]: https://github.com/gadomski/stacrs/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/gadomski/stacrs/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/gadomski/stacrs/compare/v0.5.0...v0.5.1
