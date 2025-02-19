@@ -74,10 +74,9 @@ In particular, our [example notebook](https://stac-utils.github.io/stacrs/latest
 
 ## CLI
 
-We have a pip-installable command-line interface (CLI) that exposes much of the same functionality:
+**stacrs** comes with a CLI:
 
 ```shell
-$ python -m pip install stacrs-cli
 $ stacrs -h
 stacrs: A command-line interface for the SpatioTemporal Asset Catalog (STAC)
 
@@ -105,7 +104,8 @@ Options:
           Print help (see more with '--help')
 ```
 
-The code for the CLI lives in the [stac-rs](https://github.com/stac-utils/stac-rs) repo, so please open any issues or feature requests over there, if possible.
+> [!NOTE]
+> Before **stacrs** v0.5.4, the CLI was its own PyPI package named **stacrs-cli**, which is no longer needed.
 
 ## Comparisons
 
