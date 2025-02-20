@@ -4,6 +4,7 @@ use pyo3::{
     prelude::*,
     types::{PyDict, PyList},
 };
+use pyo3_arrow::PyTable;
 use stac_api::python::{StringOrDict, StringOrList};
 use stac_duckdb::{Client, Config};
 use std::sync::Mutex;
@@ -86,7 +87,7 @@ impl DuckdbClient {
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
         kwargs: Option<Bound<'py, PyDict>>,
-    ) -> Result<Bound<'py, PyObject>> {
+    ) -> Result<PyObject> {
         let search = stac_api::python::search(
             intersects,
             ids,
@@ -102,13 +103,23 @@ impl DuckdbClient {
             kwargs,
         )?;
         let record_batches = {
-            let client = self
+            let mut client = self
                 .0
                 .lock()
                 .map_err(|err| PyException::new_err(err.to_string()))?;
-            client.search_to_arrow(&href, search)?
+            let convert_wkb = client.config.convert_wkb;
+            let result = client.search_to_arrow(&href, search);
+            client.config.convert_wkb = convert_wkb;
+            result?
         };
-        todo!()
+        if record_batches.is_empty() {
+            Ok(py.None())
+        } else {
+            let schema = record_batches[0].schema();
+            let table = PyTable::try_new(record_batches, schema)?;
+            let table = table.to_arro3(py)?;
+            Ok(table)
+        }
     }
 
     fn get_collections<'py>(&self, py: Python<'py>, href: String) -> Result<Bound<'py, PyList>> {

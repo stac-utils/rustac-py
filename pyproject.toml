@@ -21,6 +21,9 @@ classifiers = [
 ]
 keywords = ["stac", "geospatial"]
 dynamic = ["version"]
+dependencies = [
+    "arro3-core>=0.4.5",
+]
 
 [project.scripts]
 stacrs = "stacrs:main"
