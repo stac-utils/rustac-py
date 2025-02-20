@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.5.5] - 2025-02-20
+
+### Fixed
+
+- Removed tracing subscriber to fix CLI ([#49](https://github.com/stac-utils/stacrs/pull/49))
+
 ## [0.5.4] - 2025-02-19
 
 ### Added
@@ -132,7 +138,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.4...main
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.5...main
+[0.5.5]: https://github.com/gadomski/stacrs/compare/v0.5.4...v0.5.5
 [0.5.4]: https://github.com/gadomski/stacrs/compare/v0.5.3...v0.5.4
 [0.5.3]: https://github.com/gadomski/stacrs/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/gadomski/stacrs/compare/v0.5.1...v0.5.2
