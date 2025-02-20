@@ -18,8 +18,6 @@ type Result<T> = std::result::Result<T, Error>;
 
 #[pymodule]
 fn stacrs(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
-    pyo3_log::init();
-
     m.add("StacrsError", py.get_type::<error::StacrsError>())?;
 
     m.add_class::<duckdb::DuckdbClient>()?;
