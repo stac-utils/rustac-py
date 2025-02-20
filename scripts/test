@@ -4,4 +4,4 @@ set -e
 
 uv run maturin dev --uv
 uv run pytest "$@"
-uv run stacrs --help
+uv run stacrs translate spec-examples/v1.1.0/simple-item.json /dev/null

@@ -19,6 +19,7 @@ impl DuckdbClient {
         let config = Config {
             use_s3_credential_chain,
             use_hive_partitioning,
+            convert_wkb: true,
         };
         let client = Client::with_config(config)?;
         Ok(DuckdbClient(Mutex::new(client)))

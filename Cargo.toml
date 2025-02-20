@@ -21,7 +21,6 @@ pyo3-async-runtimes = { version = "0.23.0", features = [
     "tokio",
     "tokio-runtime",
 ] }
-pyo3-log = "0.12.1"
 pythonize = "0.23.0"
 serde = "1.0.217"
 serde_json = "1.0.138"
@@ -37,5 +36,4 @@ stac-cli = { version = "0.5.1", git = "https://github.com/stac-utils/stac-rs" }
 stac-duckdb = { version = "0.1.0", git = "https://github.com/stac-utils/stac-rs" }
 thiserror = "2.0.11"
 clap = "4.5.30"
-tracing-subscriber = "0.3.19"
 tokio = { version = "1.43.0", features = ["rt-multi-thread"] }
