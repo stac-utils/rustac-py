@@ -693,9 +693,9 @@ checksum = "37b2a672a2cb129a2e41c10b1224bb368f9f37a2b16b612598138befd7b37eb5"
 
 [[package]]
 name = "cc"
-version = "1.2.14"
+version = "1.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c3d1b2e905a3a7b00a6141adb0e4c0bb941d11caf55349d863942a1cc44e3c9"
+checksum = "c736e259eea577f443d5c86c304f9f4ae0295c43f3ba05c21f1d66b5f06001af"
 dependencies = [
  "jobserver",
  "libc",
@@ -859,9 +859,9 @@ dependencies = [
 
 [[package]]
 name = "cql2"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8a873bc3126a63fb35568e48f321bbcf05dceb792bd6d7c35ec331352e648623"
+checksum = "e788be883ee783bd659dde0f64ee2f63544619724bb2b337c3e94fad9fbf5c22"
 dependencies = [
  "geo",
  "geo-types",
@@ -2227,9 +2227,9 @@ dependencies = [
 
 [[package]]
 name = "log"
-version = "0.4.25"
+version = "0.4.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "04cbf5b083de1c7e0222a7a51dbfdba1cbe1c6ab0b15e29fff3f6c077fd9cd9f"
+checksum = "30bde2b3dc3671ae49d8e2e9f044c7c005836e7a023ee57cffa25ab82764bb9e"
 
 [[package]]
 name = "lz4_flex"
@@ -2631,7 +2631,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/stac-rs#598b254e3909c54ad0ec4103b6e2684706784b72"
+source = "git+https://github.com/stac-utils/stac-rs#53878f6f03bf80cd5583674613d2d8a44dc5361b"
 dependencies = [
  "serde",
  "serde_json",
@@ -3056,9 +3056,9 @@ dependencies = [
 
 [[package]]
 name = "redox_syscall"
-version = "0.5.8"
+version = "0.5.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "03a862b389f93e68874fbf580b9de08dd02facb9a788ebadaf4a3fd33cf58834"
+checksum = "82b568323e98e49e2a0899dcee453dd679fae22d69adf9b11dd508d1549b7e2f"
 dependencies = [
  "bitflags 2.8.0",
 ]
@@ -3200,9 +3200,9 @@ dependencies = [
 
 [[package]]
 name = "ring"
-version = "0.17.9"
+version = "0.17.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e75ec5e92c4d8aede845126adc388046234541629e76029599ed35a003c7ed24"
+checksum = "d34b5020fcdea098ef7d95e9f89ec15952123a4a039badd09fabebe9e963e839"
 dependencies = [
  "cc",
  "cfg-if",
@@ -3632,7 +3632,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "stac"
 version = "0.12.0"
-source = "git+https://github.com/stac-utils/stac-rs#598b254e3909c54ad0ec4103b6e2684706784b72"
+source = "git+https://github.com/stac-utils/stac-rs#53878f6f03bf80cd5583674613d2d8a44dc5361b"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3663,7 +3663,7 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.7.1"
-source = "git+https://github.com/stac-utils/stac-rs#598b254e3909c54ad0ec4103b6e2684706784b72"
+source = "git+https://github.com/stac-utils/stac-rs#53878f6f03bf80cd5583674613d2d8a44dc5361b"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3689,7 +3689,7 @@ dependencies = [
 [[package]]
 name = "stac-cli"
 version = "0.5.3"
-source = "git+https://github.com/stac-utils/stac-rs#598b254e3909c54ad0ec4103b6e2684706784b72"
+source = "git+https://github.com/stac-utils/stac-rs#53878f6f03bf80cd5583674613d2d8a44dc5361b"
 dependencies = [
  "anyhow",
  "axum",
@@ -3709,7 +3709,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.2.0"
-source = "git+https://github.com/stac-utils/stac-rs#598b254e3909c54ad0ec4103b6e2684706784b72"
+source = "git+https://github.com/stac-utils/stac-rs#53878f6f03bf80cd5583674613d2d8a44dc5361b"
 dependencies = [
  "quote",
  "syn 2.0.98",
@@ -3718,7 +3718,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.1.1"
-source = "git+https://github.com/stac-utils/stac-rs#598b254e3909c54ad0ec4103b6e2684706784b72"
+source = "git+https://github.com/stac-utils/stac-rs#53878f6f03bf80cd5583674613d2d8a44dc5361b"
 dependencies = [
  "arrow",
  "chrono",
@@ -3736,7 +3736,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.3.4"
-source = "git+https://github.com/stac-utils/stac-rs#598b254e3909c54ad0ec4103b6e2684706784b72"
+source = "git+https://github.com/stac-utils/stac-rs#53878f6f03bf80cd5583674613d2d8a44dc5361b"
 dependencies = [
  "axum",
  "bb8",
