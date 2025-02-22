@@ -77,7 +77,10 @@ jobs:
           args: --release --out dist -i 3.10 --auditwheel repair
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: musllinux_1_2
-          before-script-linux: export DUCKDB_LIB_DIR=/opt/duckdb
+          before-script-linux: |
+            export DUCKDB_LIB_DIR=/opt/duckdb
+            echo $DUCKDB_LIB_DIR
+            ls $DUCKDB_LIB_DIR
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
