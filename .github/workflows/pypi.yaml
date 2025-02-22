@@ -13,9 +13,6 @@ concurrency:
   group: wheels
   cancel-in-progress: false
 
-env:
-  DUCKDB_VERSION: "1.2.0"
-
 jobs:
   # TODO add bundled builds for platforms where we don't have pre-built libraries
   linux:
@@ -42,7 +39,7 @@ jobs:
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: ${{ matrix.platform.manylinux }}
           before-script-linux: |
-            sudo apt-get install unzip
+            apt-get install unzip
             curl -L -O https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip
             unzip libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip -d /opt/duckdb
             export DUCKDB_LIB_DIR=/opt/duckdb
@@ -66,10 +63,6 @@ jobs:
       - uses: astral-sh/setup-uv@v5
       - name: Install Pythons
         run: uv python install 3.10
-      - name: Install libduckdb
-        run: |
-          wget https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip
-          unzip libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip -d /opt/duckdb
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
@@ -78,9 +71,10 @@ jobs:
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: musllinux_1_2
           before-script-linux: |
+            sudo apt-get install unzip
+            curl -L -O https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip
+            unzip libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip -d /opt/duckdb
             export DUCKDB_LIB_DIR=/opt/duckdb
-            echo $DUCKDB_LIB_DIR
-            ls $DUCKDB_LIB_DIR
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
@@ -96,6 +90,8 @@ jobs:
             target: x86_64
           - runner: macos-14
             target: aarch64
+    env:
+      DUCKDB_VERSION: "1.2.0"
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
@@ -103,7 +99,7 @@ jobs:
         run: uv python install 3.10
       - name: Install libduckdb
         run: |
-          wget https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-osx-universal.zip
+          wget https://github.com/duckdb/duckdb/releases/download/v${DUCKDB_VERSION}/libduckdb-osx-universal.zip
           mkdir -p ./opt/duckdb
           unzip libduckdb-osx-universal.zip -d ./opt/duckdb
       - name: Install delocate
