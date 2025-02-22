@@ -1,6 +1,6 @@
 [project]
 name = "stacrs"
-description = "A small, no-dependency Python package for STAC, using Rust under the hood."
+description = "A no-dependency Python package for STAC, using Rust under the hood."
 readme = "README.md"
 authors = [{ name = "Pete Gadomski", email = "pete.gadomski@gmail.com" }]
 requires-python = ">=3.10"
@@ -45,7 +45,7 @@ asyncio_default_fixture_loop_scope = "function"
 dev = [
     "maturin>=1.7.4",
     "mypy>=1.11.2",
-    "pyarrow>=18.0.0",
+    "pyarrow>=19.0.1",
     "pystac[validation]>=1.11.0",
     "pytest>=8.3.3",
     "pytest-asyncio>=0.25.1",
@@ -66,6 +66,3 @@ default-groups = ["dev", "docs"]
 [build-system]
 requires = ["maturin>=1.7,<2.0"]
 build-backend = "maturin"
-
-[tool.maturin]
-features = ["pyo3/extension-module"]

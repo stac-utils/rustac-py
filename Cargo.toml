@@ -8,15 +8,10 @@ publish = false
 name = "stacrs"
 crate-type = ["cdylib"]
 
-[features]
-default = ["duckdb-bundled"]
-duckdb-bundled = ["duckdb/bundled"]
-
 [dependencies]
-duckdb = { version = "=1.1.1" }
-libduckdb-sys = { version = "=1.1.1" }
+clap = "4.5.30"
 geojson = "0.24.1"
-pyo3 = { version = "0.23.4", features = ["abi3-py310"] }
+pyo3 = { version = "0.23.4", features = ["abi3-py310", "extension-module"] }
 pyo3-async-runtimes = { version = "0.23.0", features = [
     "tokio",
     "tokio-runtime",
@@ -32,8 +27,9 @@ stac-api = { features = [
     "client",
     "python",
 ], git = "https://github.com/stac-utils/stac-rs" }
-stac-cli = { git = "https://github.com/stac-utils/stac-rs" }
+stac-cli = { git = "https://github.com/stac-utils/stac-rs", default-features = false, features = [
+    "pgstac",
+] }
 stac-duckdb = { git = "https://github.com/stac-utils/stac-rs" }
 thiserror = "2.0.11"
-clap = "4.5.30"
 tokio = { version = "1.43.0", features = ["rt-multi-thread"] }

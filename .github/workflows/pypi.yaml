@@ -14,29 +14,18 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # TODO add bundled builds for platforms where we don't have pre-built libraries
   linux:
-    runs-on: ${{ matrix.platform.runner }}
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         platform:
-          - runner: ubuntu-22.04
-            target: x86_64
+          - target: x86_64
             manylinux: auto
-          - runner: ubuntu-22.04
-            target: x86
-            manylinux: auto
-          - runner: ubuntu-22.04
-            target: aarch64
+            duckdb-slug: amd64
+          - target: aarch64
             manylinux: "2_28"
-          - runner: ubuntu-22.04
-            target: armv7
-            manylinux: auto
-          - runner: ubuntu-22.04
-            target: s390x
-            manylinux: auto
-          - runner: ubuntu-22.04
-            target: ppc64le
-            manylinux: auto
+            duckdb-slug: aarch64
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
@@ -46,72 +35,26 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist -i 3.10
+          args: --release --out dist -i 3.10 --auditwheel repair
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: ${{ matrix.platform.manylinux }}
+          before-script-linux: |
+            if command -v yum &> /dev/null; then
+                yum install -y unzip
+            elif command -v apt-get &> /dev/null; then
+                apt-get update && apt-get install -y unzip
+            else
+                echo "No supported package manager found."
+                exit 1
+            fi
+            curl -L -O https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip
+            unzip libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip -d /opt/duckdb
+            export DUCKDB_LIB_DIR=/opt/duckdb
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
           name: wheels-linux-${{ matrix.platform.target }}
           path: dist
-
-  musllinux:
-    runs-on: ${{ matrix.platform.runner }}
-    strategy:
-      matrix:
-        platform:
-          - runner: ubuntu-22.04
-            target: x86_64
-          - runner: ubuntu-22.04
-            target: x86
-          - runner: ubuntu-22.04
-            target: aarch64
-          - runner: ubuntu-22.04
-            target: armv7
-    steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
-      - name: Install Pythons
-        run: uv python install 3.10
-      - name: Build wheels
-        uses: PyO3/maturin-action@v1
-        with:
-          target: ${{ matrix.platform.target }}
-          args: --release --out dist -i 3.10
-          sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
-          manylinux: musllinux_1_2
-      - name: Upload wheels
-        uses: actions/upload-artifact@v4
-        with:
-          name: wheels-musllinux-${{ matrix.platform.target }}
-          path: dist
-
-  # windows:
-  #   runs-on: ${{ matrix.platform.runner }}
-  #   strategy:
-  #     matrix:
-  #       platform:
-  #         - runner: windows-latest
-  #           target: x64
-  #         - runner: windows-latest
-  #           target: x86
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-python@v5
-  #       with:
-  #         python-version: 3.x
-  #         architecture: ${{ matrix.platform.target }}
-  #     - name: Build wheels
-  #       uses: PyO3/maturin-action@v1
-  #       with:
-  #         target: ${{ matrix.platform.target }}
-  #         args: --release --out dist --find-interpreter
-  #         sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
-  #     - name: Upload wheels
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: wheels-windows-${{ matrix.platform.target }}
-  #         path: dist
 
   macos:
     runs-on: ${{ matrix.platform.runner }}
@@ -122,17 +65,34 @@ jobs:
             target: x86_64
           - runner: macos-14
             target: aarch64
+    env:
+      DUCKDB_VERSION: "1.2.0"
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
-      - name: Install Pythons
+      - name: Install Python
         run: uv python install 3.10
+      - name: Install libduckdb
+        run: |
+          wget https://github.com/duckdb/duckdb/releases/download/v${DUCKDB_VERSION}/libduckdb-osx-universal.zip
+          mkdir -p ./opt/duckdb
+          unzip libduckdb-osx-universal.zip -d ${{ github.workspace }}/opt/duckdb
+      - name: Install delocate
+        run: |
+          uv venv
+          uv pip install delocate
       - name: Build wheels
         uses: PyO3/maturin-action@v1
+        env:
+          DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
         with:
           target: ${{ matrix.platform.target }}
           args: --release --out dist -i 3.10
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
+      - name: Repair wheel
+        run: .venv/bin/delocate-wheel -v dist/*.whl
+        env:
+          DYLD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
@@ -160,8 +120,6 @@ jobs:
     if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
     needs:
       - linux
-      - musllinux
-      # - windows
       - macos
       - sdist
     environment:
