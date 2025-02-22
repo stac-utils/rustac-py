@@ -103,7 +103,9 @@ jobs:
           mkdir -p ./opt/duckdb
           unzip libduckdb-osx-universal.zip -d ./opt/duckdb
       - name: Install delocate
-        run: uv pip install --system delocate
+        run: |
+          uv venv
+          uv pip install delocate
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         env:
@@ -113,7 +115,7 @@ jobs:
           args: --release --out dist -i 3.10
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
       - name: Repair wheel
-        run: delocate-wheel -v dist/*.whl
+        run: uv run delocate-wheel -v dist/*.whl
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
