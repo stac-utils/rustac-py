@@ -104,14 +104,14 @@ jobs:
       - name: Install libduckdb
         run: |
           wget https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-osx-universal.zip
-          mkdir -p /opt/duckdb
-          unzip libduckdb-osx-universal.zip -d /opt/duckdb
+          mkdir -p ./opt/duckdb
+          unzip libduckdb-osx-universal.zip -d ./opt/duckdb
       - name: Install delocate
         run: uv pip install --system delocate
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         env:
-          DUCKDB_LIB_DIR: /opt/duckdb
+          DUCKDB_LIB_DIR: ./opt/duckdb
         with:
           target: ${{ matrix.platform.target }}
           args: --release --out dist -i 3.10
