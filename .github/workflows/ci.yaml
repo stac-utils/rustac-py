@@ -48,10 +48,12 @@ jobs:
           mkdir -p ${{ github.workspace }}/opt/duckdb
           unzip libduckdb-${{ matrix.os.duckdb-slug }}.zip -d ${{ github.workspace }}/opt/duckdb
       - name: Sync
-        run: uv sync --no-install-project
-      - name: Build directly with maturin
-        run: uv run maturin dev --uv
+        run: uv sync --all-extras
       - name: Lint
         run: scripts/lint
       - name: Test
         run: scripts/test
+      - name: Sync w/o extras
+        run: uv sync
+      - name: Test w/o extras
+        run: uv run pytest
