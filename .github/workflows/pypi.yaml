@@ -42,7 +42,7 @@ jobs:
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: ${{ matrix.platform.manylinux }}
           before-script-linux: |
-            curl -L -O https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip
+            curl -L -O https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip
             unzip libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip -d /opt/duckdb
             export DUCKDB_LIB_DIR=/opt/duckdb
       - name: Upload wheels
@@ -71,13 +71,12 @@ jobs:
           unzip libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip -d /opt/duckdb
       - name: Build wheels
         uses: PyO3/maturin-action@v1
-        env:
-          DUCKDB_LIB_DIR: /opt/duckdb
         with:
           target: ${{ matrix.platform.target }}
           args: --release --out dist -i 3.10 --auditwheel repair
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: musllinux_1_2
+          before-script-linux: export DUCKDB_LIB_DIR=/opt/duckdb
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
