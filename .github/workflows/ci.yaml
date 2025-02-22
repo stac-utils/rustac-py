@@ -11,12 +11,12 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  DUCKDB_VERSION: "1.2.0"
+  duckdb-version: "1.2.0"
 
 jobs:
   test:
     name: Test
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os.runner }}
     env:
       DUCKDB_LIB_DIR: /opt/duckdb
     strategy:
@@ -28,8 +28,10 @@ jobs:
           - "3.12"
           - "3.13"
         os:
-          - ubuntu-latest
-          # - macos-latest
+          - runner: ubuntu-latest
+            duckdb-slug: linux-amd64
+          - runner: macos-latest
+            duckdb-slug: osx-universal
           # https://github.com/stac-utils/stacrs/issues/1
           # - windows-latest
     steps:
@@ -40,8 +42,8 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
       - name: Install libduckdb
         run: |
-          wget https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/libduckdb-linux-amd64.zip
-          unzip libduckdb-linux-amd64.zip -d /opt/duckdb
+          wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-${{ matrix.os.duckdb-slug }}.zip
+          unzip libduckdb-${{ matrix.os.duckdb-slug }}.zip -d /opt/duckdb
       - name: Sync
         run: uv sync --no-install-project
       - name: Build directly with maturin
