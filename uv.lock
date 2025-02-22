@@ -2127,7 +2127,9 @@ wheels = [
 [[package]]
 name = "stacrs"
 source = { editable = "." }
-dependencies = [
+
+[package.optional-dependencies]
+arrow = [
     { name = "arro3-core" },
 ]
 
@@ -2152,7 +2154,8 @@ docs = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "arro3-core", specifier = ">=0.4.5" }]
+requires-dist = [{ name = "arro3-core", marker = "extra == 'arrow'", specifier = ">=0.4.5" }]
+provides-extras = ["arrow"]
 
 [package.metadata.requires-dev]
 dev = [

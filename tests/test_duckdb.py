@@ -41,6 +41,7 @@ def test_init_with_config() -> None:
 
 
 def test_search_to_arrow(client: DuckdbClient) -> None:
+    pytest.importorskip("arro3.core")
     table = client.search_to_arrow("data/100-sentinel-2-items.parquet")
     data_frame = GeoDataFrame.from_arrow(table)
     assert len(data_frame) == 100
