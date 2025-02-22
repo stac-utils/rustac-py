@@ -65,7 +65,11 @@ jobs:
     runs-on: ${{ matrix.platform.runner }}
     strategy:
       matrix:
-        maturin-args: ["-i 3.10", "-i 3.11 -F pyo3/abi3-py311"]
+        maturin:
+          - args: "-i 3.10"
+            name: python-310
+          - args: "-i 3.11 -F pyo3/abi3-py311"
+            name: python-311+
         platform:
           - runner: macos-13
             target: x86_64
@@ -93,7 +97,7 @@ jobs:
           DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist ${{ matrix.maturin-args }}
+          args: --release --out dist ${{ matrix.maturin.args }}
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
       - name: Repair wheel
         run: .venv/bin/delocate-wheel -v dist/*.whl
@@ -102,7 +106,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-macos-${{ matrix.platform.target }}
+          name: wheels-macos-${{ matrix.platform.target }}-${{ matrix.maturin.name }}
           path: dist
 
   sdist:
