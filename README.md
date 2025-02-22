@@ -11,8 +11,9 @@ A small no-dependency Python package for [STAC](https://stacspec.org/), using Ru
 
 ## Why?
 
-Why make a new STAC Python library, when we already have [PySTAC](https://github.com/stac-utils/pystac)?
-Well, we've built some things in [stac-rs](https://github.com/stac-utils/stac-rs) (a collection of STAC Rust libraries) that we want to provide to the Python ecosystem, such as:
+Q: We already have [PySTAC](https://github.com/stac-utils/pystac), so why did we make a new STAC Python library?
+
+A: We want to provide a couple of things in [stac-rs](https://github.com/stac-utils/stac-rs) (a collection of STAC Rust libraries) to the Python ecosystem:
 
 - Read, write, and search [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet)
 - `async` functions
@@ -24,7 +25,11 @@ If you don't need those things, **stacrs** probably isn't for you — use **pyst
 Install via **pip**:
 
 ```shell
+# basic
 python -m pip install stacrs
+
+# add methods to return arrow tables
+python -m pip install 'stacrs[arrow]'
 ```
 
 Or via **conda**:
@@ -46,6 +51,11 @@ items = await stacrs.search(
     sortby="-properties.datetime",
     max_items=100,
 )
+
+# If you installed with `pystac[arrow]`:
+from geopandas import GeoDataFrame
+table = await stacrs.search_to_arrow(...)
+data_frame = GeoDataFrame.from_arrow(table)
 
 # Write items to a stac-geoparquet file
 await stacrs.write("items.parquet", items)
