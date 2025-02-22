@@ -3,6 +3,7 @@ use pyo3::{
     exceptions::PyException,
     prelude::*,
     types::{PyDict, PyList},
+    IntoPyObjectExt,
 };
 use pyo3_arrow::PyTable;
 use stac_api::python::{StringOrDict, StringOrList};
@@ -108,17 +109,18 @@ impl DuckdbClient {
                 .lock()
                 .map_err(|err| PyException::new_err(err.to_string()))?;
             let convert_wkb = client.config.convert_wkb;
+            client.config.convert_wkb = false;
             let result = client.search_to_arrow(&href, search);
             client.config.convert_wkb = convert_wkb;
             result?
         };
         if record_batches.is_empty() {
-            Ok(py.None())
+            todo!()
         } else {
             let schema = record_batches[0].schema();
             let table = PyTable::try_new(record_batches, schema)?;
             let table = table.to_arro3(py)?;
-            Ok(table)
+            Ok(table.into_py_any(py)?)
         }
     }
 
