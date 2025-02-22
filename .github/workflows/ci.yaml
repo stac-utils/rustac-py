@@ -10,12 +10,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  DUCKDB_VERSION: "1.2.0"
+
 jobs:
   test:
     name: Test
     runs-on: ${{ matrix.os }}
     env:
-      DUCKDB_VERSION: "1.2.0"
       DUCKDB_LIB_DIR: /opt/duckdb
     strategy:
       fail-fast: false
@@ -36,7 +38,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Install Python version
         run: uv python install ${{ matrix.python-version }}
-      - name: Get DuckDB
+      - name: Install libduckdb
         run: |
           wget https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/libduckdb-linux-amd64.zip
           unzip libduckdb-linux-amd64.zip -d /opt/duckdb
