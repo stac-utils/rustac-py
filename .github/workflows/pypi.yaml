@@ -39,7 +39,14 @@ jobs:
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: ${{ matrix.platform.manylinux }}
           before-script-linux: |
-            yum install -y unzip
+            if command -v yum &> /dev/null; then
+                yum install -y unzip
+            elif command -v apt-get &> /dev/null; then
+                apt-get update && apt-get install -y unzip
+            else
+                echo "No supported package manager found."
+                exit 1
+            fi
             curl -L -O https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip
             unzip libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip -d /opt/duckdb
             export DUCKDB_LIB_DIR=/opt/duckdb
