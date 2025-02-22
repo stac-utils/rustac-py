@@ -19,6 +19,8 @@ jobs:
     runs-on: ${{ matrix.os.runner }}
     env:
       DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
+      LD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
+      DYLD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
     strategy:
       fail-fast: false
       matrix:
