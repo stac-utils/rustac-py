@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.5.6-beta.0] - 2025-02-22
+
+### Added
+
+- Search to an arrow table ([#54](https://github.com/stac-utils/stacrs/pull/54))
+
+### Changed
+
+- Include **libduckdb** in wheels ([#52](https://github.com/stac-utils/stacrs/pull/52))
+
 ## [0.5.5] - 2025-02-20
 
 ### Fixed
@@ -138,7 +148,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.5...main
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.6-beta.0...main
+[0.5.6-beta.0]: https://github.com/gadomski/stacrs/compare/v0.5.5...v0.5.6-beta.0
 [0.5.5]: https://github.com/gadomski/stacrs/compare/v0.5.4...v0.5.5
 [0.5.4]: https://github.com/gadomski/stacrs/compare/v0.5.3...v0.5.4
 [0.5.3]: https://github.com/gadomski/stacrs/compare/v0.5.2...v0.5.3
