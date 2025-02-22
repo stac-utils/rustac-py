@@ -21,6 +21,10 @@ classifiers = [
 ]
 keywords = ["stac", "geospatial"]
 dynamic = ["version"]
+dependencies = []
+
+[project.optional-dependencies]
+arrow = ["arro3-core>=0.4.5"]
 
 [project.scripts]
 stacrs = "stacrs:main"
@@ -34,7 +38,7 @@ Issues = "https://github.com/stac-utils/issues"
 files = "**/*.py"
 
 [[tool.mypy.overrides]]
-module = "pyarrow.*"
+module = ["pyarrow.*", "geopandas.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
@@ -43,6 +47,7 @@ asyncio_default_fixture_loop_scope = "function"
 
 [dependency-groups]
 dev = [
+    "geopandas>=1.0.1",
     "maturin>=1.7.4",
     "mypy>=1.11.2",
     "pyarrow>=19.0.1",

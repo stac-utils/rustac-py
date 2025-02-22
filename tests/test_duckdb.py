@@ -1,4 +1,5 @@
 import pytest
+from geopandas import GeoDataFrame
 from stacrs import DuckdbClient
 
 
@@ -37,3 +38,10 @@ def test_get_collections(client: DuckdbClient) -> None:
 
 def test_init_with_config() -> None:
     DuckdbClient(use_s3_credential_chain=True, use_hive_partitioning=True)
+
+
+def test_search_to_arrow(client: DuckdbClient) -> None:
+    pytest.importorskip("arro3.core")
+    table = client.search_to_arrow("data/100-sentinel-2-items.parquet")
+    data_frame = GeoDataFrame.from_arrow(table)
+    assert len(data_frame) == 100
