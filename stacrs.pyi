@@ -1,5 +1,7 @@
 from typing import Any, Optional, Tuple
 
+import arro3.core
+
 class DuckdbClient:
     """A client for querying stac-geoparquet with DuckDB."""
 
@@ -62,6 +64,62 @@ class DuckdbClient:
 
         Returns:
             dict[str, Any]: A feature collection of STAC items.
+        """
+
+    def search_to_arrow(
+        self,
+        href: str,
+        *,
+        ids: Optional[str | list[str]] = None,
+        collections: Optional[str | list[str]] = None,
+        intersects: Optional[str | dict[str, Any]] = None,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
+        bbox: Optional[list[float]] = None,
+        datetime: Optional[str] = None,
+        include: Optional[str | list[str]] = None,
+        exclude: Optional[str | list[str]] = None,
+        sortby: Optional[str | list[str]] = None,
+        filter: Optional[str | dict[str, Any]] = None,
+        query: Optional[dict[str, Any]] = None,
+        **kwargs: str,
+    ) -> arro3.core.Table | None:
+        """Search a stac-geoparquet file with duckdb, returning an arrow table
+        suitable for loading into (e.g.) GeoPandas.
+        **stacrs** must be installed with the `arrow` extra, e.g. `python -m pip
+        *install 'stacrs[arrow]'.
+
+        Args:
+            href: The stac-geoparquet file.
+            ids: Array of Item ids to return.
+            collections: Array of one or more Collection IDs that each matching
+                Item must be in.
+            intersects: Searches items by performing intersection between their
+                geometry and provided GeoJSON geometry.
+            limit: The number of items to return.
+            offset: The number of items to skip before returning.
+            bbox: Requested bounding box.
+            datetime: Single date+time, or a range (`/` separator), formatted to
+                RFC 3339, section 5.6.  Use double dots .. for open date ranges.
+            include: fields to include in the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+                for more on the semantics).
+            exclude: fields to exclude from the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+                for more on the semantics).
+            sortby: Fields by which to sort results (use `-field` to sort descending).
+            filter: CQL2 filter expression. Strings will be interpreted as
+                cql2-text, dictionaries as cql2-json.
+            query: Additional filtering based on properties.  It is recommended
+                to use filter instead, if possible.
+            kwargs: Additional parameters to pass in to the search.
+
+        Returns:
+            arro3.core.Table | None: An arrow table, or none if no records were returned.
+
+        Examples:
+            >>> table = client.search_to_arrow("data/100-sentinel-2-items.parquet")
+            >>> data_frame = GeoDataFrame.from_arrow(table)
         """
 
     def get_collections(self, href: str) -> list[dict[str, Any]]:

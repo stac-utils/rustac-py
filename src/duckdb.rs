@@ -115,7 +115,7 @@ impl DuckdbClient {
             result?
         };
         if record_batches.is_empty() {
-            todo!()
+            Ok(py.None())
         } else {
             let schema = record_batches[0].schema();
             let table = PyTable::try_new(record_batches, schema)?;
