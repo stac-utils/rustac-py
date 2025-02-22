@@ -128,16 +128,35 @@ We test to ensure [compatibility](https://github.com/stac-utils/stac-rs/blob/mai
 
 ## Development
 
-Get [Rust](https://rustup.rs/) and [uv](https://docs.astral.sh/uv/getting-started/installation/).
+Get [Rust](https://rustup.rs/), [uv](https://docs.astral.sh/uv/getting-started/installation/), and [libduckdb](https://duckdb.org/docs/installation/index) (for more on setting up **libduckdb**, [see this](#duckdb)).
 Then:
 
 ```shell
 git clone git@github.com:stac-utils/stacrs.git
 cd stacrs
-scripts/test  # This will take a little while while the Rust dependencies build, especially DuckDB
+scripts/test
 ```
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information about contributing to this project.
+
+### DuckDB
+
+By default, this package expects **libduckdb** to be present on your system.
+If you get this sort of error when building:
+
+```shell
+  = note: ld: library 'duckdb' not found
+```
+
+Set your `DUCKDB_LIB_DIR` to point to your **libduckdb**.
+If you're using [homebrew](https://brew.sh/), that might look like this:
+
+```shell
+export DUCKDB_LIB_DIR=/opt/homebrew/lib
+```
+
+> [!NOTE]
+> We used to use the [bundled](https://github.com/duckdb/duckdb-rs?tab=readme-ov-file#notes-on-building-duckdb-and-libduckdb-sys) feature of DuckDB, but it was making our build times intolerably slow.
 
 ## License
 
