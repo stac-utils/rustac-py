@@ -38,7 +38,7 @@ Issues = "https://github.com/stac-utils/issues"
 files = "**/*.py"
 
 [[tool.mypy.overrides]]
-module = "pyarrow.*"
+module = ["pyarrow.*", "geopandas.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
