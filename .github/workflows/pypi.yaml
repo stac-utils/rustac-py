@@ -19,7 +19,11 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        maturin-args: ["-i 3.10", "-i 3.11 -F pyo3/abi3-py311"]
+        maturin:
+          - args: "-i 3.10"
+            name: python-310
+          - args: "-i 3.11 -F pyo3/abi3-py311"
+            name: python-311+
         platform:
           - target: x86_64
             manylinux: auto
@@ -36,7 +40,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist ${{ matrix.maturin-args }} --auditwheel repair
+          args: --release --out dist ${{ matrix.maturin.args }} --auditwheel repair
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: ${{ matrix.platform.manylinux }}
           before-script-linux: |
@@ -54,7 +58,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-linux-${{ matrix.platform.target }}
+          name: wheels-linux-${{ matrix.platform.target }}-${{ matrix.maturin.name }}
           path: dist
 
   macos:
