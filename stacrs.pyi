@@ -212,6 +212,21 @@ async def read(
         >>> item = await stacrs.read("item.json")
     """
 
+async def from_arrow(
+    table: arro3.core.Table,
+) -> dict[str, Any]:
+    """
+    Converts an [arrow3.core.table][] to a STAC item collection.
+
+    Requires **stacrs** to be installed with the `arrow` extra.
+
+    Args:
+        table: The table
+
+    Returns:
+        dict[str, Any]: The STAC item collection
+    """
+
 async def search(
     href: str,
     *,

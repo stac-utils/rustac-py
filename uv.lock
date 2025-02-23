@@ -2522,6 +2522,9 @@ source = { editable = "." }
 arrow = [
     { name = "arro3-core" },
 ]
+docs = [
+    { name = "jinja2" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -2546,8 +2549,11 @@ docs = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "arro3-core", marker = "extra == 'arrow'", specifier = ">=0.4.5" }]
-provides-extras = ["arrow"]
+requires-dist = [
+    { name = "arro3-core", marker = "extra == 'arrow'", specifier = ">=0.4.5" },
+    { name = "jinja2", marker = "extra == 'docs'", specifier = ">=3.1.4" },
+]
+provides-extras = ["arrow", "docs"]
 
 [package.metadata.requires-dev]
 dev = [

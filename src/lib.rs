@@ -24,6 +24,7 @@ fn stacrs(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(migrate::migrate, m)?)?;
     m.add_function(wrap_pyfunction!(migrate::migrate_href, m)?)?;
     m.add_function(wrap_pyfunction!(read::read, m)?)?;
+    m.add_function(wrap_pyfunction!(duckdb::from_arrow, m)?)?;
     m.add_function(wrap_pyfunction!(search::search, m)?)?;
     m.add_function(wrap_pyfunction!(search::search_to, m)?)?;
     m.add_function(wrap_pyfunction!(version::version, m)?)?;
