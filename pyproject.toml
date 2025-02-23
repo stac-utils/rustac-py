@@ -58,6 +58,8 @@ dev = [
     "stac-geoparquet>=0.6.0",
 ]
 docs = [
+    "contextily>=1.6.2",
+    "humanize>=4.12.1",
     "mike>=2.1.3",
     "mkdocs-jupyter>=0.25.1",
     "mkdocs-material[imaging]>=9.5.45",
