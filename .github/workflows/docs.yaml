@@ -8,20 +8,30 @@ on:
       - "v*"
   workflow_dispatch:
 
+env:
+  duckdb-version: "1.2.0"
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # to get gh-pages
       - uses: astral-sh/setup-uv@v3
       - uses: Swatinem/rust-cache@v2
+      - name: Install libduckdb
+        run: |
+          wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-linux-amd64.zip
+          mkdir -p ${{ github.workspace }}/opt/duckdb
+          unzip libduckdb-linux-amd64.zip -d ${{ github.workspace }}/opt/duckdb
       - name: Sync
-        run: uv sync
+        run: uv sync --all-extras
       - name: Deploy
         if: github.event_name == 'push' && startsWith(github.ref_name, 'v')
         run: uv run mike deploy ${{ github.ref_name }} latest --push --update-aliases
