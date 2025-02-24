@@ -2,7 +2,7 @@ use crate::Result;
 use pyo3::{
     exceptions::PyException,
     prelude::*,
-    types::{PyCapsule, PyDict, PyList},
+    types::{PyDict, PyList},
     IntoPyObjectExt,
 };
 use pyo3_arrow::PyTable;
@@ -133,10 +133,4 @@ impl DuckdbClient {
         let collections = pythonize::pythonize(py, &collections)?.extract()?;
         Ok(collections)
     }
-}
-
-// TODO this probably should live in a different mod
-#[pyfunction]
-pub fn from_arrow(table: &Bound<PyCapsule>) -> () {
-    todo!()
 }
