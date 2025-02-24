@@ -1,7 +1,9 @@
 use crate::{Error, Json, Result};
 use geoarrow::table::Table;
-use pyo3::prelude::*;
+use pyo3::{prelude::*, IntoPyObjectExt};
 use pyo3_arrow::PyTable;
+use serde_json::Value;
+use stac::{Item, ItemCollection};
 
 #[pyfunction]
 pub fn from_arrow(py: Python<'_>, table: PyTable) -> PyResult<Bound<PyAny>> {
@@ -20,4 +22,24 @@ pub fn from_arrow(py: Python<'_>, table: PyTable) -> PyResult<Bound<PyAny>> {
     let item_collection = stac::geoarrow::from_table(table).map_err(Error::from)?;
     let item_collection = Json(item_collection).into_pyobject(py)?;
     Ok(item_collection)
+}
+
+#[pyfunction]
+pub fn to_arrow(py: Python<'_>, items: Bound<PyAny>) -> PyResult<PyObject> {
+    let value: Value = pythonize::depythonize(&items)?;
+    let item_collection = if let Value::Array(array) = value {
+        let items = array
+            .into_iter()
+            .map(|value| serde_json::from_value::<Item>(value).map_err(Error::from))
+            .collect::<Result<Vec<_>>>()?;
+        ItemCollection::from(items)
+    } else {
+        serde_json::from_value(value).map_err(Error::from)?
+    };
+    let (record_batches, schema) = stac::geoarrow::to_table(item_collection)
+        .map_err(Error::from)?
+        .into_inner();
+    let table = PyTable::try_new(record_batches, schema)?;
+    let table = table.to_arro3(py)?;
+    Ok(table.into_py_any(py)?)
 }
