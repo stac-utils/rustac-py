@@ -9,8 +9,9 @@ name = "stacrs"
 crate-type = ["cdylib"]
 
 [dependencies]
-clap = "4.5.30"
+clap = "4.5.31"
 geojson = "0.24.1"
+geoarrow = "0.4.0-beta.3"
 pyo3 = { version = "0.23.4", features = ["extension-module"] }
 pyo3-async-runtimes = { version = "0.23.0", features = [
     "tokio",

@@ -2541,6 +2541,7 @@ dev = [
 docs = [
     { name = "contextily" },
     { name = "humanize" },
+    { name = "jinja2" },
     { name = "mike" },
     { name = "mkdocs-jupyter" },
     { name = "mkdocs-material", extra = ["imaging"] },
@@ -2570,6 +2571,7 @@ dev = [
 docs = [
     { name = "contextily", specifier = ">=1.6.2" },
     { name = "humanize", specifier = ">=4.12.1" },
+    { name = "jinja2", specifier = ">=3.1.4" },
     { name = "mike", specifier = ">=2.1.3" },
     { name = "mkdocs-jupyter", specifier = ">=0.25.1" },
     { name = "mkdocs-material", extras = ["imaging"], specifier = ">=9.5.45" },
