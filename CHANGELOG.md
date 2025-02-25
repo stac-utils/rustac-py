@@ -6,15 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-### Added
-
-- Create a item collection from an arrow table ([#57](https://github.com/stac-utils/stacrs/pull/57))
-
-## [0.5.6-beta.0] - 2025-02-22
+## [0.5.6-beta.1] - 2025-02-25
 
 ### Added
 
 - Search to an arrow table ([#54](https://github.com/stac-utils/stacrs/pull/54))
+- Create a item collection from an arrow table ([#57](https://github.com/stac-utils/stacrs/pull/57))
 
 ### Changed
 
@@ -152,8 +149,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.6-beta.0...main
-[0.5.6-beta.0]: https://github.com/gadomski/stacrs/compare/v0.5.5...v0.5.6-beta.0
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.6-beta.1...main
+[0.5.6-beta.1]: https://github.com/gadomski/stacrs/compare/v0.5.5...v0.5.6-beta.1
 [0.5.5]: https://github.com/gadomski/stacrs/compare/v0.5.4...v0.5.5
 [0.5.4]: https://github.com/gadomski/stacrs/compare/v0.5.3...v0.5.4
 [0.5.3]: https://github.com/gadomski/stacrs/compare/v0.5.2...v0.5.3
