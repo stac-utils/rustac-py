@@ -36,9 +36,19 @@ pub fn to_arrow(py: Python<'_>, items: Bound<PyAny>) -> PyResult<PyObject> {
     } else {
         serde_json::from_value(value).map_err(Error::from)?
     };
-    let (record_batches, schema) = stac::geoarrow::to_table(item_collection)
+    // TODO we might want to just allow use to go WKB right when we got to table?
+    let (record_batches, mut schema) = stac::geoarrow::to_table(item_collection)
         .map_err(Error::from)?
         .into_inner();
+    let record_batches = record_batches
+        .into_iter()
+        .map(|record_batch| {
+            stac::geoarrow::with_wkb_geometry(record_batch, "geometry").map_err(Error::from)
+        })
+        .collect::<Result<Vec<_>>>()?;
+    if !record_batches.is_empty() {
+        schema = record_batches[0].schema();
+    }
     let table = PyTable::try_new(record_batches, schema)?;
     let table = table.to_arro3(py)?;
     Ok(table.into_py_any(py)?)
