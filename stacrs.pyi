@@ -212,7 +212,7 @@ async def read(
         >>> item = await stacrs.read("item.json")
     """
 
-async def from_arrow(
+def from_arrow(
     table: arro3.core.Table,
 ) -> dict[str, Any]:
     """
@@ -227,7 +227,7 @@ async def from_arrow(
         dict[str, Any]: The STAC item collection
     """
 
-async def to_arrow(
+def to_arrow(
     items: list[dict[str, Any]] | dict[str, Any],
 ) -> arro3.core.Table:
     """

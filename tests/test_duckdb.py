@@ -46,6 +46,6 @@ def test_search_to_arrow(client: DuckdbClient) -> None:
     table = client.search_to_arrow("data/100-sentinel-2-items.parquet")
     data_frame = GeoDataFrame.from_arrow(table)
     assert len(data_frame) == 100
-    table = data_frame.to_arrow()
-    item_collection = stacrs.from_arrow(table)
+    data_frame_table = data_frame.to_arrow()
+    item_collection = stacrs.from_arrow(data_frame_table)
     assert len(item_collection["features"]) == 100
