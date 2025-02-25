@@ -1,5 +1,6 @@
 #![deny(unused_crate_dependencies)]
 
+mod arrow;
 mod cli;
 mod duckdb;
 mod error;
@@ -20,6 +21,8 @@ fn stacrs(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
 
     m.add_class::<duckdb::DuckdbClient>()?;
 
+    m.add_function(wrap_pyfunction!(arrow::from_arrow, m)?)?;
+    m.add_function(wrap_pyfunction!(arrow::to_arrow, m)?)?;
     m.add_function(wrap_pyfunction!(cli::main, m)?)?;
     m.add_function(wrap_pyfunction!(migrate::migrate, m)?)?;
     m.add_function(wrap_pyfunction!(migrate::migrate_href, m)?)?;

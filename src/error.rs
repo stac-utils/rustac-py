@@ -13,6 +13,9 @@ pub enum Error {
     Geojson(#[from] geojson::Error),
 
     #[error(transparent)]
+    Geoarrow(#[from] geoarrow::error::GeoArrowError),
+
+    #[error(transparent)]
     Io(#[from] std::io::Error),
 
     #[error(transparent)]

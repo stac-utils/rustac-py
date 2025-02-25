@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Create a item collection from an arrow table ([#57](https://github.com/stac-utils/stacrs/pull/57))
+
 ## [0.5.6-beta.0] - 2025-02-22
 
 ### Added
