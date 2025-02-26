@@ -132,7 +132,7 @@ We test to ensure [compatibility](https://github.com/stac-utils/stac-rs/blob/mai
 
 ## Development
 
-Get [Rust](https://rustup.rs/), [uv](https://docs.astral.sh/uv/getting-started/installation/), and [libduckdb](https://duckdb.org/docs/installation/index) (for more on setting up **libduckdb**, [see this](#duckdb)).
+Get [Rust](https://rustup.rs/), [uv](https://docs.astral.sh/uv/getting-started/installation/), and (optionally) [libduckdb](https://duckdb.org/docs/installation/index).
 Then:
 
 ```shell
@@ -142,10 +142,6 @@ scripts/test
 ```
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information about contributing to this project.
-
-> [!TIP]
-> We ship our wheels with **libduckdb** so users don't have to worry about having it installed.
-> You only need it if you're doing development.
 
 ### DuckDB
 
@@ -163,8 +159,14 @@ If you're using [homebrew](https://brew.sh/), that might look like this:
 export DUCKDB_LIB_DIR=/opt/homebrew/lib
 ```
 
-> [!NOTE]
-> We used to use the [bundled](https://github.com/duckdb/duckdb-rs?tab=readme-ov-file#notes-on-building-duckdb-and-libduckdb-sys) feature of DuckDB, but it was making our build times intolerably slow.
+Alternatively, you can use the `duckdb-bundled` feature to build DuckDB bindings into the Rust library:
+
+```shell
+maturin dev --uv -F duckdb-bundled && pytest
+```
+
+> [!WARNING]
+> Building DuckDB [bundled](https://github.com/duckdb/duckdb-rs?tab=readme-ov-file#notes-on-building-duckdb-and-libduckdb-sys) takes a long while.
 
 ## License
 

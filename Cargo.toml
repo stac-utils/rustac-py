@@ -8,6 +8,9 @@ publish = false
 name = "stacrs"
 crate-type = ["cdylib"]
 
+[features]
+duckdb-bundled = ["stac-duckdb/bundled"]
+
 [dependencies]
 clap = "4.5.31"
 geojson = "0.24.1"
