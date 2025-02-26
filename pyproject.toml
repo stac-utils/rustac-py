@@ -25,7 +25,6 @@ dependencies = []
 
 [project.optional-dependencies]
 arrow = ["arro3-core>=0.4.5"]
-docs = ["jinja2>=3.1.4"]
 
 [project.scripts]
 stacrs = "stacrs:main"
