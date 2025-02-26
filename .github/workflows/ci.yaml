@@ -57,3 +57,19 @@ jobs:
         run: uv sync
       - name: Test w/o extras
         run: uv run pytest
+  test-bundled-duckdb:
+    name: Test w/ bundled DuckDB
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - uses: Swatinem/rust-cache@v2
+      - name: Build
+        run: |
+          maturin build -F duckdb-bundled
+          uv venv
+          uv pip install target/wheels/stacrs*.whl
+      - name: Sync only dev
+        run: uv sync --only-dev
+      - name: Test
+        run: uv run pytest
