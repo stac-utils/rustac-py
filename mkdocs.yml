@@ -20,6 +20,7 @@ nav:
   - Example notebook: example.ipynb
   - API:
       - api/index.md
+      - arrow: api/arrow.md
       - duckdb: api/duckdb.md
       - migrate: api/migrate.md
       - read: api/read.md
@@ -47,6 +48,8 @@ plugins:
             show_source: false
             show_symbol_type_toc: true
             signature_crossrefs: true
+          import:
+            - https://kylebarron.dev/arro3/latest/objects.inv
   - search
   - social:
       cards_layout_options:

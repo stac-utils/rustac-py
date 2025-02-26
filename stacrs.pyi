@@ -63,7 +63,7 @@ class DuckdbClient:
             kwargs: Additional parameters to pass in to the search.
 
         Returns:
-            dict[str, Any]: A feature collection of STAC items.
+            A feature collection of STAC items.
         """
 
     def search_to_arrow(
@@ -86,8 +86,12 @@ class DuckdbClient:
     ) -> arro3.core.Table | None:
         """Search a stac-geoparquet file with duckdb, returning an arrow table
         suitable for loading into (e.g.) GeoPandas.
+
         **stacrs** must be installed with the `arrow` extra, e.g. `python -m pip
         *install 'stacrs[arrow]'.
+
+        Because DuckDB has arrow as a core output format, this can be more
+        performant than going through a JSON dictionary.
 
         Args:
             href: The stac-geoparquet file.
@@ -115,7 +119,7 @@ class DuckdbClient:
             kwargs: Additional parameters to pass in to the search.
 
         Returns:
-            arro3.core.Table | None: An arrow table, or none if no records were returned.
+            An arrow table, or none if no records were returned.
 
         Examples:
             >>> table = client.search_to_arrow("data/100-sentinel-2-items.parquet")
@@ -180,7 +184,7 @@ def migrate(value: dict[str, Any], version: Optional[str] = None) -> dict[str, A
             value will be migrated to the latest stable version.
 
     Returns:
-        dict[str, Any]: The migrated dictionary
+        The migrated dictionary
 
     Examples:
         >>> with open("examples/simple-item.json") as f:
@@ -206,7 +210,7 @@ async def read(
             object store, e.g. your AWS credentials.
 
     Returns:
-        dict[str, Any]: The STAC value
+        The STAC value
 
     Examples:
         >>> item = await stacrs.read("item.json")
@@ -216,7 +220,7 @@ def from_arrow(
     table: arro3.core.Table,
 ) -> dict[str, Any]:
     """
-    Converts an [arro3.core.table][] to a STAC item collection.
+    Converts an [arro3.core.Table][] to a STAC item collection.
 
     Requires **stacrs** to be installed with the `arrow` extra.
 
@@ -224,22 +228,22 @@ def from_arrow(
         table: The table
 
     Returns:
-        dict[str, Any]: The STAC item collection
+        The STAC item collection
     """
 
 def to_arrow(
     items: list[dict[str, Any]] | dict[str, Any],
 ) -> arro3.core.Table:
     """
-    Converts items to an [arro3.core.table][].
+    Converts items to an [arro3.core.Table][].
 
     Requires **stacrs** to be installed with the `arrow` extra.
 
     Args:
-        items: Either an iterable of items or a item collection
+        items: Either a list of items or a item collection
 
     Returns:
-        arro3.core.Table: The table
+        The table
     """
 
 async def search(
@@ -298,7 +302,7 @@ async def search(
         kwargs: Additional parameters to pass in to the search.
 
     Returns:
-        list[dict[str, Any]]: A list of the returned STAC items.
+        A list of the returned STAC items.
 
     Examples:
         >>> items = await stacrs.search(
@@ -372,7 +376,7 @@ async def search_to(
             to None.
 
     Returns:
-        int: The number of items written
+        The number of items written
 
     Examples:
         >>> count = await stacrs.search_to("out.parquet",
@@ -404,9 +408,8 @@ async def write(
             object store, e.g. your AWS credentials.
 
     Returns:
-        dict[str, str] | None: The result of putting data into an object store,
-            e.g. the e_tag and the version. None is returned if the file was written
-            locally.
+        The result of putting data into an object store, e.g. the e_tag and the
+            version. None is returned if the file was written locally.
 
     Examples:
         >>> with open("items.json") as f:
@@ -423,7 +426,7 @@ def version(name: str | None = None) -> str | None:
             values are "stac", "stac-api", "stac-duckdb", or "duckdb".
 
     Returns:
-        str: The version, or None if the name is not recognized as an upstream.
+        The version, or None if the name is not recognized as an upstream.
 
     Examples:
         >>> stacrs.version()
