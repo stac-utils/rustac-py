@@ -40,21 +40,9 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist ${{ matrix.maturin.args }} --auditwheel repair
+          args: --release --out dist ${{ matrix.maturin.args }} -F duckdb-bundled
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: ${{ matrix.platform.manylinux }}
-          before-script-linux: |
-            if command -v yum &> /dev/null; then
-                yum install -y unzip
-            elif command -v apt-get &> /dev/null; then
-                apt-get update && apt-get install -y unzip
-            else
-                echo "No supported package manager found."
-                exit 1
-            fi
-            curl -L -O https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip
-            unzip libduckdb-linux-${{ matrix.platform.duckdb-slug }}.zip -d /opt/duckdb
-            export DUCKDB_LIB_DIR=/opt/duckdb
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
@@ -75,34 +63,17 @@ jobs:
             target: x86_64
           - runner: macos-14
             target: aarch64
-    env:
-      DUCKDB_VERSION: "1.2.0"
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - name: Install Python
         run: uv python install 3.10
-      - name: Install libduckdb
-        run: |
-          wget https://github.com/duckdb/duckdb/releases/download/v${DUCKDB_VERSION}/libduckdb-osx-universal.zip
-          mkdir -p ./opt/duckdb
-          unzip libduckdb-osx-universal.zip -d ${{ github.workspace }}/opt/duckdb
-      - name: Install delocate
-        run: |
-          uv venv
-          uv pip install delocate
       - name: Build wheels
         uses: PyO3/maturin-action@v1
-        env:
-          DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist ${{ matrix.maturin.args }}
+          args: --release --out dist ${{ matrix.maturin.args }} -F duckdb-bundled
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
-      - name: Repair wheel
-        run: .venv/bin/delocate-wheel -v dist/*.whl
-        env:
-          DYLD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
