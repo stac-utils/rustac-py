@@ -74,3 +74,9 @@ default-groups = ["dev", "docs"]
 [build-system]
 requires = ["maturin>=1.7,<2.0"]
 build-backend = "maturin"
+
+[tool.maturin]
+strip = true
+opt-level = "z"   # TODO compare with "s"
+lto = true
+codegen-units = 1

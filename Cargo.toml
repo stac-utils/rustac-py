@@ -36,9 +36,3 @@ stac-cli = { git = "https://github.com/stac-utils/stac-rs", features = [
 stac-duckdb = { git = "https://github.com/stac-utils/stac-rs" }
 thiserror = "2.0.11"
 tokio = { version = "1.43.0", features = ["rt-multi-thread"] }
-
-[profile.release]
-strip = true
-opt-level = "z"   # TODO compare with "s"
-lto = true
-codegen-units = 1
