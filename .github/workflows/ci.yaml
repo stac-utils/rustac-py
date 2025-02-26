@@ -67,8 +67,6 @@ jobs:
       - name: Sync only dev
         run: uv sync --only-dev
       - name: Build
-        run: |
-          uv run maturin build -F duckdb-bundled
-          uv pip install target/wheels/stacrs*.whl
+        run: uv run maturin dev -F duckdb-bundled
       - name: Test
         run: uv run pytest
