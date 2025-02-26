@@ -3824,6 +3824,7 @@ name = "stacrs"
 version = "0.5.7"
 dependencies = [
  "clap",
+ "duckdb",
  "geoarrow",
  "geojson",
  "pyo3",

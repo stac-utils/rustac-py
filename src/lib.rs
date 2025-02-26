@@ -1,4 +1,6 @@
 #![deny(unused_crate_dependencies)]
+#[cfg(feature = "duckdb-bundled")]
+use ::duckdb as _;
 
 mod arrow;
 mod cli;

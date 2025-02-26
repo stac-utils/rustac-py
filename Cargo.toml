@@ -9,10 +9,11 @@ name = "stacrs"
 crate-type = ["cdylib"]
 
 [features]
-duckdb-bundled = ["stac-duckdb/bundled"]
+duckdb-bundled = ["duckdb/bundled"]
 
 [dependencies]
 clap = "4.5.31"
+duckdb = { version = "1.2.0", optional = true }
 geojson = "0.24.1"
 geoarrow = "0.4.0-beta.3"
 pyo3 = { version = "0.23.5", features = ["extension-module"] }
