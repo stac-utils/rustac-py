@@ -25,9 +25,7 @@ dependencies = []
 
 [project.optional-dependencies]
 arrow = ["arro3-core>=0.4.5"]
-docs = [
-    "jinja2>=3.1.4",
-]
+docs = ["jinja2>=3.1.4"]
 
 [project.scripts]
 stacrs = "stacrs:main"
@@ -35,7 +33,7 @@ stacrs = "stacrs:main"
 [project.urls]
 Repository = "https://github.com/stac-utils/stacrs"
 Documentation = "https://stac-utils.github.io/stacrs"
-Issues = "https://github.com/stac-utils/issues"
+Issues = "https://github.com/stac-utils/stacrs/issues"
 
 [tool.mypy]
 files = "**/*.py"
