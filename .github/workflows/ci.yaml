@@ -64,12 +64,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
       - uses: Swatinem/rust-cache@v2
+      - name: Sync only dev
+        run: uv sync --only-dev
       - name: Build
         run: |
           maturin build -F duckdb-bundled
-          uv venv
           uv pip install target/wheels/stacrs*.whl
-      - name: Sync only dev
-        run: uv sync --only-dev
       - name: Test
         run: uv run pytest
