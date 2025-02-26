@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.5.7] - 2025-02-26
+
+### Changed
+
+- Don't include libduckdb, but rather build bundled to save size ([#61](https://github.com/stac-utils/stacrs/pull/61))
+
 ## [0.5.6] - 2025-02-26
 
 ### Added
@@ -149,7 +155,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.6...main
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.7...main
+[0.5.7]: https://github.com/gadomski/stacrs/compare/v0.5.6...v0.5.7
 [0.5.6]: https://github.com/gadomski/stacrs/compare/v0.5.5...v0.5.6
 [0.5.5]: https://github.com/gadomski/stacrs/compare/v0.5.4...v0.5.5
 [0.5.4]: https://github.com/gadomski/stacrs/compare/v0.5.3...v0.5.4

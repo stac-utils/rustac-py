@@ -3821,7 +3821,7 @@ dependencies = [
 
 [[package]]
 name = "stacrs"
-version = "0.5.6"
+version = "0.5.7"
 dependencies = [
  "clap",
  "geoarrow",
