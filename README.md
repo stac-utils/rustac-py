@@ -7,18 +7,19 @@
 ![PyPI - License](https://img.shields.io/pypi/l/stacrs?style=for-the-badge)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
 
-A small no-dependency Python package for [STAC](https://stacspec.org/), using Rust under the hood.
+A Python package for [STAC](https://stacspec.org/) using Rust under the hood.
 
 ## Why?
 
-Q: We already have [PySTAC](https://github.com/stac-utils/pystac), so why did we make a new STAC Python library?
+Q: We already have [PySTAC](https://github.com/stac-utils/pystac), so why **stacrs**?
 
-A: We want to provide a couple of things in [stac-rs](https://github.com/stac-utils/stac-rs) (a collection of STAC Rust libraries) to the Python ecosystem:
+A: **stacrs** can
 
 - Read, write, and search [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet)
-- `async` functions
+- Go to and from [arrow](https://arrow.apache.org/) tables, allowing easy interoperability with (e.g.) [GeoPandas](https://geopandas.org/en/stable/)
+- `async`
 
-If you don't need those things, **stacrs** probably isn't for you — use **pystac** and its friend, [pystac-client](https://github.com/stac-utils/pystac-client), instead.
+If you don't need those things, **stacrs** probably isn't for you — use **pystac** and its friend, [pystac-client](https://github.com/stac-utils/pystac-client).
 
 ## Usage
 
@@ -28,7 +29,7 @@ Install via **pip**:
 # basic
 python -m pip install stacrs
 
-# add methods to return arrow tables
+# support arrow tables
 python -m pip install 'stacrs[arrow]'
 ```
 
@@ -56,6 +57,7 @@ items = await stacrs.search(
 from geopandas import GeoDataFrame
 table = await stacrs.search_to_arrow(...)
 data_frame = GeoDataFrame.from_arrow(table)
+items = stacrs.from_arrow(data_frame.to_arrow())
 
 # Write items to a stac-geoparquet file
 await stacrs.write("items.parquet", items)
@@ -117,17 +119,9 @@ Options:
 > [!NOTE]
 > Before **stacrs** v0.5.4, the CLI was its own PyPI package named **stacrs-cli**, which is no longer needed.
 
-## Comparisons
+## stac-geoparquet
 
-This package (intentionally) has limited functionality, as it is _not_ intended to be a replacement for existing Python STAC packages.
-[pystac](https://pystac.readthedocs.io) is a mature Python library with a significantly richer API for working with STAC objects.
-For querying STAC APIs, [pystac-client](https://pystac-client.readthedocs.io) is more feature-rich than our simplistic `stacrs.search`.
-
-That being said, it is hoped that **stacrs** will be a nice complement to the existing Python STAC ecosystem by providing a no-dependency package with unique capabilities, such as searching directly into a stac-geoparquet file.
-
-### stac-geoparquet
-
-**stacrs** also replicates much of the behavior in the [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet) library, and even uses some of the same Rust dependencies.
+**stacrs** replicates much of the behavior in the [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet) library, and even uses some of the same Rust dependencies.
 We believe there are a couple of issues with **stac-geoparquet** that make **stacrs** a worthy replacement:
 
 - The **stac-geoparquet** repo includes Python dependencies
@@ -148,6 +142,10 @@ scripts/test
 ```
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information about contributing to this project.
+
+> [!TIP]
+> We ship our wheels with **libduckdb** so users don't have to worry about having it installed.
+> You only need it if you're doing development.
 
 ### DuckDB
 

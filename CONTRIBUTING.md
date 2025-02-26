@@ -1,4 +1,4 @@
-# Contributing to **stacrs**
+# Contributing
 
 First off, thanks for contributing!
 We appreciates you.
