@@ -14,6 +14,8 @@ jobs:
     name: Build w/ bundled DuckDB
     if: ${{ github.event.label.name == '[build] bundled-duckdb' }}
     runs-on: ubuntu-latest
+    env:
+      UV_NO_SYNC: true
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
