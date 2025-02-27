@@ -1,0 +1,30 @@
+name: Labels
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-bundled-duckdb:
+    name: Build w/ bundled DuckDB
+    if: ${{ github.event.label.name == '[build] bundled-duckdb' }}
+    runs-on: ubuntu-latest
+    env:
+      UV_NO_SYNC: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - uses: Swatinem/rust-cache@v2
+      - name: Install dev deps
+        run: uv sync --no-install-project --only-group dev
+      - name: Build
+        run: uv run maturin build -F duckdb-bundled
+      - name: Install
+        run: uv pip install target/wheels/*.whl
+      - name: Test
+        run: uv run pytest
