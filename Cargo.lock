@@ -2204,9 +2204,9 @@ checksum = "d26c52dbd32dccf2d10cac7725f8eae5296885fb5703b261f7d0a0739ec807ab"
 
 [[package]]
 name = "litemap"
-version = "0.7.4"
+version = "0.7.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4ee93343901ab17bd981295f2cf0026d4ad018c7c31ba84549a4ddbb47a45104"
+checksum = "23fb14cb19457329c82206317a5663005a4d404783dc74f4252769b0d5f42856"
 
 [[package]]
 name = "lock_api"
@@ -2665,7 +2665,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/stac-rs#c36a7fd7db8724b71f6e970d3aecec9c310bc734"
+source = "git+https://github.com/stac-utils/stac-rs#85f008ab30b4c5c402ce16382cca5abbf7770055"
 dependencies = [
  "serde",
  "serde_json",
@@ -3693,7 +3693,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "stac"
 version = "0.12.0"
-source = "git+https://github.com/stac-utils/stac-rs#c36a7fd7db8724b71f6e970d3aecec9c310bc734"
+source = "git+https://github.com/stac-utils/stac-rs#85f008ab30b4c5c402ce16382cca5abbf7770055"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3724,7 +3724,7 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.7.1"
-source = "git+https://github.com/stac-utils/stac-rs#c36a7fd7db8724b71f6e970d3aecec9c310bc734"
+source = "git+https://github.com/stac-utils/stac-rs#85f008ab30b4c5c402ce16382cca5abbf7770055"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3750,7 +3750,7 @@ dependencies = [
 [[package]]
 name = "stac-cli"
 version = "0.5.3"
-source = "git+https://github.com/stac-utils/stac-rs#c36a7fd7db8724b71f6e970d3aecec9c310bc734"
+source = "git+https://github.com/stac-utils/stac-rs#85f008ab30b4c5c402ce16382cca5abbf7770055"
 dependencies = [
  "anyhow",
  "axum",
@@ -3768,7 +3768,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.2.0"
-source = "git+https://github.com/stac-utils/stac-rs#c36a7fd7db8724b71f6e970d3aecec9c310bc734"
+source = "git+https://github.com/stac-utils/stac-rs#85f008ab30b4c5c402ce16382cca5abbf7770055"
 dependencies = [
  "quote",
  "syn 2.0.98",
@@ -3777,7 +3777,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.1.1"
-source = "git+https://github.com/stac-utils/stac-rs#c36a7fd7db8724b71f6e970d3aecec9c310bc734"
+source = "git+https://github.com/stac-utils/stac-rs#85f008ab30b4c5c402ce16382cca5abbf7770055"
 dependencies = [
  "arrow",
  "chrono",
@@ -3795,7 +3795,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.3.4"
-source = "git+https://github.com/stac-utils/stac-rs#c36a7fd7db8724b71f6e970d3aecec9c310bc734"
+source = "git+https://github.com/stac-utils/stac-rs#85f008ab30b4c5c402ce16382cca5abbf7770055"
 dependencies = [
  "axum",
  "bb8",
@@ -4426,9 +4426,9 @@ checksum = "06abde3611657adf66d383f00b093d7faecc7fa57071cce2578660c9f1010821"
 
 [[package]]
 name = "uuid"
-version = "1.14.0"
+version = "1.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "93d59ca99a559661b96bf898d8fce28ed87935fd2bea9f05983c1464dd6c71b1"
+checksum = "e0f540e3240398cce6128b64ba83fdbdd86129c16a3aa1a3a252efd66eb3d587"
 
 [[package]]
 name = "uuid-simd"
@@ -4947,18 +4947,18 @@ dependencies = [
 
 [[package]]
 name = "zerofrom"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cff3ee08c995dee1859d998dea82f7374f2826091dd9cd47def953cae446cd2e"
+checksum = "50cc42e0333e05660c3587f3bf9d0478688e15d870fab3346451ce7f8c9fbea5"
 dependencies = [
  "zerofrom-derive",
 ]
 
 [[package]]
 name = "zerofrom-derive"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "595eed982f7d355beb85837f651fa22e90b3c044842dc7f2c2842c086f295808"
+checksum = "d71e5d6e06ab090c67b5e44993ec16b72dcbaabc526db883a360057678b48502"
 dependencies = [
  "proc-macro2",
  "quote",
