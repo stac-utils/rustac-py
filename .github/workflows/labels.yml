@@ -19,7 +19,7 @@ jobs:
       - uses: astral-sh/setup-uv@v3
       - uses: Swatinem/rust-cache@v2
       - name: Sync dev
-        run: uv sync --dev
+        run: uv pip install maturin pytest
       - name: Build
         run: uv run maturin build -F duckdb-bundled
       - name: Install
