@@ -390,10 +390,10 @@ async def search_to(
         ... )
     """
 
-async def walk(
+def walk(
     container: dict[str, Any],
-) -> AsyncIterator[(dict[str, Any], list[dict[str, Any], list[dict[str, Any]]])]:
-    """Walks a STAC catalog or collection.
+) -> AsyncIterator[tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]]:
+    """Recursively walks a STAC catalog or collection breadth-first.
 
     Args:
         container: A STAC catalog or collection.
