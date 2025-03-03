@@ -11,5 +11,5 @@ async def test_walk(examples: Path) -> None:
         all_children.extend(children)
         all_items.extend(items)
 
-    assert len(all_children) == 2
-    assert len(all_items) == 3
+    assert len(all_children) == 3
+    assert len(all_items) == 2

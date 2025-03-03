@@ -154,6 +154,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "arc-swap"
+version = "1.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "69f7f8c3906b62b754cd5326047894316021dcfe5a194c8ea52bdd94934a3457"
+
+[[package]]
 name = "arrayvec"
 version = "0.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2663,7 +2669,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/stac-rs#b9051b96738637bdfbc68d33f752cdb36177c2fc"
+source = "git+https://github.com/stac-utils/stac-rs#5941f924c2fe7dc3945415242de226c14a0fcdcb"
 dependencies = [
  "serde",
  "serde_json",
@@ -2915,6 +2921,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "pyo3-log"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "be5bb22b77965a7b5394e9aae9897a0607b51df5167561ffc3b02643b4200bc7"
+dependencies = [
+ "arc-swap",
+ "log",
+ "pyo3",
+]
+
+[[package]]
 name = "pyo3-macros"
 version = "0.23.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3114,9 +3131,9 @@ dependencies = [
 
 [[package]]
 name = "redox_syscall"
-version = "0.5.9"
+version = "0.5.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "82b568323e98e49e2a0899dcee453dd679fae22d69adf9b11dd508d1549b7e2f"
+checksum = "0b8c0c260b63a8219631167be35e6a988e9554dbd323f8bd08439c8ed1302bd1"
 dependencies = [
  "bitflags 2.9.0",
 ]
@@ -3690,7 +3707,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "stac"
 version = "0.12.0"
-source = "git+https://github.com/stac-utils/stac-rs#b9051b96738637bdfbc68d33f752cdb36177c2fc"
+source = "git+https://github.com/stac-utils/stac-rs#5941f924c2fe7dc3945415242de226c14a0fcdcb"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3721,7 +3738,7 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.7.1"
-source = "git+https://github.com/stac-utils/stac-rs#b9051b96738637bdfbc68d33f752cdb36177c2fc"
+source = "git+https://github.com/stac-utils/stac-rs#5941f924c2fe7dc3945415242de226c14a0fcdcb"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3747,7 +3764,7 @@ dependencies = [
 [[package]]
 name = "stac-cli"
 version = "0.5.3"
-source = "git+https://github.com/stac-utils/stac-rs#b9051b96738637bdfbc68d33f752cdb36177c2fc"
+source = "git+https://github.com/stac-utils/stac-rs#5941f924c2fe7dc3945415242de226c14a0fcdcb"
 dependencies = [
  "anyhow",
  "axum",
@@ -3765,7 +3782,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.2.0"
-source = "git+https://github.com/stac-utils/stac-rs#b9051b96738637bdfbc68d33f752cdb36177c2fc"
+source = "git+https://github.com/stac-utils/stac-rs#5941f924c2fe7dc3945415242de226c14a0fcdcb"
 dependencies = [
  "quote",
  "syn 2.0.99",
@@ -3774,7 +3791,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.1.1"
-source = "git+https://github.com/stac-utils/stac-rs#b9051b96738637bdfbc68d33f752cdb36177c2fc"
+source = "git+https://github.com/stac-utils/stac-rs#5941f924c2fe7dc3945415242de226c14a0fcdcb"
 dependencies = [
  "arrow",
  "chrono",
@@ -3792,7 +3809,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.3.4"
-source = "git+https://github.com/stac-utils/stac-rs#b9051b96738637bdfbc68d33f752cdb36177c2fc"
+source = "git+https://github.com/stac-utils/stac-rs#5941f924c2fe7dc3945415242de226c14a0fcdcb"
 dependencies = [
  "axum",
  "bb8",
@@ -3826,6 +3843,7 @@ dependencies = [
  "pyo3",
  "pyo3-arrow",
  "pyo3-async-runtimes",
+ "pyo3-log",
  "pythonize",
  "serde",
  "serde_json",

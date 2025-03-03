@@ -198,16 +198,18 @@ async def read(
     *,
     format: str | None = None,
     options: list[tuple[str, str]] | None = None,
+    set_self_link: bool = True,
 ) -> dict[str, Any]:
     """
     Reads STAC from a href.
 
     Args:
-        href (str): The href to write to
-        format (str | None): The input format. If not provided, will be inferred
+        href: The href to write to
+        format: The input format. If not provided, will be inferred
             from the href's extension.
-        options (list[tuple[str, str]] | None): Options for configuring an
+        options: Options for configuring an
             object store, e.g. your AWS credentials.
+        set_self_link: If True, set the `self` link to the value of `href`.
 
     Returns:
         The STAC value
