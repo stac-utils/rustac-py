@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- `walk` and `set_self_link` for `read` ([#69](https://github.com/stac-utils/stacrs/pull/69))
+
 ## [0.5.8] - 2025-02-27
 
 ### Fixed

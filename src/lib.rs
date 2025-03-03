@@ -1,4 +1,4 @@
-#![deny(unused_crate_dependencies)]
+#![warn(unused_crate_dependencies)]
 
 mod arrow;
 mod cli;
@@ -8,6 +8,7 @@ mod migrate;
 mod read;
 mod search;
 mod version;
+mod walk;
 mod write;
 
 use error::Error;
@@ -17,6 +18,8 @@ type Result<T> = std::result::Result<T, Error>;
 
 #[pymodule]
 fn stacrs(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
+    pyo3_log::init();
+
     m.add("StacrsError", py.get_type::<error::StacrsError>())?;
 
     m.add_class::<duckdb::DuckdbClient>()?;
@@ -30,6 +33,7 @@ fn stacrs(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(search::search, m)?)?;
     m.add_function(wrap_pyfunction!(search::search_to, m)?)?;
     m.add_function(wrap_pyfunction!(version::version, m)?)?;
+    m.add_function(wrap_pyfunction!(walk::walk, m)?)?;
     m.add_function(wrap_pyfunction!(write::write, m)?)?;
 
     Ok(())

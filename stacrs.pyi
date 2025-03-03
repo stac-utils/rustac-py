@@ -1,4 +1,4 @@
-from typing import Any, Optional, Tuple
+from typing import Any, AsyncIterator, Optional, Tuple
 
 import arro3.core
 
@@ -198,16 +198,18 @@ async def read(
     *,
     format: str | None = None,
     options: list[tuple[str, str]] | None = None,
+    set_self_link: bool = True,
 ) -> dict[str, Any]:
     """
     Reads STAC from a href.
 
     Args:
-        href (str): The href to write to
-        format (str | None): The input format. If not provided, will be inferred
+        href: The href to write to
+        format: The input format. If not provided, will be inferred
             from the href's extension.
-        options (list[tuple[str, str]] | None): Options for configuring an
+        options: Options for configuring an
             object store, e.g. your AWS credentials.
+        set_self_link: If True, set the `self` link to the value of `href`.
 
     Returns:
         The STAC value
@@ -386,6 +388,22 @@ async def search_to(
         ...     sortby="-properties.datetime",
         ...     max_items=1,
         ... )
+    """
+
+def walk(
+    container: dict[str, Any],
+) -> AsyncIterator[tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]]:
+    """Recursively walks a STAC catalog or collection breadth-first.
+
+    Args:
+        container: A STAC catalog or collection.
+
+    Yields:
+        A three-tuple of the container, its children, and its items.
+
+    Examples:
+        >>> async for container, children, items in stacrs.walk(catalog):
+        ...     ...
     """
 
 async def write(
