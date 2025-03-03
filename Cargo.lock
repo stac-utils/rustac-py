@@ -3835,7 +3835,7 @@ dependencies = [
 
 [[package]]
 name = "stacrs"
-version = "0.5.8"
+version = "0.5.9-beta.0"
 dependencies = [
  "clap",
  "geoarrow",
