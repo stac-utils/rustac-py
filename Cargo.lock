@@ -2669,7 +2669,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/stac-rs?branch=optional-tracing-cli#d3b89daebe52fc74017f68b8ac3a6c680ac0f964"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#9365c4b5cb23300a4c0d34dccb6b56fc0ba30d1d"
 dependencies = [
  "serde",
  "serde_json",
@@ -3707,7 +3707,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "stac"
 version = "0.12.0"
-source = "git+https://github.com/stac-utils/stac-rs?branch=optional-tracing-cli#d3b89daebe52fc74017f68b8ac3a6c680ac0f964"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#9365c4b5cb23300a4c0d34dccb6b56fc0ba30d1d"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3738,7 +3738,7 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.7.1"
-source = "git+https://github.com/stac-utils/stac-rs?branch=optional-tracing-cli#d3b89daebe52fc74017f68b8ac3a6c680ac0f964"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#9365c4b5cb23300a4c0d34dccb6b56fc0ba30d1d"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3764,7 +3764,7 @@ dependencies = [
 [[package]]
 name = "stac-cli"
 version = "0.5.3"
-source = "git+https://github.com/stac-utils/stac-rs?branch=optional-tracing-cli#d3b89daebe52fc74017f68b8ac3a6c680ac0f964"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#9365c4b5cb23300a4c0d34dccb6b56fc0ba30d1d"
 dependencies = [
  "anyhow",
  "axum",
@@ -3782,7 +3782,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.2.0"
-source = "git+https://github.com/stac-utils/stac-rs?branch=optional-tracing-cli#d3b89daebe52fc74017f68b8ac3a6c680ac0f964"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#9365c4b5cb23300a4c0d34dccb6b56fc0ba30d1d"
 dependencies = [
  "quote",
  "syn 2.0.99",
@@ -3791,7 +3791,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.1.1"
-source = "git+https://github.com/stac-utils/stac-rs?branch=optional-tracing-cli#d3b89daebe52fc74017f68b8ac3a6c680ac0f964"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#9365c4b5cb23300a4c0d34dccb6b56fc0ba30d1d"
 dependencies = [
  "arrow",
  "chrono",
@@ -3809,7 +3809,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.3.4"
-source = "git+https://github.com/stac-utils/stac-rs?branch=optional-tracing-cli#d3b89daebe52fc74017f68b8ac3a6c680ac0f964"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#9365c4b5cb23300a4c0d34dccb6b56fc0ba30d1d"
 dependencies = [
  "axum",
  "bb8",
@@ -3853,6 +3853,7 @@ dependencies = [
  "stac-duckdb",
  "thiserror 2.0.12",
  "tokio",
+ "tracing",
 ]
 
 [[package]]
