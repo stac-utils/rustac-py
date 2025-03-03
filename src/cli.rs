@@ -15,7 +15,7 @@ pub fn main(py: Python<'_>) -> PyResult<i64> {
             .build()
             .unwrap()
             .block_on(async {
-                match args.run().await {
+                match args.run(false).await {
                     Ok(()) => 0,
                     Err(err) => {
                         eprintln!("ERROR: {}", err);

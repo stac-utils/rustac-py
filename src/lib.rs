@@ -1,4 +1,4 @@
-#![deny(unused_crate_dependencies)]
+#![warn(unused_crate_dependencies)]
 
 mod arrow;
 mod cli;
