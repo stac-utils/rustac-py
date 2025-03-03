@@ -1,4 +1,4 @@
-from typing import Any, Optional, Tuple
+from typing import Any, AsyncIterator, Optional, Tuple
 
 import arro3.core
 
@@ -386,6 +386,22 @@ async def search_to(
         ...     sortby="-properties.datetime",
         ...     max_items=1,
         ... )
+    """
+
+async def walk(
+    container: dict[str, Any],
+) -> AsyncIterator[(dict[str, Any], list[dict[str, Any], list[dict[str, Any]]])]:
+    """Walks a STAC catalog or collection.
+
+    Args:
+        container: A STAC catalog or collection.
+
+    Yields:
+        A three-tuple of the container, its children, and its items.
+
+    Examples:
+        >>> async for container, children, items in stacrs.walk(catalog):
+        ...     ...
     """
 
 async def write(

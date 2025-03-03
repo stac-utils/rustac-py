@@ -8,6 +8,7 @@ mod migrate;
 mod read;
 mod search;
 mod version;
+mod walk;
 mod write;
 
 use error::Error;
@@ -30,6 +31,7 @@ fn stacrs(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(search::search, m)?)?;
     m.add_function(wrap_pyfunction!(search::search_to, m)?)?;
     m.add_function(wrap_pyfunction!(version::version, m)?)?;
+    m.add_function(wrap_pyfunction!(walk::walk, m)?)?;
     m.add_function(wrap_pyfunction!(write::write, m)?)?;
 
     Ok(())
