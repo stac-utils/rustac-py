@@ -33,6 +33,15 @@ pub fn main(py: Python<'_>) -> PyResult<i64> {
                 match args.run(false).await {
                     Ok(()) => 0,
                     Err(err) => {
+                        // https://github.com/stac-utils/stacrs/issues/72
+                        //
+                        // Don't know why this happens through the Python CLI
+                        // entry but not through the Rust one 🤷
+                        if let Some(err) = err.downcast_ref::<std::io::Error>() {
+                            if err.kind() == std::io::ErrorKind::BrokenPipe {
+                                return 0;
+                            }
+                        }
                         eprintln!("ERROR: {}", err);
                         1
                     }
