@@ -26,6 +26,7 @@ nav:
       - read: api/read.md
       - search: api/search.md
       - version: api/version.md
+      - walk: api/walk.md
       - write: api/write.md
   - CONTRIBUTING.md
 
@@ -48,7 +49,7 @@ plugins:
             show_source: false
             show_symbol_type_toc: true
             signature_crossrefs: true
-          import:
+          inventories:
             - https://kylebarron.dev/arro3/latest/objects.inv
   - search
   - social:
