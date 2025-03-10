@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - Swallow broken pipe errors ([#73](https://github.com/stac-utils/stacrs/pull/73))
+- Clean up docs ([#78](https://github.com/stac-utils/stacrs/pull/78))
+
+### Removed
+
+- `migrate_href` ([#78](https://github.com/stac-utils/stacrs/pull/78))
 
 ## [0.5.9] - 2025-03-03
 

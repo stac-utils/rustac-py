@@ -18,20 +18,3 @@ pub fn migrate<'py>(
     let value = value.extract()?;
     Ok(value)
 }
-
-#[pyfunction]
-#[pyo3(signature = (href, version=None))]
-pub fn migrate_href<'py>(
-    py: Python<'py>,
-    href: &str,
-    version: Option<&str>,
-) -> Result<Bound<'py, PyDict>> {
-    let value: Value = stac::read(href).map_err(Error::from)?;
-    let version = version
-        .map(|version| version.parse().unwrap())
-        .unwrap_or_default();
-    let value = value.migrate(&version)?;
-    let value = pythonize::pythonize(py, &value)?;
-    let value = value.extract()?;
-    Ok(value)
-}
