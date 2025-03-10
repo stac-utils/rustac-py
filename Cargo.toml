@@ -1,6 +1,6 @@
 [package]
 name = "stacrs"
-version = "0.5.9-beta.0"
+version = "0.5.9"
 edition = "2021"
 publish = false
 
