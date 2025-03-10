@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Swallow broken pipe errors ([#73](https://github.com/stac-utils/stacrs/pull/73))
 
-## [0.5.9-beta.0] - 2025-03-03
+## [0.5.9] - 2025-03-03
 
 ### Added
 
@@ -171,8 +171,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.9-beta.0...main
-[0.5.9-beta.0]: https://github.com/gadomski/stacrs/compare/v0.5.8...v0.5.9-beta.0
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.9...main
+[0.5.9]: https://github.com/gadomski/stacrs/compare/v0.5.8...v0.5.9
 [0.5.8]: https://github.com/gadomski/stacrs/compare/v0.5.7...v0.5.8
 [0.5.7]: https://github.com/gadomski/stacrs/compare/v0.5.6...v0.5.7
 [0.5.6]: https://github.com/gadomski/stacrs/compare/v0.5.5...v0.5.6
