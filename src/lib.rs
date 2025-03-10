@@ -28,7 +28,6 @@ fn stacrs(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(arrow::to_arrow, m)?)?;
     m.add_function(wrap_pyfunction!(cli::main, m)?)?;
     m.add_function(wrap_pyfunction!(migrate::migrate, m)?)?;
-    m.add_function(wrap_pyfunction!(migrate::migrate_href, m)?)?;
     m.add_function(wrap_pyfunction!(read::read, m)?)?;
     m.add_function(wrap_pyfunction!(search::search, m)?)?;
     m.add_function(wrap_pyfunction!(search::search_to, m)?)?;
