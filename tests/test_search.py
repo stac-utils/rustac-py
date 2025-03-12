@@ -11,7 +11,6 @@ async def test_search() -> None:
         "https://landsatlook.usgs.gov/stac-server",
         collections="landsat-c2l2-sr",
         intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
-        sortby="-properties.datetime",
         max_items=1,
     )
     assert len(items) == 1
@@ -23,7 +22,6 @@ async def test_search_to(tmp_path: Path) -> None:
         "https://landsatlook.usgs.gov/stac-server",
         collections="landsat-c2l2-sr",
         intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
-        sortby="-properties.datetime",
         max_items=1,
     )
     with open(tmp_path / "out.json") as f:
@@ -37,7 +35,6 @@ async def test_search_to_geoparquet(tmp_path: Path) -> None:
         "https://landsatlook.usgs.gov/stac-server",
         collections="landsat-c2l2-sr",
         intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
-        sortby="-properties.datetime",
         max_items=1,
     )
     assert count == 1
@@ -48,4 +45,17 @@ async def test_search_to_geoparquet(tmp_path: Path) -> None:
 
 async def test_search_geoparquet(data: Path) -> None:
     items = await stacrs.search(str(data / "extended-item.parquet"))
+    assert len(items) == 1
+
+
+async def test_sortby_list_of_dict() -> None:
+    items = await stacrs.search(
+        "https://landsatlook.usgs.gov/stac-server",
+        collections="landsat-c2l2-sr",
+        intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
+        sortby=[
+            {"field": "properties.datetime", "direction": "asc"},
+        ],
+        max_items=1,
+    )
     assert len(items) == 1
