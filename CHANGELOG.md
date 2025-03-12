@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Construct `stac_api::Search` (moved from `stac_api` crate) ([#81](https://github.com/stac-utils/stacrs/pull/81))
+
 ### Fixed
 
 - Swallow broken pipe errors ([#73](https://github.com/stac-utils/stacrs/pull/73))

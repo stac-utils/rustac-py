@@ -2695,7 +2695,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/stac-rs?branch=main#83fd636ef3b21d65761a21228a1ff2ca094b5090"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#e59405cf4d566218cc9fa5fef52b21d96244ef5f"
 dependencies = [
  "serde",
  "serde_json",
@@ -3398,9 +3398,9 @@ dependencies = [
 
 [[package]]
 name = "rustix"
-version = "1.0.1"
+version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dade4812df5c384711475be5fcd8c162555352945401aed22a35bffeab61f657"
+checksum = "f7178faa4b75a30e269c71e61c353ce2748cf3d76f0c44c393f4e60abf49b825"
 dependencies = [
  "bitflags 2.9.0",
  "errno",
@@ -3712,7 +3712,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "stac"
 version = "0.12.0"
-source = "git+https://github.com/stac-utils/stac-rs?branch=main#83fd636ef3b21d65761a21228a1ff2ca094b5090"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#e59405cf4d566218cc9fa5fef52b21d96244ef5f"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3743,7 +3743,7 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.7.1"
-source = "git+https://github.com/stac-utils/stac-rs?branch=main#83fd636ef3b21d65761a21228a1ff2ca094b5090"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#e59405cf4d566218cc9fa5fef52b21d96244ef5f"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3752,8 +3752,6 @@ dependencies = [
  "geo",
  "geojson",
  "http",
- "pyo3",
- "pythonize",
  "reqwest",
  "serde",
  "serde_json",
@@ -3769,7 +3767,7 @@ dependencies = [
 [[package]]
 name = "stac-cli"
 version = "0.5.3"
-source = "git+https://github.com/stac-utils/stac-rs?branch=main#83fd636ef3b21d65761a21228a1ff2ca094b5090"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#e59405cf4d566218cc9fa5fef52b21d96244ef5f"
 dependencies = [
  "anyhow",
  "axum",
@@ -3787,7 +3785,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.2.0"
-source = "git+https://github.com/stac-utils/stac-rs?branch=main#83fd636ef3b21d65761a21228a1ff2ca094b5090"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#e59405cf4d566218cc9fa5fef52b21d96244ef5f"
 dependencies = [
  "quote",
  "syn 2.0.100",
@@ -3796,7 +3794,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.1.1"
-source = "git+https://github.com/stac-utils/stac-rs?branch=main#83fd636ef3b21d65761a21228a1ff2ca094b5090"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#e59405cf4d566218cc9fa5fef52b21d96244ef5f"
 dependencies = [
  "arrow",
  "chrono",
@@ -3814,7 +3812,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.3.4"
-source = "git+https://github.com/stac-utils/stac-rs?branch=main#83fd636ef3b21d65761a21228a1ff2ca094b5090"
+source = "git+https://github.com/stac-utils/stac-rs?branch=main#e59405cf4d566218cc9fa5fef52b21d96244ef5f"
 dependencies = [
  "axum",
  "bb8",

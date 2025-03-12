@@ -30,7 +30,6 @@ stac = { features = [
 ], git = "https://github.com/stac-utils/stac-rs", branch = "main" }
 stac-api = { features = [
     "client",
-    "python",
 ], git = "https://github.com/stac-utils/stac-rs", branch = "main" }
 stac-cli = { git = "https://github.com/stac-utils/stac-rs", features = [
     "pgstac",

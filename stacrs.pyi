@@ -6,15 +6,30 @@ class DuckdbClient:
     """A client for querying stac-geoparquet with DuckDB."""
 
     def __init__(
-        self, use_s3_credential_chain: bool = True, use_hive_partitioning: bool = False
+        self,
+        *,
+        use_s3_credential_chain: bool = True,
+        use_azure_credential_chain: bool = True,
+        use_httpfs: bool = True,
+        use_hive_partitioning: bool = False,
+        install_extensions: bool = True,
+        custom_extension_repository: str | None = None,
+        extension_directory: str | None = None,
     ) -> None:
         """Creates a new duckdb client.
 
         Args:
             use_s3_credential_chain: If true, configures DuckDB to correctly
                 handle s3:// urls.
+            use_azure_credential_chain: If true, configures DuckDB to correctly
+                handle azure urls.
+            use_https_credential_chain: If true, configures DuckDB to correctly
+                handle https urls.
             use_hive_partitioning: If true, enables queries on hive partitioned
                 geoparquet files.
+            install_extensions: If true, installs extensions before loading them.
+            custom_extension_repository: A custom extension repository to use.
+            extension_directory: A non-standard extension directory to use.
         """
 
     def search(
@@ -30,7 +45,7 @@ class DuckdbClient:
         datetime: Optional[str] = None,
         include: Optional[str | list[str]] = None,
         exclude: Optional[str | list[str]] = None,
-        sortby: Optional[str | list[str]] = None,
+        sortby: Optional[str | list[str | dict[str, str]]] = None,
         filter: Optional[str | dict[str, Any]] = None,
         query: Optional[dict[str, Any]] = None,
         **kwargs: str,
@@ -79,7 +94,7 @@ class DuckdbClient:
         datetime: Optional[str] = None,
         include: Optional[str | list[str]] = None,
         exclude: Optional[str | list[str]] = None,
-        sortby: Optional[str | list[str]] = None,
+        sortby: Optional[str | list[str | dict[str, str]]] = None,
         filter: Optional[str | dict[str, Any]] = None,
         query: Optional[dict[str, Any]] = None,
         **kwargs: str,
@@ -237,7 +252,7 @@ async def search(
     datetime: Optional[str] = None,
     include: Optional[str | list[str]] = None,
     exclude: Optional[str | list[str]] = None,
-    sortby: Optional[str | list[str]] = None,
+    sortby: Optional[str | list[str | dict[str, str]]] = None,
     filter: Optional[str | dict[str, Any]] = None,
     query: Optional[dict[str, Any]] = None,
     use_duckdb: Optional[bool] = None,
@@ -306,7 +321,7 @@ async def search_to(
     datetime: Optional[str] = None,
     include: Optional[str | list[str]] = None,
     exclude: Optional[str | list[str]] = None,
-    sortby: Optional[str | list[str]] = None,
+    sortby: Optional[str | list[str | dict[str, str]]] = None,
     filter: Optional[str | dict[str, Any]] = None,
     query: Optional[dict[str, Any]] = None,
     format: Optional[str] = None,

@@ -1,4 +1,7 @@
-use crate::Result;
+use crate::{
+    search::{PySortby, StringOrDict, StringOrList},
+    Result,
+};
 use pyo3::{
     exceptions::PyException,
     prelude::*,
@@ -6,7 +9,6 @@ use pyo3::{
     IntoPyObjectExt,
 };
 use pyo3_arrow::PyTable;
-use stac_api::python::{StringOrDict, StringOrList};
 use stac_duckdb::{Client, Config};
 use std::sync::Mutex;
 
@@ -16,11 +18,24 @@ pub struct DuckdbClient(Mutex<Client>);
 #[pymethods]
 impl DuckdbClient {
     #[new]
-    #[pyo3(signature = (use_s3_credential_chain=true, use_hive_partitioning=false))]
-    fn new(use_s3_credential_chain: bool, use_hive_partitioning: bool) -> Result<DuckdbClient> {
+    #[pyo3(signature = (*, use_s3_credential_chain=true, use_azure_credential_chain=true, use_httpfs=true, use_hive_partitioning=false, install_extensions=true, custom_extension_repository=None, extension_directory=None))]
+    fn new(
+        use_s3_credential_chain: bool,
+        use_azure_credential_chain: bool,
+        use_httpfs: bool,
+        use_hive_partitioning: bool,
+        install_extensions: bool,
+        custom_extension_repository: Option<String>,
+        extension_directory: Option<String>,
+    ) -> Result<DuckdbClient> {
         let config = Config {
             use_s3_credential_chain,
+            use_azure_credential_chain,
+            use_httpfs,
             use_hive_partitioning,
+            install_extensions,
+            custom_extension_repository,
+            extension_directory,
             convert_wkb: true,
         };
         let client = Client::with_config(config)?;
@@ -40,12 +55,12 @@ impl DuckdbClient {
         datetime: Option<String>,
         include: Option<StringOrList>,
         exclude: Option<StringOrList>,
-        sortby: Option<StringOrList>,
+        sortby: Option<PySortby<'py>>,
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
         kwargs: Option<Bound<'py, PyDict>>,
     ) -> Result<Bound<'py, PyDict>> {
-        let search = stac_api::python::search(
+        let search = crate::search::build(
             intersects,
             ids,
             collections,
@@ -84,12 +99,12 @@ impl DuckdbClient {
         datetime: Option<String>,
         include: Option<StringOrList>,
         exclude: Option<StringOrList>,
-        sortby: Option<StringOrList>,
+        sortby: Option<PySortby<'py>>,
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
         kwargs: Option<Bound<'py, PyDict>>,
     ) -> Result<PyObject> {
-        let search = stac_api::python::search(
+        let search = crate::search::build(
             intersects,
             ids,
             collections,
