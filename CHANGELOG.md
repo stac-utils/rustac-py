@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.6.0-beta.0] - 2025-03-13
+
 ### Added
 
 - Construct `stac_api::Search` (moved from `stac_api` crate) ([#81](https://github.com/stac-utils/stacrs/pull/81))
@@ -180,7 +182,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.5.9...main
+[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.6.0-beta.0...main
+[0.6.0-beta.0]: https://github.com/gadomski/stacrs/compare/v0.5.9...v0.6.0-beta.0
 [0.5.9]: https://github.com/gadomski/stacrs/compare/v0.5.8...v0.5.9
 [0.5.8]: https://github.com/gadomski/stacrs/compare/v0.5.7...v0.5.8
 [0.5.7]: https://github.com/gadomski/stacrs/compare/v0.5.6...v0.5.7
