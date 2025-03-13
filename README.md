@@ -55,7 +55,8 @@ items = await stacrs.search(
 
 # If you installed with `pystac[arrow]`:
 from geopandas import GeoDataFrame
-table = await stacrs.search_to_arrow(...)
+
+table = stacrs.to_arrow(items)
 data_frame = GeoDataFrame.from_arrow(table)
 items = stacrs.from_arrow(data_frame.to_arrow())
 
