@@ -58,4 +58,6 @@ jobs:
       - name: Test w/o extras
         run: uv run pytest
       - name: Check docs
+        # not worth it to install cairo on macos
+        if: runner.os == 'ubuntu-latest'
         run: uv run mkdocs build --strict
