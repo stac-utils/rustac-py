@@ -61,6 +61,7 @@ dev = [
     "stac-geoparquet>=0.6.0",
 ]
 docs = [
+    "arro3-core>=0.4.5",
     "contextily>=1.6.2",
     "humanize>=4.12.1",
     "ipykernel>=6.29.5",
