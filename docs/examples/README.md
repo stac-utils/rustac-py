@@ -1,3 +1,3 @@
 # Examples
 
-Examples of using **stacrs**.
+Examples of using **rustac**.

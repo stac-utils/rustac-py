@@ -4,5 +4,5 @@ description: Search a STAC API
 
 # Search
 
-::: stacrs.search
-::: stacrs.search_to
+::: rustac.search
+::: rustac.search_to

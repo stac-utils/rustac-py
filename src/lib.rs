@@ -17,10 +17,10 @@ use pyo3::prelude::*;
 type Result<T> = std::result::Result<T, Error>;
 
 #[pymodule]
-fn stacrs(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn rustac(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     pyo3_log::init();
 
-    m.add("StacrsError", py.get_type::<error::StacrsError>())?;
+    m.add("RustacError", py.get_type::<error::RustacError>())?;
 
     m.add_class::<duckdb::DuckdbClient>()?;
 

@@ -1,8 +1,8 @@
-import stacrs
+import rustac
 
 
 def test_version() -> None:
-    assert stacrs.version() is not None
-    assert stacrs.version("stac") is not None
-    assert stacrs.version("stac-api") is not None
-    assert stacrs.version("stac-duckdb") is not None
+    assert rustac.version() is not None
+    assert rustac.version("stac") is not None
+    assert rustac.version("stac-api") is not None
+    assert rustac.version("stac-duckdb") is not None

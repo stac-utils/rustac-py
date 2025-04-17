@@ -1,7 +1,7 @@
-site_name: stacrs
+site_name: rustac-py
 site_description: A small no-dependency Python package for STAC, using Rust under the hood.
-site_url: https://gadom.ski/stacrs
-repo_url: https://github.com/stac-utils/stacrs
+site_url: https://stac-utils.github.io/rustac-py
+repo_url: https://github.com/stac-utils/rustac-py
 theme:
   name: material
   logo: img/stac-ferris.png

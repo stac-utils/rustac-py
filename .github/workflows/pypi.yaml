@@ -105,7 +105,7 @@ jobs:
       - sdist
     environment:
       name: pypi
-      url: https://pypi.org/p/stacrs
+      url: https://pypi.org/p/rustac
     permissions:
       id-token: write
       contents: write

@@ -5,7 +5,7 @@ use pyo3::{
 };
 use thiserror::Error;
 
-create_exception!(stacrs, StacrsError, PyException);
+create_exception!(rustac, RustacError, PyException);
 
 #[derive(Debug, Error)]
 pub enum Error {
@@ -42,7 +42,7 @@ impl From<Error> for PyErr {
         match err {
             Error::Py(err) => err,
             Error::Io(err) => PyIOError::new_err(err.to_string()),
-            _ => StacrsError::new_err(err.to_string()),
+            _ => RustacError::new_err(err.to_string()),
         }
     }
 }

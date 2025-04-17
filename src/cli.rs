@@ -4,7 +4,7 @@ use pyo3::{
     types::{PyAnyMethods, PyDict},
     PyResult, Python,
 };
-use stac_cli::Stacrs;
+use rustac::Rustac;
 use tracing::Level;
 
 #[pyfunction]
@@ -13,7 +13,7 @@ pub fn main(py: Python<'_>) -> PyResult<i64> {
     let _ = signal
         .getattr("signal")?
         .call1((signal.getattr("SIGINT")?, signal.getattr("SIG_DFL")?))?;
-    let args = Stacrs::parse_from(std::env::args_os().skip(1));
+    let args = Rustac::parse_from(std::env::args_os().skip(1));
     let logging = py.import("logging")?;
     let kwargs = PyDict::new(py);
     kwargs.set_item(
@@ -33,7 +33,7 @@ pub fn main(py: Python<'_>) -> PyResult<i64> {
                 match args.run(false).await {
                     Ok(()) => 0,
                     Err(err) => {
-                        // https://github.com/stac-utils/stacrs/issues/72
+                        // https://github.com/stac-utils/rustac-py/issues/72
                         //
                         // Don't know why this happens through the Python CLI
                         // entry but not through the Rust one 🤷

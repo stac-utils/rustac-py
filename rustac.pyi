@@ -2,7 +2,7 @@ from typing import Any, AsyncIterator, Literal, Optional, Tuple
 
 import arro3.core
 
-class StacrsError(Exception):
+class RustacError(Exception):
     """A package-specific exception."""
 
 class DuckdbClient:
@@ -105,8 +105,8 @@ class DuckdbClient:
         """Search a stac-geoparquet file with duckdb, returning an arrow table
         suitable for loading into (e.g.) GeoPandas.
 
-        **stacrs** must be installed with the `arrow` extra, e.g. `python -m pip
-        *install 'stacrs[arrow]'.
+        **rustac** must be installed with the `arrow` extra, e.g. `python -m pip
+        *install 'rustac[arrow]'.
 
         Because DuckDB has arrow as a core output format, this can be more
         performant than going through a JSON dictionary.
@@ -184,7 +184,7 @@ def migrate(value: dict[str, Any], version: Optional[str] = None) -> dict[str, A
     Examples:
         >>> with open("examples/simple-item.json") as f:
         >>>     item = json.load(f)
-        >>> item = stacrs.migrate(item, "1.1.0-beta.1")
+        >>> item = rustac.migrate(item, "1.1.0-beta.1")
         >>> assert item["stac_version"] == "1.1.0-beta.1"
     """
 
@@ -210,7 +210,7 @@ async def read(
         The STAC value
 
     Examples:
-        >>> item = await stacrs.read("item.json")
+        >>> item = await rustac.read("item.json")
     """
 
 def from_arrow(
@@ -219,7 +219,7 @@ def from_arrow(
     """
     Converts an [arro3.core.Table][] to a STAC item collection.
 
-    Requires **stacrs** to be installed with the `arrow` extra.
+    Requires **rustac** to be installed with the `arrow` extra.
 
     Args:
         table: The table
@@ -234,7 +234,7 @@ def to_arrow(
     """
     Converts items to an [arro3.core.Table][].
 
-    Requires **stacrs** to be installed with the `arrow` extra.
+    Requires **rustac** to be installed with the `arrow` extra.
 
     Args:
         items: Either a list of items or a item collection
@@ -302,7 +302,7 @@ async def search(
         A list of the returned STAC items.
 
     Examples:
-        >>> items = await stacrs.search(
+        >>> items = await rustac.search(
         ...     "https://landsatlook.usgs.gov/stac-server",
         ...     collections=["landsat-c2l2-sr"],
         ...     intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
@@ -376,7 +376,7 @@ async def search_to(
         The number of items written
 
     Examples:
-        >>> count = await stacrs.search_to("out.parquet",
+        >>> count = await rustac.search_to("out.parquet",
         ...     "https://landsatlook.usgs.gov/stac-server",
         ...     collections=["landsat-c2l2-sr"],
         ...     intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
@@ -397,7 +397,7 @@ def walk(
         A three-tuple of the container, its children, and its items.
 
     Examples:
-        >>> async for container, children, items in stacrs.walk(catalog):
+        >>> async for container, children, items in rustac.walk(catalog):
         ...     ...
     """
 
@@ -427,7 +427,7 @@ async def write(
     Examples:
         >>> with open("items.json") as f:
         ...     items = json.load(f)
-        >>> await stacrs.write("items.parquet", items)
+        >>> await rustac.write("items.parquet", items)
     """
 
 def version(
@@ -448,8 +448,8 @@ def version(
         The version, or None if the name is not recognized as an upstream.
 
     Examples:
-        >>> stacrs.version()
+        >>> rustac.version()
         "0.2.0"
-        >>> stacrs.version("duckdb")
+        >>> rustac.version("duckdb")
         "1.0.0"
     """
