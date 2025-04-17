@@ -2,24 +2,24 @@
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/ci.yaml?branch=main&style=for-the-badge)](https://github.com/stac-utils/rustac-py/actions/workflows/ci.yaml)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://stac-utils.github.io/rustac-py/latest/)
-[![PyPI - Version](https://img.shields.io/pypi/v/rustac-py?style=for-the-badge)](https://pypi.org/project/rustac-py)
-[![Conda Downloads](https://img.shields.io/conda/d/conda-forge/rustac-py?style=for-the-badge)](https://anaconda.org/conda-forge/rustac-py)
-![PyPI - License](https://img.shields.io/pypi/l/rustac-py?style=for-the-badge)
+[![PyPI - Version](https://img.shields.io/pypi/v/rustac?style=for-the-badge)](https://pypi.org/project/rustac)
+[![Conda Downloads](https://img.shields.io/conda/d/conda-forge/rustac?style=for-the-badge)](https://anaconda.org/conda-forge/rustac)
+![PyPI - License](https://img.shields.io/pypi/l/rustac?style=for-the-badge)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
 
 A Python package for [STAC](https://stacspec.org/) using Rust under the hood.
 
 ## Why?
 
-Q: We already have [PySTAC](https://github.com/stac-utils/pystac), so why **rustac-py**?
+Q: We already have [PySTAC](https://github.com/stac-utils/pystac), so why **rustac**?
 
-A: **rustac-py** can
+A: **rustac** can
 
 - Read, write, and search [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet)
 - Go to and from [arrow](https://arrow.apache.org/) tables, allowing easy interoperability with (e.g.) [GeoPandas](https://geopandas.org/en/stable/)
 - `async`
 
-If you don't need those things, **rustac-py** probably isn't for you — use **pystac** and its friend, [pystac-client](https://github.com/stac-utils/pystac-client).
+If you don't need those things, **rustac** probably isn't for you — use **pystac** and its friend, [pystac-client](https://github.com/stac-utils/pystac-client).
 
 ## Usage
 
@@ -87,19 +87,19 @@ In particular, our [examples](https://stac-utils.github.io/rustac-py/latest/exam
 
 ## CLI
 
-**rustac-py** comes with a CLI:
+**rustac** comes with a CLI:
 
 ```bash exec="on" source="above" result="text"
 rustac -h
 ```
 
 > [!NOTE]
-> Before **rustac-py** v0.5.4, the CLI was its own PyPI package named **stacrs-cli**, which is no longer needed.
+> Before **rustac** v0.5.4, the CLI was its own PyPI package named **stacrs-cli**, which is no longer needed.
 
 ## stac-geoparquet
 
-**rustac-py** replicates much of the behavior in the [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet) library, and even uses some of the same Rust dependencies.
-We believe there are a couple of issues with **stac-geoparquet** that make **rustac-py** a worthy replacement:
+**rustac** replicates much of the behavior in the [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet) library, and even uses some of the same Rust dependencies.
+We believe there are a couple of issues with **stac-geoparquet** that make **rustac** a worthy replacement:
 
 - The **stac-geoparquet** repo includes Python dependencies
 - It doesn't have a nice one-shot API for reading and writing
