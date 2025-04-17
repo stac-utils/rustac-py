@@ -87,7 +87,6 @@ jobs:
     needs:
       - linux
       - macos
-      - sdist
     environment:
       name: pypi
       url: https://pypi.org/p/rustac
