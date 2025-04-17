@@ -1,4 +1,4 @@
-# rustac-py
+# rustac
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/ci.yaml?branch=main&style=for-the-badge)](https://github.com/stac-utils/rustac-py/actions/workflows/ci.yaml)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://stac-utils.github.io/rustac-py/latest/)
