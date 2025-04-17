@@ -1,14 +1,10 @@
----
-description: The stacrs Python API
----
+# API
 
-# Python API
-
-API documentation for the **stacrs** Python package.
+API documentation for the **rustac** Python package.
 
 ## Format
 
-Several functions, including [stacrs.write][], take a `format` argument.
+Several functions, including [rustac.write][], take a `format` argument.
 Valid values are:
 
 - `json` or `geojson`: compact (no whitespace) JSON

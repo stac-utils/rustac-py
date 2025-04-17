@@ -1,7 +1,7 @@
 import pytest
-import stacrs
+import rustac
 from geopandas import GeoDataFrame
-from stacrs import DuckdbClient
+from rustac import DuckdbClient
 
 
 @pytest.fixture
@@ -47,5 +47,5 @@ def test_search_to_arrow(client: DuckdbClient) -> None:
     data_frame = GeoDataFrame.from_arrow(table)
     assert len(data_frame) == 100
     data_frame_table = data_frame.to_arrow()
-    item_collection = stacrs.from_arrow(data_frame_table)
+    item_collection = rustac.from_arrow(data_frame_table)
     assert len(item_collection["features"]) == 100

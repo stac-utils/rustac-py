@@ -1,5 +1,5 @@
 [project]
-name = "stacrs"
+name = "rustac"
 description = "A no-dependency Python package for STAC, using Rust under the hood."
 readme = "README.md"
 authors = [{ name = "Pete Gadomski", email = "pete.gadomski@gmail.com" }]
@@ -27,12 +27,12 @@ dependencies = []
 arrow = ["arro3-core>=0.4.5"]
 
 [project.scripts]
-stacrs = "stacrs:main"
+rustac = "rustac:main"
 
 [project.urls]
-Repository = "https://github.com/stac-utils/stacrs"
-Documentation = "https://stac-utils.github.io/stacrs"
-Issues = "https://github.com/stac-utils/stacrs/issues"
+Repository = "https://github.com/stac-utils/rustac-py"
+Documentation = "https://stac-utils.github.io/rustac-py"
+Issues = "https://github.com/stac-utils/rustac-py/issues"
 
 [tool.mypy]
 files = "**/*.py"

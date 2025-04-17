@@ -4,13 +4,13 @@
 """
 
 # %%
-# Search a STAC API with `stacrs.search`:
+# Search a STAC API with `rustac.search`:
 import contextily
 import pandas
-import stacrs
+import rustac
 from geopandas import GeoDataFrame
 
-items = await stacrs.search(
+items = await rustac.search(
     "https://stac.eoapi.dev",
     collections="MAXAR_Marshall_Fire_21_Update"
 )
@@ -23,7 +23,7 @@ axis.set_axis_off()
 # %%
 # Search [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet/blob/main/spec/stac-geoparquet-spec.md) with [DuckDB](https://duckdb.org/), no servers required!
 
-items = await stacrs.search(
+items = await rustac.search(
     "../../data/100-sentinel-2-items.parquet",
     datetime="2024-12-01T00:00:00Z/..",
 )
@@ -33,11 +33,11 @@ data_frame[["datetime", "geometry"]]
 
 # %%
 # If you know you're going to a [geopandas.GeoDataFrame][] (or something else that speaks
-# arrow), you can use the `arrow` optional dependency for **stacrs** (`pip
-# install 'stacrs[arrow]'`) and search directly to arrow, which can be more
+# arrow), you can use the `arrow` optional dependency for **rustac** (`pip
+# install 'rustac[arrow]'`) and search directly to arrow, which can be more
 # efficient than going through JSON dictionaries:
 
-from stacrs import DuckdbClient
+from rustac import DuckdbClient
 
 client = DuckdbClient()
 table = client.search_to_arrow(

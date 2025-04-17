@@ -1,13 +1,13 @@
 from pathlib import Path
 
-import stacrs
+import rustac
 
 
 async def test_walk(examples: Path) -> None:
     all_children = []
     all_items = []
-    catalog = await stacrs.read(str(examples / "catalog.json"))
-    async for _, children, items in stacrs.walk(catalog):
+    catalog = await rustac.read(str(examples / "catalog.json"))
+    async for _, children, items in rustac.walk(catalog):
         all_children.extend(children)
         all_items.extend(items)
 

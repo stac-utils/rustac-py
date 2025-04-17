@@ -10,96 +10,96 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- Construct `stac_api::Search` (moved from `stac_api` crate) ([#81](https://github.com/stac-utils/stacrs/pull/81))
+- Construct `stac_api::Search` (moved from `stac_api` crate) ([#81](https://github.com/stac-utils/rustac-py/pull/81))
 
 ### Fixed
 
-- Swallow broken pipe errors ([#73](https://github.com/stac-utils/stacrs/pull/73))
-- Clean up docs ([#78](https://github.com/stac-utils/stacrs/pull/78))
+- Swallow broken pipe errors ([#73](https://github.com/stac-utils/rustac-py/pull/73))
+- Clean up docs ([#78](https://github.com/stac-utils/rustac-py/pull/78))
 
 ### Removed
 
-- `migrate_href` ([#78](https://github.com/stac-utils/stacrs/pull/78))
+- `migrate_href` ([#78](https://github.com/stac-utils/rustac-py/pull/78))
 
 ## [0.5.9] - 2025-03-03
 
 ### Added
 
-- `walk` and `set_self_link` for `read` ([#69](https://github.com/stac-utils/stacrs/pull/69))
+- `walk` and `set_self_link` for `read` ([#69](https://github.com/stac-utils/rustac-py/pull/69))
 
 ## [0.5.8] - 2025-02-27
 
 ### Fixed
 
-- Patch DuckDB ([#64](https://github.com/stac-utils/stacrs/pull/64))
+- Patch DuckDB ([#64](https://github.com/stac-utils/rustac-py/pull/64))
 
 ## [0.5.7] - 2025-02-26
 
 ### Changed
 
-- Don't include libduckdb, but rather build bundled to save size ([#61](https://github.com/stac-utils/stacrs/pull/61))
+- Don't include libduckdb, but rather build bundled to save size ([#61](https://github.com/stac-utils/rustac-py/pull/61))
 
 ## [0.5.6] - 2025-02-26
 
 ### Added
 
-- Search to an arrow table ([#54](https://github.com/stac-utils/stacrs/pull/54))
-- Create a item collection from an arrow table ([#57](https://github.com/stac-utils/stacrs/pull/57))
+- Search to an arrow table ([#54](https://github.com/stac-utils/rustac-py/pull/54))
+- Create a item collection from an arrow table ([#57](https://github.com/stac-utils/rustac-py/pull/57))
 
 ### Changed
 
-- Include **libduckdb** in wheels ([#52](https://github.com/stac-utils/stacrs/pull/52))
+- Include **libduckdb** in wheels ([#52](https://github.com/stac-utils/rustac-py/pull/52))
 
 ## [0.5.5] - 2025-02-20
 
 ### Fixed
 
-- Removed tracing subscriber to fix CLI ([#49](https://github.com/stac-utils/stacrs/pull/49))
+- Removed tracing subscriber to fix CLI ([#49](https://github.com/stac-utils/rustac-py/pull/49))
 
 ## [0.5.4] - 2025-02-19
 
 ### Added
 
-- CLI ([#46](https://github.com/stac-utils/stacrs/pull/46))
-- Config args to DuckDB client ([#42](https://github.com/stac-utils/stacrs/pull/42))
+- CLI ([#46](https://github.com/stac-utils/rustac-py/pull/46))
+- Config args to DuckDB client ([#42](https://github.com/stac-utils/rustac-py/pull/42))
 
 ## [0.5.3] - 2025-02-07
 
 ### Changed
 
-- Use only abi3 wheels ([#36](https://github.com/gadomski/stacrs/pull/36))
+- Use only abi3 wheels ([#36](https://github.com/gadomski/rustac-py/pull/36))
 
 > [!WARNING]
 > All versions older than v0.5.3 were deleted from PyPI, but some tags still exist on this repo.
-> See <https://github.com/gadomski/stacrs/discussions/37> for more.
+> See <https://github.com/gadomski/rustac-py/discussions/37> for more.
 
 ## [0.5.2] - 2025-02-07
 
 ### Changed
 
-- Bundle by default ([#32](https://github.com/gadomski/stacrs/pull/32))
+- Bundle by default ([#32](https://github.com/gadomski/rustac-py/pull/32))
 
 ## [0.5.1] - 2025-02-07
 
 ### Added
 
-- More wheels ([#28](https://github.com/gadomski/stacrs/pull/28))
+- More wheels ([#28](https://github.com/gadomski/rustac-py/pull/28))
 
 ## [0.5.0] - 2025-02-06
 
 ### Changed
 
-- `search` and `search_to` are now async ([#24](https://github.com/gadomski/stacrs/pull/24))
+- `search` and `search_to` are now async ([#24](https://github.com/gadomski/rustac-py/pull/24))
 
 ## [0.4.0] - 2025-01-13
 
 ### Added
 
-- DuckDB client ([#15](https://github.com/gadomski/stacrs/pull/15))
+- DuckDB client ([#15](https://github.com/gadomski/rustac-py/pull/15))
 
 ### Changed
 
-- `read` and `write` are now async ([#18](https://github.com/gadomski/stacrs/pull/18))
+- `read` and `write` are now async ([#18](https://github.com/gadomski/rustac-py/pull/18))
 
 ## [0.3.0] - 2024-11-21
 
@@ -109,7 +109,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- Moved out of the <https://github.com/stac-utils/stac-rs> into <https://github.com/gadomski/stacrs>
+- Moved out of the <https://github.com/stac-utils/stac-rs> into <https://github.com/gadomski/rustac-py>
 
 ## [0.2.2] - 2024-10-22
 
@@ -182,20 +182,20 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/gadomski/stacrs/compare/v0.6.0-beta.0...main
-[0.6.0-beta.0]: https://github.com/gadomski/stacrs/compare/v0.5.9...v0.6.0-beta.0
-[0.5.9]: https://github.com/gadomski/stacrs/compare/v0.5.8...v0.5.9
-[0.5.8]: https://github.com/gadomski/stacrs/compare/v0.5.7...v0.5.8
-[0.5.7]: https://github.com/gadomski/stacrs/compare/v0.5.6...v0.5.7
-[0.5.6]: https://github.com/gadomski/stacrs/compare/v0.5.5...v0.5.6
-[0.5.5]: https://github.com/gadomski/stacrs/compare/v0.5.4...v0.5.5
-[0.5.4]: https://github.com/gadomski/stacrs/compare/v0.5.3...v0.5.4
-[0.5.3]: https://github.com/gadomski/stacrs/compare/v0.5.2...v0.5.3
-[0.5.2]: https://github.com/gadomski/stacrs/compare/v0.5.1...v0.5.2
-[0.5.1]: https://github.com/gadomski/stacrs/compare/v0.5.0...v0.5.1
-[0.5.0]: https://github.com/gadomski/stacrs/compare/v0.4.0...v0.5.0
-[0.4.0]: https://github.com/gadomski/stacrs/compare/v0.3.0...v0.4.0
-[0.3.0]: https://github.com/gadomski/stacrs/releases/tag/v0.3.0
+[Unreleased]: https://github.com/gadomski/rustac-py/compare/v0.6.0-beta.0...main
+[0.6.0-beta.0]: https://github.com/gadomski/rustac-py/compare/v0.5.9...v0.6.0-beta.0
+[0.5.9]: https://github.com/gadomski/rustac-py/compare/v0.5.8...v0.5.9
+[0.5.8]: https://github.com/gadomski/rustac-py/compare/v0.5.7...v0.5.8
+[0.5.7]: https://github.com/gadomski/rustac-py/compare/v0.5.6...v0.5.7
+[0.5.6]: https://github.com/gadomski/rustac-py/compare/v0.5.5...v0.5.6
+[0.5.5]: https://github.com/gadomski/rustac-py/compare/v0.5.4...v0.5.5
+[0.5.4]: https://github.com/gadomski/rustac-py/compare/v0.5.3...v0.5.4
+[0.5.3]: https://github.com/gadomski/rustac-py/compare/v0.5.2...v0.5.3
+[0.5.2]: https://github.com/gadomski/rustac-py/compare/v0.5.1...v0.5.2
+[0.5.1]: https://github.com/gadomski/rustac-py/compare/v0.5.0...v0.5.1
+[0.5.0]: https://github.com/gadomski/rustac-py/compare/v0.4.0...v0.5.0
+[0.4.0]: https://github.com/gadomski/rustac-py/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/gadomski/rustac-py/releases/tag/v0.3.0
 [0.2.2]: https://github.com/stac-utils/stac-rs/compare/python-v0.2.1...python-v0.2.2
 [0.2.1]: https://github.com/stac-utils/stac-rs/compare/python-v0.2.0...python-v0.2.1
 [0.2.0]: https://github.com/stac-utils/stac-rs/compare/python-v0.1.3...python-v0.2.0

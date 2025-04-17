@@ -1,3 +1,3 @@
 # Walk
 
-::: stacrs.walk
+::: rustac.walk

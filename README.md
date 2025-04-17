@@ -1,25 +1,25 @@
-# stacrs
+# rustac-py
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/stacrs/ci.yaml?branch=main&style=for-the-badge)](https://github.com/stac-utils/stacrs/actions/workflows/ci.yaml)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/stacrs/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://stac-utils.github.io/stacrs/latest/)
-[![PyPI - Version](https://img.shields.io/pypi/v/stacrs?style=for-the-badge)](https://pypi.org/project/stacrs)
-[![Conda Downloads](https://img.shields.io/conda/d/conda-forge/stacrs?style=for-the-badge)](https://anaconda.org/conda-forge/stacrs)
-![PyPI - License](https://img.shields.io/pypi/l/stacrs?style=for-the-badge)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/ci.yaml?branch=main&style=for-the-badge)](https://github.com/stac-utils/rustac-py/actions/workflows/ci.yaml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://stac-utils.github.io/rustac-py/latest/)
+[![PyPI - Version](https://img.shields.io/pypi/v/rustac-py?style=for-the-badge)](https://pypi.org/project/rustac-py)
+[![Conda Downloads](https://img.shields.io/conda/d/conda-forge/rustac-py?style=for-the-badge)](https://anaconda.org/conda-forge/rustac-py)
+![PyPI - License](https://img.shields.io/pypi/l/rustac-py?style=for-the-badge)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
 
 A Python package for [STAC](https://stacspec.org/) using Rust under the hood.
 
 ## Why?
 
-Q: We already have [PySTAC](https://github.com/stac-utils/pystac), so why **stacrs**?
+Q: We already have [PySTAC](https://github.com/stac-utils/pystac), so why **rustac-py**?
 
-A: **stacrs** can
+A: **rustac-py** can
 
 - Read, write, and search [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet)
 - Go to and from [arrow](https://arrow.apache.org/) tables, allowing easy interoperability with (e.g.) [GeoPandas](https://geopandas.org/en/stable/)
 - `async`
 
-If you don't need those things, **stacrs** probably isn't for you — use **pystac** and its friend, [pystac-client](https://github.com/stac-utils/pystac-client).
+If you don't need those things, **rustac-py** probably isn't for you — use **pystac** and its friend, [pystac-client](https://github.com/stac-utils/pystac-client).
 
 ## Usage
 
@@ -27,27 +27,27 @@ Install via **pip**:
 
 ```shell
 # basic
-python -m pip install stacrs
+python -m pip install rustac
 
 # support arrow tables
-python -m pip install 'stacrs[arrow]'
+python -m pip install 'rustac[arrow]'
 ```
 
 Or via **conda**:
 
 ```shell
-conda install conda-forge::stacrs
+conda install conda-forge::rustac
 ```
 
 Then:
 
 ```python exec="on" source="above"
 import asyncio
-import stacrs
+import rustac
 
 async def main() -> None:
     # Search a STAC API
-    items = await stacrs.search(
+    items = await rustac.search(
         "https://landsatlook.usgs.gov/stac-server",
         collections="landsat-c2l2-sr",
         intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
@@ -58,19 +58,19 @@ async def main() -> None:
     # If you installed with `pystac[arrow]`:
     from geopandas import GeoDataFrame
 
-    table = stacrs.to_arrow(items)
+    table = rustac.to_arrow(items)
     data_frame = GeoDataFrame.from_arrow(table)
-    items = stacrs.from_arrow(data_frame.to_arrow())
+    items = rustac.from_arrow(data_frame.to_arrow())
 
     # Write items to a stac-geoparquet file
-    await stacrs.write("/tmp/items.parquet", items)
+    await rustac.write("/tmp/items.parquet", items)
 
     # Read items from a stac-geoparquet file as an item collection
-    item_collection = await stacrs.read("/tmp/items.parquet")
+    item_collection = await rustac.read("/tmp/items.parquet")
 
     # Use `search_to` for better performance if you know you'll be writing the items
     # to a file
-    await stacrs.search_to(
+    await rustac.search_to(
         "/tmp/items.parquet",
         "https://landsatlook.usgs.gov/stac-server",
         collections="landsat-c2l2-sr",
@@ -82,24 +82,24 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-See [the documentation](https://stac-utils.github.io/stacrs) for details.
-In particular, our [examples](https://stac-utils.github.io/stacrs/latest/examples/) demonstrate some of the more interesting features.
+See [the documentation](https://stac-utils.github.io/rustac-py) for details.
+In particular, our [examples](https://stac-utils.github.io/rustac-py/latest/examples/) demonstrate some of the more interesting features.
 
 ## CLI
 
-**stacrs** comes with a CLI:
+**rustac-py** comes with a CLI:
 
 ```bash exec="on" source="above" result="text"
-stacrs -h
+rustac -h
 ```
 
 > [!NOTE]
-> Before **stacrs** v0.5.4, the CLI was its own PyPI package named **stacrs-cli**, which is no longer needed.
+> Before **rustac-py** v0.5.4, the CLI was its own PyPI package named **stacrs-cli**, which is no longer needed.
 
 ## stac-geoparquet
 
-**stacrs** replicates much of the behavior in the [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet) library, and even uses some of the same Rust dependencies.
-We believe there are a couple of issues with **stac-geoparquet** that make **stacrs** a worthy replacement:
+**rustac-py** replicates much of the behavior in the [stac-geoparquet](https://github.com/stac-utils/stac-geoparquet) library, and even uses some of the same Rust dependencies.
+We believe there are a couple of issues with **stac-geoparquet** that make **rustac-py** a worthy replacement:
 
 - The **stac-geoparquet** repo includes Python dependencies
 - It doesn't have a nice one-shot API for reading and writing
@@ -113,8 +113,8 @@ Get [Rust](https://rustup.rs/), [uv](https://docs.astral.sh/uv/getting-started/i
 Then:
 
 ```shell
-git clone git@github.com:stac-utils/stacrs.git
-cd stacrs
+git clone git@github.com:stac-utils/rustac-py.git
+cd rustac-py
 scripts/test
 ```
 
@@ -147,5 +147,5 @@ maturin dev --uv -F duckdb-bundled && pytest
 
 ## License
 
-**stacrs** is dual-licensed under both the MIT license and the Apache license (Version 2.0).
+**rustac-py** is dual-licensed under both the MIT license and the Apache license (Version 2.0).
 See [LICENSE-APACHE](./LICENSE-APACHE) and [LICENSE-MIT](./LICENSE-MIT) for details.

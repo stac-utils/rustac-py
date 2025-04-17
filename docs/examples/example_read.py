@@ -5,9 +5,9 @@
 
 # %%
 # Reading is done via a top-level async function.
-import stacrs
+import rustac
 
-items = await stacrs.read("https://github.com/stac-utils/stacrs/raw/refs/heads/main/data/100-sentinel-2-items.parquet")
+items = await rustac.read("https://github.com/stac-utils/rustac-py/raw/refs/heads/main/data/100-sentinel-2-items.parquet")
 items
 
 # %%

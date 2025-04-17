@@ -1,11 +1,11 @@
 [package]
-name = "stacrs"
+name = "rustac"
 version = "0.6.0-beta.0"
 edition = "2021"
 publish = false
 
 [lib]
-name = "stacrs"
+name = "rustac"
 crate-type = ["cdylib"]
 
 [features]
@@ -31,7 +31,7 @@ stac = { features = [
 stac-api = { features = [
     "client",
 ], git = "https://github.com/stac-utils/stac-rs", branch = "main" }
-stac-cli = { git = "https://github.com/stac-utils/stac-rs", features = [
+rustac = { git = "https://github.com/stac-utils/stac-rs", features = [
     "pgstac",
     "duckdb",
 ], branch = "main" }

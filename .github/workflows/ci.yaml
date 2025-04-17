@@ -34,7 +34,7 @@ jobs:
             duckdb-slug: linux-amd64
           - runner: macos-latest
             duckdb-slug: osx-universal
-          # https://github.com/stac-utils/stacrs/issues/1
+          # https://github.com/stac-utils/rustac-py/issues/1
           # - windows-latest
     steps:
       - uses: actions/checkout@v4
