@@ -35,7 +35,7 @@ Documentation = "https://stac-utils.github.io/rustac-py"
 Issues = "https://github.com/stac-utils/rustac-py/issues"
 
 [tool.mypy]
-files = "**/*.py"
+files = "tests/**/*.py,docs/examples/**/*.py"
 
 [[tool.mypy.overrides]]
 module = ["pyarrow.*", "geopandas.*"]

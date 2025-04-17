@@ -2303,6 +2303,71 @@ wheels = [
 ]
 
 [[package]]
+name = "rustac"
+source = { editable = "." }
+
+[package.optional-dependencies]
+arrow = [
+    { name = "arro3-core" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "geopandas" },
+    { name = "maturin" },
+    { name = "mypy" },
+    { name = "pyarrow" },
+    { name = "pystac", extra = ["validation"] },
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "ruff" },
+    { name = "stac-geoparquet" },
+]
+docs = [
+    { name = "arro3-core" },
+    { name = "contextily" },
+    { name = "humanize" },
+    { name = "ipykernel" },
+    { name = "jinja2" },
+    { name = "markdown-exec" },
+    { name = "mike" },
+    { name = "mkdocs-gallery" },
+    { name = "mkdocs-material", extra = ["imaging"] },
+    { name = "mkdocstrings", extra = ["python"] },
+    { name = "pystac-client" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "arro3-core", marker = "extra == 'arrow'", specifier = ">=0.4.5" }]
+provides-extras = ["arrow"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "geopandas", specifier = ">=1.0.1" },
+    { name = "maturin", specifier = ">=1.7.4" },
+    { name = "mypy", specifier = ">=1.11.2" },
+    { name = "pyarrow", specifier = ">=19.0.1" },
+    { name = "pystac", extras = ["validation"], specifier = ">=1.11.0" },
+    { name = "pytest", specifier = ">=8.3.3" },
+    { name = "pytest-asyncio", specifier = ">=0.25.1" },
+    { name = "ruff", specifier = ">=0.6.9" },
+    { name = "stac-geoparquet", specifier = ">=0.6.0" },
+]
+docs = [
+    { name = "arro3-core", specifier = ">=0.4.5" },
+    { name = "contextily", specifier = ">=1.6.2" },
+    { name = "humanize", specifier = ">=4.12.1" },
+    { name = "ipykernel", specifier = ">=6.29.5" },
+    { name = "jinja2", specifier = ">=3.1.4" },
+    { name = "markdown-exec", specifier = ">=1.10.1" },
+    { name = "mike", specifier = ">=2.1.3" },
+    { name = "mkdocs-gallery", specifier = ">=0.10.4" },
+    { name = "mkdocs-material", extras = ["imaging"], specifier = ">=9.5.45" },
+    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.27.0" },
+    { name = "pystac-client", specifier = ">=0.8.5" },
+]
+
+[[package]]
 name = "shapely"
 version = "2.0.7"
 source = { registry = "https://pypi.org/simple" }
@@ -2380,69 +2445,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/28/e3/55dcc2cfbc3ca9c29519eb6884dd1415ecb53b0e934862d3559ddcb7e20b/stack_data-0.6.3.tar.gz", hash = "sha256:836a778de4fec4dcd1dcd89ed8abff8a221f58308462e1c4aa2a3cf30148f0b9", size = 44707 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f1/7b/ce1eafaf1a76852e2ec9b22edecf1daa58175c090266e9f6c64afcd81d91/stack_data-0.6.3-py3-none-any.whl", hash = "sha256:d5558e0c25a4cb0853cddad3d77da9891a08cb85dd9f9f91b9f8cd66e511e695", size = 24521 },
-]
-
-[[package]]
-name = "stacrs"
-source = { editable = "." }
-
-[package.optional-dependencies]
-arrow = [
-    { name = "arro3-core" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "geopandas" },
-    { name = "maturin" },
-    { name = "mypy" },
-    { name = "pyarrow" },
-    { name = "pystac", extra = ["validation"] },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "ruff" },
-    { name = "stac-geoparquet" },
-]
-docs = [
-    { name = "contextily" },
-    { name = "humanize" },
-    { name = "ipykernel" },
-    { name = "jinja2" },
-    { name = "markdown-exec" },
-    { name = "mike" },
-    { name = "mkdocs-gallery" },
-    { name = "mkdocs-material", extra = ["imaging"] },
-    { name = "mkdocstrings", extra = ["python"] },
-    { name = "pystac-client" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "arro3-core", marker = "extra == 'arrow'", specifier = ">=0.4.5" }]
-provides-extras = ["arrow"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "geopandas", specifier = ">=1.0.1" },
-    { name = "maturin", specifier = ">=1.7.4" },
-    { name = "mypy", specifier = ">=1.11.2" },
-    { name = "pyarrow", specifier = ">=19.0.1" },
-    { name = "pystac", extras = ["validation"], specifier = ">=1.11.0" },
-    { name = "pytest", specifier = ">=8.3.3" },
-    { name = "pytest-asyncio", specifier = ">=0.25.1" },
-    { name = "ruff", specifier = ">=0.6.9" },
-    { name = "stac-geoparquet", specifier = ">=0.6.0" },
-]
-docs = [
-    { name = "contextily", specifier = ">=1.6.2" },
-    { name = "humanize", specifier = ">=4.12.1" },
-    { name = "ipykernel", specifier = ">=6.29.5" },
-    { name = "jinja2", specifier = ">=3.1.4" },
-    { name = "markdown-exec", specifier = ">=1.10.1" },
-    { name = "mike", specifier = ">=2.1.3" },
-    { name = "mkdocs-gallery", specifier = ">=0.10.4" },
-    { name = "mkdocs-material", extras = ["imaging"], specifier = ">=9.5.45" },
-    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.27.0" },
-    { name = "pystac-client", specifier = ">=0.8.5" },
 ]
 
 [[package]]
