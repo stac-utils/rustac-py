@@ -3450,7 +3450,7 @@ dependencies = [
 
 [[package]]
 name = "rustac"
-version = "0.6.0-rc.0"
+version = "0.6.0"
 dependencies = [
  "clap",
  "geoarrow",
