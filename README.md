@@ -3,7 +3,6 @@
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/ci.yaml?branch=main&style=for-the-badge)](https://github.com/stac-utils/rustac-py/actions/workflows/ci.yaml)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/docs.yaml?branch=main&style=for-the-badge&label=Docs)](https://stac-utils.github.io/rustac-py/latest/)
 [![PyPI - Version](https://img.shields.io/pypi/v/rustac?style=for-the-badge)](https://pypi.org/project/rustac)
-[![Conda Downloads](https://img.shields.io/conda/d/conda-forge/rustac?style=for-the-badge)](https://anaconda.org/conda-forge/rustac)
 ![PyPI - License](https://img.shields.io/pypi/l/rustac?style=for-the-badge)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
 
