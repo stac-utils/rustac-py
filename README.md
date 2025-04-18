@@ -85,7 +85,7 @@ asyncio.run(main())
 ```
 
 See [the documentation](https://stac-utils.github.io/rustac-py) for details.
-In particular, our [examples](https://stac-utils.github.io/rustac-py/latest/examples/) demonstrate some of the more interesting features.
+In particular, our [examples](https://stac-utils.github.io/rustac-py/latest/generated/gallery/) demonstrate some of the more interesting features.
 
 ## CLI
 
