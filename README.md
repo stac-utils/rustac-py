@@ -8,6 +8,9 @@
 
 A Python package for [STAC](https://stacspec.org/) using Rust under the hood.
 
+> [!TIP]
+> While you can pronounce "rustac" however you'd like, we like "ruh-stac".
+
 ## Why?
 
 Q: We already have [PySTAC](https://github.com/stac-utils/pystac), so why **rustac**?
