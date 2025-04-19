@@ -54,13 +54,13 @@
     
       <link rel="stylesheet" href="stylesheets/extra.css">
     
-      <link rel="stylesheet" href="sg_gallery.css">
-    
       <link rel="stylesheet" href="sg_gallery-rendered-html.css">
+    
+      <link rel="stylesheet" href="sg_gallery-dataframe.css">
     
       <link rel="stylesheet" href="sg_gallery-binder.css">
     
-      <link rel="stylesheet" href="sg_gallery-dataframe.css">
+      <link rel="stylesheet" href="sg_gallery.css">
     
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -364,6 +364,15 @@
   <a href="#duckdb" class="md-nav__link">
     <span class="md-ellipsis">
       DuckDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docs
     </span>
   </a>
   
@@ -851,6 +860,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docs
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -888,10 +906,13 @@
 <p><a href="https://github.com/stac-utils/rustac-py/actions/workflows/ci.yaml"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/ci.yaml?branch=main&amp;style=for-the-badge" /></a>
 <a href="https://stac-utils.github.io/rustac-py/latest/"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/stac-utils/rustac-py/docs.yaml?branch=main&amp;style=for-the-badge&amp;label=Docs" /></a>
 <a href="https://pypi.org/project/rustac"><img alt="PyPI - Version" src="https://img.shields.io/pypi/v/rustac?style=for-the-badge" /></a>
-<a href="https://anaconda.org/conda-forge/rustac"><img alt="Conda Downloads" src="https://img.shields.io/conda/d/conda-forge/rustac?style=for-the-badge" /></a>
 <img alt="PyPI - License" src="https://img.shields.io/pypi/l/rustac?style=for-the-badge" />
 <a href="CODE_OF_CONDUCT"><img alt="Contributor Covenant" src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge" /></a></p>
 <p>A Python package for <a href="https://stacspec.org/">STAC</a> using Rust under the hood.</p>
+<blockquote>
+<p>[!TIP]
+While you can pronounce "rustac" however you'd like, we like "ruh-stac".</p>
+</blockquote>
 <h2 id="why">Why?</h2>
 <p>Q: We already have <a href="https://github.com/stac-utils/pystac">PySTAC</a>, so why <strong>rustac</strong>?</p>
 <p>A: <strong>rustac</strong> can</p>
@@ -953,7 +974,7 @@
 </span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </span></code></pre></div>
 <p>See <a href="https://stac-utils.github.io/rustac-py">the documentation</a> for details.
-In particular, our <a href="https://stac-utils.github.io/rustac-py/latest/examples/">examples</a> demonstrate some of the more interesting features.</p>
+In particular, our <a href="https://stac-utils.github.io/rustac-py/latest/generated/gallery/">examples</a> demonstrate some of the more interesting features.</p>
 <h2 id="cli">CLI</h2>
 <p><strong>rustac</strong> comes with a CLI:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>rustac<span class="w"> </span>-h
@@ -1024,6 +1045,10 @@ If you're using <a href="https://brew.sh/">homebrew</a>, that might look like th
 <p>[!WARNING]
 Building DuckDB <a href="https://github.com/duckdb/duckdb-rs?tab=readme-ov-file#notes-on-building-duckdb-and-libduckdb-sys">bundled</a> takes a long while.</p>
 </blockquote>
+<h3 id="docs">Docs</h3>
+<p>If you want to run an off-cycle docs update (e.g. if you fixed something and want to post it without having to make a new release):</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>mike<span class="w"> </span>deploy<span class="w"> </span><span class="o">[</span>version<span class="o">]</span><span class="w"> </span>latest<span class="w"> </span>--push
+</span></code></pre></div>
 <h2 id="license">License</h2>
 <p><strong>rustac-py</strong> is dual-licensed under both the MIT license and the Apache license (Version 2.0).
 See <a href="LICENSE-APACHE">LICENSE-APACHE</a> and <a href="LICENSE-MIT">LICENSE-MIT</a> for details.</p>
