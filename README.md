@@ -23,7 +23,7 @@ A: **rustac** can
 
 If you don't need those things, **rustac** probably isn't for you — use **pystac** and its friend, [pystac-client](https://github.com/stac-utils/pystac-client).
 
-## Usage
+## Installation
 
 Install via **pip**:
 
@@ -41,7 +41,22 @@ Or via **conda**:
 conda install conda-forge::rustac
 ```
 
-Then:
+### From source
+
+By default, **rustac** wants to find DuckDB on your system:
+
+```shell
+brew install duckdb  # if you're using Homebrew ... if not, get DuckDB another way
+python -m pip install -U git+https://github.com/stac-utils/rustac-py
+```
+
+If you don't want to (or can't) install DuckDB,  _can_ build DuckDB as a "bundled" build (warning: it takes a while):
+
+```shell
+MATURIN_PEP517_ARGS="--features=duckdb-bundled" python -m pip install -U git+https://github.com/stac-utils/rustac-py
+```
+
+## Usage
 
 ```python exec="on" source="above"
 import asyncio
@@ -87,16 +102,13 @@ asyncio.run(main())
 See [the documentation](https://stac-utils.github.io/rustac-py) for details.
 In particular, our [examples](https://stac-utils.github.io/rustac-py/latest/generated/gallery/) demonstrate some of the more interesting features.
 
-## CLI
+## Command line interface (CLI)
 
 **rustac** comes with a CLI:
 
 ```bash exec="on" source="above" result="text"
 rustac -h
 ```
-
-> [!NOTE]
-> Before **rustac** v0.5.4, the CLI was its own PyPI package named **stacrs-cli**, which is no longer needed.
 
 ## stac-geoparquet
 
