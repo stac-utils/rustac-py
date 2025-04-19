@@ -147,6 +147,14 @@ maturin dev --uv -F duckdb-bundled && pytest
 > [!WARNING]
 > Building DuckDB [bundled](https://github.com/duckdb/duckdb-rs?tab=readme-ov-file#notes-on-building-duckdb-and-libduckdb-sys) takes a long while.
 
+### Docs
+
+If you want to run an off-cycle docs update (e.g. if you fixed something and want to post it without having to make a new release):
+
+```shell
+mike deploy [version] latest --push
+```
+
 ## License
 
 **rustac-py** is dual-licensed under both the MIT license and the Apache license (Version 2.0).
