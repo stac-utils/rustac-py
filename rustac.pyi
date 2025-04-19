@@ -169,7 +169,7 @@ def migrate(value: dict[str, Any], version: Optional[str] = None) -> dict[str, A
     [eo:bands and raster:bands should be consolidated to the new bands
     structure](https://github.com/radiantearth/stac-spec/releases/tag/v1.1.0-beta.1).
 
-    See [the stac-rs
+    See [the rustac
     documentation](https://docs.rs/stac/latest/stac/enum.Version.html) for
     supported versions.
 

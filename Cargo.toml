@@ -27,15 +27,15 @@ serde_json = "1.0.138"
 stac = { features = [
     "geoparquet-compression",
     "object-store-all",
-], git = "https://github.com/stac-utils/stac-rs", branch = "main" }
+], git = "https://github.com/stac-utils/rustac", branch = "main" }
 stac-api = { features = [
     "client",
-], git = "https://github.com/stac-utils/stac-rs", branch = "main" }
-rustac = { git = "https://github.com/stac-utils/stac-rs", features = [
+], git = "https://github.com/stac-utils/rustac", branch = "main" }
+rustac = { git = "https://github.com/stac-utils/rustac", features = [
     "pgstac",
     "duckdb",
 ], branch = "main" }
-stac-duckdb = { git = "https://github.com/stac-utils/stac-rs", branch = "main" }
+stac-duckdb = { git = "https://github.com/stac-utils/rustac", branch = "main" }
 thiserror = "2.0.12"
 tokio = { version = "1.44.0", features = ["rt-multi-thread"] }
 pyo3-log = "0.12.1"

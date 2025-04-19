@@ -107,7 +107,7 @@ We believe there are a couple of issues with **stac-geoparquet** that make **rus
 - It doesn't have a nice one-shot API for reading and writing
 - It includes some leftover code and logic from its genesis as a tool for the [Microsoft Planetary Computer](https://planetarycomputer.microsoft.com/)
 
-We test to ensure [compatibility](https://github.com/stac-utils/stac-rs/blob/main/scripts/validate-stac-geoparquet) between the two libraries, and we intend to consolidate to a single "stac-geoparquet" library at some point in the future.
+We test to ensure [compatibility](https://github.com/stac-utils/rustac/blob/main/scripts/validate-stac-geoparquet) between the two libraries, and we intend to consolidate to a single "stac-geoparquet" library at some point in the future.
 
 ## Development
 
