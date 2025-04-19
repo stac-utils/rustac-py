@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Source distribution to PyPI publish ([#92](https://github.com/stac-utils/rustac-py/pull/92))
 
+### Fixed
+
+- Deterministic asset ordering ([rustac #709](https://github.com/stac-utils/rustac/pull/709))
+
 ## [0.6.0] - 2025-04-18
 
 > [!NOTE]
