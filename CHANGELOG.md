@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
-- Deterministic asset ordering ([rustac #709](https://github.com/stac-utils/rustac/pull/709))
+- Deterministic asset ordering ([rustac #709](https://github.com/stac-utils/rustac/pull/709), [#93](https://github.com/stac-utils/rustac-py/pull/93))
 
 ## [0.6.0] - 2025-04-18
 
