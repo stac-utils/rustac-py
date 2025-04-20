@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Source distribution to PyPI publish ([#92](https://github.com/stac-utils/rustac-py/pull/92))
+- `rustac.sha` ([#99](https://github.com/stac-utils/rustac-py/pull/99))
 
 ### Fixed
 

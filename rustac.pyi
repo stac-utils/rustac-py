@@ -453,3 +453,12 @@ def version(
         >>> rustac.version("duckdb")
         "1.0.0"
     """
+
+def sha() -> str:
+    """
+    Returns the SHA of the underlying rustac crate.
+
+    Examples:
+        >>> rustac.sha()
+        "4d6a60a3df1386922285191aba95a76ec704a8b4"
+    """
