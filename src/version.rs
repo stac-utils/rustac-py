@@ -17,3 +17,9 @@ pub fn version(name: Option<String>) -> Option<String> {
         Some(env!("CARGO_PKG_VERSION").to_string())
     }
 }
+
+#[pyfunction]
+pub fn sha() -> String {
+    // This environment variable is set in the build script
+    env!("RUSTAC_SHA").to_string()
+}
