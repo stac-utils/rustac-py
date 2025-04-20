@@ -9,7 +9,7 @@ import arro3.core
 class Catalog(TypedDict):
     """A STAC Catalog object represents a logical group of other Catalog, Collection, and Item objects."""
 
-    type: str = "Catalog"
+    type: str
     """Set to Catalog if this Catalog only implements the Catalog spec."""
 
     stac_version: str
@@ -35,7 +35,7 @@ class Catalog(TypedDict):
 class Collection(TypedDict):
     """The STAC Collection Specification defines a set of common fields to describe a group of Items that share properties and metadata."""
 
-    type: str = "Collection"
+    type: str
     """Must be set to Collection to be a valid Collection."""
 
     stac_version: str
@@ -144,7 +144,7 @@ class ItemAsset(TypedDict):
 class Item(TypedDict):
     """An Item is a GeoJSON Feature augmented with foreign members relevant to a STAC object."""
 
-    type: str = "Feature"
+    type: str
     """Type of the GeoJSON Object. MUST be set to Feature."""
 
     stac_version: str
