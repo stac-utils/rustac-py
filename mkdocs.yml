@@ -25,6 +25,7 @@ nav:
       - migrate: api/migrate.md
       - read: api/read.md
       - search: api/search.md
+      - stac: api/stac.md
       - version: api/version.md
       - walk: api/walk.md
       - write: api/write.md
