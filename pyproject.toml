@@ -52,6 +52,7 @@ exclude = ["docs/examples/example_*.py"]
 dev = [
     "geopandas>=1.0.1",
     "maturin>=1.7.4",
+    "maturin-import-hook>=0.2.0",
     "mypy>=1.11.2",
     "pyarrow>=19.0.1",
     "pystac[validation]>=1.11.0",
