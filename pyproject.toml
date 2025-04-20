@@ -46,7 +46,7 @@ asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 
 [tool.ruff]
-exclude = ["docs/examples/example_*.py"]
+exclude = ["python/rustac/__init__.py", "docs/examples/example_*.py"]
 
 [dependency-groups]
 dev = [
@@ -87,7 +87,8 @@ requires = ["maturin>=1.7,<2.0"]
 build-backend = "maturin"
 
 [tool.maturin]
+python-source = "python"
 strip = true
-opt-level = "z"   # TODO compare with "s"
+opt-level = "z"          # TODO compare with "s"
 lto = true
 codegen-units = 1
