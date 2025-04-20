@@ -19,11 +19,6 @@ python -m pip install 'rustac[arrow]'
 ## Usage
 
 ```python
-import rustac.blocking
-
-item = rustac.blocking.read("item.json")
-
-# Or, for async
 import asyncio
 import rustac
 
