@@ -56,8 +56,8 @@ class DuckdbClient:
         filter: Optional[str | dict[str, Any]] = None,
         query: Optional[dict[str, Any]] = None,
         **kwargs: str,
-    ) -> dict[str, Any]:
-        """Search a stac-geoparquet file with duckdb, returning an item collection.
+    ) -> list[dict[str, Any]]:
+        """Search a stac-geoparquet file with duckdb, returning a list of items.
 
         Args:
             href: The stac-geoparquet file.
@@ -85,7 +85,7 @@ class DuckdbClient:
             kwargs: Additional parameters to pass in to the search.
 
         Returns:
-            A feature collection of STAC items.
+            A list of STAC items.
         """
 
     def search_to_arrow(
@@ -264,7 +264,7 @@ async def search(
     query: Optional[dict[str, Any]] = None,
     use_duckdb: Optional[bool] = None,
     **kwargs: str,
-) -> dict[str, Any]:
+) -> list[dict[str, Any]]:
     """
     Searches a STAC API server.
 
@@ -303,10 +303,10 @@ async def search(
         kwargs: Additional parameters to pass in to the search.
 
     Returns:
-        A feature collection of the returned STAC items.
+        STAC items
 
     Examples:
-        >>> item_collection = await rustac.search(
+        >>> items = await rustac.search(
         ...     "https://landsatlook.usgs.gov/stac-server",
         ...     collections=["landsat-c2l2-sr"],
         ...     intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
