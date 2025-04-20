@@ -1,6 +1,6 @@
 [project]
 name = "rustac"
-description = "A no-dependency Python package for STAC, using Rust under the hood."
+description = "The power of Rust for the Python STAC ecosystem"
 readme = "README.md"
 authors = [{ name = "Pete Gadomski", email = "pete.gadomski@gmail.com" }]
 requires-python = ">=3.10"
@@ -76,6 +76,11 @@ docs = [
 
 [tool.uv]
 default-groups = ["dev", "docs"]
+cache-keys = [
+    { file = "pyproject.toml" },
+    { file = "Cargo.toml" },
+    { file = "**/*.rs" },
+]
 
 [build-system]
 requires = ["maturin>=1.7,<2.0"]
