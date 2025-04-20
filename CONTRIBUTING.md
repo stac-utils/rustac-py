@@ -3,6 +3,24 @@
 First off, thanks for contributing!
 We appreciates you.
 
+## Relationship to **stac-utils/rustac**
+
+[stac-utils/rustac](https://github.com/stac-utils/rustac) is a Rust monorepo that provides _most_ of the functionality of this Python package.
+It's pretty common that a bug in **rustac-py** is actually a bug in **rustac**.
+Knowing which repository to work in can be a little tricky, so don't hesitate to reach out and ask.
+
+## Python environment
+
+It can be a little tricky to ensure that your Python environment is always up-to-date while developing a Rust+Python project.
+We're still figuring out the _best_ way, but for now, try this:
+
+```shell
+uv sync
+python -m maturin_import_hook site install
+```
+
+This _should_ make sure your **pytest** runs are picking up the latest changes to your Rust code.
+
 ## Testing
 
 We aim for comprehensive unit testing of this library.

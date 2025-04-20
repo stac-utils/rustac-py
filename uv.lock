@@ -552,6 +552,15 @@ wheels = [
 ]
 
 [[package]]
+name = "filelock"
+version = "3.18.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/0a/10/c23352565a6544bdc5353e0b15fc1c563352101f30e24bf500207a54df9a/filelock-3.18.0.tar.gz", hash = "sha256:adbc88eabb99d2fec8c9c1b229b171f18afa655400173ddc653d5d01501fb9f2", size = 18075 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4d/36/2a115987e2d8c300a974597416d9de88f2444426de9571f4b59b2cca3acc/filelock-3.18.0-py3-none-any.whl", hash = "sha256:c401f4f8377c4464e6db25fff06205fd89bdd83b65eb0488ed1b160f780e21de", size = 16215 },
+]
+
+[[package]]
 name = "fonttools"
 version = "4.56.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1089,6 +1098,19 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/da/b8/f0475031de5f5328c8b2bbb9b50503a6b0a58b3c5cbe50a656c418ca7435/maturin-1.8.2-py3-none-win32.whl", hash = "sha256:4a62268975f98885a04ae9f0df875b304e4f8c1f0d989e8a7ab18e42793126ee", size = 6980868 },
     { url = "https://files.pythonhosted.org/packages/a2/f3/a67264d4ae3bf61a73abf616eba59543e0c8d182a77230703380f1858494/maturin-1.8.2-py3-none-win_amd64.whl", hash = "sha256:b6b29811013056f46a1e0b7f26907ae080028be65102d4fb23fbdf86847fffbd", size = 7886565 },
     { url = "https://files.pythonhosted.org/packages/5e/df/3641646696277249407c923795825176403c208a6553e0fd21b6764038b5/maturin-1.8.2-py3-none-win_arm64.whl", hash = "sha256:4232c2380faf61862d27269c6acf14e1d542c4ba64086a3f5c356d6e5e4823e7", size = 6656754 },
+]
+
+[[package]]
+name = "maturin-import-hook"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "filelock" },
+    { name = "tomli", marker = "python_full_version < '3.11'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/93/5f/9d426545c49926f4212fbe6244bc397508a29f65e35fe307835c07c0be7b/maturin_import_hook-0.2.0.tar.gz", hash = "sha256:e8a81333179faf7b5f413e44c2a1c89604fefff433679275f724950b0a632adf", size = 31071 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/44/48/1e88f90750a66825a5ea8fd2e26908e4e4acade0fe5a378c36d14bc0138d/maturin_import_hook-0.2.0-py3-none-any.whl", hash = "sha256:742d882213d6aa24bacf6775ce26ab96bd4ee26ceafbbbad69d60fdc98d95ec8", size = 31134 },
 ]
 
 [[package]]
@@ -2315,6 +2337,7 @@ arrow = [
 dev = [
     { name = "geopandas" },
     { name = "maturin" },
+    { name = "maturin-import-hook" },
     { name = "mypy" },
     { name = "pyarrow" },
     { name = "pystac", extra = ["validation"] },
@@ -2345,6 +2368,7 @@ provides-extras = ["arrow"]
 dev = [
     { name = "geopandas", specifier = ">=1.0.1" },
     { name = "maturin", specifier = ">=1.7.4" },
+    { name = "maturin-import-hook", specifier = ">=0.2.0" },
     { name = "mypy", specifier = ">=1.11.2" },
     { name = "pyarrow", specifier = ">=19.0.1" },
     { name = "pystac", extras = ["validation"], specifier = ">=1.11.0" },
