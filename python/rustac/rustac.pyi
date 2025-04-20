@@ -1,6 +1,10 @@
+"""The power of Rust for the Python STAC ecosystem."""
+
 from typing import Any, AsyncIterator, Literal, Optional, Tuple
 
 import arro3.core
+
+from rustac import Catalog, Collection, Item, ItemCollection
 
 class RustacError(Exception):
     """A package-specific exception."""
@@ -144,7 +148,7 @@ class DuckdbClient:
             >>> data_frame = GeoDataFrame.from_arrow(table)
         """
 
-    def get_collections(self, href: str) -> list[dict[str, Any]]:
+    def get_collections(self, href: str) -> list[Collection]:
         """Returns all collections in this stac-geoparquet file.
 
         These collections will be auto-generated from the STAC items, one
@@ -215,7 +219,7 @@ async def read(
 
 def from_arrow(
     table: arro3.core.Table,
-) -> dict[str, Any]:
+) -> ItemCollection:
     """
     Converts an [arro3.core.Table][] to a STAC item collection.
 
@@ -229,7 +233,7 @@ def from_arrow(
     """
 
 def to_arrow(
-    items: list[dict[str, Any]] | dict[str, Any],
+    items: list[Item] | ItemCollection,
 ) -> arro3.core.Table:
     """
     Converts items to an [arro3.core.Table][].
@@ -260,7 +264,7 @@ async def search(
     query: Optional[dict[str, Any]] = None,
     use_duckdb: Optional[bool] = None,
     **kwargs: str,
-) -> list[dict[str, Any]]:
+) -> dict[str, Any]:
     """
     Searches a STAC API server.
 
@@ -299,10 +303,10 @@ async def search(
         kwargs: Additional parameters to pass in to the search.
 
     Returns:
-        A list of the returned STAC items.
+        A feature collection of the returned STAC items.
 
     Examples:
-        >>> items = await rustac.search(
+        >>> item_collection = await rustac.search(
         ...     "https://landsatlook.usgs.gov/stac-server",
         ...     collections=["landsat-c2l2-sr"],
         ...     intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
@@ -387,7 +391,7 @@ async def search_to(
 
 def walk(
     container: dict[str, Any],
-) -> AsyncIterator[tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]]:
+) -> AsyncIterator[tuple[Catalog | Collection, list[Catalog | Collection], list[Item]]]:
     """Recursively walks a STAC catalog or collection breadth-first.
 
     Args:

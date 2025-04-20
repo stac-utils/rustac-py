@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
-from typing import Any
 
 import pytest
+from rustac import Item
 
 
 @pytest.fixture
@@ -26,6 +26,6 @@ def data(root: Path) -> Path:
 
 
 @pytest.fixture
-def item(examples: Path) -> dict[str, Any]:
+def item(examples: Path) -> Item:
     with open(examples / "simple-item.json") as f:
         return json.load(f)
