@@ -59,7 +59,7 @@ impl DuckdbClient {
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
         kwargs: Option<Bound<'py, PyDict>>,
-    ) -> Result<Bound<'py, PyDict>> {
+    ) -> Result<Bound<'py, PyList>> {
         let search = crate::search::build(
             intersects,
             ids,
@@ -81,9 +81,9 @@ impl DuckdbClient {
                 .map_err(|err| PyException::new_err(err.to_string()))?;
             client.search(&href, search)?
         };
-        let dict = pythonize::pythonize(py, &item_collection)?;
-        let dict = dict.extract()?;
-        Ok(dict)
+        let list = pythonize::pythonize(py, &item_collection.items)?;
+        let list = list.extract()?;
+        Ok(list)
     }
 
     #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]
