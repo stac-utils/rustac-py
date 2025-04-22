@@ -1,5 +1,6 @@
 """The power of Rust for the Python STAC ecosystem."""
 
+from pathlib import Path
 from typing import Any, AsyncIterator, Literal, Optional, Tuple
 
 import arro3.core
@@ -15,28 +16,28 @@ class DuckdbClient:
     def __init__(
         self,
         *,
-        use_s3_credential_chain: bool = True,
-        use_azure_credential_chain: bool = True,
-        use_httpfs: bool = True,
+        extension_directory: Path | None = None,
+        extensions: list[str] | None = None,
+        install_spatial: bool = True,
         use_hive_partitioning: bool = False,
-        install_extensions: bool = True,
-        custom_extension_repository: str | None = None,
-        extension_directory: str | None = None,
     ) -> None:
         """Creates a new duckdb client.
 
         Args:
-            use_s3_credential_chain: If true, configures DuckDB to correctly
-                handle s3:// urls.
-            use_azure_credential_chain: If true, configures DuckDB to correctly
-                handle azure urls.
-            use_httpfs: If true, configures DuckDB to correctly handle https
-                urls.
-            use_hive_partitioning: If true, enables queries on hive partitioned
-                geoparquet files.
-            install_extensions: If true, installs extensions before loading them.
-            custom_extension_repository: A custom extension repository to use.
             extension_directory: A non-standard extension directory to use.
+            extensions: A list of extensions to LOAD on client initialization.
+            install_spatial: Whether to install the spatial extension on client initialization.
+            use_hive_partitioning: Whether to use hive partitioning for geoparquet queries.
+        """
+
+    def execute(self, sql: str, params: list[str] | None = None) -> int:
+        """Execute an SQL command.
+
+        This can be useful for configuring AWS credentials, for example.
+
+        Args:
+            sql: The SQL to execute
+            params: The parameters to pass in to the execution
         """
 
     def search(

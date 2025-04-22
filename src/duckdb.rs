@@ -2,6 +2,7 @@ use crate::{
     search::{PySortby, StringOrDict, StringOrList},
     Result,
 };
+use duckdb::Connection;
 use pyo3::{
     exceptions::PyException,
     prelude::*,
@@ -9,8 +10,8 @@ use pyo3::{
     IntoPyObjectExt,
 };
 use pyo3_arrow::PyTable;
-use stac_duckdb::{Client, Config};
-use std::sync::Mutex;
+use stac_duckdb::Client;
+use std::{path::PathBuf, sync::Mutex};
 
 #[pyclass(frozen)]
 pub struct DuckdbClient(Mutex<Client>);
@@ -18,28 +19,40 @@ pub struct DuckdbClient(Mutex<Client>);
 #[pymethods]
 impl DuckdbClient {
     #[new]
-    #[pyo3(signature = (*, use_s3_credential_chain=false, use_azure_credential_chain=false, use_httpfs=false, use_hive_partitioning=false, install_extensions=true, custom_extension_repository=None, extension_directory=None))]
+    #[pyo3(signature = (*, extension_directory=None, extensions=Vec::new(), install_spatial=true, use_hive_partitioning=false))]
     fn new(
-        use_s3_credential_chain: bool,
-        use_azure_credential_chain: bool,
-        use_httpfs: bool,
+        extension_directory: Option<PathBuf>,
+        extensions: Vec<String>,
+        install_spatial: bool,
         use_hive_partitioning: bool,
-        install_extensions: bool,
-        custom_extension_repository: Option<String>,
-        extension_directory: Option<String>,
     ) -> Result<DuckdbClient> {
-        let config = Config {
-            use_s3_credential_chain,
-            use_azure_credential_chain,
-            use_httpfs,
-            use_hive_partitioning,
-            install_extensions,
-            custom_extension_repository,
-            extension_directory,
-            convert_wkb: true,
-        };
-        let client = Client::with_config(config)?;
+        let connection = Connection::open_in_memory()?;
+        if let Some(extension_directory) = extension_directory {
+            connection.execute(
+                "SET extension_directory = ?",
+                [extension_directory.to_string_lossy()],
+            )?;
+        }
+        if install_spatial {
+            connection.execute("INSTALL spatial", [])?;
+        }
+        for extension in extensions {
+            connection.execute(&format!("LOAD '{}'", extension), [])?;
+        }
+        connection.execute("LOAD spatial", [])?;
+        let mut client = Client::from(connection);
+        client.use_hive_partitioning = use_hive_partitioning;
         Ok(DuckdbClient(Mutex::new(client)))
+    }
+
+    #[pyo3(signature = (sql, params = Vec::new()))]
+    fn execute<'py>(&self, sql: String, params: Vec<String>) -> Result<usize> {
+        let client = self
+            .0
+            .lock()
+            .map_err(|err| PyException::new_err(err.to_string()))?;
+        let count = client.execute(&sql, duckdb::params_from_iter(params))?;
+        Ok(count)
     }
 
     #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]
@@ -123,10 +136,11 @@ impl DuckdbClient {
                 .0
                 .lock()
                 .map_err(|err| PyException::new_err(err.to_string()))?;
-            let convert_wkb = client.config.convert_wkb;
-            client.config.convert_wkb = false;
+            // FIXME this is awkward
+            let convert_wkb = client.convert_wkb;
+            client.convert_wkb = false;
             let result = client.search_to_arrow(&href, search);
-            client.config.convert_wkb = convert_wkb;
+            client.convert_wkb = convert_wkb;
             result?
         };
         if record_batches.is_empty() {
