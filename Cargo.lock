@@ -1018,6 +1018,7 @@ dependencies = [
  "memchr",
  "num-integer",
  "rust_decimal",
+ "serde_json",
  "smallvec",
  "strum",
 ]
@@ -3396,6 +3397,7 @@ version = "0.6.0"
 dependencies = [
  "cargo-lock",
  "clap",
+ "duckdb",
  "geoarrow-array",
  "geojson",
  "pyo3",

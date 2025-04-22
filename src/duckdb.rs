@@ -2,6 +2,7 @@ use crate::{
     search::{PySortby, StringOrDict, StringOrList},
     Result,
 };
+use duckdb::Connection;
 use pyo3::{
     exceptions::PyException,
     prelude::*,
@@ -18,13 +19,40 @@ pub struct DuckdbClient(Mutex<Client>);
 #[pymethods]
 impl DuckdbClient {
     #[new]
-    #[pyo3(signature = (*, use_hive_partitioning=false, extension_directory=None, install_extensions=true))]
+    #[pyo3(signature = (*, extension_directory=None, extensions=Vec::new(), install_spatial=true, use_hive_partitioning=false))]
     fn new(
-        use_hive_partitioning: bool,
         extension_directory: Option<PathBuf>,
-        install_extensions: bool,
+        extensions: Vec<String>,
+        install_spatial: bool,
+        use_hive_partitioning: bool,
     ) -> Result<DuckdbClient> {
-        todo!()
+        let connection = Connection::open_in_memory()?;
+        if let Some(extension_directory) = extension_directory {
+            connection.execute(
+                "SET extension_directory = ?",
+                [extension_directory.to_string_lossy()],
+            )?;
+        }
+        if install_spatial {
+            connection.execute("INSTALL spatial", [])?;
+        }
+        for extension in extensions {
+            connection.execute(&format!("LOAD '{}'", extension), [])?;
+        }
+        connection.execute("LOAD spatial", [])?;
+        let mut client = Client::from(connection);
+        client.use_hive_partitioning = use_hive_partitioning;
+        Ok(DuckdbClient(Mutex::new(client)))
+    }
+
+    #[pyo3(signature = (sql, params = Vec::new()))]
+    fn execute<'py>(&self, sql: String, params: Vec<String>) -> Result<usize> {
+        let client = self
+            .0
+            .lock()
+            .map_err(|err| PyException::new_err(err.to_string()))?;
+        let count = client.execute(&sql, duckdb::params_from_iter(params))?;
+        Ok(count)
     }
 
     #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]

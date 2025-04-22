@@ -10,6 +10,9 @@ create_exception!(rustac, RustacError, PyException);
 #[derive(Debug, Error)]
 pub enum Error {
     #[error(transparent)]
+    Duckdb(#[from] duckdb::Error),
+
+    #[error(transparent)]
     Geojson(#[from] geojson::Error),
 
     #[error(transparent)]

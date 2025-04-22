@@ -2,6 +2,5 @@
 
 set -e
 
-uv run maturin dev --uv -E arrow
 uv run pytest "$@"
 uv run rustac translate spec-examples/v1.1.0/simple-item.json /dev/null

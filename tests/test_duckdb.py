@@ -1,15 +1,19 @@
 from pathlib import Path
 
 import pytest
-from geopandas import GeoDataFrame
-
 import rustac
+from geopandas import GeoDataFrame
 from rustac import DuckdbClient, RustacError
 
 
 @pytest.fixture
 def client() -> DuckdbClient:
     return DuckdbClient()
+
+
+@pytest.fixture
+def extension_directory() -> Path:
+    return Path(__file__).parent / "duckdb-extensions"
 
 
 def test_search(client: DuckdbClient) -> None:
@@ -40,8 +44,7 @@ def test_search_to_arrow(client: DuckdbClient) -> None:
     assert len(item_collection["features"]) == 100
 
 
-def test_custom_extension_directory() -> None:
-    extension_directory = Path(__file__).parent / "duckdb-extensions"
+def test_custom_extension_directory(extension_directory: Path) -> None:
     client = DuckdbClient(extension_directory=extension_directory)
     # Search to ensure we trigger everything
     client.search("data/100-sentinel-2-items.parquet")
@@ -49,4 +52,29 @@ def test_custom_extension_directory() -> None:
 
 def test_no_install(tmp_path: Path) -> None:
     with pytest.raises(RustacError):
-        DuckdbClient(extension_directory=tmp_path, install_extensions=False)
+        DuckdbClient(extension_directory=tmp_path, install_spatial=False)
+
+
+def test_extensions(extension_directory: Path, tmp_path: Path) -> None:
+    # Ensure we've fetched the extension
+    DuckdbClient(extension_directory=extension_directory)
+
+    extension = next(extension_directory.glob("**/spatial.duckdb_extension"))
+    client = DuckdbClient(
+        extensions=[str(extension)], extension_directory=tmp_path, install_spatial=False
+    )
+    client.search("data/100-sentinel-2-items.parquet")
+
+
+def test_execute(client: DuckdbClient, extension_directory: Path) -> None:
+    # Just a smoke test
+    client.execute("SET extension_directory = ?", [str(extension_directory)])
+
+
+def test_load_spatial() -> None:
+    DuckdbClient(extensions=["spatial"])
+
+
+@pytest.mark.skip("slow")
+def test_aws_credential_chain(client: DuckdbClient) -> None:
+    client.execute("CREATE SECRET (TYPE S3, PROVIDER CREDENTIAL_CHAIN)")
