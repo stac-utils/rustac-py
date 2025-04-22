@@ -40,7 +40,7 @@ type WalkStep = (Value, Vec<Container>, VecDeque<Item>);
 
 async fn next_walk(nodes: Arc<Mutex<VecDeque<Node>>>) -> PyResult<Json<WalkStep>> {
     let mut nodes = nodes.lock().await;
-    if let Some(node) = nodes.pop_front() {
+    match nodes.pop_front() { Some(node) => {
         let mut node = node.resolve().await.map_err(Error::from)?;
         let items = std::mem::take(&mut node.items);
         let mut children = Vec::with_capacity(node.children.len());
@@ -49,7 +49,7 @@ async fn next_walk(nodes: Arc<Mutex<VecDeque<Node>>>) -> PyResult<Json<WalkStep>
             nodes.push_back(child);
         }
         Ok(Json((node.value.into(), children, items)))
-    } else {
+    } _ => {
         Err(PyStopAsyncIteration::new_err("done walking"))
-    }
+    }}
 }
