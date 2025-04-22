@@ -1,5 +1,5 @@
 [package]
-name = "rustac"
+name = "rustac-py"
 version = "0.6.0"
 edition = "2021"
 publish = false
@@ -13,14 +13,14 @@ duckdb-bundled = ["stac-duckdb/bundled"]
 
 [dependencies]
 clap = "4.5.31"
+geoarrow-array = { git = "https://github.com/geoarrow/geoarrow-rs/", rev = "17bf33e4cf78b060afa08ca9560dc4efd73c2c76" }
 geojson = "0.24.1"
-geoarrow = "0.4.0-beta.3"
 pyo3 = { version = "0.24.1", features = ["extension-module"] }
 pyo3-async-runtimes = { version = "0.24.0", features = [
     "tokio",
     "tokio-runtime",
 ] }
-pyo3-arrow = "0.8.0"
+pyo3-arrow = "0.9.0"
 pythonize = "0.24.0"
 serde = "1.0.217"
 serde_json = { version = "1.0.138", features = ["preserve_order"] }
@@ -45,5 +45,4 @@ tracing = "0.1.41"
 cargo-lock = "10"
 
 [patch.crates-io]
-# TODO unpatch cql2 when we upgrade geoarrow to use geo v0.30
-cql2 = { git = "https://github.com/gadomski/cql2-rs", branch = "geo-v0.29" }
+duckdb = { git = "https://github.com/gadomski/duckdb-rs/", branch = "arrow-v55" }

@@ -13,7 +13,7 @@ pub enum Error {
     Geojson(#[from] geojson::Error),
 
     #[error(transparent)]
-    Geoarrow(#[from] geoarrow::error::GeoArrowError),
+    Geoarrow(#[from] geoarrow_array::error::GeoArrowError),
 
     #[error(transparent)]
     Io(#[from] std::io::Error),
