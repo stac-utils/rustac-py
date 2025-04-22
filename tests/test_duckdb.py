@@ -1,7 +1,10 @@
+from pathlib import Path
+
 import pytest
-import rustac
 from geopandas import GeoDataFrame
-from rustac import DuckdbClient
+
+import rustac
+from rustac import DuckdbClient, RustacError
 
 
 @pytest.fixture
@@ -27,11 +30,6 @@ def test_get_collections(client: DuckdbClient) -> None:
     assert len(collections) == 1
 
 
-@pytest.mark.skip("slow")
-def test_init_with_config() -> None:
-    DuckdbClient(use_s3_credential_chain=True, use_hive_partitioning=True)
-
-
 def test_search_to_arrow(client: DuckdbClient) -> None:
     pytest.importorskip("arro3.core")
     table = client.search_to_arrow("data/100-sentinel-2-items.parquet")
@@ -40,3 +38,15 @@ def test_search_to_arrow(client: DuckdbClient) -> None:
     data_frame_table = data_frame.to_arrow()
     item_collection = rustac.from_arrow(data_frame_table)
     assert len(item_collection["features"]) == 100
+
+
+def test_custom_extension_directory() -> None:
+    extension_directory = Path(__file__).parent / "duckdb-extensions"
+    client = DuckdbClient(extension_directory=extension_directory)
+    # Search to ensure we trigger everything
+    client.search("data/100-sentinel-2-items.parquet")
+
+
+def test_no_install(tmp_path: Path) -> None:
+    with pytest.raises(RustacError):
+        DuckdbClient(extension_directory=tmp_path, install_extensions=False)
