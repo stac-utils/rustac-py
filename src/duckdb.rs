@@ -1,13 +1,13 @@
 use crate::{
-    search::{PySortby, StringOrDict, StringOrList},
     Result,
+    search::{PySortby, StringOrDict, StringOrList},
 };
 use duckdb::Connection;
 use pyo3::{
+    IntoPyObjectExt,
     exceptions::PyException,
     prelude::*,
     types::{PyDict, PyList},
-    IntoPyObjectExt,
 };
 use pyo3_arrow::PyTable;
 use stac_duckdb::Client;

@@ -1,5 +1,5 @@
 use crate::{Error, Json, Result};
-use pyo3::{prelude::*, IntoPyObjectExt};
+use pyo3::{IntoPyObjectExt, prelude::*};
 use pyo3_arrow::PyTable;
 use serde_json::Value;
 use stac::geoarrow::Table;

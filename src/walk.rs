@@ -1,7 +1,7 @@
 use crate::{Error, Json, Result};
 use pyo3::{
-    exceptions::PyStopAsyncIteration, pyclass, pyfunction, pymethods, types::PyDict, Bound, Py,
-    PyAny, PyResult, Python,
+    Bound, Py, PyAny, PyResult, Python, exceptions::PyStopAsyncIteration, pyclass, pyfunction,
+    pymethods, types::PyDict,
 };
 use stac::{Container, Item, Links, Node, SelfHref, Value};
 use std::collections::VecDeque;
@@ -40,16 +40,17 @@ type WalkStep = (Value, Vec<Container>, VecDeque<Item>);
 
 async fn next_walk(nodes: Arc<Mutex<VecDeque<Node>>>) -> PyResult<Json<WalkStep>> {
     let mut nodes = nodes.lock().await;
-    match nodes.pop_front() { Some(node) => {
-        let mut node = node.resolve().await.map_err(Error::from)?;
-        let items = std::mem::take(&mut node.items);
-        let mut children = Vec::with_capacity(node.children.len());
-        for child in node.children {
-            children.push(child.value.clone());
-            nodes.push_back(child);
+    match nodes.pop_front() {
+        Some(node) => {
+            let mut node = node.resolve().await.map_err(Error::from)?;
+            let items = std::mem::take(&mut node.items);
+            let mut children = Vec::with_capacity(node.children.len());
+            for child in node.children {
+                children.push(child.value.clone());
+                nodes.push_back(child);
+            }
+            Ok(Json((node.value.into(), children, items)))
         }
-        Ok(Json((node.value.into(), children, items)))
-    } _ => {
-        Err(PyStopAsyncIteration::new_err("done walking"))
-    }}
+        _ => Err(PyStopAsyncIteration::new_err("done walking")),
+    }
 }

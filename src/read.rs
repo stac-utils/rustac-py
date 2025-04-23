@@ -1,5 +1,5 @@
 use crate::{Error, Json};
-use pyo3::{pyfunction, types::PyAny, Bound, PyResult, Python};
+use pyo3::{Bound, PyResult, Python, pyfunction, types::PyAny};
 use stac::{Format, Link, Links, SelfHref, Value};
 
 #[pyfunction]

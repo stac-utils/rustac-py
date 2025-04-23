@@ -1,7 +1,7 @@
 use crate::{Error, Json, Result};
 use geojson::Geometry;
 use pyo3::prelude::*;
-use pyo3::{exceptions::PyValueError, types::PyDict, Bound, FromPyObject, PyErr, PyResult};
+use pyo3::{Bound, FromPyObject, PyErr, PyResult, exceptions::PyValueError, types::PyDict};
 use stac::Bbox;
 use stac::Format;
 use stac_api::{Fields, Filter, Items, Search, Sortby};

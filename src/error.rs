@@ -1,7 +1,6 @@
 use pyo3::{
-    create_exception,
+    PyErr, create_exception,
     exceptions::{PyException, PyIOError},
-    PyErr,
 };
 use thiserror::Error;
 
