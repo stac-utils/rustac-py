@@ -19,11 +19,11 @@ pub struct DuckdbClient(Mutex<Client>);
 #[pymethods]
 impl DuckdbClient {
     #[new]
-    #[pyo3(signature = (*, extension_directory=None, extensions=Vec::new(), install_spatial=true, use_hive_partitioning=false))]
+    #[pyo3(signature = (*, extension_directory=None, extensions=Vec::new(), install_extensions=true, use_hive_partitioning=false))]
     fn new(
         extension_directory: Option<PathBuf>,
         extensions: Vec<String>,
-        install_spatial: bool,
+        install_extensions: bool,
         use_hive_partitioning: bool,
     ) -> Result<DuckdbClient> {
         let connection = Connection::open_in_memory()?;
@@ -33,13 +33,15 @@ impl DuckdbClient {
                 [extension_directory.to_string_lossy()],
             )?;
         }
-        if install_spatial {
+        if install_extensions {
             connection.execute("INSTALL spatial", [])?;
+            connection.execute("INSTALL icu", [])?;
         }
         for extension in extensions {
             connection.execute(&format!("LOAD '{}'", extension), [])?;
         }
         connection.execute("LOAD spatial", [])?;
+        connection.execute("LOAD icu", [])?;
         let mut client = Client::from(connection);
         client.use_hive_partitioning = use_hive_partitioning;
         Ok(DuckdbClient(Mutex::new(client)))

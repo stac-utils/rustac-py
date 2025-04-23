@@ -18,7 +18,7 @@ class DuckdbClient:
         *,
         extension_directory: Path | None = None,
         extensions: list[str] | None = None,
-        install_spatial: bool = True,
+        install_extensions: bool = True,
         use_hive_partitioning: bool = False,
     ) -> None:
         """Creates a new duckdb client.
@@ -26,7 +26,7 @@ class DuckdbClient:
         Args:
             extension_directory: A non-standard extension directory to use.
             extensions: A list of extensions to LOAD on client initialization.
-            install_spatial: Whether to install the spatial extension on client initialization.
+            install_extensions: Whether to install the spatial and icu extensions on client initialization.
             use_hive_partitioning: Whether to use hive partitioning for geoparquet queries.
         """
 

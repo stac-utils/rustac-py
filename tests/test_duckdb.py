@@ -52,16 +52,18 @@ def test_custom_extension_directory(extension_directory: Path) -> None:
 
 def test_no_install(tmp_path: Path) -> None:
     with pytest.raises(RustacError):
-        DuckdbClient(extension_directory=tmp_path, install_spatial=False)
+        DuckdbClient(extension_directory=tmp_path, install_extensions=False)
 
 
 def test_extensions(extension_directory: Path, tmp_path: Path) -> None:
     # Ensure we've fetched the extension
     DuckdbClient(extension_directory=extension_directory)
 
-    extension = next(extension_directory.glob("**/spatial.duckdb_extension"))
+    extensions = list(str(e) for e in extension_directory.glob("**/*.duckdb_extension"))
     client = DuckdbClient(
-        extensions=[str(extension)], extension_directory=tmp_path, install_spatial=False
+        extensions=extensions,
+        extension_directory=tmp_path,
+        install_extensions=False,
     )
     client.search("data/100-sentinel-2-items.parquet")
 
