@@ -13,6 +13,8 @@ use pyo3_arrow::PyTable;
 use stac_duckdb::Client;
 use std::{path::PathBuf, sync::Mutex};
 
+const REQUIRED_EXTENSIONS: [&str; 3] = ["spatial", "icu", "parquet"];
+
 #[pyclass(frozen)]
 pub struct DuckdbClient(Mutex<Client>);
 
@@ -34,14 +36,16 @@ impl DuckdbClient {
             )?;
         }
         if install_extensions {
-            connection.execute("INSTALL spatial", [])?;
-            connection.execute("INSTALL icu", [])?;
+            for extension in REQUIRED_EXTENSIONS {
+                connection.execute(&format!("INSTALL {extension}"), [])?;
+            }
         }
         for extension in extensions {
-            connection.execute(&format!("LOAD '{}'", extension), [])?;
+            connection.execute(&format!("LOAD '{extension}'"), [])?;
         }
-        connection.execute("LOAD spatial", [])?;
-        connection.execute("LOAD icu", [])?;
+        for extension in REQUIRED_EXTENSIONS {
+            connection.execute(&format!("LOAD {extension}"), [])?;
+        }
         let mut client = Client::from(connection);
         client.use_hive_partitioning = use_hive_partitioning;
         Ok(DuckdbClient(Mutex::new(client)))

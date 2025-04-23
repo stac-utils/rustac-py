@@ -26,7 +26,7 @@ class DuckdbClient:
         Args:
             extension_directory: A non-standard extension directory to use.
             extensions: A list of extensions to LOAD on client initialization.
-            install_extensions: Whether to install the spatial and icu extensions on client initialization.
+            install_extensions: Whether to install the required extensions on client initialization.
             use_hive_partitioning: Whether to use hive partitioning for geoparquet queries.
         """
 
