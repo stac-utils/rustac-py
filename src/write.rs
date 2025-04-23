@@ -1,5 +1,5 @@
 use crate::{Error, Json, Result};
-use pyo3::{pyfunction, Bound, PyAny, PyResult, Python};
+use pyo3::{Bound, PyAny, PyResult, Python, pyfunction};
 use serde_json::Value;
 use stac::{Format, Item, ItemCollection};
 

@@ -1,8 +1,7 @@
 use clap::Parser;
 use pyo3::{
-    pyfunction,
+    PyResult, Python, pyfunction,
     types::{PyAnyMethods, PyDict},
-    PyResult, Python,
 };
 use rustac::Rustac;
 use tracing::Level;
