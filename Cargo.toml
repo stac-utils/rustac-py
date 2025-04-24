@@ -1,6 +1,6 @@
 [package]
 name = "rustac-py"
-version = "0.7.0-beta.1"
+version = "0.7.0-beta.2"
 edition = "2024"
 publish = false
 

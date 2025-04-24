@@ -5,13 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [0.7.0-beta.1] - 2025-04-23
+## [0.7.0-beta.2] - 2025-04-23
 
 ### Added
 
 - Source distribution to PyPI publish ([#92](https://github.com/stac-utils/rustac-py/pull/92))
 - `rustac.sha` ([#99](https://github.com/stac-utils/rustac-py/pull/99))
 - Typed dictionaries for STAC entities ([#101](https://github.com/stac-utils/rustac-py/pull/101))
+- `rustac.collection_from_id_and_items` ([#109](https://github.com/stac-utils/rustac-py/pull/109))
 
 ### Fixed
 
@@ -197,8 +198,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.7.0-beta.1...main
-[0.7.0-beta.1]: https://github.com/stac-utils/rustac-py/compare/v0.6.0...v0.7.0-beta.1
+[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.7.0-beta.2...main
+[0.7.0-beta.2]: https://github.com/stac-utils/rustac-py/compare/v0.6.0...v0.7.0-beta.2
 [0.6.0]: https://github.com/stac-utils/rustac-py/compare/v0.5.9...v0.6.0
 [0.5.9]: https://github.com/stac-utils/rustac-py/compare/v0.5.8...v0.5.9
 [0.5.8]: https://github.com/stac-utils/rustac-py/compare/v0.5.7...v0.5.8
