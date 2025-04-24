@@ -165,6 +165,19 @@ class DuckdbClient:
             A list of STAC Collections
         """
 
+def collection_from_id_and_items(id: str, items: list[Item]) -> Collection:
+    """Creates a collection from an id and some items.
+
+    The extents will be calculated from the items, and the items will be linked.
+
+    Args:
+        id: The collection id
+        items: A list of STAC items
+
+    Returns:
+        A STAC collection
+    """
+
 def migrate(value: dict[str, Any], version: Optional[str] = None) -> dict[str, Any]:
     """
     Migrates a STAC dictionary to another version.
