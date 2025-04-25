@@ -19,6 +19,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Deterministic asset ordering ([rustac #709](https://github.com/stac-utils/rustac/pull/709), [#93](https://github.com/stac-utils/rustac-py/pull/93))
 - Normalize search output ([#102](https://github.com/stac-utils/rustac-py/pull/102))
 
+### Removed
+
+- Python 3.10 support ([#110](https://github.com/stac-utils/rustac-py/pull/110))
+
 ## [0.6.0] - 2025-04-18
 
 > [!NOTE]
