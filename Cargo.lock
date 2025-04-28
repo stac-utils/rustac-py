@@ -2671,7 +2671,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#19f581dfa70a47465f6293579ca7795cda2eae24"
+source = "git+https://github.com/stac-utils/rustac?branch=main#7ff8ac4e0c4359183dc00cd9cc1835f2a87d8665"
 dependencies = [
  "serde",
  "serde_json",
@@ -3376,7 +3376,7 @@ dependencies = [
 [[package]]
 name = "rustac"
 version = "0.5.3"
-source = "git+https://github.com/stac-utils/rustac?branch=main#19f581dfa70a47465f6293579ca7795cda2eae24"
+source = "git+https://github.com/stac-utils/rustac?branch=main#7ff8ac4e0c4359183dc00cd9cc1835f2a87d8665"
 dependencies = [
  "anyhow",
  "axum",
@@ -3393,7 +3393,7 @@ dependencies = [
 
 [[package]]
 name = "rustac-py"
-version = "0.7.0-beta.5"
+version = "0.7.0-beta.6"
 dependencies = [
  "cargo-lock",
  "clap",
@@ -3779,7 +3779,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "stac"
 version = "0.12.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#19f581dfa70a47465f6293579ca7795cda2eae24"
+source = "git+https://github.com/stac-utils/rustac?branch=main#7ff8ac4e0c4359183dc00cd9cc1835f2a87d8665"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3814,7 +3814,7 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.7.1"
-source = "git+https://github.com/stac-utils/rustac?branch=main#19f581dfa70a47465f6293579ca7795cda2eae24"
+source = "git+https://github.com/stac-utils/rustac?branch=main#7ff8ac4e0c4359183dc00cd9cc1835f2a87d8665"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3839,7 +3839,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.2.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#19f581dfa70a47465f6293579ca7795cda2eae24"
+source = "git+https://github.com/stac-utils/rustac?branch=main#7ff8ac4e0c4359183dc00cd9cc1835f2a87d8665"
 dependencies = [
  "quote",
  "syn 2.0.101",
@@ -3848,7 +3848,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.1.1"
-source = "git+https://github.com/stac-utils/rustac?branch=main#19f581dfa70a47465f6293579ca7795cda2eae24"
+source = "git+https://github.com/stac-utils/rustac?branch=main#7ff8ac4e0c4359183dc00cd9cc1835f2a87d8665"
 dependencies = [
  "arrow-array",
  "chrono",
@@ -3867,7 +3867,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.3.4"
-source = "git+https://github.com/stac-utils/rustac?branch=main#19f581dfa70a47465f6293579ca7795cda2eae24"
+source = "git+https://github.com/stac-utils/rustac?branch=main#7ff8ac4e0c4359183dc00cd9cc1835f2a87d8665"
 dependencies = [
  "axum",
  "bb8",
