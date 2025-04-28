@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [0.7.0-beta.4] - 2025-04-23
+## [0.7.0-beta.5] - 2025-04-23
 
 ### Added
 
@@ -202,8 +202,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.7.0-beta.4...main
-[0.7.0-beta.4]: https://github.com/stac-utils/rustac-py/compare/v0.6.0...v0.7.0-beta.4
+[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.7.0-beta.5...main
+[0.7.0-beta.5]: https://github.com/stac-utils/rustac-py/compare/v0.6.0...v0.7.0-beta.5
 [0.6.0]: https://github.com/stac-utils/rustac-py/compare/v0.5.9...v0.6.0
 [0.5.9]: https://github.com/stac-utils/rustac-py/compare/v0.5.8...v0.5.9
 [0.5.8]: https://github.com/stac-utils/rustac-py/compare/v0.5.7...v0.5.8

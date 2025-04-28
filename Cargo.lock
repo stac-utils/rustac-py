@@ -3393,7 +3393,7 @@ dependencies = [
 
 [[package]]
 name = "rustac-py"
-version = "0.7.0-beta.4"
+version = "0.7.0-beta.5"
 dependencies = [
  "cargo-lock",
  "clap",
