@@ -26,6 +26,11 @@ def test_search_empty_datetime_interval(client: DuckdbClient) -> None:
     client.search("data/extended-item.parquet", datetime="2025-04-27T00:00:00Z/")
 
 
+def test_search_missing_column(client: DuckdbClient) -> None:
+    # https://github.com/stac-utils/rustac/pull/717
+    client.search("data/100-sentinel-2-items.parquet", filter="foo:bar = 42")
+
+
 def test_search_offset(client: DuckdbClient) -> None:
     items = client.search("data/100-sentinel-2-items.parquet", offset=0, limit=1)
     assert items[0]["id"] == "S2B_MSIL2A_20241203T174629_R098_T13TDE_20241203T211406"
