@@ -6,10 +6,18 @@
 ![PyPI - License](https://img.shields.io/pypi/l/rustac?style=for-the-badge)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
 
-A Python package for [STAC](https://stacspec.org/) using Rust under the hood.
+![The rustac logo](./img/rustac-small.png)
 
+The power of Rust for the Python STAC ecosystem.
+
+<!-- markdownlint-disable MD028 -->
 > [!TIP]
-> While you can pronounce "rustac" however you'd like, we like "ruh-stac".
+> We pronounce **rustac** "ruh-stac".
+
+> [!NOTE]
+> Until 2025-04-17, this package was named **stacrs**.
+> See [this RFC](https://github.com/stac-utils/rustac/issues/641) for context on the name change.
+<!-- markdownlint-enable MD028 -->
 
 ## Why?
 
@@ -25,6 +33,7 @@ If you don't need those things, **rustac** probably isn't for you — use **pyst
 
 ## Installation
 
+**rustac** has zero required dependencies.
 Install via **pip**:
 
 ```shell
@@ -43,6 +52,7 @@ conda install conda-forge::rustac
 
 ### From source
 
+You'll need [Rust](https://rustup.rs/).
 By default, **rustac** wants to find DuckDB on your system:
 
 ```shell
@@ -58,7 +68,7 @@ MATURIN_PEP517_ARGS="--features=duckdb-bundled" python -m pip install -U git+htt
 
 ## Usage
 
-```python exec="on" source="above"
+```python
 import asyncio
 import rustac
 
@@ -106,7 +116,7 @@ In particular, our [examples](https://stac-utils.github.io/rustac-py/latest/gene
 
 **rustac** comes with a CLI:
 
-```bash exec="on" source="above" result="text"
+```bash
 rustac -h
 ```
 
@@ -166,6 +176,10 @@ If you want to run an off-cycle docs update (e.g. if you fixed something and wan
 ```shell
 mike deploy [version] latest --push
 ```
+
+## Acknowledgements
+
+We'd like to thank [@jkeifer](https://github.com/jkeifer), [@parksjr](https://github.com/parksjr), and Rob Gomez (all from [@Element84](https://github.com/Element84)) for creating the [rustac logo](./img/rustac.svg) from an AI-generated image from the prompt "a crab, a cabin, and a glass of whisky".
 
 ## License
 
