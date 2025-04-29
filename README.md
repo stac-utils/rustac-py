@@ -8,7 +8,7 @@
 
 ![The rustac logo](./img/rustac-small.png)
 
-The power of Rust for the Python STAC ecosystem.
+The power of Rust for the Python [STAC](https://stacspec.org/) ecosystem.
 
 <!-- markdownlint-disable MD028 -->
 > [!TIP]

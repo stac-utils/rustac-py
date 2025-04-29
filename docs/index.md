@@ -1,8 +1,18 @@
 # rustac
 
-> The power of Rust for the Python STAC ecosystem.
+![The rustac logo](./img/rustac-small.png)
 
-**rustac** is a zero-dependency Python package for [STAC](https://stacspec.org/) using Rust under the hood.
+The power of Rust for the Python [STAC](https://stacspec.org/) ecosystem.
+
+<!-- markdownlint-disable MD046-->
+!!! tip
+
+    We pronounce **rustac** "ruh-stac"
+
+!!! note
+
+    Until 2025-04-17, this package was named **stacrs**.
+    See [this RFC](https://github.com/stac-utils/rustac/issues/641) for context on the name change.
 
 ## Installation
 
@@ -29,3 +39,7 @@ asyncio.run(main())
 ```
 
 For more, see our [examples](./generated/gallery/index.md).
+
+## Acknowledgements
+
+We'd like to thank [@jkeifer](https://github.com/jkeifer), [@parksjr](https://github.com/parksjr), and Rob Gomez (all from [@Element84](https://github.com/Element84/)) for creating the rustac logo from an AI-generated image from the prompt "a crab, a cabin, and a glass of whisky".
