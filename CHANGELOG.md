@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- `proj:geometry` ([#120](https://github.com/stac-utils/rustac-py/pull/120))
+
 ## [0.7.0] - 2025-04-29
 
 ### Added
