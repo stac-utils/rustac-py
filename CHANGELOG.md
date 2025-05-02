@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.7.1] - 2025-05-02
+
 ### Fixed
 
 - `proj:geometry` ([#120](https://github.com/stac-utils/rustac-py/pull/120))
@@ -206,7 +208,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.7.0.6...main
+[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.7.1...main
+[0.7.1]: https://github.com/stac-utils/rustac-py/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/stac-utils/rustac-py/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/stac-utils/rustac-py/compare/v0.5.9...v0.6.0
 [0.5.9]: https://github.com/stac-utils/rustac-py/compare/v0.5.8...v0.5.9
