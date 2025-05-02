@@ -4,6 +4,7 @@ from pathlib import Path
 import pyarrow.parquet
 import rustac
 import stac_geoparquet.arrow
+from rustac import Item
 
 
 async def test_search() -> None:
@@ -59,3 +60,7 @@ async def test_sortby_list_of_dict() -> None:
         max_items=1,
     )
     assert len(items) == 1
+
+
+async def test_proj_geometry(maxar_items: list[Item], tmp_path: Path) -> None:
+    await rustac.write(str(tmp_path / "out.parquet"), maxar_items)

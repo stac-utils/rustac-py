@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+import pystac
 import pytest
 from rustac import Item
 
@@ -29,3 +30,15 @@ def data(root: Path) -> Path:
 def item(examples: Path) -> Item:
     with open(examples / "simple-item.json") as f:
         return json.load(f)
+
+
+@pytest.fixture
+def maxar_items(root: Path) -> list[Item]:
+    # https://github.com/stac-utils/rustac/issues/722
+    directory = root / "tests" / "data" / "maxar-hurricane-ian-2022"
+    item_a = pystac.read_file(directory / "031331303020" / "10300100DB064000.json")
+    item_b = pystac.read_file(directory / "031331303211" / "10300100DB064000.json")
+    return [
+        item_a.to_dict(transform_hrefs=False),
+        item_b.to_dict(transform_hrefs=False),
+    ]
