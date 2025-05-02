@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import Any
 
 import pyarrow.parquet
 import rustac
@@ -59,3 +60,7 @@ async def test_sortby_list_of_dict() -> None:
         max_items=1,
     )
     assert len(items) == 1
+
+
+async def test_proj_geometry(maxar_items: list[dict[str, Any]], tmp_path: Path) -> None:
+    await rustac.write(str(tmp_path / "out.parquet"), maxar_items)
