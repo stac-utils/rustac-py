@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import cast
 
 import pystac
 import pytest
@@ -39,6 +40,6 @@ def maxar_items(root: Path) -> list[Item]:
     item_a = pystac.read_file(directory / "031331303020" / "10300100DB064000.json")
     item_b = pystac.read_file(directory / "031331303211" / "10300100DB064000.json")
     return [
-        item_a.to_dict(transform_hrefs=False),
-        item_b.to_dict(transform_hrefs=False),
+        cast(Item, item_a.to_dict(transform_hrefs=False)),
+        cast(Item, item_b.to_dict(transform_hrefs=False)),
     ]
