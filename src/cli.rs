@@ -24,7 +24,7 @@ pub fn main(py: Python<'_>) -> PyResult<i64> {
     let level = args.log_level().unwrap_or(Level::INFO);
     logger.call_method1("setLevel", (level.to_string(),))?;
     std::process::exit(
-        tokio::runtime::Builder::new_multi_thread()
+        tokio::runtime::Builder::new_current_thread()
             .enable_all()
             .build()
             .unwrap()
