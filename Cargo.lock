@@ -1444,9 +1444,9 @@ checksum = "07e28edb80900c19c28f1072f2e8aeca7fa06b23cd4169cefe1af5aa3260783f"
 
 [[package]]
 name = "h2"
-version = "0.4.9"
+version = "0.4.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75249d144030531f8dee69fe9cea04d3edf809a017ae445e2abdff6629e86633"
+checksum = "a9421a676d1b147b16b82c9225157dc629087ef8ec4d5e2960f9437a90dac0a5"
 dependencies = [
  "atomic-waker",
  "bytes",
@@ -1953,9 +1953,9 @@ checksum = "4a5f13b858c8d314ee3e8f639011f7ccefe71f97f96e50151fb991f267928e2c"
 
 [[package]]
 name = "jiff"
-version = "0.2.11"
+version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "27e77966151130221b079bcec80f1f34a9e414fa489d99152a201c07fd2182bc"
+checksum = "d07d8d955d798e7a4d6f9c58cd1f1916e790b42b092758a9ef6e16fef9f1b3fd"
 dependencies = [
  "jiff-static",
  "jiff-tzdb-platform",
@@ -1968,9 +1968,9 @@ dependencies = [
 
 [[package]]
 name = "jiff-static"
-version = "0.2.11"
+version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "97265751f8a9a4228476f2fc17874a9e7e70e96b893368e42619880fe143b48a"
+checksum = "f244cfe006d98d26f859c7abd1318d85327e1882dc9cef80f62daeeb0adcf300"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2168,9 +2168,9 @@ dependencies = [
 
 [[package]]
 name = "libm"
-version = "0.2.13"
+version = "0.2.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c9627da5196e5d8ed0b0495e61e518847578da83483c37288316d9b2e03a7f72"
+checksum = "a25169bd5913a4b437588a7e3d127cd6e90127b60e0ffbd834a38f1599e016b8"
 
 [[package]]
 name = "libredox"
@@ -2671,7 +2671,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#81d92a560f657ae9c453980bc79046d99991e1df"
+source = "git+https://github.com/stac-utils/rustac?branch=main#c8f20c3202e4e8c37e81d7c47644a272719d863b"
 dependencies = [
  "serde",
  "serde_json",
@@ -3141,9 +3141,9 @@ dependencies = [
 
 [[package]]
 name = "redox_syscall"
-version = "0.5.11"
+version = "0.5.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2f103c6d277498fbceb16e84d317e2a400f160f46904d5f5410848c829511a3"
+checksum = "928fca9cf2aa042393a8325b9ead81d2f0df4cb12e1e24cef072922ccd99c5af"
 dependencies = [
  "bitflags",
 ]
@@ -3376,7 +3376,7 @@ dependencies = [
 [[package]]
 name = "rustac"
 version = "0.5.3"
-source = "git+https://github.com/stac-utils/rustac?branch=main#81d92a560f657ae9c453980bc79046d99991e1df"
+source = "git+https://github.com/stac-utils/rustac?branch=main#c8f20c3202e4e8c37e81d7c47644a272719d863b"
 dependencies = [
  "anyhow",
  "axum",
@@ -3779,7 +3779,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "stac"
 version = "0.12.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#81d92a560f657ae9c453980bc79046d99991e1df"
+source = "git+https://github.com/stac-utils/rustac?branch=main#c8f20c3202e4e8c37e81d7c47644a272719d863b"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3814,7 +3814,7 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.7.1"
-source = "git+https://github.com/stac-utils/rustac?branch=main#81d92a560f657ae9c453980bc79046d99991e1df"
+source = "git+https://github.com/stac-utils/rustac?branch=main#c8f20c3202e4e8c37e81d7c47644a272719d863b"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3839,7 +3839,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.2.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#81d92a560f657ae9c453980bc79046d99991e1df"
+source = "git+https://github.com/stac-utils/rustac?branch=main#c8f20c3202e4e8c37e81d7c47644a272719d863b"
 dependencies = [
  "quote",
  "syn 2.0.101",
@@ -3848,7 +3848,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.1.1"
-source = "git+https://github.com/stac-utils/rustac?branch=main#81d92a560f657ae9c453980bc79046d99991e1df"
+source = "git+https://github.com/stac-utils/rustac?branch=main#c8f20c3202e4e8c37e81d7c47644a272719d863b"
 dependencies = [
  "arrow-array",
  "chrono",
@@ -3867,7 +3867,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.3.4"
-source = "git+https://github.com/stac-utils/rustac?branch=main#81d92a560f657ae9c453980bc79046d99991e1df"
+source = "git+https://github.com/stac-utils/rustac?branch=main#c8f20c3202e4e8c37e81d7c47644a272719d863b"
 dependencies = [
  "axum",
  "bb8",
