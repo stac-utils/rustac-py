@@ -43,9 +43,14 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
 
 [tool.ruff]
-exclude = ["python/rustac/__init__.py", "docs/examples/example_*.py"]
+exclude = [
+    "python/rustac/__init__.py",
+    "docs/examples/example_*.py",
+    "_obstore",
+]
 
 [dependency-groups]
 dev = [
@@ -63,6 +68,7 @@ dev = [
 docs = [
     "arro3-core>=0.4.5",
     "contextily>=1.6.2",
+    "griffe>=1.6.0",
     "humanize>=4.12.1",
     "ipykernel>=6.29.5",
     "jinja2>=3.1.4",

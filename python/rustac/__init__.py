@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from .rustac import *
 from typing import TypedDict, Required, Any, Literal
+from . import store
 
 
 class Catalog(TypedDict, total=False):
