@@ -77,6 +77,7 @@ docs = [
     "mkdocs-gallery>=0.10.4",
     "mkdocs-material[imaging]>=9.5.45",
     "mkdocstrings[python]>=0.27.0",
+    "obstore>=0.6.0",
     "pystac-client>=0.8.5",
 ]
 
