@@ -3,6 +3,7 @@ from typing import Any
 
 import rustac
 from pystac import Item
+from rustac.store import LocalStore
 
 
 async def test_read(examples: Path) -> None:
@@ -27,3 +28,8 @@ async def test_read_proj_geometry(
     await rustac.write(path, maxar_items)
     items = await rustac.read(path)
     assert len(items["features"]) == 2
+
+
+async def test_read_store(examples: Path) -> None:
+    store = LocalStore(prefix=str(examples))
+    await rustac.read("simple-item.json", store=store)

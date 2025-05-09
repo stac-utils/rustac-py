@@ -26,6 +26,15 @@ nav:
       - read: api/read.md
       - search: api/search.md
       - stac: api/stac.md
+      - store:
+          - api/store/index.md
+          - api/store/aws.md
+          - api/store/azure.md
+          - api/store/config.md
+          - api/store/gcs.md
+          - api/store/http.md
+          - api/store/local.md
+          - api/store/memory.md
       - version: api/version.md
       - walk: api/walk.md
       - write: api/write.md
@@ -57,6 +66,7 @@ plugins:
           inventories:
             - https://kylebarron.dev/arro3/latest/objects.inv
             - https://geopandas.org/en/stable/objects.inv
+            - https://developmentseed.org/obstore/latest/objects.inv
   - search
   - social:
       cards_layout_options:

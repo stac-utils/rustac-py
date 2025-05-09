@@ -6,6 +6,7 @@ from typing import Any, AsyncIterator, Literal, Optional, Tuple
 import arro3.core
 
 from rustac import Catalog, Collection, Item, ItemCollection
+from rustac.store import ObjectStore
 
 class RustacError(Exception):
     """A package-specific exception."""
@@ -210,7 +211,7 @@ async def read(
     href: str,
     *,
     format: str | None = None,
-    options: list[tuple[str, str]] | None = None,
+    store: ObjectStore | None = None,
     set_self_link: bool = True,
 ) -> dict[str, Any]:
     """
@@ -220,8 +221,7 @@ async def read(
         href: The href to write to
         format: The input format. If not provided, will be inferred
             from the href's extension.
-        options: Options for configuring an
-            object store, e.g. your AWS credentials.
+        store: An optional [ObjectStore][]
         set_self_link: If True, set the `self` link to the value of `href`.
 
     Returns:
@@ -424,7 +424,7 @@ async def write(
     value: dict[str, Any] | list[dict[str, Any]],
     *,
     format: str | None = None,
-    options: list[tuple[str, str]] | None = None,
+    store: ObjectStore | None = None,
 ) -> dict[str, str] | None:
     """
     Writes STAC to a href.
@@ -435,8 +435,7 @@ async def write(
             can be a STAC dictionary or a list of items.
         format: The output format to write. If not provided, will be
             inferred from the href's extension.
-        options: Options for configuring an
-            object store, e.g. your AWS credentials.
+        store: The object store to use for writing.
 
     Returns:
         The result of putting data into an object store, e.g. the e_tag and the

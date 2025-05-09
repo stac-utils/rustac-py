@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- `rustac.store` ([#127](https://github.com/stac-utils/rustac-py/pull/127))
+
 ## [0.7.2] - 2025-05-05
 
 ### Fixed
