@@ -733,9 +733,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "4.5.37"
+version = "4.5.38"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eccb054f56cbd38340b380d4a8e69ef1f02f1af43db2f0cc817a4774d80ae071"
+checksum = "ed93b9805f8ba930df42c2590f05453d5ec36cbb85d018868a5b24d31f6ac000"
 dependencies = [
  "clap_builder",
  "clap_derive",
@@ -743,9 +743,9 @@ dependencies = [
 
 [[package]]
 name = "clap_builder"
-version = "4.5.37"
+version = "4.5.38"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "efd9466fac8543255d3b1fcad4762c5e116ffe808c8a3043d4263cd4fd4862a2"
+checksum = "379026ff283facf611b0ea629334361c4211d1b12ee01024eec1591133b04120"
 dependencies = [
  "anstream",
  "anstyle",
@@ -1375,9 +1375,9 @@ dependencies = [
 
 [[package]]
 name = "geographiclib-rs"
-version = "0.2.4"
+version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6e5ed84f8089c70234b0a8e0aedb6dc733671612ddc0d37c6066052f9781960"
+checksum = "f611040a2bb37eaa29a78a128d1e92a378a03e0b6e66ae27398d42b1ba9a7841"
 dependencies = [
  "libm",
 ]
@@ -2645,7 +2645,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#20b2823bb1feda50806f3ff112c3a7acbb6f570e"
+source = "git+https://github.com/stac-utils/rustac?branch=main#2e988e14947ebc90ca7043a9faa0066abe9da78b"
 dependencies = [
  "serde",
  "serde_json",
@@ -3348,9 +3348,9 @@ dependencies = [
 
 [[package]]
 name = "robust"
-version = "1.1.0"
+version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cbf4a6aa5f6d6888f39e980649f3ad6b666acdce1d78e95b8a2cb076e687ae30"
+checksum = "4e27ee8bb91ca0adcf0ecb116293afa12d393f9c2b9b9cd54d33e8078fe19839"
 
 [[package]]
 name = "rstar"
@@ -3382,7 +3382,7 @@ dependencies = [
 [[package]]
 name = "rustac"
 version = "0.5.3"
-source = "git+https://github.com/stac-utils/rustac?branch=main#20b2823bb1feda50806f3ff112c3a7acbb6f570e"
+source = "git+https://github.com/stac-utils/rustac?branch=main#2e988e14947ebc90ca7043a9faa0066abe9da78b"
 dependencies = [
  "anyhow",
  "axum",
@@ -3504,9 +3504,9 @@ dependencies = [
 
 [[package]]
 name = "rustls-webpki"
-version = "0.103.2"
+version = "0.103.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7149975849f1abb3832b246010ef62ccc80d3a76169517ada7188252b9cfb437"
+checksum = "e4a72fe2bcf7a6ac6fd7d0b9e5cb68aeb7d4c0a0271730218b3e92d43b4eb435"
 dependencies = [
  "ring",
  "rustls-pki-types",
@@ -3787,7 +3787,7 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 [[package]]
 name = "stac"
 version = "0.12.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#20b2823bb1feda50806f3ff112c3a7acbb6f570e"
+source = "git+https://github.com/stac-utils/rustac?branch=main#2e988e14947ebc90ca7043a9faa0066abe9da78b"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3822,7 +3822,7 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.7.1"
-source = "git+https://github.com/stac-utils/rustac?branch=main#20b2823bb1feda50806f3ff112c3a7acbb6f570e"
+source = "git+https://github.com/stac-utils/rustac?branch=main#2e988e14947ebc90ca7043a9faa0066abe9da78b"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3847,7 +3847,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.2.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#20b2823bb1feda50806f3ff112c3a7acbb6f570e"
+source = "git+https://github.com/stac-utils/rustac?branch=main#2e988e14947ebc90ca7043a9faa0066abe9da78b"
 dependencies = [
  "quote",
  "syn 2.0.101",
@@ -3856,7 +3856,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.1.1"
-source = "git+https://github.com/stac-utils/rustac?branch=main#20b2823bb1feda50806f3ff112c3a7acbb6f570e"
+source = "git+https://github.com/stac-utils/rustac?branch=main#2e988e14947ebc90ca7043a9faa0066abe9da78b"
 dependencies = [
  "arrow-array",
  "chrono",
@@ -3875,7 +3875,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.3.4"
-source = "git+https://github.com/stac-utils/rustac?branch=main#20b2823bb1feda50806f3ff112c3a7acbb6f570e"
+source = "git+https://github.com/stac-utils/rustac?branch=main#2e988e14947ebc90ca7043a9faa0066abe9da78b"
 dependencies = [
  "axum",
  "bb8",
@@ -4313,9 +4313,9 @@ dependencies = [
 
 [[package]]
 name = "tower-http"
-version = "0.6.2"
+version = "0.6.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "403fa3b783d4b626a8ad51d766ab03cb6d2dbfc46b1c5d4448395e6628dc9697"
+checksum = "0fdb0c213ca27a9f57ab69ddb290fd80d970922355b83ae380b395d3986b8a2e"
 dependencies = [
  "bitflags",
  "bytes",

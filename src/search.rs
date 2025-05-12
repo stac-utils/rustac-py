@@ -2,6 +2,7 @@ use crate::{Error, Json, Result};
 use geojson::Geometry;
 use pyo3::prelude::*;
 use pyo3::{Bound, FromPyObject, PyErr, PyResult, exceptions::PyValueError, types::PyDict};
+use pyo3_object_store::AnyObjectStore;
 use stac::Bbox;
 use stac::Format;
 use stac_api::{Fields, Filter, Items, Search, Sortby};
@@ -57,7 +58,7 @@ pub fn search<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, format=None, options=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, format=None, store=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_to<'py>(
     py: Python<'py>,
@@ -76,7 +77,7 @@ pub fn search_to<'py>(
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
     format: Option<String>,
-    options: Option<Vec<(String, String)>>,
+    store: Option<AnyObjectStore>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Bound<'py, PyAny>> {
@@ -106,28 +107,36 @@ pub fn search_to<'py>(
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
             let value = search_duckdb(href, search, max_items)?;
             let count = value.items.len();
-            let _ = format
-                .put_opts(
-                    outfile,
-                    serde_json::to_value(value).map_err(Error::from)?,
-                    options.unwrap_or_default(),
-                )
-                .await
-                .map_err(Error::from)?;
+            let value = serde_json::to_value(value).map_err(Error::from)?;
+            if let Some(store) = store {
+                format
+                    .put_store(store.into_dyn(), outfile, value)
+                    .await
+                    .map_err(Error::from)?;
+            } else {
+                format
+                    .put_opts(outfile, value, [] as [(&str, &str); 0])
+                    .await
+                    .map_err(Error::from)?;
+            }
             Ok(count)
         })
     } else {
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
             let value = search_api(href, search, max_items).await?;
             let count = value.items.len();
-            let _ = format
-                .put_opts(
-                    outfile,
-                    serde_json::to_value(value).map_err(Error::from)?,
-                    options.unwrap_or_default(),
-                )
-                .await
-                .map_err(Error::from)?;
+            let value = serde_json::to_value(value).map_err(Error::from)?;
+            if let Some(store) = store {
+                format
+                    .put_store(store.into_dyn(), outfile, value)
+                    .await
+                    .map_err(Error::from)?;
+            } else {
+                format
+                    .put_opts(outfile, value, [] as [(&str, &str); 0])
+                    .await
+                    .map_err(Error::from)?;
+            }
             Ok(count)
         })
     }
