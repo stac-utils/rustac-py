@@ -14,18 +14,27 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # TODO add bundled builds for platforms where we don't have pre-built libraries
   linux:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         platform:
           - target: x86_64
             manylinux: auto
+          - target: x86
+            manylinux: auto
           - target: aarch64
             manylinux: "2_28"
+          - target: armv7
+            manylinux: auto
+          - target: s390x
+            manylinux: auto
+          - target: ppc64le
+            manylinux: auto
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - uses: astral-sh/setup-uv@v5
       - name: Install Python
         run: uv python install 3.11
@@ -42,6 +51,35 @@ jobs:
           name: wheels-linux-${{ matrix.platform.target }}
           path: dist
 
+  musllinux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform:
+          - target: x86_64
+          - target: x86
+          - target: aarch64
+          - target: armv7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: astral-sh/setup-uv@v5
+      - name: Install Python
+        run: uv python install 3.11
+      - name: Build wheels
+        uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.platform.target }}
+          args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled
+          sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
+          manylinux: musllinux_1_2
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-musllinux-${{ matrix.platform.target }}
+          path: dist
+
   macos:
     runs-on: ${{ matrix.platform.runner }}
     strategy:
@@ -53,6 +91,8 @@ jobs:
             target: aarch64
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - uses: astral-sh/setup-uv@v5
       - name: Install Python
         run: uv python install 3.11
@@ -72,6 +112,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - name: Build sdist
         uses: PyO3/maturin-action@v1
         with:
@@ -90,6 +132,7 @@ jobs:
     needs:
       - sdist
       - linux
+      - musllinux
       - macos
     environment:
       name: pypi
