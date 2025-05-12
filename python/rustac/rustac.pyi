@@ -1,7 +1,8 @@
 """The power of Rust for the Python STAC ecosystem."""
 
+from collections.abc import AsyncIterator
 from pathlib import Path
-from typing import Any, AsyncIterator, Literal, Optional, Tuple
+from typing import Any, Literal
 
 import arro3.core
 
@@ -45,18 +46,18 @@ class DuckdbClient:
         self,
         href: str,
         *,
-        ids: Optional[str | list[str]] = None,
-        collections: Optional[str | list[str]] = None,
-        intersects: Optional[str | dict[str, Any]] = None,
-        limit: Optional[int] = None,
-        offset: Optional[int] = None,
-        bbox: Optional[list[float]] = None,
-        datetime: Optional[str] = None,
-        include: Optional[str | list[str]] = None,
-        exclude: Optional[str | list[str]] = None,
-        sortby: Optional[str | list[str | dict[str, str]]] = None,
-        filter: Optional[str | dict[str, Any]] = None,
-        query: Optional[dict[str, Any]] = None,
+        ids: str | list[str] | None = None,
+        collections: str | list[str] | None = None,
+        intersects: str | dict[str, Any] | None = None,
+        limit: int | None = None,
+        offset: int | None = None,
+        bbox: list[float] | None = None,
+        datetime: str | None = None,
+        include: str | list[str] | None = None,
+        exclude: str | list[str] | None = None,
+        sortby: str | list[str | dict[str, str]] | None = None,
+        filter: str | dict[str, Any] | None = None,
+        query: dict[str, Any] | None = None,
         **kwargs: str,
     ) -> list[dict[str, Any]]:
         """Search a stac-geoparquet file with duckdb, returning a list of items.
@@ -94,18 +95,18 @@ class DuckdbClient:
         self,
         href: str,
         *,
-        ids: Optional[str | list[str]] = None,
-        collections: Optional[str | list[str]] = None,
-        intersects: Optional[str | dict[str, Any]] = None,
-        limit: Optional[int] = None,
-        offset: Optional[int] = None,
-        bbox: Optional[list[float]] = None,
-        datetime: Optional[str] = None,
-        include: Optional[str | list[str]] = None,
-        exclude: Optional[str | list[str]] = None,
-        sortby: Optional[str | list[str | dict[str, str]]] = None,
-        filter: Optional[str | dict[str, Any]] = None,
-        query: Optional[dict[str, Any]] = None,
+        ids: str | list[str] | None = None,
+        collections: str | list[str] | None = None,
+        intersects: str | dict[str, Any] | None = None,
+        limit: int | None = None,
+        offset: int | None = None,
+        bbox: list[float] | None = None,
+        datetime: str | None = None,
+        include: str | list[str] | None = None,
+        exclude: str | list[str] | None = None,
+        sortby: str | list[str | dict[str, str]] | None = None,
+        filter: str | dict[str, Any] | None = None,
+        query: dict[str, Any] | None = None,
         **kwargs: str,
     ) -> arro3.core.Table | None:
         """Search a stac-geoparquet file with duckdb, returning an arrow table
@@ -179,7 +180,7 @@ def collection_from_id_and_items(id: str, items: list[Item]) -> Collection:
         A STAC collection
     """
 
-def migrate(value: dict[str, Any], version: Optional[str] = None) -> dict[str, Any]:
+def migrate(value: dict[str, Any], version: str | None = None) -> dict[str, Any]:
     """
     Migrates a STAC dictionary to another version.
 
@@ -264,19 +265,19 @@ def to_arrow(
 async def search(
     href: str,
     *,
-    intersects: Optional[str | dict[str, Any]] = None,
-    ids: Optional[str | list[str]] = None,
-    collections: Optional[str | list[str]] = None,
-    max_items: Optional[int] = None,
-    limit: Optional[int] = None,
-    bbox: Optional[list[float]] = None,
-    datetime: Optional[str] = None,
-    include: Optional[str | list[str]] = None,
-    exclude: Optional[str | list[str]] = None,
-    sortby: Optional[str | list[str | dict[str, str]]] = None,
-    filter: Optional[str | dict[str, Any]] = None,
-    query: Optional[dict[str, Any]] = None,
-    use_duckdb: Optional[bool] = None,
+    intersects: str | dict[str, Any] | None = None,
+    ids: str | list[str] | None = None,
+    collections: str | list[str] | None = None,
+    max_items: int | None = None,
+    limit: int | None = None,
+    bbox: list[float] | None = None,
+    datetime: str | None = None,
+    include: str | list[str] | None = None,
+    exclude: str | list[str] | None = None,
+    sortby: str | list[str | dict[str, str]] | None = None,
+    filter: str | dict[str, Any] | None = None,
+    query: dict[str, Any] | None = None,
+    use_duckdb: bool | None = None,
     **kwargs: str,
 ) -> list[dict[str, Any]]:
     """
@@ -333,21 +334,21 @@ async def search_to(
     outfile: str,
     href: str,
     *,
-    intersects: Optional[str | dict[str, Any]] = None,
-    ids: Optional[str | list[str]] = None,
-    collections: Optional[str | list[str]] = None,
-    max_items: Optional[int] = None,
-    limit: Optional[int] = None,
-    bbox: Optional[list[float]] = None,
-    datetime: Optional[str] = None,
-    include: Optional[str | list[str]] = None,
-    exclude: Optional[str | list[str]] = None,
-    sortby: Optional[str | list[str | dict[str, str]]] = None,
-    filter: Optional[str | dict[str, Any]] = None,
-    query: Optional[dict[str, Any]] = None,
-    format: Optional[str] = None,
-    options: Optional[list[Tuple[str, str]]] = None,
-    use_duckdb: Optional[bool] = None,
+    intersects: str | dict[str, Any] | None = None,
+    ids: str | list[str] | None = None,
+    collections: str | list[str] | None = None,
+    max_items: int | None = None,
+    limit: int | None = None,
+    bbox: list[float] | None = None,
+    datetime: str | None = None,
+    include: str | list[str] | None = None,
+    exclude: str | list[str] | None = None,
+    sortby: str | list[str | dict[str, str]] | None = None,
+    filter: str | dict[str, Any] | None = None,
+    query: dict[str, Any] | None = None,
+    format: str | None = None,
+    store: ObjectStore | None = None,
+    use_duckdb: bool | None = None,
 ) -> int:
     """
     Searches a STAC API server and saves the result to an output file.
@@ -385,7 +386,7 @@ async def search_to(
             It is recommended to use filter instead, if possible.
         format: The output format. If none, will be inferred from
             the outfile extension, and if that fails will fall back to compact JSON.
-        options: Configuration values to pass to the object store backend.
+        store: An optional [ObjectStore][]
         use_duckdb: Query with DuckDB. If None and the href has a
             'parquet' or 'geoparquet' extension, will be set to True. Defaults
             to None.
