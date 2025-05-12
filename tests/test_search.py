@@ -68,6 +68,7 @@ async def test_proj_geometry(maxar_items: list[dict[str, Any]], tmp_path: Path) 
 
 
 async def test_search_to_store(data: Path) -> None:
+    # https://github.com/stac-utils/rustac-py/issues/129
     store = MemoryStore()
     count = await rustac.search_to(
         "items.json", str(data / "100-sentinel-2-items.parquet"), store=store
@@ -75,3 +76,19 @@ async def test_search_to_store(data: Path) -> None:
     assert count == 100
     item_collection = await rustac.read("items.json", store=store)
     assert len(item_collection["features"]) == 100
+
+
+async def test_list_sortby(data: Path) -> None:
+    # https://github.com/stac-utils/rustac-py/issues/80
+    items = await rustac.search(
+        str(data / "100-sentinel-2-items.parquet"),
+        sortby=[
+            {"field": "datetime", "direction": "desc"},
+            {"field": "id", "direction": "asc"},
+        ],
+    )
+    for first, second in zip(items, items[1:]):
+        if first["properties"]["datetime"] == second["properties"]["datetime"]:
+            assert first["id"] <= second["id"]
+        else:
+            assert first["properties"]["datetime"] >= second["properties"]["datetime"]
