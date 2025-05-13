@@ -80,7 +80,7 @@ jobs:
         run: uv python install 3.11
       - name: Install libduckdb
         run: |
-          wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-windows-amd64.zip
+          curl -O https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-windows-amd64.zip
           mkdir -p ${{ github.workspace }}/opt/duckdb
           unzip libduckdb-windows-amd64.zip -d ${{ github.workspace }}/opt/duckdb
       - name: Test
