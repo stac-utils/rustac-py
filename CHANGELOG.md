@@ -5,13 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.8.0] - 2025-05-13
+
 ### Added
 
 - `rustac.store` ([#127](https://github.com/stac-utils/rustac-py/pull/127))
+- More linux wheels ([#132](https://github.com/stac-utils/rustac-py/pull/132))
 
 ### Removed
 
-- `options` from `read` and `write` ([#127](https://github.com/stac-utils/rustac-py/pull/127))
+- `options` from `read`, `write`, and `search_to` ([#127](https://github.com/stac-utils/rustac-py/pull/127), [#130](https://github.com/stac-utils/rustac-py/pull/130))
 
 ## [0.7.2] - 2025-05-05
 
@@ -223,7 +226,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.7.2...main
+[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.8.0...main
+[0.8.0]: https://github.com/stac-utils/rustac-py/compare/v0.7.2...v0.8.0
 [0.7.2]: https://github.com/stac-utils/rustac-py/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/stac-utils/rustac-py/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/stac-utils/rustac-py/compare/v0.6.0...v0.7.0
