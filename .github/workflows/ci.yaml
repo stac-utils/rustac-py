@@ -79,7 +79,5 @@ jobs:
         run: |
           curl -O -L https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-windows-amd64.zip
           unzip libduckdb-windows-amd64.zip -d ${{ github.workspace }}
-      - name: Build
-        run: cargo build
       - name: Test
         run: uv run pytest --all-extras
