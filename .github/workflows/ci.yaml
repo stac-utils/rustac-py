@@ -33,7 +33,8 @@ jobs:
             duckdb-slug: linux-amd64
           - runner: macos-latest
             duckdb-slug: osx-universal
-          - windows-latest
+          - runner: windows-latest
+            duckdb-slug: windows-amd64
     steps:
       - uses: actions/checkout@v4
         with:
