@@ -65,8 +65,6 @@ jobs:
     runs-on: windows-latest
     env:
       DUCKDB_LIB_DIR: ${{ github.workspace }}
-      LD_LIBRARY_PATH: ${{ github.workspace }}
-      DYLD_LIBRARY_PATH: ${{ github.workspace }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -79,5 +77,8 @@ jobs:
         run: |
           curl -O -L https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-windows-amd64.zip
           unzip libduckdb-windows-amd64.zip -d ${{ github.workspace }}
+      - name: Add local directory to path for libduckdb
+        run: echo ${{ github.workspace }} >> "$GITHUB_PATH"
+        shell: bash
       - name: Test
         run: uv run pytest --all-extras
