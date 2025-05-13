@@ -67,9 +67,6 @@ jobs:
       DUCKDB_LIB_DIR: ${{ github.workspace }}
       LD_LIBRARY_PATH: ${{ github.workspace }}
       DYLD_LIBRARY_PATH: ${{ github.workspace }}
-    defaults:
-      run:
-        shell: bash
     steps:
       - uses: actions/checkout@v4
         with:
