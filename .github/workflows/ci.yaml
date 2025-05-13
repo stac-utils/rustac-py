@@ -64,9 +64,9 @@ jobs:
     name: Test (windows)
     runs-on: windows-latest
     env:
-      DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
-      LD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
-      DYLD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
+      DUCKDB_LIB_DIR: ${{ github.workspace }}
+      LD_LIBRARY_PATH: ${{ github.workspace }}
+      DYLD_LIBRARY_PATH: ${{ github.workspace }}
     defaults:
       run:
         shell: bash
@@ -81,8 +81,7 @@ jobs:
       - name: Install libduckdb
         run: |
           curl -O -L https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-windows-amd64.zip
-          mkdir -p ${{ github.workspace }}/opt/duckdb
-          unzip libduckdb-windows-amd64.zip -d ${{ github.workspace }}/opt/duckdb
+          unzip libduckdb-windows-amd64.zip -d ${{ github.workspace }}
       - name: Build
         run: cargo build
       - name: Test
