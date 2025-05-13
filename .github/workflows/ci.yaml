@@ -33,8 +33,6 @@ jobs:
             duckdb-slug: linux-amd64
           - runner: macos-latest
             duckdb-slug: osx-universal
-          - runner: windows-latest
-            duckdb-slug: windows-amd64
     steps:
       - uses: actions/checkout@v4
         with:
@@ -62,3 +60,28 @@ jobs:
         # not worth it to install cairo on macos
         if: runner.os == 'ubuntu-latest'
         run: uv run mkdocs build --strict
+  test-windows:
+    name: Test (windows)
+    runs-on: windows-latest
+    env:
+      DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
+      LD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
+      DYLD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: astral-sh/setup-uv@v3
+      - uses: Swatinem/rust-cache@v2
+      - name: Install Python version
+        run: uv python install 3.11
+      - name: Install libduckdb
+        run: |
+          wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-windows-amd64.zip
+          mkdir -p ${{ github.workspace }}/opt/duckdb
+          unzip libduckdb-windows-amd64.zip -d ${{ github.workspace }}/opt/duckdb
+      - name: Test
+        run: uv run pytest --all-extras
