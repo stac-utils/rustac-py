@@ -7,7 +7,7 @@
 ![PyPI - License](https://img.shields.io/pypi/l/rustac?style=for-the-badge)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
 
-![The rustac logo](./img/rustac-small.png)
+![The rustac logo](https://stac-utils.github.io/rustac-py/latest/img/rustac-small.png)
 
 The power of Rust for the Python [STAC](https://stacspec.org/) ecosystem.
 
