@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import Any
 
+import pandas
 import pyarrow.parquet
 import rustac
 import stac_geoparquet
@@ -27,3 +28,10 @@ async def test_write_store(item: dict[str, Any], tmp_path: Path) -> None:
     await rustac.write("item.json", item, store=store)
     read_item = await rustac.read("item.json", store=store)
     assert item["id"] == read_item["id"]
+
+
+async def test_write_includes_type(tmp_path: Path, item: dict[str, Any]) -> None:
+    assert "type" in item
+    await rustac.write(str(tmp_path / "out.parquet"), [item])
+    data_frame = pandas.read_parquet(str(tmp_path / "out.parquet"))
+    assert "type" in data_frame.columns
