@@ -4,8 +4,8 @@ use pyo3::prelude::*;
 use pyo3::{Bound, FromPyObject, PyErr, PyResult, exceptions::PyValueError, types::PyDict};
 use pyo3_object_store::AnyObjectStore;
 use stac::Bbox;
-use stac::Format;
 use stac_api::{Fields, Filter, Items, Search, Sortby};
+use stac_io::Format;
 
 #[pyfunction]
 #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, use_duckdb=None, **kwargs))]

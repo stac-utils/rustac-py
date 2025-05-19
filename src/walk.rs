@@ -1,28 +1,43 @@
 use crate::{Error, Json, Result};
+use object_store::ObjectStore;
 use pyo3::{
     Bound, Py, PyAny, PyResult, Python, exceptions::PyStopAsyncIteration, pyclass, pyfunction,
     pymethods, types::PyDict,
 };
-use stac::{Container, Item, Links, Node, SelfHref, Value};
+use pyo3_object_store::AnyObjectStore;
+use stac::{Item, Links, SelfHref, Value};
+use stac_io::Format;
 use std::collections::VecDeque;
 use std::sync::Arc;
 use tokio::sync::Mutex;
+use tokio::task::JoinSet;
 
 #[pyfunction]
-pub fn walk(container: Bound<'_, PyDict>) -> Result<Walk> {
+#[pyo3(signature = (container, store=None))]
+pub fn walk(container: Bound<'_, PyDict>, store: Option<AnyObjectStore>) -> Result<Walk> {
     let mut value: Value = pythonize::depythonize(&container)?;
     if let Some(link) = value.link("self").cloned() {
         *value.self_href_mut() = Some(link.href);
     }
-    let container: Container = value.try_into()?;
-    let node = Node::from(container);
     let mut walks = VecDeque::new();
-    walks.push_back(node);
-    Ok(Walk(Arc::new(Mutex::new(walks))))
+    walks.push_back(value);
+    let store = if let Some(store) = store {
+        Some(store.into_dyn())
+    } else {
+        None
+    };
+    Ok(Walk {
+        values: Arc::new(Mutex::new(walks)),
+        store,
+    })
 }
 
 #[pyclass]
-pub struct Walk(Arc<Mutex<VecDeque<Node>>>);
+#[derive(Clone)]
+pub struct Walk {
+    values: Arc<Mutex<VecDeque<Value>>>,
+    store: Option<Arc<dyn ObjectStore>>,
+}
 
 #[pymethods]
 impl Walk {
@@ -31,26 +46,58 @@ impl Walk {
     }
 
     fn __anext__<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyAny>> {
-        let nodes = self.0.clone();
-        pyo3_async_runtimes::tokio::future_into_py(py, async move { next_walk(nodes).await })
+        let walk = self.clone();
+        pyo3_async_runtimes::tokio::future_into_py(py, async move { walk.next().await })
     }
 }
 
-type WalkStep = (Value, Vec<Container>, VecDeque<Item>);
-
-async fn next_walk(nodes: Arc<Mutex<VecDeque<Node>>>) -> PyResult<Json<WalkStep>> {
-    let mut nodes = nodes.lock().await;
-    match nodes.pop_front() {
-        Some(node) => {
-            let mut node = node.resolve().await.map_err(Error::from)?;
-            let items = std::mem::take(&mut node.items);
-            let mut children = Vec::with_capacity(node.children.len());
-            for child in node.children {
-                children.push(child.value.clone());
-                nodes.push_back(child);
+impl Walk {
+    async fn next(self) -> PyResult<Json<WalkStep>> {
+        let value = {
+            let mut values = self.values.lock().await;
+            values.pop_front()
+        };
+        match value {
+            Some(value) => {
+                let mut items = Vec::new();
+                let mut children = Vec::new();
+                let mut join_set = JoinSet::new();
+                for mut link in value.links().iter().cloned() {
+                    if link.is_child() || link.is_item() {
+                        let store = self.store.clone();
+                        if let Some(self_href) = value.self_href() {
+                            link.make_absolute(self_href).map_err(Error::from)?;
+                        }
+                        join_set.spawn(async move {
+                            if let Some(store) = store {
+                                Format::json()
+                                    .get_store::<Value>(store, link.href.as_str())
+                                    .await
+                            } else {
+                                Format::json()
+                                    .get_opts(link.href.as_str(), [] as [(&str, &str); 0])
+                                    .await
+                            }
+                        });
+                    }
+                }
+                {
+                    let mut values = self.values.lock().await;
+                    while let Some(result) = join_set.join_next().await {
+                        let value = result.map_err(Error::from)?.map_err(Error::from)?;
+                        if let Value::Item(item) = value {
+                            items.push(item);
+                        } else if value.is_catalog() || value.is_collection() {
+                            children.push(value.clone());
+                            values.push_back(value.clone());
+                        }
+                    }
+                }
+                Ok(Json((value, children, items)))
             }
-            Ok(Json((node.value.into(), children, items)))
+            _ => Err(PyStopAsyncIteration::new_err("done walking")),
         }
-        _ => Err(PyStopAsyncIteration::new_err("done walking")),
     }
 }
+
+type WalkStep = (Value, Vec<Value>, Vec<Item>);

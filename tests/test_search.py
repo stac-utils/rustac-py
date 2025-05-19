@@ -92,3 +92,17 @@ async def test_list_sortby(data: Path) -> None:
             assert first["id"] <= second["id"]
         else:
             assert first["properties"]["datetime"] >= second["properties"]["datetime"]
+
+
+async def test_cql(data: Path) -> None:
+    await rustac.search(
+        str(data / "100-sentinel-2-items.parquet"),
+        filter={
+            "op": "and",
+            "args": [
+                # eq is cql, not cql2
+                {"op": "eq", "args": [{"property": "forecast:horizon"}, "PT48H"]},
+            ],
+        },
+        max_items=1,
+    )
