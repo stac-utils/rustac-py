@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - `type` field to geoparquet writes ([#136](https://github.com/stac-utils/rustac-py/pull/136), <https://github.com/stac-utils/rustac/pull/736>)
 
+### Fixed
+
+- Error instead of panic for cql ([#138](https://github.com/stac-utils/rustac-py/pull/138), <https://github.com/developmentseed/cql2-rs/pull/83>)
+
 ## [0.8.0] - 2025-05-13
 
 ### Added
