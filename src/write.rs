@@ -2,7 +2,8 @@ use crate::{Error, Json, Result};
 use pyo3::{Bound, PyAny, PyResult, Python, pyfunction};
 use pyo3_object_store::AnyObjectStore;
 use serde_json::Value;
-use stac::{Format, Item, ItemCollection};
+use stac::{Item, ItemCollection};
+use stac_io::Format;
 
 #[pyfunction]
 #[pyo3(signature = (href, value, *, format=None, store=None))]

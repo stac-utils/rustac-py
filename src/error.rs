@@ -33,10 +33,16 @@ pub enum Error {
     Stac(#[from] stac::Error),
 
     #[error(transparent)]
+    StacIo(#[from] stac_io::Error),
+
+    #[error(transparent)]
     StacApi(#[from] stac_api::Error),
 
     #[error(transparent)]
     StacDuckdb(#[from] stac_duckdb::Error),
+
+    #[error(transparent)]
+    TokioTaskJon(#[from] tokio::task::JoinError),
 }
 
 impl From<Error> for PyErr {

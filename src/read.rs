@@ -1,7 +1,8 @@
 use crate::{Error, Json};
 use pyo3::{Bound, PyResult, Python, pyfunction, types::PyAny};
 use pyo3_object_store::AnyObjectStore;
-use stac::{Format, Link, Links, SelfHref, Value};
+use stac::{Link, Links, SelfHref, Value};
+use stac_io::Format;
 
 #[pyfunction]
 #[pyo3(signature = (href, *, format=None, store=None, set_self_link=true))]
