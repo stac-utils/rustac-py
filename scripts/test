@@ -3,4 +3,4 @@
 set -e
 
 uv run pytest "$@"
-uv run rustac translate spec-examples/v1.1.0/simple-item.json /dev/null
+uv run rustac translate spec-examples/v1.1.0/simple-item.json tests/out.json && rm tests/out.json

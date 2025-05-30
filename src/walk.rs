@@ -1,12 +1,11 @@
 use crate::{Error, Json, Result};
-use object_store::ObjectStore;
 use pyo3::{
     Bound, Py, PyAny, PyResult, Python, exceptions::PyStopAsyncIteration, pyclass, pyfunction,
     pymethods, types::PyDict,
 };
 use pyo3_object_store::AnyObjectStore;
 use stac::{Item, Links, SelfHref, Value};
-use stac_io::Format;
+use stac_io::{Format, StacStore};
 use std::collections::VecDeque;
 use std::sync::Arc;
 use tokio::sync::Mutex;
@@ -22,7 +21,7 @@ pub fn walk(container: Bound<'_, PyDict>, store: Option<AnyObjectStore>) -> Resu
     let mut walks = VecDeque::new();
     walks.push_back(value);
     let store = if let Some(store) = store {
-        Some(store.into_dyn())
+        Some(StacStore::from(store.into_dyn()))
     } else {
         None
     };
@@ -36,7 +35,7 @@ pub fn walk(container: Bound<'_, PyDict>, store: Option<AnyObjectStore>) -> Resu
 #[derive(Clone)]
 pub struct Walk {
     values: Arc<Mutex<VecDeque<Value>>>,
-    store: Option<Arc<dyn ObjectStore>>,
+    store: Option<StacStore>,
 }
 
 #[pymethods]
@@ -70,13 +69,10 @@ impl Walk {
                         }
                         join_set.spawn(async move {
                             if let Some(store) = store {
-                                Format::json()
-                                    .get_store::<Value>(store, link.href.as_str())
-                                    .await
+                                store.get_format(link.href.as_str(), Format::json()).await
                             } else {
-                                Format::json()
-                                    .get_opts(link.href.as_str(), [] as [(&str, &str); 0])
-                                    .await
+                                let (store, path) = stac_io::parse_href(link.href)?;
+                                store.get_format(path, Format::json()).await
                             }
                         });
                     }
