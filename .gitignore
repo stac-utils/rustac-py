@@ -166,3 +166,4 @@ cython_debug/
 docs/generated
 
 tests/duckdb-extensions
+tests/out.json
