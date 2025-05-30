@@ -13,3 +13,7 @@
     --md-accent-fg-color: rgb(78, 180, 174);
     --md-accent-fg-color--transparent: rgba(78, 180, 174, 0.5);
 }
+
+.jp-InputPrompt, .jp-OutputPrompt {
+    display: none !important;
+}
