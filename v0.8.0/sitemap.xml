@@ -2,102 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/CONTRIBUTING/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/arrow/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/duckdb/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/migrate/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/read/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/search/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/stac/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/version/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/walk/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/write/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/store/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/store/aws/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/store/azure/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/store/config/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/store/gcs/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/store/http/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/store/local/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://stac-utils.github.io/rustac-py/v0.8.0/api/store/memory/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
-         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/generated/gallery/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/notebooks/</loc>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
-         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/generated/gallery/example_read/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/notebooks/read/</loc>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
-         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/generated/gallery/example_search/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/notebooks/search/</loc>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
-         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/generated/gallery/example_store/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/notebooks/stac-geoparquet/</loc>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
-         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/generated/gallery/mg_execution_times/</loc>
-         <lastmod>2025-05-13</lastmod>
+         <loc>https://stac-utils.github.io/rustac-py/v0.8.0/notebooks/store/</loc>
+         <lastmod>2025-05-30</lastmod>
     </url>
 </urlset>

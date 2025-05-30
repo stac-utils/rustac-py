@@ -14,7 +14,7 @@
       
       
       
-        <link rel="next" href="generated/gallery/">
+        <link rel="next" href="notebooks/">
       
       
       <link rel="icon" href="img/stac-ferris.png">
@@ -48,19 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/_markdown_exec_pyodide.css">
-    
       <link rel="stylesheet" href="assets/_mkdocstrings.css">
     
       <link rel="stylesheet" href="stylesheets/extra.css">
-    
-      <link rel="stylesheet" href="sg_gallery-dataframe.css">
-    
-      <link rel="stylesheet" href="sg_gallery.css">
-    
-      <link rel="stylesheet" href="sg_gallery-binder.css">
-    
-      <link rel="stylesheet" href="sg_gallery-rendered-html.css">
     
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -236,7 +226,9 @@
 
 
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="rustac" class="md-nav__button md-logo" aria-label="rustac" data-md-component="logo">
       
@@ -368,6 +360,8 @@
       
         
       
+        
+      
     
     
     
@@ -380,11 +374,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="generated/gallery/" class="md-nav__link ">
+            <a href="notebooks/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    Examples
+    Notebooks
     
   </span>
   
@@ -401,7 +395,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Examples
+            Notebooks
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -414,7 +408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="generated/gallery/example_read/" class="md-nav__link">
+      <a href="notebooks/read/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -436,11 +430,11 @@
   
   
     <li class="md-nav__item">
-      <a href="generated/gallery/example_search/" class="md-nav__link">
+      <a href="notebooks/store/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Searching
+    Using object storage
     
   </span>
   
@@ -458,11 +452,33 @@
   
   
     <li class="md-nav__item">
-      <a href="generated/gallery/example_store/" class="md-nav__link">
+      <a href="notebooks/stac-geoparquet/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Using object storage
+    stac-geoparquet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks/search/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Searching
     
   </span>
   
@@ -1013,59 +1029,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Installation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#acknowledgements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Acknowledgements
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           
             <div class="md-content" data-md-component="content">
@@ -1106,7 +1069,7 @@ See <a href="https://github.com/stac-utils/rustac/issues/641">this RFC</a> for c
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </span></code></pre></div>
-<p>For more, see our <a href="generated/gallery/">examples</a>.</p>
+<p>For more, see our <a href="./generated/gallery/index.md">examples</a>.</p>
 <h2 id="acknowledgements">Acknowledgements</h2>
 <p>We'd like to thank <a href="https://github.com/jkeifer">@jkeifer</a>, <a href="https://github.com/parksjr">@parksjr</a>, and <a href="https://github.com/Xenocide122">@Xenocide122</a> (all from <a href="https://github.com/Element84">@Element84</a>) for creating the <a href="https://raw.githubusercontent.com/stac-utils/rustac/refs/heads/main/img/rustac.svg">rustac logo</a> from an AI-generated image from this prompt:</p>
 <blockquote>
@@ -1145,13 +1108,13 @@ See <a href="https://github.com/stac-utils/rustac/issues/641">this RFC</a> for c
         
         
           
-          <a href="generated/gallery/" class="md-footer__link md-footer__link--next" aria-label="Next: Examples">
+          <a href="notebooks/" class="md-footer__link md-footer__link--next" aria-label="Next: Notebooks">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Examples
+                Notebooks
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1185,12 +1148,10 @@ See <a href="https://github.com/stac-utils/rustac/issues/641">this RFC</a> for c
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.indexes", "navigation.footer"], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.indexes", "navigation.footer", "toc.integrate"], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="assets/javascripts/bundle.f1b6f286.min.js"></script>
-      
-        <script src="assets/_markdown_exec_pyodide.js"></script>
       
     
   </body>
