@@ -5,7 +5,7 @@ use pyo3::{Bound, FromPyObject, PyErr, PyResult, exceptions::PyValueError, types
 use pyo3_object_store::AnyObjectStore;
 use stac::Bbox;
 use stac_api::{Fields, Filter, Items, Search, Sortby};
-use stac_io::Format;
+use stac_io::{Format, StacStore};
 
 #[pyfunction]
 #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, use_duckdb=None, **kwargs))]
@@ -109,13 +109,14 @@ pub fn search_to<'py>(
             let count = value.items.len();
             let value = serde_json::to_value(value).map_err(Error::from)?;
             if let Some(store) = store {
-                format
-                    .put_store(store.into_dyn(), outfile, value)
+                StacStore::from(store)
+                    .put_format(outfile, value, format)
                     .await
                     .map_err(Error::from)?;
             } else {
-                format
-                    .put_opts(outfile, value, [] as [(&str, &str); 0])
+                let (store, path) = stac_io::parse_href(outfile).map_err(Error::from)?;
+                store
+                    .put_format(path, value, format)
                     .await
                     .map_err(Error::from)?;
             }
@@ -127,13 +128,14 @@ pub fn search_to<'py>(
             let count = value.items.len();
             let value = serde_json::to_value(value).map_err(Error::from)?;
             if let Some(store) = store {
-                format
-                    .put_store(store.into_dyn(), outfile, value)
+                StacStore::from(store)
+                    .put_format(outfile, value, format)
                     .await
                     .map_err(Error::from)?;
             } else {
-                format
-                    .put_opts(outfile, value, [] as [(&str, &str); 0])
+                let (store, path) = stac_io::parse_href(outfile).map_err(Error::from)?;
+                store
+                    .put_format(path, value, format)
                     .await
                     .map_err(Error::from)?;
             }

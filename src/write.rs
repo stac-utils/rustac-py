@@ -3,7 +3,7 @@ use pyo3::{Bound, PyAny, PyResult, Python, pyfunction};
 use pyo3_object_store::AnyObjectStore;
 use serde_json::Value;
 use stac::{Item, ItemCollection};
-use stac_io::Format;
+use stac_io::{Format, StacStore};
 
 #[pyfunction]
 #[pyo3(signature = (href, value, *, format=None, store=None))]
@@ -29,26 +29,28 @@ pub fn write<'py>(
             .and_then(|f| f.parse::<Format>().ok())
             .or_else(|| Format::infer_from_href(&href))
             .unwrap_or_default();
-        let put_result = if let Some(store) = store {
-            format
-                .put_store(store.into_dyn(), href, value)
+        let (stac_store, path) = if let Some(store) = store {
+            (StacStore::from(store.into_dyn()), None)
+        } else {
+            stac_io::parse_href(&href)
+                .map(|(store, path)| (store, Some(path)))
+                .map_err(Error::from)?
+        };
+        let put_result = if let Some(path) = path {
+            stac_store
+                .put_format(path.as_ref(), value, format)
                 .await
-                .map(Some)
                 .map_err(Error::from)?
         } else {
-            format
-                .put_opts(href, value, [] as [(&str, &str); 0])
+            stac_store
+                .put_format(href, value, format)
                 .await
                 .map_err(Error::from)?
         };
-        if let Some(put_result) = put_result {
-            let put_result = serde_json::json!({
-                "e_tag": put_result.e_tag,
-                "version": put_result.version,
-            });
-            Ok(Some(Json(put_result)))
-        } else {
-            Ok(None)
-        }
+        let put_result = serde_json::json!({
+            "e_tag": put_result.e_tag,
+            "version": put_result.version,
+        });
+        Ok(Some(Json(put_result)))
     })
 }
