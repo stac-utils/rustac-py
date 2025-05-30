@@ -1,6 +1,6 @@
 """The power of Rust for the Python STAC ecosystem."""
 
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Sequence
 from pathlib import Path
 from typing import Any, Literal
 
@@ -422,7 +422,7 @@ def walk(
 
 async def write(
     href: str,
-    value: dict[str, Any] | list[dict[str, Any]],
+    value: dict[str, Any] | Sequence[dict[str, Any]],
     *,
     format: str | None = None,
     store: ObjectStore | None = None,

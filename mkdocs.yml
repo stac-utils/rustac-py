@@ -11,13 +11,19 @@ theme:
   features:
     - navigation.indexes
     - navigation.footer
+    - toc.integrate
   palette:
     scheme: stac
     primary: custom
 
 nav:
   - Home: index.md
-  - Examples: generated/gallery
+  - Notebooks:
+      - notebooks/index.md
+      - notebooks/read.ipynb
+      - notebooks/store.ipynb
+      - notebooks/stac-geoparquet.ipynb
+      - notebooks/search.ipynb
   - API:
       - api/index.md
       - arrow: api/arrow.md
@@ -41,11 +47,6 @@ nav:
   - CONTRIBUTING.md
 
 plugins:
-  - gallery:
-      examples_dirs: docs/examples
-      gallery_dirs: docs/generated/gallery
-      filename_pattern: /example_
-  - markdown-exec
   - mike
   - mkdocstrings:
       enable_inventory: true
@@ -67,6 +68,7 @@ plugins:
             - https://kylebarron.dev/arro3/latest/objects.inv
             - https://geopandas.org/en/stable/objects.inv
             - https://developmentseed.org/obstore/latest/objects.inv
+  - mkdocs-jupyter
   - search
   - social:
       cards_layout_options:
