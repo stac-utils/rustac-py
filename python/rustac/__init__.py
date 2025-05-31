@@ -252,3 +252,7 @@ class ItemCollection(TypedDict):
 __doc__ = rustac.__doc__
 if hasattr(rustac, "__all__"):
     __all__ = rustac.__all__
+else:
+    __all__ = []
+
+__all__.append("store")
