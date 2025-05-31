@@ -23,6 +23,7 @@ nav:
       - notebooks/read.ipynb
       - notebooks/store.ipynb
       - notebooks/stac-geoparquet.ipynb
+      - notebooks/its-live.ipynb
       - notebooks/search.ipynb
   - API:
       - api/index.md

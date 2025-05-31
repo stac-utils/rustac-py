@@ -167,3 +167,4 @@ docs/generated
 
 tests/duckdb-extensions
 tests/out.json
+data/its-live*
