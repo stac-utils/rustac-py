@@ -1,7 +1,9 @@
 from pathlib import Path
 from typing import Any
 
+import pytest
 import rustac
+from obstore.store import LocalStore as ObstoreLocalStore
 from pystac import Item
 from rustac.store import LocalStore
 
@@ -33,3 +35,12 @@ async def test_read_proj_geometry(
 async def test_read_store(examples: Path) -> None:
     store = LocalStore(prefix=str(examples))
     await rustac.read("simple-item.json", store=store)
+
+
+async def test_read_external_store(examples: Path) -> None:
+    store = ObstoreLocalStore(prefix=str(examples))
+    with pytest.warns(
+        RuntimeWarning,
+        match="Successfully reconstructed a store defined in another Python module. Connection pooling will not be shared across store instances.",
+    ):
+        await rustac.read("simple-item.json", store=store)

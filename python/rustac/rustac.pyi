@@ -5,9 +5,12 @@ from pathlib import Path
 from typing import Any, Literal
 
 import arro3.core
+from obstore.store import ObjectStore as ObstoreObjectStore
 
 from rustac import Catalog, Collection, Item, ItemCollection
 from rustac.store import ObjectStore
+
+AnyObjectStore = ObjectStore | ObstoreObjectStore
 
 class RustacError(Exception):
     """A package-specific exception."""
@@ -212,7 +215,7 @@ async def read(
     href: str,
     *,
     format: str | None = None,
-    store: ObjectStore | None = None,
+    store: AnyObjectStore | None = None,
     set_self_link: bool = True,
 ) -> dict[str, Any]:
     """
@@ -347,7 +350,7 @@ async def search_to(
     filter: str | dict[str, Any] | None = None,
     query: dict[str, Any] | None = None,
     format: str | None = None,
-    store: ObjectStore | None = None,
+    store: AnyObjectStore | None = None,
     use_duckdb: bool | None = None,
 ) -> int:
     """
@@ -425,7 +428,7 @@ async def write(
     value: dict[str, Any] | Sequence[dict[str, Any]],
     *,
     format: str | None = None,
-    store: ObjectStore | None = None,
+    store: AnyObjectStore | None = None,
 ) -> dict[str, str] | None:
     """
     Writes STAC to a href.
