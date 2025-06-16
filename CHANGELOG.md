@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `type` field to geoparquet writes ([#136](https://github.com/stac-utils/rustac-py/pull/136), <https://github.com/stac-utils/rustac/pull/736>)
 - `parquet_compression` argument to `write` and `search_to` ([#150](https://github.com/stac-utils/rustac-py/pull/150))
 - `iter_search` ([#151](https://github.com/stac-utils/rustac-py/pull/151))
+- `union_by_name` when searching **stac-geoparquet** ([#152](https://github.com/stac-utils/rustac-py/pull/152))
 
 ### Fixed
 
