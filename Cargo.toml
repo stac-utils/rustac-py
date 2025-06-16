@@ -49,6 +49,3 @@ futures-util = "0.3.31"
 
 [build-dependencies]
 cargo-lock = "10"
-
-[patch.crates-io]
-duckdb = { git = "https://github.com/gadomski/duckdb-rs/", branch = "arrow-v55" }
