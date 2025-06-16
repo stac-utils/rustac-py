@@ -58,7 +58,7 @@ pub fn search<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, format=None, store=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, format=None, parquet_compression=None, store=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_to<'py>(
     py: Python<'py>,
@@ -77,6 +77,7 @@ pub fn search_to<'py>(
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
     format: Option<String>,
+    parquet_compression: Option<String>,
     store: Option<AnyObjectStore>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
@@ -95,12 +96,18 @@ pub fn search_to<'py>(
         query,
         kwargs,
     )?;
-    let format = format
+    let mut format = format
         .map(|s| s.parse())
         .transpose()
         .map_err(Error::from)?
         .or_else(|| Format::infer_from_href(&outfile))
         .unwrap_or_default();
+    if matches!(format, Format::Geoparquet(_)) {
+        if let Some(parquet_compression) = parquet_compression {
+            tracing::debug!("setting parquet compression: {parquet_compression}");
+            format = Format::Geoparquet(Some(parquet_compression.parse().map_err(Error::from)?));
+        }
+    }
     if use_duckdb
         .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))))
     {

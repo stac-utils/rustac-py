@@ -350,6 +350,7 @@ async def search_to(
     filter: str | dict[str, Any] | None = None,
     query: dict[str, Any] | None = None,
     format: str | None = None,
+    parquet_compression: str | None = None,
     store: AnyObjectStore | None = None,
     use_duckdb: bool | None = None,
 ) -> int:
@@ -389,6 +390,10 @@ async def search_to(
             It is recommended to use filter instead, if possible.
         format: The output format. If none, will be inferred from
             the outfile extension, and if that fails will fall back to compact JSON.
+        parquet_compression: If writing stac-geoparquet, sets the compression
+            algorithm.
+            https://docs.rs/parquet/latest/parquet/basic/enum.Compression.html
+            is a list of what's available.
         store: An optional [ObjectStore][]
         use_duckdb: Query with DuckDB. If None and the href has a
             'parquet' or 'geoparquet' extension, will be set to True. Defaults
@@ -428,6 +433,7 @@ async def write(
     value: dict[str, Any] | Sequence[dict[str, Any]],
     *,
     format: str | None = None,
+    parquet_compression: str | None = None,
     store: AnyObjectStore | None = None,
 ) -> dict[str, str] | None:
     """
@@ -439,6 +445,10 @@ async def write(
             can be a STAC dictionary or a list of items.
         format: The output format to write. If not provided, will be
             inferred from the href's extension.
+        parquet_compression: If writing stac-geoparquet, sets the compression
+            algorithm.
+            https://docs.rs/parquet/latest/parquet/basic/enum.Compression.html
+            is a list of what's available.
         store: The object store to use for writing.
 
     Returns:

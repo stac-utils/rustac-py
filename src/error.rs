@@ -42,6 +42,9 @@ pub enum Error {
     StacDuckdb(#[from] stac_duckdb::Error),
 
     #[error(transparent)]
+    Parquet(#[from] parquet::errors::ParquetError),
+
+    #[error(transparent)]
     TokioTaskJon(#[from] tokio::task::JoinError),
 }
 
