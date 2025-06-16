@@ -284,7 +284,7 @@ async def search(
     **kwargs: str,
 ) -> list[dict[str, Any]]:
     """
-    Searches a STAC API server.
+    Searches a STAC API server or a stac-geoparquet file.
 
     Args:
         href: The STAC API to search.
@@ -331,6 +331,70 @@ async def search(
         ...     sortby="-properties.datetime",
         ...     max_items=1,
         ... )
+    """
+
+async def iter_search(
+    href: str,
+    *,
+    intersects: str | dict[str, Any] | None = None,
+    ids: str | list[str] | None = None,
+    collections: str | list[str] | None = None,
+    max_items: int | None = None,
+    limit: int | None = None,
+    bbox: list[float] | None = None,
+    datetime: str | None = None,
+    include: str | list[str] | None = None,
+    exclude: str | list[str] | None = None,
+    sortby: str | list[str | dict[str, str]] | None = None,
+    filter: str | dict[str, Any] | None = None,
+    query: dict[str, Any] | None = None,
+    use_duckdb: bool | None = None,
+    **kwargs: str,
+) -> AsyncIterator[dict[str, Any]]:
+    """
+    Searches a STAC API server and iterates over its items.
+
+    Args:
+        href: The STAC API to search.
+        intersects: Searches items
+            by performing intersection between their geometry and provided GeoJSON
+            geometry.
+        ids: Array of Item ids to return.
+        collections: Array of one or more Collection IDs that
+            each matching Item must be in.
+        limit: The page size returned from the server.
+        bbox: Requested bounding box.
+        datetime: Single date+time, or a range (`/` separator),
+            formatted to RFC 3339, section 5.6.  Use double dots .. for open
+            date ranges.
+        include: fields to include in the response (see [the
+            extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+            for more on the semantics).
+        exclude: fields to exclude from the response (see [the
+            extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+            for more on the semantics).
+        sortby: Fields by which to sort results (use `-field` to sort descending).
+        filter: CQL2 filter expression. Strings
+            will be interpreted as cql2-text, dictionaries as cql2-json.
+        query: Additional filtering based on properties.
+            It is recommended to use filter instead, if possible.
+        kwargs: Additional parameters to pass in to the search.
+
+    Returns:
+        An iterator over STAC items
+
+    Examples:
+        >>> search = await rustac.iter_search(
+        ...     "https://landsatlook.usgs.gov/stac-server",
+        ...     collections=["landsat-c2l2-sr"],
+        ...     intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
+        ...     sortby="-properties.datetime",
+        ... )
+        >>> async for item in search:
+        ...     items.append(item)
+        ...
     """
 
 async def search_to(

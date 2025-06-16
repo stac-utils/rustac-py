@@ -113,3 +113,12 @@ async def test_cql(data: Path) -> None:
             },
             max_items=1,
         )
+
+
+async def test_iter_search() -> None:
+    items = []
+    search = await rustac.iter_search("https://landsatlook.usgs.gov/stac-server")
+    async for item in search:
+        items.append(item)
+        if len(items) >= 10:
+            break
