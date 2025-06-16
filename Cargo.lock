@@ -3506,6 +3506,8 @@ dependencies = [
  "cargo-lock",
  "clap",
  "duckdb",
+ "futures-core",
+ "futures-util",
  "geoarrow-array 0.1.0-dev",
  "geojson",
  "parquet",

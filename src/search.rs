@@ -1,11 +1,79 @@
 use crate::{Error, Json, Result};
+use futures_core::Stream;
+use futures_core::stream::BoxStream;
+use futures_util::StreamExt;
 use geojson::Geometry;
 use pyo3::prelude::*;
 use pyo3::{Bound, FromPyObject, PyErr, PyResult, exceptions::PyValueError, types::PyDict};
 use pyo3_object_store::AnyObjectStore;
+use serde_json::{Map, Value};
 use stac::Bbox;
-use stac_api::{Fields, Filter, Items, Search, Sortby};
+use stac_api::{Client, Fields, Filter, Items, Search, Sortby};
 use stac_io::{Format, StacStore};
+use std::sync::Arc;
+use tokio::{pin, sync::Mutex};
+
+#[pyclass]
+struct SearchIterator(Arc<Mutex<BoxStream<'static, stac_api::Result<Map<String, Value>>>>>);
+
+#[pymethods]
+impl SearchIterator {
+    fn __aiter__(slf: PyRef<'_, Self>) -> PyRef<'_, Self> {
+        slf
+    }
+
+    fn __anext__<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyAny>> {
+        let stream = self.0.clone();
+        pyo3_async_runtimes::tokio::future_into_py(py, async move {
+            let mut stream = stream.lock().await;
+            if let Some(result) = stream.next().await {
+                let item = result.map_err(Error::from)?;
+                Ok(Some(Json(item)))
+            } else {
+                Ok(None)
+            }
+        })
+    }
+}
+
+#[pyfunction]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]
+#[allow(clippy::too_many_arguments)]
+pub fn iter_search<'py>(
+    py: Python<'py>,
+    href: String,
+    intersects: Option<StringOrDict>,
+    ids: Option<StringOrList>,
+    collections: Option<StringOrList>,
+    limit: Option<u64>,
+    bbox: Option<Vec<f64>>,
+    datetime: Option<String>,
+    include: Option<StringOrList>,
+    exclude: Option<StringOrList>,
+    sortby: Option<PySortby<'py>>,
+    filter: Option<StringOrDict>,
+    query: Option<Bound<'py, PyDict>>,
+    kwargs: Option<Bound<'_, PyDict>>,
+) -> PyResult<Bound<'py, PyAny>> {
+    let search = build(
+        intersects,
+        ids,
+        collections,
+        limit,
+        bbox,
+        datetime,
+        include,
+        exclude,
+        sortby,
+        filter,
+        query,
+        kwargs,
+    )?;
+    pyo3_async_runtimes::tokio::future_into_py(py, async move {
+        let stream = iter_search_api(href, search).await?;
+        Ok(SearchIterator(Arc::new(Mutex::new(Box::pin(stream)))))
+    })
+}
 
 #[pyfunction]
 #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, use_duckdb=None, **kwargs))]
@@ -165,8 +233,32 @@ async fn search_api(
     search: Search,
     max_items: Option<usize>,
 ) -> Result<stac_api::ItemCollection> {
-    let value = stac_api::client::search(&href, search, max_items).await?;
-    Ok(value)
+    let stream = iter_search_api(href, search).await?;
+    pin!(stream);
+    let mut items = if let Some(max_items) = max_items {
+        Vec::with_capacity(max_items)
+    } else {
+        Vec::new()
+    };
+    while let Some(result) = stream.next().await {
+        let item = result?;
+        items.push(item);
+        if let Some(max_items) = max_items {
+            if items.len() >= max_items {
+                break;
+            }
+        }
+    }
+    Ok(items.into())
+}
+
+async fn iter_search_api(
+    href: String,
+    search: Search,
+) -> Result<impl Stream<Item = stac_api::Result<Map<String, Value>>>> {
+    let client = Client::new(&href)?;
+    let stream = client.search(search).await?;
+    Ok(stream)
 }
 
 /// Creates a [Search] from Python arguments.

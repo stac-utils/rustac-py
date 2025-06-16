@@ -34,6 +34,7 @@ fn rustac(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     )?)?;
     m.add_function(wrap_pyfunction!(migrate::migrate, m)?)?;
     m.add_function(wrap_pyfunction!(read::read, m)?)?;
+    m.add_function(wrap_pyfunction!(search::iter_search, m)?)?;
     m.add_function(wrap_pyfunction!(search::search, m)?)?;
     m.add_function(wrap_pyfunction!(search::search_to, m)?)?;
     m.add_function(wrap_pyfunction!(version::sha, m)?)?;
