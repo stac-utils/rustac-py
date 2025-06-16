@@ -5369,8 +5369,3 @@ dependencies = [
  "cc",
  "pkg-config",
 ]
-
-[[patch.unused]]
-name = "duckdb"
-version = "1.2.2"
-source = "git+https://github.com/gadomski/duckdb-rs/?branch=arrow-v55#2103b2a2107db247482bcf54fffcba790f682134"
