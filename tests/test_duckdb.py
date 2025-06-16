@@ -90,3 +90,8 @@ def test_load_spatial() -> None:
 @pytest.mark.skip("slow")
 def test_aws_credential_chain(client: DuckdbClient) -> None:
     client.execute("CREATE SECRET (TYPE S3, PROVIDER CREDENTIAL_CHAIN)")
+
+
+def test_search_union_by_name(client: DuckdbClient) -> None:
+    items = client.search("data/*.parquet")
+    assert len(items) == 101
