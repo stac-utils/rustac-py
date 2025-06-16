@@ -6,13 +6,14 @@ use stac::{Item, ItemCollection};
 use stac_io::{Format, StacStore};
 
 #[pyfunction]
-#[pyo3(signature = (href, value, *, format=None, store=None))]
+#[pyo3(signature = (href, value, *, format=None, store=None, parquet_compression=None))]
 pub fn write<'py>(
     py: Python<'py>,
     href: String,
     value: Bound<'_, PyAny>,
     format: Option<String>,
     store: Option<AnyObjectStore>,
+    parquet_compression: Option<String>,
 ) -> PyResult<Bound<'py, PyAny>> {
     let value: Value = pythonize::depythonize(&value)?;
     let value = if let Value::Array(array) = value {
@@ -25,10 +26,17 @@ pub fn write<'py>(
         serde_json::from_value(value).map_err(Error::from)?
     };
     pyo3_async_runtimes::tokio::future_into_py(py, async move {
-        let format = format
+        let mut format = format
             .and_then(|f| f.parse::<Format>().ok())
             .or_else(|| Format::infer_from_href(&href))
             .unwrap_or_default();
+        if matches!(format, Format::Geoparquet(_)) {
+            if let Some(parquet_compression) = parquet_compression {
+                tracing::debug!("setting parquet compression: {parquet_compression}");
+                format =
+                    Format::Geoparquet(Some(parquet_compression.parse().map_err(Error::from)?));
+            }
+        }
         let (stac_store, path) = if let Some(store) = store {
             (StacStore::from(store.into_dyn()), None)
         } else {

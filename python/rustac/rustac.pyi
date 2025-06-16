@@ -428,6 +428,7 @@ async def write(
     value: dict[str, Any] | Sequence[dict[str, Any]],
     *,
     format: str | None = None,
+    parquet_compression: str | None = None,
     store: AnyObjectStore | None = None,
 ) -> dict[str, str] | None:
     """
@@ -439,6 +440,10 @@ async def write(
             can be a STAC dictionary or a list of items.
         format: The output format to write. If not provided, will be
             inferred from the href's extension.
+        parquet_compression: If writing stac-geoparquet, sets the compression
+            algorithm.
+            https://docs.rs/parquet/latest/parquet/basic/enum.Compression.html
+            is a list of what's available.
         store: The object store to use for writing.
 
     Returns:

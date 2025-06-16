@@ -5,6 +5,7 @@ import pandas
 import pyarrow.parquet
 import rustac
 import stac_geoparquet
+from pyarrow.parquet import ParquetFile
 from rustac.store import LocalStore
 
 
@@ -35,3 +36,14 @@ async def test_write_includes_type(tmp_path: Path, item: dict[str, Any]) -> None
     await rustac.write(str(tmp_path / "out.parquet"), [item])
     data_frame = pandas.read_parquet(str(tmp_path / "out.parquet"))
     assert "type" in data_frame.columns
+
+
+async def test_write_parquet_compression(tmp_path: Path, item: dict[str, Any]) -> None:
+    await rustac.write(
+        str(tmp_path / "out.parquet"), [item], parquet_compression="zstd(1)"
+    )
+    parquet_file = ParquetFile(tmp_path / "out.parquet")
+    metadata = parquet_file.metadata
+    for row_group in range(metadata.num_row_groups):
+        for column in range(metadata.num_columns):
+            assert metadata.row_group(row_group).column(column).compression == "ZSTD"
