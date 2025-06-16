@@ -23,7 +23,7 @@ jobs:
           - target: x86_64
             manylinux: "2_28"
           - target: x86
-            manylinux: "2014/2_17"
+            manylinux: "2014"
           - target: aarch64
             manylinux: "2_28"
           - target: armv7
