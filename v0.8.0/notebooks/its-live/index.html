@@ -1689,12 +1689,7 @@ An implementation using in-region resources would be faster.</p>
             <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
             <span class="k">return</span>
 
-        <span class="c1"># ndjson with only one item are read as an item, not a item collection</span>
-        <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Feature"</span><span class="p">:</span>
-            <span class="k">await</span> <span class="n">rustac</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">destination_path</span><span class="p">),</span> <span class="p">[</span><span class="n">value</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">value</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"FeatureCollection"</span>
-            <span class="k">await</span> <span class="n">rustac</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">destination_path</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">rustac</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">destination_path</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
 
         <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
@@ -1731,12 +1726,7 @@ async def copy_and_convert(
             progress_bar.update()
             return
 
-        # ndjson with only one item are read as an item, not a item collection
-        if value["type"] == "Feature":
-            await rustac.write(str(destination_path), [value])
-        else:
-            assert value["type"] == "FeatureCollection"
-            await rustac.write(str(destination_path), value)
+        await rustac.write(str(destination_path), value)
 
         progress_bar.update()
 
