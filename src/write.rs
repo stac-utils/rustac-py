@@ -6,14 +6,14 @@ use stac::{Item, ItemCollection};
 use stac_io::{Format, StacStore};
 
 #[pyfunction]
-#[pyo3(signature = (href, value, *, format=None, store=None, parquet_compression=None))]
+#[pyo3(signature = (href, value, *, format=None, parquet_compression=None, store=None))]
 pub fn write<'py>(
     py: Python<'py>,
     href: String,
     value: Bound<'_, PyAny>,
     format: Option<String>,
-    store: Option<AnyObjectStore>,
     parquet_compression: Option<String>,
+    store: Option<AnyObjectStore>,
 ) -> PyResult<Bound<'py, PyAny>> {
     let value: Value = pythonize::depythonize(&value)?;
     let value = if let Value::Array(array) = value {
