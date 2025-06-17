@@ -25,6 +25,7 @@ nav:
       - notebooks/stac-geoparquet.ipynb
       - notebooks/its-live.ipynb
       - notebooks/search.ipynb
+      - notebooks/async-search.ipynb
   - API:
       - api/index.md
       - arrow: api/arrow.md
