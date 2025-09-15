@@ -6,7 +6,7 @@ use stac::geoarrow::Table;
 use stac::{Item, ItemCollection};
 
 #[pyfunction]
-pub fn from_arrow(py: Python<'_>, table: PyTable) -> PyResult<Bound<PyAny>> {
+pub fn from_arrow(py: Python, table: PyTable) -> PyResult<Bound<PyAny>> {
     let (record_batches, mut schema) = table.into_inner();
     let record_batches = record_batches
         .into_iter()
