@@ -284,7 +284,7 @@ dependencies = [
  "arrow-schema",
  "chrono",
  "half",
- "indexmap 2.9.0",
+ "indexmap 2.11.0",
  "lexical-core",
  "memchr",
  "num",
@@ -874,7 +874,7 @@ dependencies = [
  "serde_json",
  "thiserror 2.0.12",
  "unaccent",
- "wkt 0.12.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "wkt 0.12.0",
 ]
 
 [[package]]
@@ -1361,51 +1361,25 @@ dependencies = [
 
 [[package]]
 name = "geoarrow-array"
-version = "0.1.0-dev"
-source = "git+https://github.com/geoarrow/geoarrow-rs/?rev=17bf33e4cf78b060afa08ca9560dc4efd73c2c76#17bf33e4cf78b060afa08ca9560dc4efd73c2c76"
-dependencies = [
- "arrow-array",
- "arrow-buffer",
- "arrow-schema",
- "geo-traits 0.2.0",
- "geoarrow-schema 0.1.0-dev",
- "num-traits",
- "serde_json",
- "thiserror 1.0.69",
- "wkb 0.8.0",
- "wkt 0.12.0 (git+https://github.com/georust/wkt?rev=270ffe0eaf5ba5255c364dbade39c451562a9e9b)",
-]
-
-[[package]]
-name = "geoarrow-array"
 version = "0.4.0"
-source = "git+https://github.com/geoarrow/geoarrow-rs/?rev=1d73a8c8f739ac2a9f4cbac928283c19b74db463#1d73a8c8f739ac2a9f4cbac928283c19b74db463"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ef8c7d3c8a4a4aae0997ed2dedc31f1b10a297fa28b4f8e5fb915c0cd74a5207"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-schema",
  "geo-traits 0.3.0",
- "geoarrow-schema 0.4.0",
+ "geoarrow-schema",
  "num-traits",
- "wkb 0.9.0",
+ "wkb",
  "wkt 0.14.0",
 ]
 
 [[package]]
 name = "geoarrow-schema"
-version = "0.1.0-dev"
-source = "git+https://github.com/geoarrow/geoarrow-rs/?rev=17bf33e4cf78b060afa08ca9560dc4efd73c2c76#17bf33e4cf78b060afa08ca9560dc4efd73c2c76"
-dependencies = [
- "arrow-schema",
- "geo-traits 0.2.0",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "geoarrow-schema"
 version = "0.4.0"
-source = "git+https://github.com/geoarrow/geoarrow-rs/?rev=1d73a8c8f739ac2a9f4cbac928283c19b74db463#1d73a8c8f739ac2a9f4cbac928283c19b74db463"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c60898ea6cfac76271917e3f3c38440c43a1d47ccb1c74b5c182a4dfa7243b3b"
 dependencies = [
  "arrow-schema",
  "geo-traits 0.3.0",
@@ -1439,7 +1413,8 @@ dependencies = [
 [[package]]
 name = "geoparquet"
 version = "0.4.0"
-source = "git+https://github.com/geoarrow/geoarrow-rs/?rev=1d73a8c8f739ac2a9f4cbac928283c19b74db463#1d73a8c8f739ac2a9f4cbac928283c19b74db463"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "803a6303684a8f7a40312e480c5fe56dc82838f8493efefd82f39dad4e9ef3b2"
 dependencies = [
  "arrow-arith",
  "arrow-array",
@@ -1448,13 +1423,14 @@ dependencies = [
  "arrow-schema",
  "geo-traits 0.3.0",
  "geo-types",
- "geoarrow-array 0.4.0",
- "geoarrow-schema 0.4.0",
- "indexmap 2.9.0",
+ "geoarrow-array",
+ "geoarrow-schema",
+ "indexmap 2.11.0",
  "parquet",
  "serde",
  "serde_json",
  "serde_with",
+ "wkt 0.14.0",
 ]
 
 [[package]]
@@ -1516,7 +1492,7 @@ dependencies = [
  "futures-core",
  "futures-sink",
  "http",
- "indexmap 2.9.0",
+ "indexmap 2.11.0",
  "slab",
  "tokio",
  "tokio-util",
@@ -1927,9 +1903,9 @@ dependencies = [
 
 [[package]]
 name = "indexmap"
-version = "2.9.0"
+version = "2.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cea70ddb795996207ad57735b50c5982d8844f38ba9ee5f1aedcfb708a2aa11e"
+checksum = "f2481980430f9f78649238835720ddccc57e52df14ffce1c6f37391d61b563e9"
 dependencies = [
  "equivalent",
  "hashbrown 0.15.4",
@@ -2514,9 +2490,9 @@ checksum = "830b246a0e5f20af87141b25c173cd1b609bd7779a4617d6ec582abaf90870f3"
 
 [[package]]
 name = "numpy"
-version = "0.24.0"
+version = "0.25.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a7cfbf3f0feededcaa4d289fe3079b03659e85c5b5a177f4ba6fb01ab4fb3e39"
+checksum = "29f1dee9aa8d3f6f8e8b9af3803006101bb3653866ef056d530d53ae68587191"
 dependencies = [
  "half",
  "libc",
@@ -2747,8 +2723,9 @@ dependencies = [
 
 [[package]]
 name = "pgstac"
-version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#2bf1da5961f84ee9e116460ad6ae18c27b6cef5c"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d3135d480fca6cd42ff13479547218beae19d1e6ce07e7d84efacef3f38bc0ce"
 dependencies = [
  "serde",
  "serde_json",
@@ -2938,14 +2915,13 @@ dependencies = [
 
 [[package]]
 name = "pyo3"
-version = "0.24.2"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5203598f366b11a02b13aa20cab591229ff0a89fd121a308a5df751d5fc9219"
+checksum = "8970a78afe0628a3e3430376fc5fd76b6b45c4d43360ffd6cdd40bdde72b682a"
 dependencies = [
- "cfg-if",
  "chrono",
  "chrono-tz",
- "indexmap 2.9.0",
+ "indexmap 2.11.0",
  "indoc",
  "libc",
  "memoffset",
@@ -2959,9 +2935,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3-arrow"
-version = "0.9.0"
+version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b01260f3000b917a5514025b46abc264d10b2e603d7563b3f287eae176206b9"
+checksum = "5251087eef2b22de114aa731c1175f59a2e9bdbe6f32cf4e926f7a151fc8b012"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -2970,7 +2946,7 @@ dependencies = [
  "arrow-schema",
  "arrow-select",
  "half",
- "indexmap 2.9.0",
+ "indexmap 2.11.0",
  "numpy",
  "pyo3",
  "thiserror 1.0.69",
@@ -2978,9 +2954,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3-async-runtimes"
-version = "0.24.0"
+version = "0.25.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dd0b83dc42f9d41f50d38180dad65f0c99763b65a3ff2a81bf351dd35a1df8bf"
+checksum = "d73cc6b1b7d8b3cef02101d37390dbdfe7e450dfea14921cae80a9534ba59ef2"
 dependencies = [
  "futures",
  "once_cell",
@@ -2991,9 +2967,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3-build-config"
-version = "0.24.2"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "99636d423fa2ca130fa5acde3059308006d46f98caac629418e53f7ebb1e9999"
+checksum = "458eb0c55e7ece017adeba38f2248ff3ac615e53660d7c71a238d7d2a01c7598"
 dependencies = [
  "once_cell",
  "target-lexicon",
@@ -3001,9 +2977,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3-ffi"
-version = "0.24.2"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "78f9cf92ba9c409279bc3305b5409d90db2d2c22392d443a87df3a1adad59e33"
+checksum = "7114fe5457c61b276ab77c5055f206295b812608083644a5c5b2640c3102565c"
 dependencies = [
  "libc",
  "pyo3-build-config",
@@ -3022,9 +2998,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3-macros"
-version = "0.24.2"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0b999cb1a6ce21f9a6b147dcf1be9ffedf02e0043aec74dc390f3007047cecd9"
+checksum = "a8725c0a622b374d6cb051d11a0983786448f7785336139c3c94f5aa6bef7e50"
 dependencies = [
  "proc-macro2",
  "pyo3-macros-backend",
@@ -3034,9 +3010,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3-macros-backend"
-version = "0.24.2"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "822ece1c7e1012745607d5cf0bcb2874769f0f7cb34c4cde03b9358eb9ef911a"
+checksum = "4109984c22491085343c05b0dbc54ddc405c3cf7b4374fc533f5c3313a572ccc"
 dependencies = [
  "heck 0.5.0",
  "proc-macro2",
@@ -3047,14 +3023,15 @@ dependencies = [
 
 [[package]]
 name = "pyo3-object_store"
-version = "0.2.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "08d86e64cc8cb37a7950eadeee4a80c7d8467c3871baf176996af917fa6cda36"
+checksum = "f1f6fcdd614d7c291c6edae1370b30ab8a017e5f42e819233128b3608829372f"
 dependencies = [
  "async-trait",
  "bytes",
  "chrono",
  "futures",
+ "http",
  "humantime",
  "itertools 0.14.0",
  "object_store",
@@ -3069,9 +3046,9 @@ dependencies = [
 
 [[package]]
 name = "pythonize"
-version = "0.24.0"
+version = "0.25.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d5bcac0d0b71821f0d69e42654f1e15e5c94b85196446c4de9588951a2117e7b"
+checksum = "597907139a488b22573158793aa7539df36ae863eba300c75f3a0d65fc475e27"
 dependencies = [
  "pyo3",
  "serde",
@@ -3480,8 +3457,9 @@ dependencies = [
 
 [[package]]
 name = "rustac"
-version = "0.5.3"
-source = "git+https://github.com/stac-utils/rustac?branch=main#2bf1da5961f84ee9e116460ad6ae18c27b6cef5c"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "28b717f6ae906703dc14c1cf7e71aeb49e0a0be3871e3894df7f4d18331bfe37"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -3512,7 +3490,7 @@ dependencies = [
  "duckdb",
  "futures-core",
  "futures-util",
- "geoarrow-array 0.1.0-dev",
+ "geoarrow-schema",
  "geojson",
  "parquet",
  "pyo3",
@@ -3741,7 +3719,7 @@ version = "1.0.140"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "20068b6e96dc6c9bd23e01df8827e6c7e1f2fddd43c21810382803c136b99373"
 dependencies = [
- "indexmap 2.9.0",
+ "indexmap 2.11.0",
  "itoa",
  "memchr",
  "ryu",
@@ -3789,7 +3767,7 @@ dependencies = [
  "chrono",
  "hex",
  "indexmap 1.9.3",
- "indexmap 2.9.0",
+ "indexmap 2.11.0",
  "schemars",
  "serde",
  "serde_derive",
@@ -3906,8 +3884,9 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 
 [[package]]
 name = "stac"
-version = "0.12.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#2bf1da5961f84ee9e116460ad6ae18c27b6cef5c"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5a93b4423a6d80ec2d2afc522d93b1bd7e34957a6e44d8fd7089f473450f67e8"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -3918,11 +3897,11 @@ dependencies = [
  "geo",
  "geo-traits 0.3.0",
  "geo-types",
- "geoarrow-array 0.4.0",
- "geoarrow-schema 0.4.0",
+ "geoarrow-array",
+ "geoarrow-schema",
  "geojson",
  "geoparquet",
- "indexmap 2.9.0",
+ "indexmap 2.11.0",
  "log",
  "mime",
  "parquet",
@@ -3936,8 +3915,9 @@ dependencies = [
 
 [[package]]
 name = "stac-api"
-version = "0.7.1"
-source = "git+https://github.com/stac-utils/rustac?branch=main#2bf1da5961f84ee9e116460ad6ae18c27b6cef5c"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c1cb574a5d4739241a5993ec319b839e86f32e996152a0903b62368f7ebfb404"
 dependencies = [
  "async-stream",
  "chrono",
@@ -3946,7 +3926,7 @@ dependencies = [
  "geo",
  "geojson",
  "http",
- "indexmap 2.9.0",
+ "indexmap 2.11.0",
  "reqwest",
  "serde",
  "serde_json",
@@ -3961,8 +3941,9 @@ dependencies = [
 
 [[package]]
 name = "stac-derive"
-version = "0.2.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#2bf1da5961f84ee9e116460ad6ae18c27b6cef5c"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "087057f442c3a980721f249f723db459460ce74221730c9b2115bd63957027ae"
 dependencies = [
  "quote",
  "syn 2.0.103",
@@ -3970,15 +3951,16 @@ dependencies = [
 
 [[package]]
 name = "stac-duckdb"
-version = "0.1.1"
-source = "git+https://github.com/stac-utils/rustac?branch=main#2bf1da5961f84ee9e116460ad6ae18c27b6cef5c"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0be8980c5881ae0e5894340ec4ff0d3e686eb43e1917d40bcd5f2f97096843ef"
 dependencies = [
  "arrow-array",
  "chrono",
  "cql2",
  "duckdb",
  "geo",
- "geoarrow-schema 0.4.0",
+ "geoarrow-schema",
  "geojson",
  "getrandom 0.3.3",
  "log",
@@ -3991,7 +3973,8 @@ dependencies = [
 [[package]]
 name = "stac-io"
 version = "0.1.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#2bf1da5961f84ee9e116460ad6ae18c27b6cef5c"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cc25e90f8534b16dae880934d1258216a17b1347ff6502dbc9813af5261604b2"
 dependencies = [
  "bytes",
  "object_store",
@@ -4007,8 +3990,9 @@ dependencies = [
 
 [[package]]
 name = "stac-server"
-version = "0.3.4"
-source = "git+https://github.com/stac-utils/rustac?branch=main#2bf1da5961f84ee9e116460ad6ae18c27b6cef5c"
+version = "0.3.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e0954a612f9955de56fbab43271def73f5bfae182d48afcee3487fb5c3e7fa85"
 dependencies = [
  "axum",
  "bb8",
@@ -4035,7 +4019,8 @@ dependencies = [
 [[package]]
 name = "stac-validate"
 version = "0.4.0"
-source = "git+https://github.com/stac-utils/rustac?branch=main#2bf1da5961f84ee9e116460ad6ae18c27b6cef5c"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "afe94ac2c507b479b3a1fab3316d354376900bb297d838c5dc3fa55d58559a6f"
 dependencies = [
  "fluent-uri",
  "jsonschema 0.30.0",
@@ -4427,7 +4412,7 @@ version = "0.22.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "41fe8c660ae4257887cf66394862d21dbca4a6ddd26f04a3560410406a2f819a"
 dependencies = [
- "indexmap 2.9.0",
+ "indexmap 2.11.0",
  "serde",
  "serde_spanned",
  "toml_datetime",
@@ -5110,17 +5095,6 @@ dependencies = [
 
 [[package]]
 name = "wkb"
-version = "0.8.0"
-source = "git+https://github.com/georust/wkb?rev=5a2027995997017bcd531e6be7e5cf126db1d4c1#5a2027995997017bcd531e6be7e5cf126db1d4c1"
-dependencies = [
- "byteorder",
- "geo-traits 0.2.0",
- "num_enum",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "wkb"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ff9eff6aebac4c64f9c7c057a68f6359284e2a80acf102dffe041fe219b3a082"
@@ -5148,18 +5122,6 @@ name = "wkt"
 version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e1c591649bd1c9d4e28459758bbb5fb5c0edc7a67060b52422f4761c94ffe961"
-dependencies = [
- "geo-traits 0.2.0",
- "geo-types",
- "log",
- "num-traits",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "wkt"
-version = "0.12.0"
-source = "git+https://github.com/georust/wkt?rev=270ffe0eaf5ba5255c364dbade39c451562a9e9b#270ffe0eaf5ba5255c364dbade39c451562a9e9b"
 dependencies = [
  "geo-traits 0.2.0",
  "geo-types",
