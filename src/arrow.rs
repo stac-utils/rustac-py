@@ -26,7 +26,7 @@ pub fn from_arrow(py: Python, table: PyTable) -> PyResult<Bound<PyAny>> {
 }
 
 #[pyfunction]
-pub fn to_arrow(py: Python<'_>, items: Bound<PyAny>) -> PyResult<PyObject> {
+pub fn to_arrow(py: Python<'_>, items: Bound<PyAny>) -> PyResult<Py<PyAny>> {
     let value: Value = pythonize::depythonize(&items)?;
     let item_collection = if let Value::Array(array) = value {
         let items = array
