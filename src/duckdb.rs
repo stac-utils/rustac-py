@@ -122,7 +122,7 @@ impl DuckdbClient {
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
         kwargs: Option<Bound<'py, PyDict>>,
-    ) -> Result<PyObject> {
+    ) -> Result<Py<PyAny>> {
         let search = crate::search::build(
             intersects,
             ids,
