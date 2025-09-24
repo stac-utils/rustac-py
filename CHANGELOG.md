@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Don't set geo metadata for `proj:geometry` ([rustac #808](https://github.com/stac-utils/rustac/pull/808), [#161](https://github.com/stac-utils/rustac-py/pull/161))
+
 ## [0.8.2] - 2025-09-15
 
 Bump **pyo3** version.
