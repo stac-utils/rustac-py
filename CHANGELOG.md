@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- Deconstruct item collections when writing ndjson ([#167](https://github.com/stac-utils/rustac-py/pull/167))
+
 ## [0.8.3] - 2025-09-24
 
 ### Changed
