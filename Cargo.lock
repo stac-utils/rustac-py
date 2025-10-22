@@ -3567,6 +3567,7 @@ dependencies = [
  "futures-util",
  "geoarrow-schema 0.4.0",
  "geojson",
+ "openssl",
  "parquet",
  "pyo3",
  "pyo3-arrow",

@@ -35,7 +35,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.target }}
-          args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled
+          args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled ${{ matrix.target == 'x86_64' && '' || '-F openssl/vendored'}}
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: "2_28"
       - name: Upload wheels
