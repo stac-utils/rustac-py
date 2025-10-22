@@ -13,6 +13,7 @@ mod walk;
 mod write;
 
 use error::Error;
+#[cfg(feature = "openssl-vendored")]
 use openssl as _;
 use pyo3::prelude::*;
 
