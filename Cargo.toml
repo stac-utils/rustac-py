@@ -18,6 +18,7 @@ futures-core = "0.3.31"
 futures-util = "0.3.31"
 geoarrow-schema = "0.4.0"
 geojson = "0.24.1"
+openssl = { version = "0.10", features = ["vendored"] }
 parquet = "56.0.0"
 pyo3 = { version = "0.26.0", features = ["extension-module"] }
 pyo3-arrow = "0.12.0"
