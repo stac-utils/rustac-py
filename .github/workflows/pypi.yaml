@@ -19,11 +19,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target:
-          - x86_64
-          - aarch64
-          - armv7
-          - ppc64le
+        platform:
+          - target: x86_64
+          - target: aarch64
+            flags: "-F openssl/vendored"
+          - target: armv7
+            flags: "-F openssl/vendored"
+          - target: ppc64le
+            flags: "-F openssl/vendored"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,14 +37,14 @@ jobs:
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
-          target: ${{ matrix.target }}
-          args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled ${{ matrix.target == 'x86_64' && '' || '-F openssl/vendored'}}
+          target: ${{ matrix.platform.target }}
+          args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled ${{ matrix.platform.flags }}
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: "2_28"
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-linux-${{ matrix.target }}
+          name: wheels-linux-${{ matrix.platform.target }}
           path: dist
 
   musllinux:
