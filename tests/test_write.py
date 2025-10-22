@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from typing import Any
 
@@ -47,3 +48,13 @@ async def test_write_parquet_compression(tmp_path: Path, item: dict[str, Any]) -
     for row_group in range(metadata.num_row_groups):
         for column in range(metadata.num_columns):
             assert metadata.row_group(row_group).column(column).compression == "ZSTD"
+
+
+async def test_write_item_collection_ndjson(
+    tmp_path: Path, item: dict[str, Any]
+) -> None:
+    path = str(tmp_path / "out.ndjson")
+    await rustac.write(path, [item])
+    with open(path) as f:
+        item = json.load(f)
+    assert item["type"] == "Feature"
