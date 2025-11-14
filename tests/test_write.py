@@ -22,7 +22,7 @@ async def test_write_compressed(item: dict[str, Any], tmp_path: Path) -> None:
     path = str(tmp_path / "out.parquet")
     await rustac.write(path, [item])
     metadata = pyarrow.parquet.read_metadata(path)
-    assert metadata.row_group(0).column(0).compression == "SNAPPY"
+    assert metadata.row_group(0).column(0).compression == "ZSTD"
 
 
 async def test_write_store(item: dict[str, Any], tmp_path: Path) -> None:
@@ -58,3 +58,11 @@ async def test_write_item_collection_ndjson(
     with open(path) as f:
         item = json.load(f)
     assert item["type"] == "Feature"
+
+
+async def test_geoparquet_writer_two(tmp_path: Path, item: dict[str, Any]) -> None:
+    with rustac.geoparquet_writer([item], str(tmp_path / "out.parquet")) as w:
+        w.write([item])
+
+    item_collection = await rustac.read(str(tmp_path / "out.parquet"))
+    assert len(item_collection["features"]) == 2

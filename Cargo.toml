@@ -43,3 +43,8 @@ tracing = "0.1.41"
 
 [build-dependencies]
 cargo-lock = "10"
+
+[patch.crates-io]
+stac = { git = 'https://github.com/stac-utils/rustac.git' }
+stac-io = { git = 'https://github.com/stac-utils/rustac.git' }
+rustac = { git = 'https://github.com/stac-utils/rustac.git' }
