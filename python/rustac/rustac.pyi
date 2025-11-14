@@ -7,7 +7,6 @@ from typing import Any, Literal
 import arro3.core
 from obstore.store import ObjectStore as ObstoreObjectStore
 
-from rustac import Catalog, Collection, Item, ItemCollection
 from rustac.store import ObjectStore
 
 AnyObjectStore = ObjectStore | ObstoreObjectStore
@@ -154,7 +153,7 @@ class DuckdbClient:
             >>> data_frame = GeoDataFrame.from_arrow(table)
         """
 
-    def get_collections(self, href: str) -> list[Collection]:
+    def get_collections(self, href: str) -> list[dict[str, Any]]:
         """Returns all collections in this stac-geoparquet file.
 
         These collections will be auto-generated from the STAC items, one
@@ -170,7 +169,9 @@ class DuckdbClient:
             A list of STAC Collections
         """
 
-def collection_from_id_and_items(id: str, items: list[Item]) -> Collection:
+def collection_from_id_and_items(
+    id: str, items: list[dict[str, Any]]
+) -> dict[str, Any]:
     """Creates a collection from an id and some items.
 
     The extents will be calculated from the items, and the items will be linked.
@@ -237,7 +238,7 @@ async def read(
 
 def from_arrow(
     table: arro3.core.Table,
-) -> ItemCollection:
+) -> dict[str, Any]:
     """
     Converts an [arro3.core.Table][] to a STAC item collection.
 
@@ -251,7 +252,7 @@ def from_arrow(
     """
 
 def to_arrow(
-    items: list[Item] | ItemCollection,
+    items: list[dict[str, Any]] | dict[str, Any],
 ) -> arro3.core.Table:
     """
     Converts items to an [arro3.core.Table][].
@@ -478,7 +479,7 @@ async def search_to(
 
 def walk(
     container: dict[str, Any],
-) -> AsyncIterator[tuple[Catalog | Collection, list[Catalog | Collection], list[Item]]]:
+) -> AsyncIterator[tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]]:
     """Recursively walks a STAC catalog or collection breadth-first.
 
     Args:
