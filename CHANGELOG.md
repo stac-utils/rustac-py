@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Removed
+
+- STAC typed dicts ([#177](https://github.com/stac-utils/rustac-py/pull/177))
+
 ## [0.8.4] - 2025-10-22
 
 ### Fixed
