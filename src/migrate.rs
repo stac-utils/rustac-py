@@ -1,4 +1,4 @@
-use crate::{Error, Result};
+use crate::Result;
 use pyo3::{prelude::*, types::PyDict};
 use stac::{Migrate, Value};
 
@@ -13,7 +13,7 @@ pub fn migrate<'py>(
     let version = version
         .map(|version| version.parse().unwrap())
         .unwrap_or_default();
-    let value = value.migrate(&version).map_err(Error::from)?;
+    let value = value.migrate(&version)?;
     let value = pythonize::pythonize(py, &value)?;
     let value = value.extract()?;
     Ok(value)
