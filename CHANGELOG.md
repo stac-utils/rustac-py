@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.9.0]
+
+### Added
+
+- Chunked stac-geoparquet writing ([#178](https://github.com/stac-utils/rustac-py/pull/178))
+
 ### Removed
 
 - STAC typed dicts ([#177](https://github.com/stac-utils/rustac-py/pull/177))
@@ -259,7 +265,8 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.8.4...main
+[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.9.0...main
+[0.9.0]: https://github.com/stac-utils/rustac-py/compare/v0.8.4...v0.9.0
 [0.8.4]: https://github.com/stac-utils/rustac-py/compare/v0.8.3...v0.8.4
 [0.8.3]: https://github.com/stac-utils/rustac-py/compare/v0.8.2...v0.8.3
 [0.8.2]: https://github.com/stac-utils/rustac-py/compare/v0.8.1...v0.8.2

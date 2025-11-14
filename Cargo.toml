@@ -1,6 +1,6 @@
 [package]
 name = "rustac-py"
-version = "0.8.4"
+version = "0.9.0"
 edition = "2024"
 publish = false
 
@@ -33,7 +33,7 @@ pythonize = "0.26.0"
 rustac = { version = "0.1.1", features = ["pgstac"] }
 serde = "1.0.217"
 serde_json = { version = "1.0.138", features = ["preserve_order"] }
-stac = { version = "0.13.2", features = ["geoarrow", "geoparquet"] }
+stac = { version = "0.14.0", features = ["geoarrow", "geoparquet"] }
 stac-api = { version = "0.8.1", features = ["client"] }
 stac-duckdb = "0.2.1"
 stac-io = { version = "0.1.1", features = ["store-all"] }
@@ -43,8 +43,3 @@ tracing = "0.1.41"
 
 [build-dependencies]
 cargo-lock = "10"
-
-[patch.crates-io]
-stac = { git = 'https://github.com/stac-utils/rustac.git' }
-stac-io = { git = 'https://github.com/stac-utils/rustac.git' }
-rustac = { git = 'https://github.com/stac-utils/rustac.git' }
