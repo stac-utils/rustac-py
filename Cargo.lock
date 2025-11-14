@@ -645,9 +645,9 @@ checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
 name = "bytes"
-version = "1.10.1"
+version = "1.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
+checksum = "b35204fbdc0b3f4446b89fc1ac2cf84a8a68971995d0bf2e925ec7cd960f9cb3"
 
 [[package]]
 name = "cargo-lock"
@@ -1403,19 +1403,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c60898ea6cfac76271917e3f3c38440c43a1d47ccb1c74b5c182a4dfa7243b3b"
 dependencies = [
  "arrow-schema 55.2.0",
- "geo-traits",
- "serde",
- "serde_json",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "geoarrow-schema"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f5ebd2cbf841a1062d3521c2b2de7e819bb201b30f23381f872e62b9430b82af"
-dependencies = [
- "arrow-schema 56.2.0",
  "geo-traits",
  "serde",
  "serde_json",
@@ -2788,13 +2775,14 @@ dependencies = [
 
 [[package]]
 name = "pgstac"
-version = "0.3.1"
-source = "git+https://github.com/stac-utils/rustac.git#ba95ec5ca87ea140068e1eb72cf11b1639cb6646"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "389ee26bd1316a603a1ad41788614aec25d5efca4dd291ba1857993057a37719"
 dependencies = [
  "serde",
  "serde_json",
  "stac",
- "stac-api 0.8.1 (git+https://github.com/stac-utils/rustac.git)",
+ "stac-api",
  "thiserror 2.0.17",
  "tokio-postgres",
 ]
@@ -3555,8 +3543,9 @@ dependencies = [
 
 [[package]]
 name = "rustac"
-version = "0.1.1"
-source = "git+https://github.com/stac-utils/rustac.git#ba95ec5ca87ea140068e1eb72cf11b1639cb6646"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df899fd8c99e0b54cfd85a3741e1cfcf1286b38803a3675438abb98f5d4685b7"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -3566,8 +3555,8 @@ dependencies = [
  "futures-util",
  "serde_json",
  "stac",
- "stac-api 0.8.1 (git+https://github.com/stac-utils/rustac.git)",
- "stac-duckdb 0.2.1 (git+https://github.com/stac-utils/rustac.git)",
+ "stac-api",
+ "stac-duckdb",
  "stac-io",
  "stac-server",
  "stac-validate",
@@ -3580,7 +3569,7 @@ dependencies = [
 
 [[package]]
 name = "rustac-py"
-version = "0.8.4"
+version = "0.9.0"
 dependencies = [
  "cargo-lock",
  "clap",
@@ -3601,8 +3590,8 @@ dependencies = [
  "serde",
  "serde_json",
  "stac",
- "stac-api 0.8.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "stac-duckdb 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "stac-api",
+ "stac-duckdb",
  "stac-io",
  "thiserror 2.0.17",
  "tokio",
@@ -4042,8 +4031,9 @@ checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 
 [[package]]
 name = "stac"
-version = "0.13.3"
-source = "git+https://github.com/stac-utils/rustac.git#ba95ec5ca87ea140068e1eb72cf11b1639cb6646"
+version = "0.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74d226653f99eee743e3ea4aac54ccb11d26a3366169a66741ec1a1b7ae19f71"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -4064,7 +4054,7 @@ dependencies = [
  "parquet",
  "serde",
  "serde_json",
- "stac-derive 0.3.0 (git+https://github.com/stac-utils/rustac.git)",
+ "stac-derive",
  "thiserror 2.0.17",
  "tracing",
  "url",
@@ -4073,33 +4063,9 @@ dependencies = [
 
 [[package]]
 name = "stac-api"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d3af688ee60f5188b01fe8f470e3209fd81412dd2dff43d4e7f2054d4fb20874"
-dependencies = [
- "async-stream",
- "chrono",
- "cql2",
- "futures",
- "geojson",
- "http",
- "indexmap 2.12.0",
- "reqwest",
- "serde",
- "serde_json",
- "serde_urlencoded",
- "stac",
- "stac-derive 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror 2.0.17",
- "tokio",
- "tracing",
- "url",
-]
-
-[[package]]
-name = "stac-api"
-version = "0.8.1"
-source = "git+https://github.com/stac-utils/rustac.git#ba95ec5ca87ea140068e1eb72cf11b1639cb6646"
+checksum = "718100eb670be765653c9f23139e85e3d422c99ec43207828098a46696adbd1e"
 dependencies = [
  "async-stream",
  "chrono",
@@ -4114,7 +4080,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "stac",
- "stac-derive 0.3.0 (git+https://github.com/stac-utils/rustac.git)",
+ "stac-derive",
  "thiserror 2.0.17",
  "tokio",
  "tracing",
@@ -4132,39 +4098,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "stac-derive"
-version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac.git#ba95ec5ca87ea140068e1eb72cf11b1639cb6646"
-dependencies = [
- "quote",
- "syn 2.0.110",
-]
-
-[[package]]
 name = "stac-duckdb"
-version = "0.2.1"
+version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ff057a963748ec47e4ae8b98a987b38372186f348c976ba541ab4e69d6ead0c8"
-dependencies = [
- "arrow-array",
- "chrono",
- "cql2",
- "duckdb",
- "geo",
- "geoarrow-schema 0.5.0",
- "geojson",
- "getrandom 0.3.4",
- "log",
- "serde_json",
- "stac",
- "stac-api 0.8.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror 2.0.17",
-]
-
-[[package]]
-name = "stac-duckdb"
-version = "0.2.1"
-source = "git+https://github.com/stac-utils/rustac.git#ba95ec5ca87ea140068e1eb72cf11b1639cb6646"
+checksum = "118e5af9ea0aa2a74372cb9a7087a4fd829198c1fbbb65f5375958f8193a56a7"
 dependencies = [
  "arrow-array",
  "chrono",
@@ -4177,14 +4114,15 @@ dependencies = [
  "log",
  "serde_json",
  "stac",
- "stac-api 0.8.1 (git+https://github.com/stac-utils/rustac.git)",
+ "stac-api",
  "thiserror 2.0.17",
 ]
 
 [[package]]
 name = "stac-io"
-version = "0.1.1"
-source = "git+https://github.com/stac-utils/rustac.git#ba95ec5ca87ea140068e1eb72cf11b1639cb6646"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "343e16601a373f9e8a5cf912dfb13fdbb1d134b64d5846e2f242853e599838d6"
 dependencies = [
  "bytes",
  "object_store",
@@ -4200,8 +4138,9 @@ dependencies = [
 
 [[package]]
 name = "stac-server"
-version = "0.3.5"
-source = "git+https://github.com/stac-utils/rustac.git#ba95ec5ca87ea140068e1eb72cf11b1639cb6646"
+version = "0.3.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e26a62fee121979d7a79a388696e031a62b7da04a07b12f63a17d7049611c4d"
 dependencies = [
  "axum",
  "bb8",
@@ -4215,8 +4154,8 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "stac",
- "stac-api 0.8.1 (git+https://github.com/stac-utils/rustac.git)",
- "stac-duckdb 0.2.1 (git+https://github.com/stac-utils/rustac.git)",
+ "stac-api",
+ "stac-duckdb",
  "thiserror 2.0.17",
  "tokio-postgres",
  "tokio-postgres-rustls",
@@ -4227,8 +4166,9 @@ dependencies = [
 
 [[package]]
 name = "stac-validate"
-version = "0.5.0"
-source = "git+https://github.com/stac-utils/rustac.git#ba95ec5ca87ea140068e1eb72cf11b1639cb6646"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ae0e009295e5fc1a35831faeb4d37867abcb901b86a35b575044cca78c60da23"
 dependencies = [
  "async-recursion",
  "async-trait",
