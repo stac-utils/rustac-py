@@ -11,6 +11,38 @@ from rustac.store import ObjectStore
 
 AnyObjectStore = ObjectStore | ObstoreObjectStore
 
+class GeoparquetWriter:
+    """A helper class to write geoparquet from batches of items."""
+
+    def __init__(
+        self,
+        items: list[dict[str, Any]],
+        path: str,
+        drop_invalid_attributes: bool = True,
+    ) -> None:
+        """Creates a new writer for the provided items and the path.
+
+        Args:
+            items: The STAC items to write to geoparquet. The schema of these
+                items will be used for the output file, and any additional items
+                added to the writer need to have the same schema.
+            path: The filesystem path to write the stac-geoparquet to.
+            drop_invalid_attributes: Whether to drop invalid attributes in the
+                items' `properties` (e.g. an additional `id` property). If false,
+                raise an error instead.
+        """
+
+    def write(self, items: list[dict[str, Any]]) -> None:
+        """Writes more items to the geoparquet.
+
+        Args:
+            items: The items to write. They must have the same schema as the
+                items used to initialize the writer.
+        """
+
+    def finish(self) -> None:
+        """Finishes writing the stac-geoparquet file."""
+
 class RustacError(Exception):
     """A package-specific exception."""
 

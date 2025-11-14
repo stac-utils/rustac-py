@@ -1,8 +1,9 @@
 use crate::{Error, Json, Result};
+use duckdb::arrow::array::RecordBatchIterator;
 use pyo3::{IntoPyObjectExt, prelude::*};
 use pyo3_arrow::PyTable;
 use serde_json::Value;
-use stac::geoarrow::Table;
+use stac::geoarrow;
 use stac::{Item, ItemCollection};
 
 #[pyfunction]
@@ -18,8 +19,8 @@ pub fn from_arrow(py: Python, table: PyTable) -> Result<Bound<PyAny>> {
     if !record_batches.is_empty() {
         schema = record_batches[0].schema();
     }
-    let table = Table::new(record_batches, schema);
-    let item_collection = stac::geoarrow::from_record_batch_reader(table.into_reader())?;
+    let reader = RecordBatchIterator::new(record_batches.into_iter().map(Ok), schema);
+    let item_collection = stac::geoarrow::from_record_batch_reader(reader)?;
     let item_collection = Json(item_collection).into_pyobject(py)?;
     Ok(item_collection)
 }
@@ -36,18 +37,10 @@ pub fn to_arrow(py: Python<'_>, items: Bound<PyAny>) -> Result<Py<PyAny>> {
     } else {
         serde_json::from_value(value)?
     };
-    // TODO we might want to just allow use to go WKB right when we got to table?
-    let (record_batches, mut schema) = Table::from_item_collection(item_collection)?.into_inner();
-    let record_batches = record_batches
-        .into_iter()
-        .map(|record_batch| {
-            stac::geoarrow::with_wkb_geometry(record_batch, "geometry").map_err(Error::from)
-        })
-        .collect::<Result<Vec<_>>>()?;
-    if !record_batches.is_empty() {
-        schema = record_batches[0].schema();
-    }
-    let table = PyTable::try_new(record_batches, schema)?;
+    let (record_batch, _) = geoarrow::encode(item_collection.items)?;
+    let record_batch = stac::geoarrow::with_wkb_geometry(record_batch, "geometry")?;
+    let schema = record_batch.schema().clone();
+    let table = PyTable::try_new(vec![record_batch], schema)?;
     let table = table.to_arro3(py)?;
     Ok(table.into_py_any(py)?)
 }
