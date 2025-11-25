@@ -87,4 +87,4 @@ jobs:
           uv venv
           uv pip install .
       - name: Import
-        run: uv run --no-dev python -c "import rustac"
+        run: uv run --no-default-groups python -c "import rustac"
