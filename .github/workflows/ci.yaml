@@ -40,9 +40,9 @@ jobs:
         with:
           submodules: true
       - uses: astral-sh/setup-uv@v3
+        with:
+          python-version: ${{ matrix.python-version }}
       - uses: Swatinem/rust-cache@v2
-      - name: Install Python version
-        run: uv python install ${{ matrix.python-version }}
       - name: Install libduckdb
         run: |
           wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-${{ matrix.os.duckdb-slug }}.zip
@@ -71,9 +71,9 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Install libduckdb
         run: |
-          wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-${{ matrix.os.duckdb-slug }}.zip
+          wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-linux-amd64.zip
           mkdir -p ${{ github.workspace }}/opt/duckdb
-          unzip libduckdb-${{ matrix.os.duckdb-slug }}.zip -d ${{ github.workspace }}/opt/duckdb
+          unzip libduckdb-linux-amd64.zip -d ${{ github.workspace }}/opt/duckdb
       - name: Install
         run: uv pip install .
       - name: Import

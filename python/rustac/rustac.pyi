@@ -18,7 +18,7 @@ class GeoparquetWriter:
         items: list[dict[str, Any]],
         path: str,
         drop_invalid_attributes: bool = True,
-        store: AnyObjectStore = None,
+        store: AnyObjectStore | None = None,
     ) -> None:
         """Creates a new writer for the provided items and the path.
 
