@@ -73,6 +73,8 @@ jobs:
       LD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - uses: astral-sh/setup-uv@v3
       - uses: Swatinem/rust-cache@v2
       - name: Install libduckdb
