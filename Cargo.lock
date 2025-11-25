@@ -172,7 +172,7 @@ dependencies = [
  "arrow-data",
  "arrow-ord",
  "arrow-row",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "arrow-select",
  "arrow-string",
 ]
@@ -186,7 +186,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "chrono",
  "num",
 ]
@@ -200,7 +200,7 @@ dependencies = [
  "ahash 0.8.12",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "chrono",
  "chrono-tz",
  "half",
@@ -228,7 +228,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "arrow-select",
  "atoi",
  "base64",
@@ -247,7 +247,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a5c64fff1d142f833d78897a772f2e5b55b36cb3e6320376f0961ab0db7bd6d0"
 dependencies = [
  "arrow-buffer",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "half",
  "num",
 ]
@@ -261,7 +261,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "arrow-select",
  "flatbuffers",
 ]
@@ -276,7 +276,7 @@ dependencies = [
  "arrow-buffer",
  "arrow-cast",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "chrono",
  "half",
  "indexmap 2.12.1",
@@ -297,7 +297,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "arrow-select",
 ]
 
@@ -310,15 +310,9 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "half",
 ]
-
-[[package]]
-name = "arrow-schema"
-version = "55.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "af7686986a3bf2254c9fb130c623cdcb2f8e1f15763e7c71c310f0834da3d292"
 
 [[package]]
 name = "arrow-schema"
@@ -339,7 +333,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "num",
 ]
 
@@ -352,7 +346,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "arrow-select",
  "memchr",
  "num",
@@ -652,9 +646,9 @@ checksum = "b35204fbdc0b3f4446b89fc1ac2cf84a8a68971995d0bf2e925ec7cd960f9cb3"
 
 [[package]]
 name = "cargo-lock"
-version = "10.1.0"
+version = "11.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c06acb4f71407ba205a07cb453211e0e6a67b21904e47f6ba1f9589e38f2e454"
+checksum = "cf53e0ebbbc6e45357b199f3b213f3eb330792c8b370e548499f5685470ecb11"
 dependencies = [
  "semver",
  "serde",
@@ -1412,25 +1406,12 @@ checksum = "7d1884b17253d8572e88833c282fcbb442365e4ae5f9052ced2831608253436c"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "geo-traits",
- "geoarrow-schema 0.6.2",
+ "geoarrow-schema",
  "num-traits",
  "wkb",
  "wkt 0.14.0",
-]
-
-[[package]]
-name = "geoarrow-schema"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c60898ea6cfac76271917e3f3c38440c43a1d47ccb1c74b5c182a4dfa7243b3b"
-dependencies = [
- "arrow-schema 55.2.0",
- "geo-traits",
- "serde",
- "serde_json",
- "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -1439,7 +1420,7 @@ version = "0.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "02f1b18b1c9a44ecd72be02e53d6e63bbccfdc8d1765206226af227327e2be6e"
 dependencies = [
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "geo-traits",
  "serde",
  "serde_json",
@@ -1478,11 +1459,11 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-ord",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "geo-traits",
  "geo-types",
  "geoarrow-array",
- "geoarrow-schema 0.6.2",
+ "geoarrow-schema",
  "indexmap 2.12.1",
  "parquet",
  "serde",
@@ -2743,7 +2724,7 @@ dependencies = [
  "arrow-cast",
  "arrow-data",
  "arrow-ipc",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "arrow-select",
  "base64",
  "brotli",
@@ -3016,7 +2997,7 @@ version = "3.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "219cb19e96be00ab2e37d6e299658a0cfa83e52429179969b0f0121b4ac46983"
 dependencies = [
- "toml_edit 0.23.7",
+ "toml_edit",
 ]
 
 [[package]]
@@ -3088,7 +3069,7 @@ dependencies = [
  "arrow-buffer",
  "arrow-cast",
  "arrow-data",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "arrow-select",
  "half",
  "indexmap 2.12.1",
@@ -3645,7 +3626,7 @@ dependencies = [
  "duckdb",
  "futures-core",
  "futures-util",
- "geoarrow-schema 0.4.0",
+ "geoarrow-schema",
  "geojson",
  "object_store",
  "openssl",
@@ -3926,11 +3907,11 @@ dependencies = [
 
 [[package]]
 name = "serde_spanned"
-version = "0.6.9"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bf41e0cfaf7226dca15e8197172c295a782857fcb97fad1808a166870dee75a3"
+checksum = "e24345aa0fe688594e73770a5f6d1b216508b4f93484c0026d521acd30134392"
 dependencies = [
- "serde",
+ "serde_core",
 ]
 
 [[package]]
@@ -4106,7 +4087,7 @@ dependencies = [
  "arrow-array",
  "arrow-cast",
  "arrow-json",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "bytes",
  "chrono",
  "cql2",
@@ -4114,7 +4095,7 @@ dependencies = [
  "geo-traits",
  "geo-types",
  "geoarrow-array",
- "geoarrow-schema 0.6.2",
+ "geoarrow-schema",
  "geojson",
  "geoparquet",
  "indexmap 2.12.1",
@@ -4146,12 +4127,12 @@ version = "0.2.2"
 source = "git+https://github.com/stac-utils/rustac#d0f7405a811dd2c3b044404b4a6a48cf07926a89"
 dependencies = [
  "arrow-array",
- "arrow-schema 56.2.0",
+ "arrow-schema",
  "chrono",
  "cql2",
  "duckdb",
  "geo",
- "geoarrow-schema 0.6.2",
+ "geoarrow-schema",
  "geojson",
  "getrandom 0.3.4",
  "log",
@@ -4648,23 +4629,17 @@ dependencies = [
 
 [[package]]
 name = "toml"
-version = "0.8.23"
+version = "0.9.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc1beb996b9d83529a9e75c17a1686767d148d70663143c7854d8b4a09ced362"
+checksum = "f0dc8b1fb61449e27716ec0e1bdf0f6b8f3e8f6b05391e8497b8b6d7804ea6d8"
 dependencies = [
- "serde",
+ "indexmap 2.12.1",
+ "serde_core",
  "serde_spanned",
- "toml_datetime 0.6.11",
- "toml_edit 0.22.27",
-]
-
-[[package]]
-name = "toml_datetime"
-version = "0.6.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22cddaf88f4fbc13c51aebbf5f8eceb5c7c5a9da2ac40a13519eb5b0a0e8f11c"
-dependencies = [
- "serde",
+ "toml_datetime",
+ "toml_parser",
+ "toml_writer",
+ "winnow",
 ]
 
 [[package]]
@@ -4678,26 +4653,12 @@ dependencies = [
 
 [[package]]
 name = "toml_edit"
-version = "0.22.27"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41fe8c660ae4257887cf66394862d21dbca4a6ddd26f04a3560410406a2f819a"
-dependencies = [
- "indexmap 2.12.1",
- "serde",
- "serde_spanned",
- "toml_datetime 0.6.11",
- "toml_write",
- "winnow",
-]
-
-[[package]]
-name = "toml_edit"
 version = "0.23.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6485ef6d0d9b5d0ec17244ff7eb05310113c3f316f2d14200d4de56b3cb98f8d"
 dependencies = [
  "indexmap 2.12.1",
- "toml_datetime 0.7.3",
+ "toml_datetime",
  "toml_parser",
  "winnow",
 ]
@@ -4712,10 +4673,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "toml_write"
-version = "0.1.2"
+name = "toml_writer"
+version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5d99f8c9a7727884afe522e9bd5edbfc91a3312b36a77b5fb8926e4c31a41801"
+checksum = "df8b2b54733674ad286d16267dcfc7a71ed5c776e4ac7aa3c3e2561f7c637bf2"
 
 [[package]]
 name = "tower"
