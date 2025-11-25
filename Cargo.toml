@@ -19,6 +19,7 @@ futures-core = "0.3.31"
 futures-util = "0.3.31"
 geoarrow-schema = "0.4.0"
 geojson = "0.24.1"
+object_store = { version = "0.12.4", features = ["gcp", "aws", "azure", "http"] }
 openssl = { version = "0.10", features = ["vendored"], optional = true }
 parquet = "56.0.0"
 pyo3 = { version = "0.26.0", features = ["extension-module"] }
@@ -34,9 +35,9 @@ rustac = { version = "0.1.1", features = ["pgstac"] }
 serde = "1.0.217"
 serde_json = { version = "1.0.138", features = ["preserve_order"] }
 stac = { version = "0.14.0", features = ["geoarrow", "geoparquet"] }
-stac-api = { version = "0.8.1", features = ["client"] }
+stac-api = "0.8.1"
 stac-duckdb = "0.2.1"
-stac-io = { version = "0.1.1", features = ["store-all"] }
+stac-io = { version = "0.1.1", features = ["store-all", "geoparquet"] }
 thiserror = "2.0.12"
 tokio = { version = "1.44.0", features = ["rt-multi-thread"] }
 tracing = "0.1.41"

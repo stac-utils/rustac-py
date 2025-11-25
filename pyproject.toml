@@ -48,7 +48,6 @@ filterwarnings = ["error"]
 
 [tool.ruff]
 exclude = [
-    "python/rustac/__init__.py",
     "docs/examples/example_*.py",
     "_obstore",
 ]

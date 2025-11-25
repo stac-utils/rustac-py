@@ -145,7 +145,9 @@ impl DuckdbClient {
             // FIXME this is awkward
             let convert_wkb = client.convert_wkb;
             client.convert_wkb = false;
-            let result = client.search_to_arrow(&href, search);
+            let result = client
+                .search_to_arrow(&href, search)?
+                .collect::<std::result::Result<Vec<_>, _>>();
             client.convert_wkb = convert_wkb;
             result?
         };

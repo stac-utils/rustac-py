@@ -5,8 +5,8 @@ mod cli;
 mod collection;
 mod duckdb;
 mod error;
+mod geoparquet;
 mod migrate;
-mod parquet;
 mod read;
 mod search;
 mod version;
@@ -27,7 +27,7 @@ fn rustac(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add("RustacError", py.get_type::<error::RustacError>())?;
 
     m.add_class::<duckdb::DuckdbClient>()?;
-    m.add_class::<parquet::GeoparquetWriter>()?;
+    m.add_class::<geoparquet::GeoparquetWriter>()?;
 
     m.add_function(wrap_pyfunction!(arrow::from_arrow, m)?)?;
     m.add_function(wrap_pyfunction!(arrow::to_arrow, m)?)?;

@@ -1,14 +1,22 @@
 from __future__ import annotations
-from pathlib import Path
-from collections.abc import Generator
-from contextlib import contextmanager
+
+from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager
 from typing import Any
 
-from .rustac import *
-from . import store
+from obstore.store import ObjectStore
 
-@contextmanager
-def geoparquet_writer(items: list[dict[str, Any]], path: str, drop_invalid_attributes: bool = True) -> Generator[GeoparquetWriter]:
+from . import store
+from .rustac import *  # noqa: F403
+
+
+@asynccontextmanager
+async def geoparquet_writer(
+    items: list[dict[str, Any]],
+    path: str,
+    drop_invalid_attributes: bool = True,
+    store: store.Store | ObjectStore | None = None,
+) -> AsyncGenerator[GeoparquetWriter]:  # noqa: F405
     """Open a geoparquet writer in a context manager.
 
     The items provided to the initial call will be used to build the geoparquet
@@ -24,6 +32,7 @@ def geoparquet_writer(items: list[dict[str, Any]], path: str, drop_invalid_attri
         drop_invalid_attributes: If true, invalid attributes (e.g. an `id` in
             the `properties` field) will be dropped. If false, raise an error if
             an invalid attribute is encountered.
+        store: The optional object store to use for writing the geoparquet file.
 
     Examples:
 
@@ -33,13 +42,14 @@ def geoparquet_writer(items: list[dict[str, Any]], path: str, drop_invalid_attri
         ...
         >>>
     """
-    writer = GeoparquetWriter(items, path, drop_invalid_attributes)
+    writer = await GeoparquetWriter.open(items, path, drop_invalid_attributes, store)  # noqa: F405
     yield writer
-    writer.finish()
+    await writer.finish()
 
-__doc__ = rustac.__doc__
-if hasattr(rustac, "__all__"):
-    __all__ = rustac.__all__
+
+__doc__ = rustac.__doc__  # noqa: F405
+if hasattr(rustac, "__all__"):  # noqa: F405
+    __all__ = rustac.__all__  # noqa: F405
 else:
     __all__ = []
 
