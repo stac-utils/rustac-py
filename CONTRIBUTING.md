@@ -9,6 +9,9 @@ We appreciates you.
 It's pretty common that a bug in **rustac-py** is actually a bug in **rustac**.
 Knowing which repository to work in can be a little tricky, so don't hesitate to reach out and ask.
 
+Because the two repos are tightly coupled, we use [a configuration file](./cargo/config.toml) to use the current **main** branch of **rustac** for development.
+If this ever is a problem, simply comment out the `[patch]` section in the configuration file.
+
 ## Python environment
 
 It can be a little tricky to ensure that your Python environment is always up-to-date while developing a Rust+Python project.

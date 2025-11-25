@@ -14,11 +14,11 @@ AnyObjectStore = ObjectStore | ObstoreObjectStore
 class GeoparquetWriter:
     """A helper class to write geoparquet from batches of items."""
 
-    def __init__(
-        self,
+    async def open(
         items: list[dict[str, Any]],
         path: str,
         drop_invalid_attributes: bool = True,
+        store: AnyObjectStore = None,
     ) -> None:
         """Creates a new writer for the provided items and the path.
 
@@ -30,9 +30,11 @@ class GeoparquetWriter:
             drop_invalid_attributes: Whether to drop invalid attributes in the
                 items' `properties` (e.g. an additional `id` property). If false,
                 raise an error instead.
+            store: The object store to use for the geoparquet file. If not
+                provided, a local object store will be used.
         """
 
-    def write(self, items: list[dict[str, Any]]) -> None:
+    async def write(self, items: list[dict[str, Any]]) -> None:
         """Writes more items to the geoparquet.
 
         Args:
@@ -40,7 +42,7 @@ class GeoparquetWriter:
                 items used to initialize the writer.
         """
 
-    def finish(self) -> None:
+    async def finish(self) -> None:
         """Finishes writing the stac-geoparquet file."""
 
 class RustacError(Exception):

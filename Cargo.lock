@@ -858,7 +858,7 @@ dependencies = [
  "geozero",
  "jiff",
  "json_dotpath",
- "jsonschema",
+ "jsonschema 0.33.0",
  "lazy_static",
  "like",
  "pest",
@@ -956,6 +956,12 @@ dependencies = [
  "quote",
  "syn 2.0.110",
 ]
+
+[[package]]
+name = "data-encoding"
+version = "2.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2a2330da5de22e8a3cb63252ce2abb30116bf5265e89c0e01bc17015ce30a476"
 
 [[package]]
 name = "der"
@@ -1190,6 +1196,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "fluent-uri"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bc74ac4d8359ae70623506d512209619e5cf8f347124910440dbc221714b328e"
+dependencies = [
+ "borrow-or-share",
+ "ref-cast",
+ "serde",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1200,6 +1217,12 @@ name = "foldhash"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d9c4f5dac5e15c24eb999c26181a6ca40b39fe946cbe4c263c7209467bc83af2"
+
+[[package]]
+name = "foldhash"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
 
 [[package]]
 name = "foreign-types"
@@ -1565,7 +1588,7 @@ checksum = "9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1"
 dependencies = [
  "allocator-api2",
  "equivalent",
- "foldhash",
+ "foldhash 0.1.5",
 ]
 
 [[package]]
@@ -1573,6 +1596,11 @@ name = "hashbrown"
 version = "0.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5419bdc4f6a9207fbeba6d11b604d481addf78ecd10c11ad51e76c2f6482748d"
+dependencies = [
+ "allocator-api2",
+ "equivalent",
+ "foldhash 0.2.0",
+]
 
 [[package]]
 name = "hashlink"
@@ -2102,7 +2130,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d46662859bc5f60a145b75f4632fbadc84e829e45df6c5de74cfc8e05acb96b5"
 dependencies = [
  "ahash 0.8.12",
- "async-trait",
  "base64",
  "bytecount",
  "email_address",
@@ -2114,13 +2141,41 @@ dependencies = [
  "num-traits",
  "once_cell",
  "percent-encoding",
- "referencing",
+ "referencing 0.33.0",
+ "regex",
+ "regex-syntax",
+ "serde",
+ "serde_json",
+ "uuid-simd",
+]
+
+[[package]]
+name = "jsonschema"
+version = "0.37.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ae66e2951b8570591298ab528f9f457bcc38cdc24ee927cece9310248aa32a74"
+dependencies = [
+ "ahash 0.8.12",
+ "async-trait",
+ "bytecount",
+ "data-encoding",
+ "email_address",
+ "fancy-regex",
+ "fraction",
+ "getrandom 0.3.4",
+ "idna",
+ "itoa",
+ "num-cmp",
+ "num-traits",
+ "percent-encoding",
+ "referencing 0.37.1",
  "regex",
  "regex-syntax",
  "reqwest",
  "serde",
  "serde_json",
  "tokio",
+ "unicode-general-category",
  "uuid-simd",
 ]
 
@@ -2695,16 +2750,19 @@ dependencies = [
  "bytes",
  "chrono",
  "flate2",
+ "futures",
  "half",
  "hashbrown 0.16.0",
  "lz4_flex",
  "num",
  "num-bigint",
+ "object_store",
  "paste",
  "seq-macro",
  "simdutf8",
  "snap",
  "thrift",
+ "tokio",
  "twox-hash",
  "zstd",
 ]
@@ -2776,8 +2834,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "389ee26bd1316a603a1ad41788614aec25d5efca4dd291ba1857993057a37719"
+source = "git+https://github.com/stac-utils/rustac#ec6e7de6bf7c43cff11ba5d7dfd9f7c0654b2db1"
 dependencies = [
  "serde",
  "serde_json",
@@ -3369,10 +3426,25 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e9c261f7ce75418b3beadfb3f0eb1299fe8eb9640deba45ffa2cb783098697d"
 dependencies = [
  "ahash 0.8.12",
- "async-trait",
- "fluent-uri",
- "futures",
+ "fluent-uri 0.3.2",
  "once_cell",
+ "parking_lot",
+ "percent-encoding",
+ "serde_json",
+]
+
+[[package]]
+name = "referencing"
+version = "0.37.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c1efd6958dfa348f532982eaa367ffbf78e077bc8f1f7a0173778914ec647437"
+dependencies = [
+ "ahash 0.8.12",
+ "async-trait",
+ "fluent-uri 0.4.1",
+ "futures",
+ "getrandom 0.3.4",
+ "hashbrown 0.16.0",
  "parking_lot",
  "percent-encoding",
  "serde_json",
@@ -3544,8 +3616,7 @@ dependencies = [
 [[package]]
 name = "rustac"
 version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "df899fd8c99e0b54cfd85a3741e1cfcf1286b38803a3675438abb98f5d4685b7"
+source = "git+https://github.com/stac-utils/rustac#ec6e7de6bf7c43cff11ba5d7dfd9f7c0654b2db1"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -3578,6 +3649,7 @@ dependencies = [
  "futures-util",
  "geoarrow-schema 0.4.0",
  "geojson",
+ "object_store",
  "openssl",
  "parquet",
  "pyo3",
@@ -4032,8 +4104,7 @@ checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 [[package]]
 name = "stac"
 version = "0.14.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "74d226653f99eee743e3ea4aac54ccb11d26a3366169a66741ec1a1b7ae19f71"
+source = "git+https://github.com/stac-utils/rustac#ec6e7de6bf7c43cff11ba5d7dfd9f7c0654b2db1"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -4064,34 +4135,26 @@ dependencies = [
 [[package]]
 name = "stac-api"
 version = "0.8.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "718100eb670be765653c9f23139e85e3d422c99ec43207828098a46696adbd1e"
+source = "git+https://github.com/stac-utils/rustac#ec6e7de6bf7c43cff11ba5d7dfd9f7c0654b2db1"
 dependencies = [
- "async-stream",
  "chrono",
  "cql2",
- "futures",
  "geo",
  "geojson",
- "http",
  "indexmap 2.12.0",
- "reqwest",
  "serde",
  "serde_json",
  "serde_urlencoded",
  "stac",
  "stac-derive",
  "thiserror 2.0.17",
- "tokio",
- "tracing",
  "url",
 ]
 
 [[package]]
 name = "stac-derive"
 version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "087057f442c3a980721f249f723db459460ce74221730c9b2115bd63957027ae"
+source = "git+https://github.com/stac-utils/rustac#ec6e7de6bf7c43cff11ba5d7dfd9f7c0654b2db1"
 dependencies = [
  "quote",
  "syn 2.0.110",
@@ -4100,10 +4163,10 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.2.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "118e5af9ea0aa2a74372cb9a7087a4fd829198c1fbbb65f5375958f8193a56a7"
+source = "git+https://github.com/stac-utils/rustac#ec6e7de6bf7c43cff11ba5d7dfd9f7c0654b2db1"
 dependencies = [
  "arrow-array",
+ "arrow-schema 56.2.0",
  "chrono",
  "cql2",
  "duckdb",
@@ -4121,17 +4184,21 @@ dependencies = [
 [[package]]
 name = "stac-io"
 version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "343e16601a373f9e8a5cf912dfb13fdbb1d134b64d5846e2f242853e599838d6"
+source = "git+https://github.com/stac-utils/rustac#ec6e7de6bf7c43cff11ba5d7dfd9f7c0654b2db1"
 dependencies = [
+ "async-stream",
  "bytes",
+ "futures",
+ "http",
  "object_store",
  "parquet",
  "reqwest",
  "serde",
  "serde_json",
  "stac",
+ "stac-api",
  "thiserror 2.0.17",
+ "tokio",
  "tracing",
  "url",
 ]
@@ -4139,8 +4206,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.3.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0e26a62fee121979d7a79a388696e031a62b7da04a07b12f63a17d7049611c4d"
+source = "git+https://github.com/stac-utils/rustac#ec6e7de6bf7c43cff11ba5d7dfd9f7c0654b2db1"
 dependencies = [
  "axum",
  "bb8",
@@ -4167,14 +4233,13 @@ dependencies = [
 [[package]]
 name = "stac-validate"
 version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae0e009295e5fc1a35831faeb4d37867abcb901b86a35b575044cca78c60da23"
+source = "git+https://github.com/stac-utils/rustac#ec6e7de6bf7c43cff11ba5d7dfd9f7c0654b2db1"
 dependencies = [
  "async-recursion",
  "async-trait",
- "fluent-uri",
- "jsonschema",
- "referencing",
+ "fluent-uri 0.4.1",
+ "jsonschema 0.37.1",
+ "referencing 0.37.1",
  "reqwest",
  "serde",
  "serde_json",
@@ -4834,6 +4899,12 @@ name = "unicode-bidi"
 version = "0.3.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5c1cb5db39152898a79168971543b1cb5020dff7fe43c8dc468b0885f5e29df5"
+
+[[package]]
+name = "unicode-general-category"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0b993bddc193ae5bd0d623b49ec06ac3e9312875fdae725a975c51db1cc1677f"
 
 [[package]]
 name = "unicode-ident"

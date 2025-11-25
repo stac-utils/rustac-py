@@ -7,7 +7,7 @@ import pyarrow.parquet
 import rustac
 import stac_geoparquet
 from pyarrow.parquet import ParquetFile
-from rustac.store import LocalStore
+from rustac.store import LocalStore, MemoryStore
 
 
 async def test_write(item: dict[str, Any], tmp_path: Path) -> None:
@@ -61,8 +61,17 @@ async def test_write_item_collection_ndjson(
 
 
 async def test_geoparquet_writer_two(tmp_path: Path, item: dict[str, Any]) -> None:
-    with rustac.geoparquet_writer([item], str(tmp_path / "out.parquet")) as w:
-        w.write([item])
+    async with rustac.geoparquet_writer([item], str(tmp_path / "out.parquet")) as w:
+        await w.write([item])
 
     item_collection = await rustac.read(str(tmp_path / "out.parquet"))
+    assert len(item_collection["features"]) == 2
+
+
+async def test_geoparquet_writer_memory_store(item: dict[str, Any]) -> None:
+    store = MemoryStore()
+    async with rustac.geoparquet_writer([item], "out.parquet", store=store) as w:
+        await w.write([item])
+
+    item_collection = await rustac.read("out.parquet", store=store)
     assert len(item_collection["features"]) == 2

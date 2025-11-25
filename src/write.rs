@@ -2,7 +2,7 @@ use crate::{Error, Json, Result};
 use pyo3::{Bound, PyAny, PyResult, Python, pyfunction};
 use pyo3_object_store::AnyObjectStore;
 use serde_json::Value;
-use stac::{Item, ItemCollection};
+use stac::{Item, ItemCollection, geoparquet::WriterOptions};
 use stac_io::{Format, StacStore};
 
 #[pyfunction]
@@ -33,8 +33,10 @@ pub fn write<'py>(
         if matches!(format, Format::Geoparquet(_)) {
             if let Some(parquet_compression) = parquet_compression {
                 tracing::debug!("setting parquet compression: {parquet_compression}");
-                format =
-                    Format::Geoparquet(Some(parquet_compression.parse().map_err(Error::from)?));
+                format = Format::Geoparquet(WriterOptions {
+                    compression: Some(parquet_compression.parse().map_err(Error::from)?),
+                    ..Default::default()
+                });
             }
         }
         let (stac_store, path) = if let Some(store) = store {
