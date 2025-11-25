@@ -48,6 +48,9 @@ jobs:
           wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-${{ matrix.os.duckdb-slug }}.zip
           mkdir -p ${{ github.workspace }}/opt/duckdb
           unzip libduckdb-${{ matrix.os.duckdb-slug }}.zip -d ${{ github.workspace }}/opt/duckdb
+      - name: Install GDAL
+        if: runner.os == 'macOS'
+        run: brew install gdal
       - name: Sync
         run: uv sync --all-extras
       - name: Lint
