@@ -7,8 +7,8 @@ use pyo3::prelude::*;
 use pyo3::{Bound, FromPyObject, PyErr, PyResult, exceptions::PyValueError, types::PyDict};
 use pyo3_object_store::AnyObjectStore;
 use serde_json::{Map, Value};
+use stac::api::{Fields, Filter, Items, Search, Sortby};
 use stac::{Bbox, geoparquet::WriterOptions};
-use stac_api::{Fields, Filter, Items, Search, Sortby};
 use stac_io::{Format, StacStore, api::Client};
 use std::sync::Arc;
 use tokio::{pin, sync::Mutex};
@@ -226,7 +226,7 @@ fn search_duckdb(
     href: String,
     search: Search,
     max_items: Option<usize>,
-) -> Result<stac_api::ItemCollection> {
+) -> Result<stac::api::ItemCollection> {
     let value = stac_duckdb::search(&href, search, max_items)?;
     Ok(value)
 }
@@ -235,7 +235,7 @@ async fn search_api(
     href: String,
     search: Search,
     max_items: Option<usize>,
-) -> Result<stac_api::ItemCollection> {
+) -> Result<stac::api::ItemCollection> {
     let stream = iter_search_api(href, search).await?;
     pin!(stream);
     let mut items = if let Some(max_items) = max_items {
