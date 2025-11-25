@@ -68,6 +68,9 @@ jobs:
   import:
     name: Import
     runs-on: ubuntu-latest
+    env:
+      DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
+      LD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
