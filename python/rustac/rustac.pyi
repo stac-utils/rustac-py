@@ -20,7 +20,7 @@ class GeoparquetWriter:
         path: str,
         drop_invalid_attributes: bool = True,
         store: AnyObjectStore | None = None,
-    ) -> None:
+    ) -> GeoparquetWriter:
         """Creates a new writer for the provided items and the path.
 
         Args:
