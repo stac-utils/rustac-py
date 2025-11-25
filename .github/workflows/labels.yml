@@ -17,10 +17,10 @@ jobs:
     env:
       UV_NO_SYNC: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v7
       - uses: Swatinem/rust-cache@v2
       - name: Install dev deps
         run: uv sync --no-install-project --only-group dev

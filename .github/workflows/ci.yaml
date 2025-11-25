@@ -37,7 +37,7 @@ jobs:
           # https://github.com/stac-utils/rustac-py/issues/1
           # - windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
       - uses: astral-sh/setup-uv@v7
@@ -73,7 +73,7 @@ jobs:
       DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
       LD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
       - uses: astral-sh/setup-uv@v7
