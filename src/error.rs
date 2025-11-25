@@ -36,9 +36,6 @@ pub enum Error {
     StacIo(#[from] stac_io::Error),
 
     #[error(transparent)]
-    StacApi(#[from] stac_api::Error),
-
-    #[error(transparent)]
     StacDuckdb(#[from] stac_duckdb::Error),
 
     #[error(transparent)]
