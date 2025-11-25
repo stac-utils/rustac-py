@@ -2,7 +2,7 @@
 description: Write stac-geoparquet
 ---
 
-# parquet
+# geoparquet
 
 ::: rustac.GeoparquetWriter
 ::: rustac.geoparquet_writer
