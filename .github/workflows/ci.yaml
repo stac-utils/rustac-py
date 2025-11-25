@@ -82,9 +82,5 @@ jobs:
           wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-linux-amd64.zip
           mkdir -p ${{ github.workspace }}/opt/duckdb
           unzip libduckdb-linux-amd64.zip -d ${{ github.workspace }}/opt/duckdb
-      - name: Install
-        run: |
-          uv venv
-          uv pip install .
       - name: Import
         run: uv run --no-default-groups python -c "import rustac"

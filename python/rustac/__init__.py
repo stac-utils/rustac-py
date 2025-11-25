@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import Any
-
-from obstore.store import ObjectStore
+from typing import TYPE_CHECKING, Any
 
 from . import store
 from .rustac import *  # noqa: F403
+
+if TYPE_CHECKING:
+    from obstore.store import ObjectStore
 
 
 @asynccontextmanager
