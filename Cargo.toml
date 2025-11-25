@@ -17,7 +17,7 @@ clap = "4.5.31"
 duckdb = { version = "1.4.0", features = ["serde_json"] }
 futures-core = "0.3.31"
 futures-util = "0.3.31"
-geoarrow-schema = "0.4.0"
+geoarrow-schema = "0.6.2"
 geojson = "0.24.1"
 object_store = { version = "0.12.4", features = ["gcp", "aws", "azure", "http"] }
 openssl = { version = "0.10", features = ["vendored"], optional = true }
@@ -42,4 +42,4 @@ tokio = { version = "1.44.0", features = ["rt-multi-thread"] }
 tracing = "0.1.41"
 
 [build-dependencies]
-cargo-lock = "10"
+cargo-lock = "11"
