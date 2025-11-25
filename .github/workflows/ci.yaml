@@ -75,6 +75,8 @@ jobs:
           mkdir -p ${{ github.workspace }}/opt/duckdb
           unzip libduckdb-linux-amd64.zip -d ${{ github.workspace }}/opt/duckdb
       - name: Install
-        run: uv pip install .
+        run: |
+          uv venv
+          uv pip install .
       - name: Import
         run: uv run python -c "import rustac"
