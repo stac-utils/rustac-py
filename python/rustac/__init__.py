@@ -36,9 +36,9 @@ async def geoparquet_writer(
 
     Examples:
 
-        >>> with geoparquet_writer(item_batches[0], "out.parquet") as w:
+        >>> async with geoparquet_writer(item_batches[0], "out.parquet") as w:
         ...     for items in item_batches[1:]:
-        ...         w.write(items)
+        ...         await w.write(items)
         ...
         >>>
     """
