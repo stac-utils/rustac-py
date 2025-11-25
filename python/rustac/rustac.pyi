@@ -14,12 +14,13 @@ AnyObjectStore = ObjectStore | ObstoreObjectStore
 class GeoparquetWriter:
     """A helper class to write geoparquet from batches of items."""
 
+    @staticmethod
     async def open(
         items: list[dict[str, Any]],
         path: str,
         drop_invalid_attributes: bool = True,
-        store: AnyObjectStore = None,
-    ) -> None:
+        store: AnyObjectStore | None = None,
+    ) -> GeoparquetWriter:
         """Creates a new writer for the provided items and the path.
 
         Args:
