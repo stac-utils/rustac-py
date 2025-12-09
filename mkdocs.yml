@@ -31,6 +31,7 @@ nav:
       - arrow: api/arrow.md
       - duckdb: api/duckdb.md
       - migrate: api/migrate.md
+      - geoparquet: api/geoparquet.md
       - read: api/read.md
       - search: api/search.md
       - stac: api/stac.md

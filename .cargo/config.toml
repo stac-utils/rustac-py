@@ -1,0 +1,5 @@
+[patch.crates-io]
+stac = { git = "https://github.com/stac-utils/rustac" }
+stac-io = { git = "https://github.com/stac-utils/rustac" }
+stac-duckdb = { git = "https://github.com/stac-utils/rustac" }
+rustac = { git = "https://github.com/stac-utils/rustac" }

@@ -20,11 +20,11 @@ jobs:
     env:
       DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0 # to get gh-pages
           submodules: true
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v7
       - uses: Swatinem/rust-cache@v2
       - name: Install libduckdb
         run: |

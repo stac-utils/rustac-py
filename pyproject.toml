@@ -48,10 +48,13 @@ filterwarnings = ["error"]
 
 [tool.ruff]
 exclude = [
-    "python/rustac/__init__.py",
     "docs/examples/example_*.py",
     "_obstore",
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"python/rustac/__init__.py" = ["F403", "F405"]
+
 
 [dependency-groups]
 dev = [

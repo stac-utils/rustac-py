@@ -32,23 +32,27 @@ jobs:
         os:
           - runner: ubuntu-latest
             duckdb-slug: linux-amd64
-          - runner: macos-latest
-            duckdb-slug: osx-universal
+          # Installing GDAL is just too slow, for now. We should cache eventually.
+          # - runner: macos-latest
+          #   duckdb-slug: osx-universal
           # https://github.com/stac-utils/rustac-py/issues/1
           # - windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
       - uses: Swatinem/rust-cache@v2
-      - name: Install Python version
-        run: uv python install ${{ matrix.python-version }}
       - name: Install libduckdb
         run: |
           wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-${{ matrix.os.duckdb-slug }}.zip
           mkdir -p ${{ github.workspace }}/opt/duckdb
           unzip libduckdb-${{ matrix.os.duckdb-slug }}.zip -d ${{ github.workspace }}/opt/duckdb
+      - name: Install GDAL
+        if: runner.os == 'macOS'
+        run: brew install gdal
       - name: Sync
         run: uv sync --all-extras
       - name: Lint
@@ -63,3 +67,22 @@ jobs:
         # not worth it to install cairo on macos
         if: runner.os == 'ubuntu-latest'
         run: uv run mkdocs build --strict
+  import:
+    name: Import
+    runs-on: ubuntu-latest
+    env:
+      DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
+      LD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - uses: astral-sh/setup-uv@v7
+      - uses: Swatinem/rust-cache@v2
+      - name: Install libduckdb
+        run: |
+          wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-linux-amd64.zip
+          mkdir -p ${{ github.workspace }}/opt/duckdb
+          unzip libduckdb-linux-amd64.zip -d ${{ github.workspace }}/opt/duckdb
+      - name: Import
+        run: uv run --no-default-groups python -c "import rustac"

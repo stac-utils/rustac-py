@@ -7,14 +7,14 @@ use pyo3::prelude::*;
 use pyo3::{Bound, FromPyObject, PyErr, PyResult, exceptions::PyValueError, types::PyDict};
 use pyo3_object_store::AnyObjectStore;
 use serde_json::{Map, Value};
-use stac::Bbox;
-use stac_api::{Client, Fields, Filter, Items, Search, Sortby};
-use stac_io::{Format, StacStore};
+use stac::api::{Fields, Filter, Items, Search, Sortby};
+use stac::{Bbox, geoparquet::WriterOptions};
+use stac_io::{Format, StacStore, api::Client};
 use std::sync::Arc;
 use tokio::{pin, sync::Mutex};
 
 #[pyclass]
-struct SearchIterator(Arc<Mutex<BoxStream<'static, stac_api::Result<Map<String, Value>>>>>);
+struct SearchIterator(Arc<Mutex<BoxStream<'static, stac_io::Result<Map<String, Value>>>>>);
 
 #[pymethods]
 impl SearchIterator {
@@ -173,7 +173,10 @@ pub fn search_to<'py>(
     if matches!(format, Format::Geoparquet(_)) {
         if let Some(parquet_compression) = parquet_compression {
             tracing::debug!("setting parquet compression: {parquet_compression}");
-            format = Format::Geoparquet(Some(parquet_compression.parse().map_err(Error::from)?));
+            format = Format::Geoparquet(WriterOptions {
+                compression: Some(parquet_compression.parse().map_err(Error::from)?),
+                ..Default::default()
+            });
         }
     }
     if use_duckdb
@@ -223,7 +226,7 @@ fn search_duckdb(
     href: String,
     search: Search,
     max_items: Option<usize>,
-) -> Result<stac_api::ItemCollection> {
+) -> Result<stac::api::ItemCollection> {
     let value = stac_duckdb::search(&href, search, max_items)?;
     Ok(value)
 }
@@ -232,7 +235,7 @@ async fn search_api(
     href: String,
     search: Search,
     max_items: Option<usize>,
-) -> Result<stac_api::ItemCollection> {
+) -> Result<stac::api::ItemCollection> {
     let stream = iter_search_api(href, search).await?;
     pin!(stream);
     let mut items = if let Some(max_items) = max_items {
@@ -255,7 +258,7 @@ async fn search_api(
 async fn iter_search_api(
     href: String,
     search: Search,
-) -> Result<impl Stream<Item = stac_api::Result<Map<String, Value>>>> {
+) -> Result<impl Stream<Item = stac_io::Result<Map<String, Value>>>> {
     let client = Client::new(&href)?;
     let stream = client.search(search).await?;
     Ok(stream)

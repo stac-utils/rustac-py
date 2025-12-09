@@ -5,6 +5,40 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.9.2]
+
+### Fixed
+
+- Circular import issue ([#186](https://github.com/stac-utils/rustac-py/pull/186))
+
+## [0.9.1]
+
+### Added
+
+- Write **stac-geoparquet** to an object store ([#182](https://github.com/stac-utils/rustac-py/pull/182))
+
+## [0.9.0]
+
+### Added
+
+- Chunked stac-geoparquet writing ([#178](https://github.com/stac-utils/rustac-py/pull/178))
+
+### Removed
+
+- STAC typed dicts ([#177](https://github.com/stac-utils/rustac-py/pull/177))
+
+## [0.8.4] - 2025-10-22
+
+### Fixed
+
+- Deconstruct item collections when writing ndjson ([#167](https://github.com/stac-utils/rustac-py/pull/167))
+
+## [0.8.3] - 2025-09-24
+
+### Changed
+
+- Don't set geo metadata for `proj:geometry` ([rustac #808](https://github.com/stac-utils/rustac/pull/808), [#161](https://github.com/stac-utils/rustac-py/pull/161))
+
 ## [0.8.2] - 2025-09-15
 
 Bump **pyo3** version.
@@ -243,7 +277,12 @@ Non-functional release to fix releasing from Github actions.
 
 Initial release.
 
-[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.8.2...main
+[Unreleased]: https://github.com/stac-utils/rustac-py/compare/v0.9.2...main
+[0.9.2]: https://github.com/stac-utils/rustac-py/compare/v0.9.1...v0.9.2
+[0.9.1]: https://github.com/stac-utils/rustac-py/compare/v0.9.0...v0.9.1
+[0.9.0]: https://github.com/stac-utils/rustac-py/compare/v0.8.4...v0.9.0
+[0.8.4]: https://github.com/stac-utils/rustac-py/compare/v0.8.3...v0.8.4
+[0.8.3]: https://github.com/stac-utils/rustac-py/compare/v0.8.2...v0.8.3
 [0.8.2]: https://github.com/stac-utils/rustac-py/compare/v0.8.1...v0.8.2
 [0.8.1]: https://github.com/stac-utils/rustac-py/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/stac-utils/rustac-py/compare/v0.7.2...v0.8.0

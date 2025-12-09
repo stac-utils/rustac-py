@@ -23,24 +23,36 @@ jobs:
           - x86_64
           - aarch64
           - armv7
-          - s390x
           - ppc64le
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
       - name: Install Python
         run: uv python install 3.11
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.target }}
-          args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled
+          args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled -F openssl-vendored
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: "2_28"
+          before-script-linux: |
+            case "${{ matrix.target }}" in
+              "aarch64" | "armv7" | "ppc64le")
+                # NOTE: pypa/manylinux docker images are Debian based
+                sudo apt-get update
+                sudo apt-get install -y pkg-config libssl-dev
+                ;;
+              "x86_64")
+                # NOTE: rust-cross/manylinux docker images are CentOS based
+                yum update -y
+                yum install -y openssl openssl-devel perl-IPC-Cmd perl-Time-Piece
+                ;;
+            esac
       - name: Upload wheels
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: wheels-linux-${{ matrix.target }}
           path: dist
@@ -55,21 +67,21 @@ jobs:
           - target: aarch64
           - target: armv7
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
       - name: Install Python
         run: uv python install 3.11
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled
+          args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled -F openssl-vendored
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: musllinux_1_2
       - name: Upload wheels
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: wheels-musllinux-${{ matrix.platform.target }}
           path: dist
@@ -79,15 +91,15 @@ jobs:
     strategy:
       matrix:
         platform:
-          - runner: macos-13
+          - runner: macos-15-intel
             target: x86_64
           - runner: macos-14
             target: aarch64
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
       - name: Install Python
         run: uv python install 3.11
       - name: Build wheels
@@ -97,7 +109,7 @@ jobs:
           args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
       - name: Upload wheels
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: wheels-macos-${{ matrix.platform.target }}
           path: dist
@@ -105,7 +117,7 @@ jobs:
   sdist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
       - name: Build sdist
@@ -114,7 +126,7 @@ jobs:
           command: sdist
           args: --out dist
       - name: Upload sdist
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: wheels-sdist
           path: dist
@@ -136,9 +148,9 @@ jobs:
       contents: write
       attestations: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v6
       - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@v3
         with:
           subject-path: "wheels-*/*"
       - name: Publish to PyPI

@@ -5,6 +5,7 @@ mod cli;
 mod collection;
 mod duckdb;
 mod error;
+mod geoparquet;
 mod migrate;
 mod read;
 mod search;
@@ -13,6 +14,8 @@ mod walk;
 mod write;
 
 use error::Error;
+#[cfg(feature = "openssl-vendored")]
+use openssl as _;
 use pyo3::prelude::*;
 
 type Result<T> = std::result::Result<T, Error>;
@@ -24,6 +27,7 @@ fn rustac(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add("RustacError", py.get_type::<error::RustacError>())?;
 
     m.add_class::<duckdb::DuckdbClient>()?;
+    m.add_class::<geoparquet::GeoparquetWriter>()?;
 
     m.add_function(wrap_pyfunction!(arrow::from_arrow, m)?)?;
     m.add_function(wrap_pyfunction!(arrow::to_arrow, m)?)?;
