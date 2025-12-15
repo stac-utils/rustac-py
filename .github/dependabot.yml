@@ -1,16 +1,18 @@
 version: 2
 updates:
-  # Cargo dependencies
   - package-ecosystem: "cargo"
     directory: "/"
     schedule:
       interval: "weekly"
     groups:
-      cargo-dependencies:
+      arrow:
         patterns:
-          - "*"
-
-  # Python pip dependencies
+          - "*arrow*"
+          - "*parquet*"
+      non-arrow:
+        exclude-patterns:
+          - "*arrow*"
+          - "*parquet*"
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
@@ -19,8 +21,6 @@ updates:
       pip-dependencies:
         patterns:
           - "*"
-
-  # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
