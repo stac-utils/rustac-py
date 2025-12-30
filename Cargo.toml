@@ -19,7 +19,7 @@ futures-core = "0.3.31"
 futures-util = "0.3.31"
 geoarrow-schema = "0.6.2"
 geojson = "0.24.1"
-object_store = { version = "0.12.4", features = ["gcp", "aws", "azure", "http"] }
+object_store = { version = "0.13.0", features = ["gcp", "aws", "azure", "http"] }
 openssl = { version = "0.10", features = ["vendored"], optional = true }
 parquet = "56.0.0"
 pyo3 = { version = "0.26.0", features = ["extension-module"] }
@@ -33,7 +33,7 @@ pyo3-object_store = "0.6.0"
 pythonize = "0.26.0"
 rustac = { version = "0.1.1", features = ["pgstac"] }
 serde = "1.0.217"
-serde_json = { version = "1.0.146", features = ["preserve_order"] }
+serde_json = { version = "1.0.148", features = ["preserve_order"] }
 stac = { version = "0.14.0", features = ["geoarrow", "geoparquet"] }
 stac-duckdb = "0.2.1"
 stac-io = { version = "0.1.1", features = ["store-all", "geoparquet"] }
