@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0](https://github.com/stac-utils/rustac-py/compare/v0.9.2...v0.10.0) (2026-01-05)
+
+
+### Features
+
+* normalize datetimes when searching ([#202](https://github.com/stac-utils/rustac-py/issues/202)) ([a1b5660](https://github.com/stac-utils/rustac-py/commit/a1b5660432886f6448cb15981be11fe4a5f02c32))
+
+
+### Bug Fixes
+
+* split cargo dependencies ([#195](https://github.com/stac-utils/rustac-py/issues/195)) ([14919bb](https://github.com/stac-utils/rustac-py/commit/14919bb981edeaffdd28b9580dc8e09bb9ff5196))
+
+
+### Dependencies
+
+* bump a few ([#190](https://github.com/stac-utils/rustac-py/issues/190)) ([f2c6816](https://github.com/stac-utils/rustac-py/commit/f2c6816649465c568b5313729b61bb1bfd42ee61))
+
 ## [Unreleased]
 
 ## [0.9.2]
