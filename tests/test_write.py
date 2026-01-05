@@ -75,3 +75,15 @@ async def test_geoparquet_writer_memory_store(item: dict[str, Any]) -> None:
 
     item_collection = await rustac.read("out.parquet", store=store)
     assert len(item_collection["features"]) == 2
+
+
+async def test_geoparquet_writer_collections(
+    tmp_path: Path, item: dict[str, Any], collection: dict[str, Any]
+) -> None:
+    async with rustac.geoparquet_writer([item], str(tmp_path / "out.parquet")) as w:
+        w.add_collection(collection)
+
+    metadata = pyarrow.parquet.read_metadata(tmp_path / "out.parquet")
+    stac_geoparquet_metadata = json.loads(metadata.metadata[b"stac-geoparquet"])
+    assert "simple-collection" in stac_geoparquet_metadata["collections"]
+    assert "version" in stac_geoparquet_metadata
