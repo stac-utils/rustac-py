@@ -2847,6 +2847,44 @@ dependencies = [
 ]
 
 [[package]]
+name = "object_store"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d180d5469872facb82dec7e233ff850d615330ea3044a7813550b22ffa4f05ce"
+dependencies = [
+ "async-trait",
+ "base64",
+ "bytes",
+ "chrono",
+ "form_urlencoded",
+ "futures",
+ "http",
+ "http-body-util",
+ "httparse",
+ "humantime",
+ "hyper",
+ "itertools 0.14.0",
+ "md-5",
+ "parking_lot",
+ "percent-encoding",
+ "quick-xml",
+ "rand 0.9.2",
+ "reqwest 0.12.28",
+ "ring",
+ "rustls-pki-types",
+ "serde",
+ "serde_json",
+ "serde_urlencoded",
+ "thiserror 2.0.17",
+ "tokio",
+ "tracing",
+ "url",
+ "walkdir",
+ "wasm-bindgen-futures",
+ "web-time",
+]
+
+[[package]]
 name = "once_cell"
 version = "1.21.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2981,7 +3019,7 @@ dependencies = [
  "lz4_flex",
  "num",
  "num-bigint",
- "object_store",
+ "object_store 0.12.4",
  "paste",
  "seq-macro",
  "simdutf8",
@@ -3409,7 +3447,7 @@ dependencies = [
  "http",
  "humantime",
  "itertools 0.14.0",
- "object_store",
+ "object_store 0.12.4",
  "percent-encoding",
  "pyo3",
  "pyo3-async-runtimes",
@@ -3982,7 +4020,7 @@ dependencies = [
  "futures-util",
  "geoarrow-schema",
  "geojson",
- "object_store",
+ "object_store 0.13.0",
  "openssl",
  "parquet",
  "pyo3",
@@ -4549,7 +4587,7 @@ dependencies = [
  "bytes",
  "futures",
  "http",
- "object_store",
+ "object_store 0.12.4",
  "parquet",
  "reqwest 0.13.1",
  "serde",
