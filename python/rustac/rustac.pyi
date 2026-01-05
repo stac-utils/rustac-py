@@ -35,6 +35,15 @@ class GeoparquetWriter:
                 provided, a local object store will be used.
         """
 
+    def add_collection(self, collection: dict[str, Any]) -> None:
+        """Adds a collection to this writer's metadata
+
+        Will warn and overwrite if there's already a collection with the same id.
+
+        Args:
+            collection: The STAC collection.
+        """
+
     async def write(self, items: list[dict[str, Any]]) -> None:
         """Writes more items to the geoparquet.
 

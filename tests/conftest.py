@@ -42,3 +42,9 @@ def maxar_items(root: Path) -> list[dict[str, Any]]:
         item_a.to_dict(transform_hrefs=False),
         item_b.to_dict(transform_hrefs=False),
     ]
+
+
+@pytest.fixture
+def collection(examples: Path) -> dict[str, Any]:
+    with open(examples / "collection.json") as f:
+        return json.load(f)

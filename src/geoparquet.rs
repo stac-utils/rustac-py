@@ -3,7 +3,7 @@ use object_store::local::LocalFileSystem;
 use pyo3::exceptions::PyRuntimeError;
 use pyo3::prelude::*;
 use pyo3_object_store::AnyObjectStore;
-use stac::{Item, geoarrow::Options};
+use stac::{Collection, Item, geoarrow::Options};
 use stac_io::store::geoparquet::StacGeoparquetObjectWriter;
 use std::sync::Arc;
 use tokio::sync::Mutex;
@@ -37,6 +37,24 @@ impl GeoparquetWriter {
                     .await
                     .map_err(Error::from)?;
             Ok(GeoparquetWriter(Arc::new(Mutex::new(Some(writer)))))
+        })
+    }
+
+    pub fn add_collection<'py>(
+        &mut self,
+        py: Python<'py>,
+        collection: Bound<PyAny>,
+    ) -> PyResult<Bound<'py, PyAny>> {
+        let collection: Collection = pythonize::depythonize(&collection)?;
+        let writer = self.0.clone();
+        pyo3_async_runtimes::tokio::future_into_py(py, async move {
+            let mut writer = writer.lock().await;
+            if let Some(writer) = writer.as_mut() {
+                writer.add_collection(collection);
+                Ok(())
+            } else {
+                Err(PyErr::new::<PyRuntimeError, _>("Writer is closed"))
+            }
         })
     }
 
