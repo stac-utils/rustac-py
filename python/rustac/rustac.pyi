@@ -111,6 +111,14 @@ class DuckdbClient:
             bbox: Requested bounding box.
             datetime: Single date+time, or a range (`/` separator), formatted to
                 RFC 3339, section 5.6.  Use double dots .. for open date ranges.
+
+                Partial dates are also supported and will be automatically expanded
+                to full RFC 3339 datetime ranges:
+
+                - Year only (e.g., "2023") expands to 2023-01-01T00:00:00Z/2023-12-31T23:59:59Z
+                - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
+                - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
+                - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
             include: fields to include in the response (see [the extension
                 docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
                 for more on the semantics).
@@ -167,6 +175,14 @@ class DuckdbClient:
             bbox: Requested bounding box.
             datetime: Single date+time, or a range (`/` separator), formatted to
                 RFC 3339, section 5.6.  Use double dots .. for open date ranges.
+
+                Partial dates are also supported and will be automatically expanded
+                to full RFC 3339 datetime ranges:
+
+                - Year only (e.g., "2023") expands to 2023-01-01T00:00:00Z/2023-12-31T23:59:59Z
+                - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
+                - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
+                - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
             include: fields to include in the response (see [the extension
                 docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
                 for more on the semantics).
@@ -338,6 +354,14 @@ async def search(
         datetime: Single date+time, or a range (`/` separator),
             formatted to RFC 3339, section 5.6.  Use double dots .. for open
             date ranges.
+
+            Partial dates are also supported and will be automatically expanded
+            to full RFC 3339 datetime ranges:
+
+            - Year only (e.g., "2023") expands to 2023-01-01T00:00:00Z/2023-12-31T23:59:59Z
+            - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
+            - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
+            - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
         include: fields to include in the response (see [the
             extension
             docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
@@ -403,6 +427,14 @@ async def iter_search(
         datetime: Single date+time, or a range (`/` separator),
             formatted to RFC 3339, section 5.6.  Use double dots .. for open
             date ranges.
+
+            Partial dates are also supported and will be automatically expanded
+            to full RFC 3339 datetime ranges:
+
+            - Year only (e.g., "2023") expands to 2023-01-01T00:00:00Z/2023-12-31T23:59:59Z
+            - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
+            - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
+            - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
         include: fields to include in the response (see [the
             extension
             docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
@@ -475,6 +507,14 @@ async def search_to(
         datetime: Single date+time, or a range ('/' separator),
             formatted to RFC 3339, section 5.6.  Use double dots .. for open
             date ranges.
+
+            Partial dates are also supported and will be automatically expanded
+            to full RFC 3339 datetime ranges:
+
+            - Year only (e.g., "2023") expands to 2023-01-01T00:00:00Z/2023-12-31T23:59:59Z
+            - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
+            - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
+            - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
         include: fields to include in the response (see [the
             extension
             docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
