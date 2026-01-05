@@ -121,3 +121,14 @@ async def test_iter_search() -> None:
         items.append(item)
         if len(items) >= 10:
             break
+
+
+async def test_search_normalize_datetimes() -> None:
+    items = await rustac.search(
+        "https://landsatlook.usgs.gov/stac-server",
+        collections="landsat-c2l2-sr",
+        datetime="2025",
+        intersects={"type": "Point", "coordinates": [-105.119, 40.173]},
+        max_items=1,
+    )
+    assert len(items) == 1

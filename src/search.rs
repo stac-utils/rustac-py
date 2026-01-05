@@ -349,12 +349,14 @@ pub fn build<'py>(
         .transpose()?;
     let ids = ids.map(|ids| ids.into()).unwrap_or_default();
     let collections = collections.map(|ids| ids.into()).unwrap_or_default();
-    Ok(Search {
+    let search = Search {
         items,
         intersects,
         ids,
         collections,
-    })
+    };
+    let search = search.normalize_datetimes().map_err(Error::from)?;
+    Ok(search)
 }
 
 /// A string or dictionary.
