@@ -3,6 +3,8 @@
     ".": {
       "release-type": "python",
       "package-name": "rustac",
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": true,
       "extra-files": [
         {
           "type": "toml",
