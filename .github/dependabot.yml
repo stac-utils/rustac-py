@@ -9,10 +9,12 @@ updates:
         patterns:
           - "*arrow*"
           - "*parquet*"
+          - "object_store"
       non-arrow:
         exclude-patterns:
           - "*arrow*"
           - "*parquet*"
+          - "object_store"
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
