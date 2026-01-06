@@ -3064,8 +3064,8 @@ dependencies = [
 
 [[package]]
 name = "pgstac"
-version = "0.4.1"
-source = "git+https://github.com/stac-utils/rustac#d9092fca222cb5a3b1f09d3de9042675251b40ad"
+version = "0.4.2"
+source = "git+https://github.com/stac-utils/rustac#1846b5fddf2f9f8cba3434a5af0ddfa811612dbb"
 dependencies = [
  "serde",
  "serde_json",
@@ -3948,8 +3948,8 @@ dependencies = [
 
 [[package]]
 name = "rustac"
-version = "0.2.1"
-source = "git+https://github.com/stac-utils/rustac#d9092fca222cb5a3b1f09d3de9042675251b40ad"
+version = "0.2.2"
+source = "git+https://github.com/stac-utils/rustac#1846b5fddf2f9f8cba3434a5af0ddfa811612dbb"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -3973,7 +3973,7 @@ dependencies = [
 
 [[package]]
 name = "rustac-py"
-version = "0.9.2"
+version = "0.9.3"
 dependencies = [
  "cargo-lock",
  "clap",
@@ -4480,8 +4480,8 @@ checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 
 [[package]]
 name = "stac"
-version = "0.15.1"
-source = "git+https://github.com/stac-utils/rustac#d9092fca222cb5a3b1f09d3de9042675251b40ad"
+version = "0.16.0"
+source = "git+https://github.com/stac-utils/rustac#1846b5fddf2f9f8cba3434a5af0ddfa811612dbb"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -4514,7 +4514,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac#d9092fca222cb5a3b1f09d3de9042675251b40ad"
+source = "git+https://github.com/stac-utils/rustac#1846b5fddf2f9f8cba3434a5af0ddfa811612dbb"
 dependencies = [
  "quote",
  "syn 2.0.113",
@@ -4522,8 +4522,8 @@ dependencies = [
 
 [[package]]
 name = "stac-duckdb"
-version = "0.3.1"
-source = "git+https://github.com/stac-utils/rustac#d9092fca222cb5a3b1f09d3de9042675251b40ad"
+version = "0.3.2"
+source = "git+https://github.com/stac-utils/rustac#1846b5fddf2f9f8cba3434a5af0ddfa811612dbb"
 dependencies = [
  "arrow-array",
  "arrow-schema",
@@ -4542,8 +4542,8 @@ dependencies = [
 
 [[package]]
 name = "stac-io"
-version = "0.2.1"
-source = "git+https://github.com/stac-utils/rustac#d9092fca222cb5a3b1f09d3de9042675251b40ad"
+version = "0.2.2"
+source = "git+https://github.com/stac-utils/rustac#1846b5fddf2f9f8cba3434a5af0ddfa811612dbb"
 dependencies = [
  "async-stream",
  "bytes",
@@ -4563,8 +4563,8 @@ dependencies = [
 
 [[package]]
 name = "stac-server"
-version = "0.4.1"
-source = "git+https://github.com/stac-utils/rustac#d9092fca222cb5a3b1f09d3de9042675251b40ad"
+version = "0.4.2"
+source = "git+https://github.com/stac-utils/rustac#1846b5fddf2f9f8cba3434a5af0ddfa811612dbb"
 dependencies = [
  "axum",
  "bb8",
@@ -4589,8 +4589,8 @@ dependencies = [
 
 [[package]]
 name = "stac-validate"
-version = "0.6.1"
-source = "git+https://github.com/stac-utils/rustac#d9092fca222cb5a3b1f09d3de9042675251b40ad"
+version = "0.6.2"
+source = "git+https://github.com/stac-utils/rustac#1846b5fddf2f9f8cba3434a5af0ddfa811612dbb"
 dependencies = [
  "async-recursion",
  "async-trait",
