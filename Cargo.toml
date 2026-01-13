@@ -33,7 +33,7 @@ pyo3-object_store = "0.6.0"
 pythonize = "0.26.0"
 rustac = { git = "https://github.com/stac-utils/rustac", features = ["pgstac"] }
 serde = "1.0.217"
-serde_json = { version = "1.0.146", features = ["preserve_order"] }
+serde_json = { version = "1.0.149", features = ["preserve_order"] }
 stac = { git = "https://github.com/stac-utils/rustac", features = ["geoarrow", "geoparquet"] }
 stac-duckdb = { git = "https://github.com/stac-utils/rustac" }
 stac-io = { git = "https://github.com/stac-utils/rustac", features = ["store-all", "geoparquet"] }
