@@ -37,7 +37,7 @@ serde_json = { version = "1.0.149", features = ["preserve_order"] }
 stac = { git = "https://github.com/stac-utils/rustac", features = ["geoarrow", "geoparquet"] }
 stac-duckdb = { git = "https://github.com/stac-utils/rustac" }
 stac-io = { git = "https://github.com/stac-utils/rustac", features = ["store-all", "geoparquet"] }
-thiserror = "2.0.12"
+thiserror = "2.0.18"
 tokio = { version = "1.44.0", features = ["rt-multi-thread"] }
 tracing = "0.1.44"
 
