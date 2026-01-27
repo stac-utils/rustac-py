@@ -14,7 +14,7 @@ openssl-vendored = ["dep:openssl"]
 
 [dependencies]
 clap = "4.5.31"
-duckdb = { version = "1.4.3", features = ["serde_json"] }
+duckdb = { version = "1.4.4", features = ["serde_json"] }
 futures-core = "0.3.31"
 futures-util = "0.3.31"
 geoarrow-schema = "0.6.2"
