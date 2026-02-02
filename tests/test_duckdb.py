@@ -95,3 +95,9 @@ def test_aws_credential_chain(client: DuckdbClient) -> None:
 def test_search_union_by_name(client: DuckdbClient) -> None:
     items = client.search("data/*.parquet")
     assert len(items) == 101
+
+
+def test_max_items_type(client: DuckdbClient) -> None:
+    # https://github.com/stac-utils/rustac-py/issues/228
+    items = client.search("data/*.parquet", max_items=1)
+    assert len(items) == 1
