@@ -96,6 +96,7 @@ class DuckdbClient:
         collections: str | list[str] | None = None,
         intersects: str | dict[str, Any] | None = None,
         limit: int | None = None,
+        max_items: int | None = None,
         offset: int | None = None,
         bbox: list[float] | None = None,
         datetime: str | None = None,
@@ -116,6 +117,8 @@ class DuckdbClient:
             intersects: Searches items by performing intersection between their
                 geometry and provided GeoJSON geometry.
             limit: The number of items to return.
+            max_items: The number of items to return (included so that we have a
+                similar call API to normal search)
             offset: The number of items to skip before returning.
             bbox: Requested bounding box.
             datetime: Single date+time, or a range (`/` separator), formatted to

@@ -61,7 +61,7 @@ impl DuckdbClient {
         Ok(count)
     }
 
-    #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]
+    #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, max_items=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]
     fn search<'py>(
         &self,
         py: Python<'py>,
@@ -69,7 +69,8 @@ impl DuckdbClient {
         intersects: Option<StringOrDict>,
         ids: Option<StringOrList>,
         collections: Option<StringOrList>,
-        limit: Option<u64>,
+        mut limit: Option<u64>,
+        max_items: Option<u64>,
         bbox: Option<Vec<f64>>,
         datetime: Option<String>,
         include: Option<StringOrList>,
@@ -79,6 +80,12 @@ impl DuckdbClient {
         query: Option<Bound<'py, PyDict>>,
         kwargs: Option<Bound<'py, PyDict>>,
     ) -> Result<Bound<'py, PyList>> {
+        if max_items.is_some() {
+            if limit.is_some() {
+                tracing::warn!("Both max_items and limit are set, overriding limit with max_items");
+            }
+            limit = max_items;
+        }
         let search = crate::search::build(
             intersects,
             ids,
