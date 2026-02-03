@@ -13,7 +13,7 @@ duckdb-bundled = ["stac-duckdb/bundled"]
 openssl-vendored = ["dep:openssl"]
 
 [dependencies]
-clap = "4.5.31"
+clap = "4.5.56"
 duckdb = { version = "1.4.4", features = ["serde_json"] }
 futures-core = "0.3.31"
 futures-util = "0.3.31"
