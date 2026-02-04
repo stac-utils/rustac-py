@@ -38,13 +38,16 @@ fn rustac(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     )?)?;
     m.add_function(wrap_pyfunction!(migrate::migrate, m)?)?;
     m.add_function(wrap_pyfunction!(read::read, m)?)?;
+    m.add_function(wrap_pyfunction!(read::read_sync, m)?)?;
     m.add_function(wrap_pyfunction!(search::iter_search, m)?)?;
     m.add_function(wrap_pyfunction!(search::search, m)?)?;
+    m.add_function(wrap_pyfunction!(search::search_sync, m)?)?;
     m.add_function(wrap_pyfunction!(search::search_to, m)?)?;
     m.add_function(wrap_pyfunction!(version::sha, m)?)?;
     m.add_function(wrap_pyfunction!(version::version, m)?)?;
     m.add_function(wrap_pyfunction!(walk::walk, m)?)?;
     m.add_function(wrap_pyfunction!(write::write, m)?)?;
+    m.add_function(wrap_pyfunction!(write::write_sync, m)?)?;
 
     pyo3_object_store::register_store_module(py, m, "rustac", "store")?;
     pyo3_object_store::register_exceptions_module(py, m, "rustac", "exceptions")?;

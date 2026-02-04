@@ -18,6 +18,14 @@ async def test_write(item: dict[str, Any], tmp_path: Path) -> None:
     assert len(items) == 1
 
 
+def test_write_sync(item: dict[str, Any], tmp_path: Path) -> None:
+    path = str(tmp_path / "out.parquet")
+    rustac.write_sync(path, [item])
+    table = pyarrow.parquet.read_table(path)
+    items = list(stac_geoparquet.arrow.stac_table_to_items(table))
+    assert len(items) == 1
+
+
 async def test_write_compressed(item: dict[str, Any], tmp_path: Path) -> None:
     path = str(tmp_path / "out.parquet")
     await rustac.write(path, [item])

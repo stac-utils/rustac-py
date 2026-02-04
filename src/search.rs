@@ -110,9 +110,9 @@ pub fn search<'py>(
         query,
         kwargs,
     )?;
-    if use_duckdb
-        .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))))
-    {
+    let use_duckdb = use_duckdb
+        .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))));
+    if use_duckdb {
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
             let value = search_duckdb(href, search, max_items)?;
             Ok(Json(value.items))
@@ -121,6 +121,56 @@ pub fn search<'py>(
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
             let value = search_api(href, search, max_items).await?;
             Ok(Json(value.items))
+        })
+    }
+}
+
+#[pyfunction]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, use_duckdb=None, **kwargs))]
+#[allow(clippy::too_many_arguments)]
+pub fn search_sync<'py>(
+    py: Python<'py>,
+    href: String,
+    intersects: Option<StringOrDict>,
+    ids: Option<StringOrList>,
+    collections: Option<StringOrList>,
+    max_items: Option<usize>,
+    limit: Option<u64>,
+    bbox: Option<Vec<f64>>,
+    datetime: Option<String>,
+    include: Option<StringOrList>,
+    exclude: Option<StringOrList>,
+    sortby: Option<PySortby<'py>>,
+    filter: Option<StringOrDict>,
+    query: Option<Bound<'py, PyDict>>,
+    use_duckdb: Option<bool>,
+    kwargs: Option<Bound<'_, PyDict>>,
+) -> PyResult<Json<Vec<Map<String, Value>>>> {
+    let search = build(
+        intersects,
+        ids,
+        collections,
+        limit,
+        bbox,
+        datetime,
+        include,
+        exclude,
+        sortby,
+        filter,
+        query,
+        kwargs,
+    )?;
+    let use_duckdb = use_duckdb
+        .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))));
+    if use_duckdb {
+        let value = search_duckdb(href, search, max_items)?;
+        Ok(Json(value.items))
+    } else {
+        py.detach(|| {
+            pyo3_async_runtimes::tokio::get_runtime().block_on(async {
+                let value = search_api(href, search, max_items).await?;
+                Ok(Json(value.items))
+            })
         })
     }
 }
