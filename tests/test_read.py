@@ -44,3 +44,8 @@ async def test_read_external_store(examples: Path) -> None:
         match="Successfully reconstructed a store defined in another Python module. Connection pooling will not be shared across store instances.",
     ):
         await rustac.read("simple-item.json", store=store)
+
+
+def test_read_sync(examples: Path) -> None:
+    item = Item.from_dict(rustac.read_sync(str(examples / "simple-item.json")))
+    item.validate()

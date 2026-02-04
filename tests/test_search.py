@@ -18,6 +18,11 @@ async def test_search() -> None:
     assert len(items) == 1
 
 
+def test_search_sync(data: Path) -> None:
+    items = rustac.search_sync(str(data / "extended-item.parquet"))
+    assert len(items) == 1
+
+
 async def test_search_to(tmp_path: Path) -> None:
     await rustac.search_to(
         str(tmp_path / "out.json"),
