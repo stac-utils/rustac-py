@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.5](https://github.com/stac-utils/rustac-py/compare/v0.9.4...v0.9.5) (2026-02-04)
+
+
+### Features
+
+* add read, write, and search *_sync ([#232](https://github.com/stac-utils/rustac-py/issues/232)) ([f0363d5](https://github.com/stac-utils/rustac-py/commit/f0363d51008760b6cb86a2f9958d79955ee26f48))
+
 ## [0.9.4](https://github.com/stac-utils/rustac-py/compare/v0.9.3...v0.9.4) (2026-02-02)
 
 
