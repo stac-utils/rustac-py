@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.6](https://github.com/stac-utils/rustac-py/compare/v0.9.5...v0.9.6) (2026-02-12)
+
+
+### Bug Fixes
+
+* update windows paths ([#238](https://github.com/stac-utils/rustac-py/issues/238)) ([8f9a1b6](https://github.com/stac-utils/rustac-py/commit/8f9a1b63e5e07c14448695d8b3ae14a1a6e9e91b))
+
+
+### Documentation
+
+* add read_sync, write_sync, and search_sync ([#234](https://github.com/stac-utils/rustac-py/issues/234)) ([921e3f9](https://github.com/stac-utils/rustac-py/commit/921e3f93dc419f7cc4537250264f9469a3f15a3d))
+
 ## [0.9.5](https://github.com/stac-utils/rustac-py/compare/v0.9.4...v0.9.5) (2026-02-04)
 
 
