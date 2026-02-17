@@ -773,9 +773,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "4.5.58"
+version = "4.5.59"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "63be97961acde393029492ce0be7a1af7e323e6bae9511ebfac33751be5e6806"
+checksum = "c5caf74d17c3aec5495110c34cc3f78644bfa89af6c8993ed4de2790e49b6499"
 dependencies = [
  "clap_builder",
  "clap_derive",
@@ -783,9 +783,9 @@ dependencies = [
 
 [[package]]
 name = "clap_builder"
-version = "4.5.58"
+version = "4.5.59"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f13174bda5dfd69d7e947827e5af4b0f2f94a4a3ee92912fba07a66150f21e2"
+checksum = "370daa45065b80218950227371916a1633217ae42b2715b2287b606dcd618e24"
 dependencies = [
  "anstream",
  "anstyle",
@@ -1398,9 +1398,9 @@ dependencies = [
 
 [[package]]
 name = "futures-channel"
-version = "0.3.31"
+version = "0.3.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2dff15bf788c671c1934e366d07e30c1814a8ef514e1af724a602e8a2fbe1b10"
+checksum = "07bbe89c50d7a535e539b8c17bc0b49bdb77747034daa8087407d655f3f7cc1d"
 dependencies = [
  "futures-core",
  "futures-sink",
@@ -1408,9 +1408,9 @@ dependencies = [
 
 [[package]]
 name = "futures-core"
-version = "0.3.31"
+version = "0.3.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "05f29059c0c2090612e8d742178b0580d2dc940c837851ad723096f87af6663e"
+checksum = "7e3450815272ef58cec6d564423f6e755e25379b217b0bc688e295ba24df6b1d"
 
 [[package]]
 name = "futures-executor"
@@ -1425,15 +1425,15 @@ dependencies = [
 
 [[package]]
 name = "futures-io"
-version = "0.3.31"
+version = "0.3.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e5c1b78ca4aae1ac06c48a526a655760685149f0d465d21f37abfe57ce075c6"
+checksum = "cecba35d7ad927e23624b22ad55235f2239cfa44fd10428eecbeba6d6a717718"
 
 [[package]]
 name = "futures-macro"
-version = "0.3.31"
+version = "0.3.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "162ee34ebcb7c64a8abebc059ce0fee27c2262618d7b60ed8faf72fef13c3650"
+checksum = "e835b70203e41293343137df5c0664546da5745f82ec9b84d40be8336958447b"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1442,21 +1442,21 @@ dependencies = [
 
 [[package]]
 name = "futures-sink"
-version = "0.3.31"
+version = "0.3.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e575fab7d1e0dcb8d0c7bcf9a63ee213816ab51902e6d244a95819acacf1d4f7"
+checksum = "c39754e157331b013978ec91992bde1ac089843443c49cbc7f46150b0fad0893"
 
 [[package]]
 name = "futures-task"
-version = "0.3.31"
+version = "0.3.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f90f7dce0722e95104fcb095585910c0977252f286e354b5e3bd38902cd99988"
+checksum = "037711b3d59c33004d3856fbdc83b99d4ff37a24768fa1be9ce3538a1cde4393"
 
 [[package]]
 name = "futures-util"
-version = "0.3.31"
+version = "0.3.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9fa08315bb612088cc391249efdc3bc77536f16c91f6cf495e6fbe85b20a4a81"
+checksum = "389ca41296e6190b48053de0321d02a77f32f8a5d2461dd38762c0593805c6d6"
 dependencies = [
  "futures-channel",
  "futures-core",
@@ -1466,7 +1466,6 @@ dependencies = [
  "futures-task",
  "memchr",
  "pin-project-lite",
- "pin-utils",
  "slab",
 ]
 
@@ -3053,8 +3052,8 @@ dependencies = [
 
 [[package]]
 name = "pgstac"
-version = "0.4.5"
-source = "git+https://github.com/stac-utils/rustac#9eed73d13be6b5fdaf2203c3331ef368908aa5c8"
+version = "0.4.6"
+source = "git+https://github.com/stac-utils/rustac#60685145b3db0e802bd96903fc5b77a3b0443976"
 dependencies = [
  "serde",
  "serde_json",
@@ -3944,8 +3943,8 @@ dependencies = [
 
 [[package]]
 name = "rustac"
-version = "0.2.6"
-source = "git+https://github.com/stac-utils/rustac#9eed73d13be6b5fdaf2203c3331ef368908aa5c8"
+version = "0.2.7"
+source = "git+https://github.com/stac-utils/rustac#60685145b3db0e802bd96903fc5b77a3b0443976"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -3970,7 +3969,7 @@ dependencies = [
 
 [[package]]
 name = "rustac-py"
-version = "0.9.5"
+version = "0.9.6"
 dependencies = [
  "cargo-lock",
  "clap",
@@ -4464,8 +4463,8 @@ checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 
 [[package]]
 name = "stac"
-version = "0.16.2"
-source = "git+https://github.com/stac-utils/rustac#9eed73d13be6b5fdaf2203c3331ef368908aa5c8"
+version = "0.16.3"
+source = "git+https://github.com/stac-utils/rustac#60685145b3db0e802bd96903fc5b77a3b0443976"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -4498,7 +4497,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac#9eed73d13be6b5fdaf2203c3331ef368908aa5c8"
+source = "git+https://github.com/stac-utils/rustac#60685145b3db0e802bd96903fc5b77a3b0443976"
 dependencies = [
  "quote",
  "syn 2.0.115",
@@ -4506,8 +4505,8 @@ dependencies = [
 
 [[package]]
 name = "stac-duckdb"
-version = "0.3.4"
-source = "git+https://github.com/stac-utils/rustac#9eed73d13be6b5fdaf2203c3331ef368908aa5c8"
+version = "0.3.5"
+source = "git+https://github.com/stac-utils/rustac#60685145b3db0e802bd96903fc5b77a3b0443976"
 dependencies = [
  "arrow-array",
  "arrow-schema",
@@ -4526,8 +4525,8 @@ dependencies = [
 
 [[package]]
 name = "stac-io"
-version = "0.2.4"
-source = "git+https://github.com/stac-utils/rustac#9eed73d13be6b5fdaf2203c3331ef368908aa5c8"
+version = "0.2.5"
+source = "git+https://github.com/stac-utils/rustac#60685145b3db0e802bd96903fc5b77a3b0443976"
 dependencies = [
  "async-stream",
  "bytes",
@@ -4547,8 +4546,8 @@ dependencies = [
 
 [[package]]
 name = "stac-server"
-version = "0.4.5"
-source = "git+https://github.com/stac-utils/rustac#9eed73d13be6b5fdaf2203c3331ef368908aa5c8"
+version = "0.4.6"
+source = "git+https://github.com/stac-utils/rustac#60685145b3db0e802bd96903fc5b77a3b0443976"
 dependencies = [
  "axum",
  "bb8",
@@ -4573,8 +4572,8 @@ dependencies = [
 
 [[package]]
 name = "stac-validate"
-version = "0.6.4"
-source = "git+https://github.com/stac-utils/rustac#9eed73d13be6b5fdaf2203c3331ef368908aa5c8"
+version = "0.6.5"
+source = "git+https://github.com/stac-utils/rustac#60685145b3db0e802bd96903fc5b77a3b0443976"
 dependencies = [
  "async-recursion",
  "async-trait",
