@@ -24,6 +24,7 @@ dependencies = []
 
 [project.optional-dependencies]
 arrow = ["arro3-core>=0.4.5"]
+duckdb-extensions = ["rustac-duckdb-extensions"]
 
 [project.scripts]
 rustac = "rustac:main"
@@ -97,6 +98,12 @@ cache-keys = [
     { file = "Cargo.toml" },
     { file = "**/*.rs" },
 ]
+
+[tool.uv.workspace]
+members = ["duckdb-extensions"]
+
+[tool.uv.sources]
+rustac-duckdb-extensions = { workspace = true }
 
 [build-system]
 requires = ["maturin>=1.7,<2.0"]

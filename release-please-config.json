@@ -5,6 +5,20 @@
       "release-type": "python",
       "bump-minor-pre-major": true,
       "bump-patch-for-minor-pre-major": true
+    },
+    "duckdb-extensions": {
+      "changelog-path": "CHANGELOG.md",
+      "release-type": "python",
+      "component": "rustac-duckdb-extensions",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "toml",
+          "path": "pyproject.toml",
+          "jsonpath": "project.version"
+        }
+      ]
     }
   },
   "extra-files": [

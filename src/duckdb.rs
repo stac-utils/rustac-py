@@ -15,7 +15,7 @@ use std::{path::PathBuf, sync::Mutex};
 
 const REQUIRED_EXTENSIONS: [&str; 3] = ["spatial", "icu", "parquet"];
 
-#[pyclass(frozen)]
+#[pyclass(frozen, subclass)]
 pub struct DuckdbClient(Mutex<Client>);
 
 #[pymethods]

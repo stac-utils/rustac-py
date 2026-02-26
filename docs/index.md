@@ -26,6 +26,12 @@ If you'd like to use `arrow` tables, e.g. to load into GeoPandas:
 python -m pip install 'rustac[arrow]'
 ```
 
+To bundle DuckDB extensions and avoid runtime downloads:
+
+```shell
+python -m pip install 'rustac[duckdb-extensions]'
+```
+
 ## Usage
 
 ```python
