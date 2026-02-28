@@ -23,13 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v7
-      - name: Install Python
-        run: uv python install 3.11
       - name: Build wheel
-        run: |
-          uv pip install hatchling wheel --system
-          cd duckdb-extensions/scripts
-          python build_wheel.py ${{ matrix.duckdb-platform }}
+        run: uv run --only-group build duckdb-extension/scripts/build_wheel.py ${{ matrix.duckdb-platform }}
       - name: Upload wheels
         uses: actions/upload-artifact@v6
         with:

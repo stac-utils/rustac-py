@@ -2797,6 +2797,10 @@ duckdb-extensions = [
 ]
 
 [package.dev-dependencies]
+build = [
+    { name = "requests" },
+    { name = "wheel" },
+]
 dev = [
     { name = "geopandas" },
     { name = "maturin" },
@@ -2838,6 +2842,10 @@ requires-dist = [
 provides-extras = ["arrow", "duckdb-extensions"]
 
 [package.metadata.requires-dev]
+build = [
+    { name = "requests", specifier = ">=2.32.5" },
+    { name = "wheel", specifier = ">=0.46.3" },
+]
 dev = [
     { name = "geopandas", specifier = ">=1.0.1" },
     { name = "maturin", specifier = ">=1.7.4" },
@@ -2873,7 +2881,7 @@ docs = [
 
 [[package]]
 name = "rustac-duckdb-extensions"
-version = "1.4.4.0"
+version = "1.4.4.post0"
 source = { editable = "duckdb-extensions" }
 
 [[package]]
@@ -3128,6 +3136,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/0b/02/ae6ceac1baeda530866a85075641cec12989bd8d31af6d5ab4a3e8c92f47/webencodings-0.5.1.tar.gz", hash = "sha256:b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923", size = 9721, upload-time = "2017-04-05T20:21:34.189Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f4/24/2a3e3df732393fed8b3ebf2ec078f05546de641fe1b667ee316ec1dcf3b7/webencodings-0.5.1-py2.py3-none-any.whl", hash = "sha256:a0af1213f3c2226497a97e2b3aa01a7e4bee4f403f95be16fc9acd2947514a78", size = 11774, upload-time = "2017-04-05T20:21:32.581Z" },
+]
+
+[[package]]
+name = "wheel"
+version = "0.46.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/89/24/a2eb353a6edac9a0303977c4cb048134959dd2a51b48a269dfc9dde00c8a/wheel-0.46.3.tar.gz", hash = "sha256:e3e79874b07d776c40bd6033f8ddf76a7dad46a7b8aa1b2787a83083519a1803", size = 60605, upload-time = "2026-01-22T12:39:49.136Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/87/22/b76d483683216dde3d67cba61fb2444be8d5be289bf628c13fc0fd90e5f9/wheel-0.46.3-py3-none-any.whl", hash = "sha256:4b399d56c9d9338230118d705d9737a2a468ccca63d5e813e2a4fc7815d8bc4d", size = 30557, upload-time = "2026-01-22T12:39:48.099Z" },
 ]
 
 [[package]]
