@@ -17,7 +17,7 @@ PLATFORM_MAP = {
     "osx_arm64": "macosx_11_0_arm64",
 }
 
-DUCKDB_EXTENSIONS_DIR = Path(__file__).parent.parent
+ROOT = Path(__file__).parent.parent
 
 
 def build_wheel(duckdb_platform: str) -> None:
@@ -30,10 +30,10 @@ def build_wheel(duckdb_platform: str) -> None:
 
     download_extensions(duckdb_platform)
 
-    dist_dir = DUCKDB_EXTENSIONS_DIR / "dist"
+    dist_dir = ROOT / "dist"
     subprocess.run(
         [sys.executable, "-m", "hatchling", "build", "-t", "wheel"],
-        cwd=DUCKDB_EXTENSIONS_DIR,
+        cwd=ROOT,
         check=True,
     )
 
