@@ -3,7 +3,7 @@ name: DuckDB Extensions
 on:
   push:
     tags:
-      - "duckdb-extensions-v*"
+      - "rustac-duckdb-extensions-v*"
   workflow_dispatch:
 
 permissions:
