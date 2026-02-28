@@ -30,7 +30,8 @@ def download_extensions(platform: str) -> None:
         url = f"{BASE_URL}/{DUCKDB_VERSION}/{platform}/{ext}.duckdb_extension.gz"
         output_path = output_dir / f"{ext}.duckdb_extension"
         print(f"Downloading {url}")
-        response = urllib.request.urlopen(url)  # noqa: S310
+        request = urllib.request.Request(url, headers={"User-Agent": "rustac"})
+        response = urllib.request.urlopen(request)  # noqa: S310
         compressed = response.read()
         decompressed = gzip.decompress(compressed)
         output_path.write_bytes(decompressed)
