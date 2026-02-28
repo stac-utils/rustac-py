@@ -16,6 +16,7 @@
     "duckdb-extensions": {
       "changelog-path": "CHANGELOG.md",
       "release-type": "python",
+      "prerelease": true,
       "component": "rustac-duckdb-extensions"
     }
   },

@@ -1,6 +1,6 @@
 [project]
 name = "rustac-duckdb-extensions"
-version = "1.4.4.0"
+version = "1.4.4-0"
 description = "Pre-built DuckDB extensions for rustac"
 readme = "README.md"
 authors = [{ name = "Pete Gadomski", email = "pete.gadomski@gmail.com" }]
