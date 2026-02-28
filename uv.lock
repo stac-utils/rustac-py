@@ -2814,7 +2814,6 @@ duckdb-extensions = [
 [package.dev-dependencies]
 build = [
     { name = "hatchling" },
-    { name = "wheel" },
 ]
 dev = [
     { name = "geopandas" },
@@ -2857,10 +2856,7 @@ requires-dist = [
 provides-extras = ["arrow", "duckdb-extensions"]
 
 [package.metadata.requires-dev]
-build = [
-    { name = "hatchling", specifier = ">=1.29.0" },
-    { name = "wheel", specifier = ">=0.46.3" },
-]
+build = [{ name = "hatchling", specifier = ">=1.29.0" }]
 dev = [
     { name = "geopandas", specifier = ">=1.0.1" },
     { name = "maturin", specifier = ">=1.7.4" },
@@ -2898,6 +2894,20 @@ docs = [
 name = "rustac-duckdb-extensions"
 version = "1.4.4.post0"
 source = { editable = "duckdb-extensions" }
+
+[package.dev-dependencies]
+build = [
+    { name = "hatchling" },
+    { name = "wheel" },
+]
+
+[package.metadata]
+
+[package.metadata.requires-dev]
+build = [
+    { name = "hatchling", specifier = ">=1.29.0" },
+    { name = "wheel", specifier = ">=0.46.3" },
+]
 
 [[package]]
 name = "shapely"

@@ -27,3 +27,9 @@ Repository = "https://github.com/stac-utils/rustac-py"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+build = [
+    "hatchling>=1.29.0",
+    "wheel>=0.46.3",
+]

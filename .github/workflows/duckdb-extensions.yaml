@@ -24,11 +24,14 @@ jobs:
             wheel-platform: macosx_11_0_x86_64
           - duckdb-platform: osx_arm64
             wheel-platform: macosx_11_0_arm64
+    defaults:
+      run:
+        working-directory: duckdb-extensions
     steps:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v7
       - name: Download extensions
-        run: uv run --only-group build duckdb-extensions/scripts/download_extensions.py ${{ matrix.duckdb-platform }}
+        run: uv run --only-group build scripts/download_extensions.py ${{ matrix.duckdb-platform }}
       - name: Build wheel
         run: uv run --only-group build python -m hatchling build -t wheel
         working-directory: duckdb-extensions
@@ -38,7 +41,6 @@ jobs:
           --remove
           --platform-tag ${{ matrix.wheel-platform }}
           dist/*.whl
-        working-directory: duckdb-extensions
       - uses: actions/upload-artifact@v6
         with:
           name: duckdb-extensions-${{ matrix.duckdb-platform }}

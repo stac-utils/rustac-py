@@ -58,10 +58,6 @@ exclude = [
 
 
 [dependency-groups]
-build = [
-    "hatchling>=1.29.0",
-    "wheel>=0.46.3",
-]
 dev = [
     "geopandas>=1.0.1",
     "maturin>=1.7.4",
