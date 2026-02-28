@@ -14,7 +14,7 @@ openssl-vendored = ["dep:openssl"]
 
 [dependencies]
 clap = "4.5.59"
-duckdb = { version = "1.4.4", features = ["serde_json"] }
+duckdb = { git = "https://github.com/duckdb/duckdb-rs", rev = "a2639608d946690e04b1d5f6448302d57bb99d7e", features = ["serde_json"] }
 futures-core = "0.3.32"
 futures-util = "0.3.32"
 geoarrow-schema = "0.6.2"
