@@ -32,7 +32,7 @@ def build_wheel(duckdb_platform: str) -> None:
 
     dist_dir = ROOT / "dist"
     subprocess.run(
-        [sys.executable, "-m", "hatchling", "build", "-t", "wheel"],
+        ["uv", "run", "python", "-m", "hatchling", "build", "-t", "wheel"],
         cwd=ROOT,
         check=True,
     )
@@ -40,7 +40,9 @@ def build_wheel(duckdb_platform: str) -> None:
     for whl in dist_dir.glob("*.whl"):
         subprocess.run(
             [
-                sys.executable,
+                "uv",
+                "run",
+                "python",
                 "-m",
                 "wheel",
                 "tags",

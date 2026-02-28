@@ -2798,7 +2798,6 @@ duckdb-extensions = [
 
 [package.dev-dependencies]
 build = [
-    { name = "requests" },
     { name = "wheel" },
 ]
 dev = [
@@ -2842,10 +2841,7 @@ requires-dist = [
 provides-extras = ["arrow", "duckdb-extensions"]
 
 [package.metadata.requires-dev]
-build = [
-    { name = "requests", specifier = ">=2.32.5" },
-    { name = "wheel", specifier = ">=0.46.3" },
-]
+build = [{ name = "wheel", specifier = ">=0.46.3" }]
 dev = [
     { name = "geopandas", specifier = ">=1.0.1" },
     { name = "maturin", specifier = ">=1.7.4" },
