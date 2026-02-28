@@ -21,16 +21,16 @@ geoarrow-schema = "0.6.2"
 geojson = "0.24.1"
 object_store = { version = "0.12.4", features = ["gcp", "aws", "azure", "http"] }
 openssl = { version = "0.10", features = ["vendored"], optional = true }
-parquet = "56.0.0"
-pyo3 = { version = "0.26.0", features = ["extension-module"] }
-pyo3-arrow = "0.12.0"
-pyo3-async-runtimes = { version = "0.26.0", features = [
+parquet = "58.0.0"
+pyo3 = { version = "0.28.0", features = ["extension-module"] }
+pyo3-arrow = "0.17.0"
+pyo3-async-runtimes = { version = "0.28.0", features = [
     "tokio",
     "tokio-runtime",
 ] }
 pyo3-log = "0.13.0"
-pyo3-object_store = "0.6.0"
-pythonize = "0.26.0"
+pyo3-object_store = "0.10.0"
+pythonize = "0.28.0"
 rustac = { git = "https://github.com/stac-utils/rustac", features = ["pgstac"] }
 serde = "1.0.217"
 serde_json = { version = "1.0.149", features = ["preserve_order"] }
