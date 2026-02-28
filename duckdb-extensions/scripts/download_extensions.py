@@ -18,7 +18,7 @@ def download_extensions(platform: str) -> None:
     """
     output_dir = (
         Path(__file__).parent.parent
-        / "python"
+        / "src"
         / "rustac_duckdb_extensions"
         / "extensions"
         / DUCKDB_VERSION

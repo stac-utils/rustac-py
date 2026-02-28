@@ -19,9 +19,9 @@ def _detect_extension_directory() -> Path | None:
 class DuckdbClient(_RustDuckdbClient):
     """A client for querying stac-geoparquet with DuckDB.
 
-    If ``rustac-duckdb-extensions`` is installed and no ``extension_directory``
+    If `rustac-duckdb-extensions` is installed and no `extension_directory`
     is provided, the bundled extensions will be used automatically and
-    ``install_extensions`` will be set to ``False``.
+    `install_extensions` will be set to `False`.
     """
 
     def __init__(
