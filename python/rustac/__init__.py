@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from .duckdb import DuckdbClient
 from .geoparquet import geoparquet_writer
 from .rustac import *
-from .duckdb import DuckdbClient  # noqa: E402
 
 __doc__ = rustac.__doc__
-__all__ = rustac.__all__ + ["geoparquet_writer"]  # pyright: ignore[reportUnsupportedDunderAll, reportAttributeAccessIssue]
+__all__ = rustac.__all__ + ["geoparquet_writer", "DuckdbClient"]  # pyright: ignore[reportUnsupportedDunderAll, reportAttributeAccessIssue]
