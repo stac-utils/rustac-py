@@ -6,6 +6,12 @@ resolution-markers = [
     "python_full_version < '3.12'",
 ]
 
+[manifest]
+members = [
+    "rustac",
+    "rustac-duckdb-extensions",
+]
+
 [[package]]
 name = "affine"
 version = "2.4.0"
@@ -2786,6 +2792,9 @@ source = { editable = "." }
 arrow = [
     { name = "arro3-core" },
 ]
+duckdb-extensions = [
+    { name = "rustac-duckdb-extensions" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -2822,8 +2831,11 @@ docs = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "arro3-core", marker = "extra == 'arrow'", specifier = ">=0.4.5" }]
-provides-extras = ["arrow"]
+requires-dist = [
+    { name = "arro3-core", marker = "extra == 'arrow'", specifier = ">=0.4.5" },
+    { name = "rustac-duckdb-extensions", marker = "extra == 'duckdb-extensions'", editable = "duckdb-extensions" },
+]
+provides-extras = ["arrow", "duckdb-extensions"]
 
 [package.metadata.requires-dev]
 dev = [
@@ -2858,6 +2870,11 @@ docs = [
     { name = "pystac-client", specifier = ">=0.8.5" },
     { name = "tqdm", specifier = ">=4.67.1" },
 ]
+
+[[package]]
+name = "rustac-duckdb-extensions"
+version = "1.4.4.0"
+source = { editable = "duckdb-extensions" }
 
 [[package]]
 name = "shapely"
