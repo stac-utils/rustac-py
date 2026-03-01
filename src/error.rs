@@ -45,6 +45,12 @@ pub enum Error {
     TokioTaskJon(#[from] tokio::task::JoinError),
 }
 
+impl From<pyo3::CastError<'_, '_>> for Error {
+    fn from(err: pyo3::CastError) -> Self {
+        Error::Py(err.into())
+    }
+}
+
 impl From<Error> for PyErr {
     fn from(err: Error) -> Self {
         match err {

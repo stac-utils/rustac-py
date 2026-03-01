@@ -310,7 +310,7 @@ async fn iter_search_api(
     search: Search,
 ) -> Result<impl Stream<Item = stac_io::Result<Map<String, Value>>>> {
     let client = Client::new(&href)?;
-    let stream = client.search(search).await?;
+    let stream = client.search_stream(search).await?;
     Ok(stream)
 }
 
