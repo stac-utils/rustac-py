@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4-0](https://github.com/stac-utils/rustac-py/compare/rustac-duckdb-extensions-v1.4.4-0...rustac-duckdb-extensions-v1.4.4-0) (2026-03-01)
+
+
+### Bug Fixes
+
+* duckdb extension grabs ([#245](https://github.com/stac-utils/rustac-py/issues/245)) ([643dead](https://github.com/stac-utils/rustac-py/commit/643dead8eb7bfa063a3491e07630150c5d9e5e1b))
+
 ## [1.4.4-0](https://github.com/stac-utils/rustac-py/compare/rustac-duckdb-extensions-v1.4.4-0...rustac-duckdb-extensions-v1.4.4-0) (2026-02-28)
 
 
