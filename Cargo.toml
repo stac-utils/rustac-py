@@ -21,9 +21,9 @@ geoarrow-schema = "0.6.2"
 geojson = "0.24.1"
 object_store = { version = "0.12.4", features = ["gcp", "aws", "azure", "http"] }
 openssl = { version = "0.10", features = ["vendored"], optional = true }
-parquet = "58.0.0"
+parquet = "57.0.0"
 pyo3 = { version = "0.28.0", features = ["extension-module"] }
-pyo3-arrow = "0.17.0"
+pyo3-arrow = "0.16.0"
 pyo3-async-runtimes = { version = "0.28.0", features = [
     "tokio",
     "tokio-runtime",

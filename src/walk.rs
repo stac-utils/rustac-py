@@ -31,7 +31,7 @@ pub fn walk(container: Bound<'_, PyDict>, store: Option<AnyObjectStore>) -> Resu
     })
 }
 
-#[pyclass]
+#[pyclass(skip_from_py_object)]
 #[derive(Clone)]
 pub struct Walk {
     values: Arc<Mutex<VecDeque<Value>>>,
