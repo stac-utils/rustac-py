@@ -2379,9 +2379,9 @@ dependencies = [
 
 [[package]]
 name = "jsonschema"
-version = "0.42.2"
+version = "0.44.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a44c9bb95f6ac9270bf4fd38d71c2f8704b9fe0323a293af7a5284cbd60a39b2"
+checksum = "f98b64a413c93a1b413dfbaf973b78d271648b9cae50b10302ad88af78991672"
 dependencies = [
  "ahash 0.8.12",
  "async-trait",
@@ -2396,7 +2396,7 @@ dependencies = [
  "num-cmp",
  "num-traits",
  "percent-encoding",
- "referencing 0.42.2",
+ "referencing 0.44.1",
  "regex",
  "regex-syntax",
  "reqwest 0.13.2",
@@ -3059,8 +3059,8 @@ dependencies = [
 
 [[package]]
 name = "pgstac"
-version = "0.4.7"
-source = "git+https://github.com/stac-utils/rustac#33b4845131b8319c275e9ed11e52151726b89afd"
+version = "0.4.8"
+source = "git+https://github.com/stac-utils/rustac#d50656eb6c90ffdf734a10b1eba053dfc4f49679"
 dependencies = [
  "serde",
  "serde_json",
@@ -3688,9 +3688,9 @@ dependencies = [
 
 [[package]]
 name = "referencing"
-version = "0.42.2"
+version = "0.44.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "97d4124f489451bb67c59d67fa16f3ae9b5690b290406a7538e38458632666df"
+checksum = "22952642836711d7a730d23a4dfb0d732e75a85e4c4f5704266d9c8fac278ff1"
 dependencies = [
  "ahash 0.8.12",
  "async-trait",
@@ -3956,8 +3956,8 @@ dependencies = [
 
 [[package]]
 name = "rustac"
-version = "0.2.8"
-source = "git+https://github.com/stac-utils/rustac#33b4845131b8319c275e9ed11e52151726b89afd"
+version = "0.2.9"
+source = "git+https://github.com/stac-utils/rustac#d50656eb6c90ffdf734a10b1eba053dfc4f49679"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -4476,8 +4476,8 @@ checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 
 [[package]]
 name = "stac"
-version = "0.16.4"
-source = "git+https://github.com/stac-utils/rustac#33b4845131b8319c275e9ed11e52151726b89afd"
+version = "0.16.5"
+source = "git+https://github.com/stac-utils/rustac#d50656eb6c90ffdf734a10b1eba053dfc4f49679"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -4510,7 +4510,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac#33b4845131b8319c275e9ed11e52151726b89afd"
+source = "git+https://github.com/stac-utils/rustac#d50656eb6c90ffdf734a10b1eba053dfc4f49679"
 dependencies = [
  "quote",
  "syn 2.0.117",
@@ -4518,8 +4518,8 @@ dependencies = [
 
 [[package]]
 name = "stac-duckdb"
-version = "0.3.6"
-source = "git+https://github.com/stac-utils/rustac#33b4845131b8319c275e9ed11e52151726b89afd"
+version = "0.3.7"
+source = "git+https://github.com/stac-utils/rustac#d50656eb6c90ffdf734a10b1eba053dfc4f49679"
 dependencies = [
  "arrow-array",
  "arrow-schema 57.3.0",
@@ -4538,8 +4538,8 @@ dependencies = [
 
 [[package]]
 name = "stac-io"
-version = "0.2.6"
-source = "git+https://github.com/stac-utils/rustac#33b4845131b8319c275e9ed11e52151726b89afd"
+version = "0.2.7"
+source = "git+https://github.com/stac-utils/rustac#d50656eb6c90ffdf734a10b1eba053dfc4f49679"
 dependencies = [
  "async-stream",
  "bytes",
@@ -4559,8 +4559,8 @@ dependencies = [
 
 [[package]]
 name = "stac-server"
-version = "0.5.0"
-source = "git+https://github.com/stac-utils/rustac#33b4845131b8319c275e9ed11e52151726b89afd"
+version = "0.5.1"
+source = "git+https://github.com/stac-utils/rustac#d50656eb6c90ffdf734a10b1eba053dfc4f49679"
 dependencies = [
  "axum",
  "bb8",
@@ -4585,14 +4585,14 @@ dependencies = [
 
 [[package]]
 name = "stac-validate"
-version = "0.6.6"
-source = "git+https://github.com/stac-utils/rustac#33b4845131b8319c275e9ed11e52151726b89afd"
+version = "0.6.7"
+source = "git+https://github.com/stac-utils/rustac#d50656eb6c90ffdf734a10b1eba053dfc4f49679"
 dependencies = [
  "async-recursion",
  "async-trait",
  "fluent-uri 0.4.1",
- "jsonschema 0.42.2",
- "referencing 0.42.2",
+ "jsonschema 0.44.1",
+ "referencing 0.44.1",
  "reqwest 0.13.2",
  "serde",
  "serde_json",
@@ -4891,9 +4891,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.49.0"
+version = "1.50.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "72a2903cd7736441aac9df9d7688bd0ce48edccaadf181c3b90be801e81d3d86"
+checksum = "27ad5e34374e03cfffefc301becb44e9dc3c17584f414349ebe29ed26661822d"
 dependencies = [
  "bytes",
  "libc",
