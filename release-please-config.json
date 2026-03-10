@@ -21,5 +21,6 @@
       "component": "rustac-duckdb-extensions"
     }
   },
+  "separate-pull-requests": true,
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
