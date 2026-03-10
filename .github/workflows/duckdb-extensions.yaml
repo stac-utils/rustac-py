@@ -41,7 +41,7 @@ jobs:
           --remove
           --platform-tag ${{ matrix.wheel-platform }}
           dist/*.whl
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: duckdb-extensions-${{ matrix.duckdb-platform }}
           path: duckdb-extensions/dist
@@ -59,13 +59,13 @@ jobs:
       contents: write
       attestations: write
     steps:
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           pattern: duckdb-extensions-*
           path: dist
           merge-multiple: true
       - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: "dist/*"
       - name: Publish to PyPI
