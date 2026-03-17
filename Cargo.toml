@@ -13,12 +13,12 @@ duckdb-bundled = ["stac-duckdb/bundled"]
 openssl-vendored = ["dep:openssl"]
 
 [dependencies]
-clap = "4.5.59"
+clap = "4.6.0"
 duckdb = { git = "https://github.com/gadomski/duckdb-rs", branch = "arrow-v58", features = ["serde_json"] }
 futures-core = "0.3.32"
 futures-util = "0.3.32"
 geoarrow-schema = "0.7.0"
-geojson = "0.24.1"
+geojson = "1.0.0"
 object_store = { version = "0.13.1", features = ["gcp", "aws", "azure", "http"] }
 openssl = { version = "0.10", features = ["vendored"], optional = true }
 parquet = "58.0.0"
