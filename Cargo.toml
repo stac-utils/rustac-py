@@ -19,9 +19,9 @@ futures-core = "0.3.32"
 futures-util = "0.3.32"
 geoarrow-schema = "0.7.0"
 geojson = "0.24.1"
-object_store = { version = "0.13.1", features = ["gcp", "aws", "azure", "http"] }
+object_store = { version = "0.13.2", features = ["gcp", "aws", "azure", "http"] }
 openssl = { version = "0.10", features = ["vendored"], optional = true }
-parquet = "58.0.0"
+parquet = "58.1.0"
 pyo3 = { version = "0.28.0", features = ["extension-module"] }
 pyo3-arrow = "0.17.0"
 pyo3-async-runtimes = { version = "0.28.0", features = [
