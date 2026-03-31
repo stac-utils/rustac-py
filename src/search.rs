@@ -388,10 +388,7 @@ pub fn build<'py>(
         .map(|intersects| match intersects {
             StringOrDict::Dict(json) => pythonize::depythonize(&json)
                 .map_err(PyErr::from)
-                .and_then(|json| {
-                    Geometry::from_json_object(json)
-                        .map_err(|err| PyValueError::new_err(err.to_string()))
-                }),
+                .map(|json| Geometry::new(json)),
             StringOrDict::String(s) => s
                 .parse::<Geometry>()
                 .map_err(|err| PyValueError::new_err(err.to_string())),
