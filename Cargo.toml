@@ -14,7 +14,7 @@ openssl-vendored = ["dep:openssl"]
 
 [dependencies]
 clap = "4.6.0"
-duckdb = { git = "https://github.com/gadomski/duckdb-rs", branch = "arrow-v58", features = ["serde_json"] }
+duckdb = "1.10501.0"
 futures-core = "0.3.32"
 futures-util = "0.3.32"
 geoarrow-schema = "0.7.0"
@@ -45,6 +45,6 @@ tracing = "0.1.44"
 cargo-lock = "11"
 
 [patch.crates-io]
-geoparquet = { git = "https://github.com/geoarrow/geoarrow-rs", branch = "arrow-58" }
-geoarrow-array = { git = "https://github.com/geoarrow/geoarrow-rs", branch = "arrow-58" }
-geoarrow-schema = { git = "https://github.com/geoarrow/geoarrow-rs", branch = "arrow-58" }
+geoarrow-array = { git = "https://github.com/geoarrow/geoarrow-rs", rev = "234c7bd287b3e3caaa9ece9e67e81259347121f8" }
+geoarrow-schema = { git = "https://github.com/geoarrow/geoarrow-rs", rev = "234c7bd287b3e3caaa9ece9e67e81259347121f8" }
+geoparquet = { git = "https://github.com/geoarrow/geoarrow-rs", rev = "234c7bd287b3e3caaa9ece9e67e81259347121f8" }
