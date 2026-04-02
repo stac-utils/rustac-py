@@ -15,11 +15,11 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/create-github-app-token@v3
+      - uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3
         id: generate-token
         with:
           app-id: ${{ vars.RELEASE_BOT_CLIENT_ID }}
           private-key: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4
         with:
           token: ${{ steps.generate-token.outputs.token }}

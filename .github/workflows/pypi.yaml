@@ -25,14 +25,14 @@ jobs:
           - armv7
           - ppc64le
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
       - name: Install Python
         run: uv python install 3.11
       - name: Build wheels
-        uses: PyO3/maturin-action@v1
+        uses: PyO3/maturin-action@04ac600d27cdf7a9a280dadf7147097c42b757ad # v1
         with:
           target: ${{ matrix.target }}
           args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled -F openssl-vendored
@@ -52,7 +52,7 @@ jobs:
                 ;;
             esac
       - name: Upload wheels
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
           name: wheels-linux-${{ matrix.target }}
           path: dist
@@ -67,21 +67,21 @@ jobs:
           - target: aarch64
           - target: armv7
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
       - name: Install Python
         run: uv python install 3.11
       - name: Build wheels
-        uses: PyO3/maturin-action@v1
+        uses: PyO3/maturin-action@04ac600d27cdf7a9a280dadf7147097c42b757ad # v1
         with:
           target: ${{ matrix.platform.target }}
           args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled -F openssl-vendored
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: musllinux_1_2
       - name: Upload wheels
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
           name: wheels-musllinux-${{ matrix.platform.target }}
           path: dist
@@ -96,20 +96,20 @@ jobs:
           - runner: macos-14
             target: aarch64
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
       - name: Install Python
         run: uv python install 3.11
       - name: Build wheels
-        uses: PyO3/maturin-action@v1
+        uses: PyO3/maturin-action@04ac600d27cdf7a9a280dadf7147097c42b757ad # v1
         with:
           target: ${{ matrix.platform.target }}
           args: --release --out dist -i 3.11 -F pyo3/abi3-py311 -F duckdb-bundled
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
       - name: Upload wheels
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
           name: wheels-macos-${{ matrix.platform.target }}
           path: dist
@@ -117,16 +117,16 @@ jobs:
   sdist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: true
       - name: Build sdist
-        uses: PyO3/maturin-action@v1
+        uses: PyO3/maturin-action@04ac600d27cdf7a9a280dadf7147097c42b757ad # v1
         with:
           command: sdist
           args: --out dist
       - name: Upload sdist
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
           name: wheels-sdist
           path: dist
@@ -148,14 +148,14 @@ jobs:
       contents: write
       attestations: write
     steps:
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
       - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v4
+        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4
         with:
           subject-path: "wheels-*/*"
       - name: Publish to PyPI
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
-        uses: PyO3/maturin-action@v1
+        uses: PyO3/maturin-action@04ac600d27cdf7a9a280dadf7147097c42b757ad # v1
         with:
           command: upload
           args: --non-interactive --skip-existing wheels-*/*

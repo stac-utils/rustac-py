@@ -38,13 +38,13 @@ jobs:
           # https://github.com/stac-utils/rustac-py/issues/1
           # - windows-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
         with:
           python-version: ${{ matrix.python-version }}
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Install libduckdb
         run: |
           wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-${{ matrix.os.duckdb-slug }}.zip
@@ -74,11 +74,11 @@ jobs:
       DUCKDB_LIB_DIR: ${{ github.workspace }}/opt/duckdb
       LD_LIBRARY_PATH: ${{ github.workspace }}/opt/duckdb
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: true
-      - uses: astral-sh/setup-uv@v7
-      - uses: Swatinem/rust-cache@v2
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
+      - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Install libduckdb
         run: |
           wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-linux-amd64.zip
