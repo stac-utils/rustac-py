@@ -3165,7 +3165,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.4.8"
-source = "git+https://github.com/stac-utils/rustac#0f0158ed527c8c9d162cd079391c58d8e09face5"
+source = "git+https://github.com/stac-utils/rustac#bc98b7e1b5edaed2c59161b4217348e7f2273380"
 dependencies = [
  "serde",
  "serde_json",
@@ -3409,9 +3409,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3"
-version = "0.28.2"
+version = "0.28.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cf85e27e86080aafd5a22eae58a162e133a589551542b3e5cee4beb27e54f8e1"
+checksum = "91fd8e38a3b50ed1167fb981cd6fd60147e091784c427b8f7183a7ee32c31c12"
 dependencies = [
  "chrono",
  "chrono-tz",
@@ -3461,18 +3461,18 @@ dependencies = [
 
 [[package]]
 name = "pyo3-build-config"
-version = "0.28.2"
+version = "0.28.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8bf94ee265674bf76c09fa430b0e99c26e319c945d96ca0d5a8215f31bf81cf7"
+checksum = "e368e7ddfdeb98c9bca7f8383be1648fd84ab466bf2bc015e94008db6d35611e"
 dependencies = [
  "target-lexicon",
 ]
 
 [[package]]
 name = "pyo3-ffi"
-version = "0.28.2"
+version = "0.28.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "491aa5fc66d8059dd44a75f4580a2962c1862a1c2945359db36f6c2818b748dc"
+checksum = "7f29e10af80b1f7ccaf7f69eace800a03ecd13e883acfacc1e5d0988605f651e"
 dependencies = [
  "libc",
  "pyo3-build-config",
@@ -3491,9 +3491,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3-macros"
-version = "0.28.2"
+version = "0.28.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f5d671734e9d7a43449f8480f8b38115df67bef8d21f76837fa75ee7aaa5e52e"
+checksum = "df6e520eff47c45997d2fc7dd8214b25dd1310918bbb2642156ef66a67f29813"
 dependencies = [
  "proc-macro2",
  "pyo3-macros-backend",
@@ -3503,9 +3503,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3-macros-backend"
-version = "0.28.2"
+version = "0.28.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22faaa1ce6c430a1f71658760497291065e6450d7b5dc2bcf254d49f66ee700a"
+checksum = "c4cdc218d835738f81c2338f822078af45b4afdf8b2e33cbb5916f108b813acb"
 dependencies = [
  "heck",
  "proc-macro2",
@@ -4085,7 +4085,7 @@ dependencies = [
 [[package]]
 name = "rustac"
 version = "0.2.9"
-source = "git+https://github.com/stac-utils/rustac#0f0158ed527c8c9d162cd079391c58d8e09face5"
+source = "git+https://github.com/stac-utils/rustac#bc98b7e1b5edaed2c59161b4217348e7f2273380"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -4607,15 +4607,18 @@ checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 [[package]]
 name = "stac"
 version = "0.16.5"
-source = "git+https://github.com/stac-utils/rustac#0f0158ed527c8c9d162cd079391c58d8e09face5"
+source = "git+https://github.com/stac-utils/rustac#bc98b7e1b5edaed2c59161b4217348e7f2273380"
 dependencies = [
  "arrow-array",
  "arrow-cast",
  "arrow-json",
  "arrow-schema",
+ "async-stream",
  "bytes",
  "chrono",
  "cql2",
+ "futures",
+ "futures-core",
  "geo 0.32.0",
  "geo-traits",
  "geo-types",
@@ -4640,7 +4643,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac#0f0158ed527c8c9d162cd079391c58d8e09face5"
+source = "git+https://github.com/stac-utils/rustac#bc98b7e1b5edaed2c59161b4217348e7f2273380"
 dependencies = [
  "quote",
  "syn 2.0.117",
@@ -4649,13 +4652,15 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.3.7"
-source = "git+https://github.com/stac-utils/rustac#0f0158ed527c8c9d162cd079391c58d8e09face5"
+source = "git+https://github.com/stac-utils/rustac#bc98b7e1b5edaed2c59161b4217348e7f2273380"
 dependencies = [
  "arrow-array",
  "arrow-schema",
  "chrono",
  "cql2",
  "duckdb",
+ "futures",
+ "futures-core",
  "geo 0.32.0",
  "geoarrow-schema",
  "geojson 1.0.0",
@@ -4669,7 +4674,7 @@ dependencies = [
 [[package]]
 name = "stac-io"
 version = "0.2.7"
-source = "git+https://github.com/stac-utils/rustac#0f0158ed527c8c9d162cd079391c58d8e09face5"
+source = "git+https://github.com/stac-utils/rustac#bc98b7e1b5edaed2c59161b4217348e7f2273380"
 dependencies = [
  "async-stream",
  "bytes",
@@ -4690,12 +4695,13 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.5.1"
-source = "git+https://github.com/stac-utils/rustac#0f0158ed527c8c9d162cd079391c58d8e09face5"
+source = "git+https://github.com/stac-utils/rustac#bc98b7e1b5edaed2c59161b4217348e7f2273380"
 dependencies = [
  "axum",
  "bb8",
  "bb8-postgres",
  "bytes",
+ "futures-core",
  "http",
  "mime",
  "pgstac",
@@ -4716,7 +4722,7 @@ dependencies = [
 [[package]]
 name = "stac-validate"
 version = "0.6.7"
-source = "git+https://github.com/stac-utils/rustac#0f0158ed527c8c9d162cd079391c58d8e09face5"
+source = "git+https://github.com/stac-utils/rustac#bc98b7e1b5edaed2c59161b4217348e7f2273380"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -5022,9 +5028,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.50.0"
+version = "1.51.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "27ad5e34374e03cfffefc301becb44e9dc3c17584f414349ebe29ed26661822d"
+checksum = "2bd1c4c0fc4a7ab90fc15ef6daaa3ec3b893f004f915f2392557ed23237820cd"
 dependencies = [
  "bytes",
  "libc",
@@ -5038,9 +5044,9 @@ dependencies = [
 
 [[package]]
 name = "tokio-macros"
-version = "2.6.1"
+version = "2.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5c55a2eff8b69ce66c84f85e1da1c233edc36ceb85a2058d11b0d6a3c7e7569c"
+checksum = "385a6cb71ab9ab790c5fe8d67f1645e6c450a7ce006a33de03daa956cf70a496"
 dependencies = [
  "proc-macro2",
  "quote",
