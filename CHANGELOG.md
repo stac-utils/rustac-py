@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.9](https://github.com/stac-utils/rustac-py/compare/v0.9.8...v0.9.9) (2026-04-09)
+
+
+### Features
+
+* bump duckdb to v1.5.1 ([#265](https://github.com/stac-utils/rustac-py/issues/265)) ([93f93ab](https://github.com/stac-utils/rustac-py/commit/93f93ab48001d78ccff8d3bd2c6b362ea352e541))
+
 ## [0.9.8](https://github.com/stac-utils/rustac-py/compare/v0.9.7...v0.9.8) (2026-03-10)
 
 
