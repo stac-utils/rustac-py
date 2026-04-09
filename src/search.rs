@@ -7,7 +7,7 @@ use pyo3::prelude::*;
 use pyo3::{Bound, FromPyObject, PyErr, PyResult, exceptions::PyValueError, types::PyDict};
 use pyo3_object_store::AnyObjectStore;
 use serde_json::{Map, Value};
-use stac::api::{Fields, Filter, Items, Search, Sortby};
+use stac::api::{Fields, Filter, Items, Search, Sortby, StreamItemsClient};
 use stac::{Bbox, geoparquet::WriterOptions};
 use stac_io::{Format, StacStore, api::Client};
 use std::sync::Arc;
@@ -308,10 +308,15 @@ async fn search_api(
 async fn iter_search_api(
     href: String,
     search: Search,
-) -> Result<impl Stream<Item = stac_io::Result<Map<String, Value>>>> {
+) -> Result<impl Stream<Item = stac_io::Result<Map<String, Value>>> + 'static> {
     let client = Client::new(&href)?;
-    let stream = client.search_stream(search).await?;
-    Ok(stream)
+    Ok(async_stream::try_stream! {
+        let inner = client.search_stream(search).await?;
+        futures_util::pin_mut!(inner);
+        while let Some(item) = inner.next().await {
+            yield item?;
+        }
+    })
 }
 
 /// Creates a [Search] from Python arguments.

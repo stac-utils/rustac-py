@@ -4112,6 +4112,7 @@ dependencies = [
 name = "rustac-py"
 version = "0.9.8"
 dependencies = [
+ "async-stream",
  "cargo-lock",
  "clap",
  "duckdb",

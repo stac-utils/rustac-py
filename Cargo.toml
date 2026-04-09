@@ -13,6 +13,7 @@ duckdb-bundled = ["stac-duckdb/bundled"]
 openssl-vendored = ["dep:openssl"]
 
 [dependencies]
+async-stream = "0.3.6"
 clap = "4.6.0"
 duckdb = "1.10501.0"
 futures-core = "0.3.32"
