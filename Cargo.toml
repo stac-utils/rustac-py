@@ -39,7 +39,7 @@ stac = { git = "https://github.com/stac-utils/rustac", features = ["geoarrow", "
 stac-duckdb = { git = "https://github.com/stac-utils/rustac" }
 stac-io = { git = "https://github.com/stac-utils/rustac", features = ["store-all", "geoparquet"] }
 thiserror = "2.0.18"
-tokio = { version = "1.51.0", features = ["rt-multi-thread"] }
+tokio = { version = "1.51.1", features = ["rt-multi-thread"] }
 tracing = "0.1.44"
 
 [build-dependencies]
