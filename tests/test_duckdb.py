@@ -83,6 +83,15 @@ def test_execute(client: DuckdbClient, extension_directory: Path) -> None:
     client.execute("SET extension_directory = ?", [str(extension_directory)])
 
 
+def test_query_to_table(client: DuckdbClient) -> None:
+    pytest.importorskip("arro3.core")
+    table = client.query_to_table(
+        "SELECT id FROM read_parquet('data/100-sentinel-2-items.parquet')"
+    )
+    assert table.num_rows == 100
+    assert table.column_names == ["id"]
+
+
 def test_load_spatial() -> None:
     DuckdbClient(extensions=["spatial"])
 

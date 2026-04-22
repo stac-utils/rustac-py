@@ -61,6 +61,26 @@ impl DuckdbClient {
         Ok(count)
     }
 
+    #[pyo3(signature = (sql, params = Vec::new()))]
+    fn query_to_table<'py>(
+        &self,
+        py: Python<'py>,
+        sql: String,
+        params: Vec<String>,
+    ) -> Result<Py<PyAny>> {
+        let client = self
+            .0
+            .lock()
+            .map_err(|err| PyException::new_err(err.to_string()))?;
+        let mut statement = client.prepare(&sql)?;
+        let arrow = statement.query_arrow(duckdb::params_from_iter(params))?;
+        let schema = arrow.get_schema();
+        let record_batches: Vec<_> = arrow.collect();
+        let table = PyTable::try_new(record_batches, schema)?;
+        let table = table.to_arro3(py)?;
+        Ok(table.into_py_any(py)?)
+    }
+
     #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, max_items=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]
     fn search<'py>(
         &self,

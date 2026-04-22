@@ -88,6 +88,19 @@ class DuckdbClient:
             params: The parameters to pass in to the execution
         """
 
+    def query_to_table(
+        self, sql: str, params: list[str] | None = None
+    ) -> arro3.core.Table:
+        """Run a SQL query and return the results as an arrow table.
+
+        Args:
+            sql: The SQL query to execute
+            params: The parameters to pass in to the query
+
+        Returns:
+            An arrow table of the query results.
+        """
+
     def search(
         self,
         href: str,
