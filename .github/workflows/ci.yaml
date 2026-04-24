@@ -24,18 +24,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version:
-          - "3.11"
-          - "3.12"
-          - "3.13"
-          - "3.14"
-        os:
-          - runner: ubuntu-latest
-            duckdb-slug: linux-amd64
-          - runner: macos-latest
-            duckdb-slug: osx-universal
-          - runner: windows-latest
-            duckdb-slug: windows-amd64
+        include:
+          - python-version: "3.11"
+            os:
+              runner: ubuntu-latest
+              duckdb-slug: linux-amd64
+          - python-version: "3.12"
+            os:
+              runner: ubuntu-latest
+              duckdb-slug: linux-amd64
+          - python-version: "3.13"
+            os:
+              runner: ubuntu-latest
+              duckdb-slug: linux-amd64
+          - python-version: "3.14"
+            os:
+              runner: ubuntu-latest
+              duckdb-slug: linux-amd64
+          - python-version: "3.11"
+            os:
+              runner: macos-latest
+              duckdb-slug: osx-universal
+          - python-version: "3.11"
+            os:
+              runner: windows-latest
+              duckdb-slug: windows-amd64
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
@@ -43,6 +56,12 @@ jobs:
       - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
           python-version: ${{ matrix.python-version }}
+          # The `obstore` symlink breaks the recursive search on Windows, so we
+          # specify the cache-dependency-globs directly.
+          cache-dependency-glob: |
+            uv.lock
+            pyproject.toml
+            duckdb-extensions/pyproject.toml
       - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Install libduckdb
         run: |
