@@ -5,7 +5,7 @@ import sys
 import urllib.request
 from pathlib import Path
 
-DUCKDB_VERSION = "v1.4.4"
+DUCKDB_VERSION = "v1.5.1"
 EXTENSIONS = ["spatial", "icu", "parquet"]
 BASE_URL = "http://extensions.duckdb.org"
 
