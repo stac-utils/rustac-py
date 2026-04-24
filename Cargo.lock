@@ -4162,7 +4162,7 @@ dependencies = [
 
 [[package]]
 name = "rustac-py"
-version = "0.9.9"
+version = "0.9.10"
 dependencies = [
  "async-stream",
  "cargo-lock",
