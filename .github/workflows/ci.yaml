@@ -55,7 +55,7 @@ jobs:
       - name: Install libduckdb
         shell: bash
         run: |
-          wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-${{ matrix.os.duckdb-slug }}.zip
+          curl -L -o libduckdb-${{ matrix.os.duckdb-slug }}.zip https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-${{ matrix.os.duckdb-slug }}.zip
           mkdir -p ${{ github.workspace }}/opt/duckdb
           unzip libduckdb-${{ matrix.os.duckdb-slug }}.zip -d ${{ github.workspace }}/opt/duckdb
       - name: Install GDAL
