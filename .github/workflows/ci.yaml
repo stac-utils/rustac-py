@@ -92,7 +92,7 @@ jobs:
         run: |
           mkdir -p "$USERPROFILE/Downloads/tzdata"
           curl -L -o tzdata.tar.gz https://data.iana.org/time-zones/tzdata-latest.tar.gz
-          tar -xzf tzdata.tar.gz -C "$USERPROFILE/Downloads/tzdata"
+          tar --force-local -xzf tzdata.tar.gz -C "$USERPROFILE/Downloads/tzdata"
           curl -L -o "$USERPROFILE/Downloads/tzdata/windowsZones.xml" https://raw.githubusercontent.com/unicode-org/cldr/master/common/supplemental/windowsZones.xml
       - name: Sync
         run: uv sync --all-extras
