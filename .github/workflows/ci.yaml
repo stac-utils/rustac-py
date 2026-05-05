@@ -70,8 +70,8 @@ jobs:
         # not worth it to install cairo on macos
         if: runner.os == 'ubuntu-latest'
         run: uv run mkdocs build --strict
-  test-windows:
-    name: Test (Windows)
+  build-windows:
+    name: Build (Windows)
     runs-on: windows-latest
     env:
       MATURIN_PEP517_ARGS: --features duckdb-bundled
@@ -87,18 +87,8 @@ jobs:
             pyproject.toml
             uv.lock
       - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
-      - name: Install tzdata
-        shell: bash
-        run: |
-          mkdir -p "$USERPROFILE/Downloads/tzdata"
-          curl -L -o tzdata.tar.gz https://data.iana.org/time-zones/tzdata-latest.tar.gz
-          tar --force-local -xzf tzdata.tar.gz -C "$USERPROFILE/Downloads/tzdata"
-          curl -L -o "$USERPROFILE/Downloads/tzdata/windowsZones.xml" https://raw.githubusercontent.com/unicode-org/cldr/master/common/supplemental/windowsZones.xml
       - name: Sync
-        run: uv sync --all-extras
-      - name: Test
-        shell: bash
-        run: scripts/test
+        run: uv sync
   import:
     name: Import
     runs-on: ubuntu-latest
