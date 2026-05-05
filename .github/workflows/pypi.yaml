@@ -136,6 +136,11 @@ jobs:
             uv.lock
       - name: Install Python
         run: uv python install 3.11
+      - name: Materialize store symlink
+        shell: bash
+        run: |
+          rm python/rustac/store
+          cp -R _obstore/obstore/python/obstore/store python/rustac/store
       - name: Build wheels
         uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b # v1
         with:
