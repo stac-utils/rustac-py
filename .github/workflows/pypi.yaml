@@ -130,6 +130,10 @@ jobs:
         with:
           submodules: true
       - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          cache-dependency-glob: |
+            pyproject.toml
+            uv.lock
       - name: Install Python
         run: uv python install 3.11
       - name: Build wheels
