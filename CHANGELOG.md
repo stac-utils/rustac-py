@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.11](https://github.com/stac-utils/rustac-py/compare/v0.9.10...v0.9.11) (2026-05-05)
+
+
+### Features
+
+* bump duckdb-extensions to v1.5.1 ([#275](https://github.com/stac-utils/rustac-py/issues/275)) ([9faaaa9](https://github.com/stac-utils/rustac-py/commit/9faaaa913366d3bd2302f2c8e46b974c7ce01aa1))
+* enable windows and macos in CI ([#282](https://github.com/stac-utils/rustac-py/issues/282)) ([f0bd4bf](https://github.com/stac-utils/rustac-py/commit/f0bd4bf6dc500937c859263159ea8e6d5d1a1e6d)), closes [#1](https://github.com/stac-utils/rustac-py/issues/1)
+
+
+### Bug Fixes
+
+* release-as for duckdb-extensions ([#283](https://github.com/stac-utils/rustac-py/issues/283)) ([10f0ba0](https://github.com/stac-utils/rustac-py/commit/10f0ba06850fe8970dc5b397f0f6df81f782ec0f))
+
+
+### Dependencies
+
+* remove patch versions ([#281](https://github.com/stac-utils/rustac-py/issues/281)) ([0c31c9a](https://github.com/stac-utils/rustac-py/commit/0c31c9a0e8b51f5d961ab8eb0e54605b1edd4318))
+
 ## [0.9.10](https://github.com/stac-utils/rustac-py/compare/v0.9.9...v0.9.10) (2026-04-22)
 
 
