@@ -17,7 +17,7 @@
       "changelog-path": "CHANGELOG.md",
       "release-type": "python",
       "prerelease": true,
-      "release-as": "1.4.4-0",
+      "release-as": "1.5.1-0",
       "component": "rustac-duckdb-extensions"
     }
   },
