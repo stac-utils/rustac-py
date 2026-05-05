@@ -3022,15 +3022,14 @@ checksum = "384b8ab6d37215f3c5301a95a4accb5d64aa607f1fcb26a11b5303878451b4fe"
 
 [[package]]
 name = "openssl"
-version = "0.10.78"
+version = "0.10.79"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f38c4372413cdaaf3cc79dd92d29d7d9f5ab09b51b10dded508fb90bb70b9222"
+checksum = "bf0b434746ee2832f4f0baf10137e1cabb18cbe6912c69e2e33263c45250f542"
 dependencies = [
  "bitflags",
  "cfg-if",
  "foreign-types",
  "libc",
- "once_cell",
  "openssl-macros",
  "openssl-sys",
 ]
@@ -3063,9 +3062,9 @@ dependencies = [
 
 [[package]]
 name = "openssl-sys"
-version = "0.9.114"
+version = "0.9.115"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "13ce1245cd07fcc4cfdb438f7507b0c7e4f3849a69fd84d52374c66d83741bb6"
+checksum = "158fe5b292746440aa6e7a7e690e55aeb72d41505e2804c23c6973ad0e9c9781"
 dependencies = [
  "cc",
  "libc",
@@ -3221,7 +3220,7 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.4.9"
-source = "git+https://github.com/stac-utils/rustac#6b5007ac1618924eb3a95d1f4b6032cfb08ba374"
+source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
 dependencies = [
  "serde",
  "serde_json",
@@ -4137,7 +4136,7 @@ dependencies = [
 [[package]]
 name = "rustac"
 version = "0.2.9"
-source = "git+https://github.com/stac-utils/rustac#6b5007ac1618924eb3a95d1f4b6032cfb08ba374"
+source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -4673,7 +4672,7 @@ checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 [[package]]
 name = "stac"
 version = "0.17.0"
-source = "git+https://github.com/stac-utils/rustac#6b5007ac1618924eb3a95d1f4b6032cfb08ba374"
+source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -4709,7 +4708,7 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac#6b5007ac1618924eb3a95d1f4b6032cfb08ba374"
+source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
 dependencies = [
  "quote",
  "syn 2.0.117",
@@ -4718,7 +4717,7 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.3.7"
-source = "git+https://github.com/stac-utils/rustac#6b5007ac1618924eb3a95d1f4b6032cfb08ba374"
+source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
 dependencies = [
  "arrow-array",
  "arrow-schema",
@@ -4740,7 +4739,7 @@ dependencies = [
 [[package]]
 name = "stac-io"
 version = "0.2.8"
-source = "git+https://github.com/stac-utils/rustac#6b5007ac1618924eb3a95d1f4b6032cfb08ba374"
+source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
 dependencies = [
  "async-stream",
  "bytes",
@@ -4761,7 +4760,7 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.5.2"
-source = "git+https://github.com/stac-utils/rustac#6b5007ac1618924eb3a95d1f4b6032cfb08ba374"
+source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
 dependencies = [
  "axum",
  "bb8",
@@ -4788,7 +4787,7 @@ dependencies = [
 [[package]]
 name = "stac-validate"
 version = "0.6.8"
-source = "git+https://github.com/stac-utils/rustac#6b5007ac1618924eb3a95d1f4b6032cfb08ba374"
+source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -5094,9 +5093,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.52.1"
+version = "1.52.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b67dee974fe86fd92cc45b7a95fdd2f99a36a6d7b0d431a231178d3d670bbcc6"
+checksum = "110a78583f19d5cdb2c5ccf321d1290344e71313c6c37d43520d386027d18386"
 dependencies = [
  "bytes",
  "libc",
