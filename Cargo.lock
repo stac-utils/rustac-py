@@ -184,7 +184,7 @@ dependencies = [
  "arrow-data",
  "arrow-ord",
  "arrow-row",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "arrow-select",
  "arrow-string",
 ]
@@ -198,7 +198,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "chrono",
  "num-traits",
 ]
@@ -212,7 +212,7 @@ dependencies = [
  "ahash 0.8.12",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "chrono",
  "chrono-tz",
  "half",
@@ -244,7 +244,7 @@ dependencies = [
  "arrow-buffer",
  "arrow-data",
  "arrow-ord",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "arrow-select",
  "atoi",
  "base64",
@@ -263,7 +263,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "db3b5846209775b6dc8056d77ff9a032b27043383dd5488abd0b663e265b9373"
 dependencies = [
  "arrow-buffer",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "half",
  "num-integer",
  "num-traits",
@@ -278,7 +278,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "arrow-select",
  "flatbuffers",
 ]
@@ -293,7 +293,7 @@ dependencies = [
  "arrow-buffer",
  "arrow-cast",
  "arrow-data",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "chrono",
  "half",
  "indexmap 2.14.0",
@@ -316,7 +316,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "arrow-select",
 ]
 
@@ -329,9 +329,15 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "half",
 ]
+
+[[package]]
+name = "arrow-schema"
+version = "57.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8c872d36b7bf2a6a6a2b40de9156265f0242910791db366a2c17476ba8330d68"
 
 [[package]]
 name = "arrow-schema"
@@ -352,7 +358,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "num-traits",
 ]
 
@@ -365,7 +371,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "arrow-select",
  "memchr",
  "num-traits",
@@ -1667,7 +1673,7 @@ checksum = "dafe7b7de3fab1a8b7099fd6a6434ca955fa65065f9c19f0f8a133693f3c2b0e"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "geo-traits",
  "geoarrow-schema 0.8.0",
  "num-traits",
@@ -1678,9 +1684,10 @@ dependencies = [
 [[package]]
 name = "geoarrow-schema"
 version = "0.7.0"
-source = "git+https://github.com/geoarrow/geoarrow-rs?rev=234c7bd287b3e3caaa9ece9e67e81259347121f8#234c7bd287b3e3caaa9ece9e67e81259347121f8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e97be4e9f523f92bd6a0e0458323f4b783d073d011664decd8dbf05651704f34"
 dependencies = [
- "arrow-schema",
+ "arrow-schema 57.3.0",
  "geo-traits",
  "serde",
  "serde_json",
@@ -1693,7 +1700,7 @@ version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4d4a7edb2a1d87024a93805332a9c8184a0354836271d42c0d18cf628a5e3cd0"
 dependencies = [
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "geo-traits",
  "serde",
  "serde_json",
@@ -1746,7 +1753,7 @@ dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-ord",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "geo-traits",
  "geo-types",
  "geoarrow-array",
@@ -3122,7 +3129,7 @@ dependencies = [
  "arrow-buffer",
  "arrow-data",
  "arrow-ipc",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "arrow-select",
  "base64",
  "brotli",
@@ -3483,7 +3490,7 @@ dependencies = [
  "arrow-buffer",
  "arrow-cast",
  "arrow-data",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "arrow-select",
  "chrono",
  "chrono-tz",
@@ -4677,7 +4684,7 @@ dependencies = [
  "arrow-array",
  "arrow-cast",
  "arrow-json",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "async-stream",
  "bytes",
  "chrono",
@@ -4720,7 +4727,7 @@ version = "0.3.7"
 source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
 dependencies = [
  "arrow-array",
- "arrow-schema",
+ "arrow-schema 58.2.0",
  "chrono",
  "cql2",
  "duckdb",
@@ -6462,13 +6469,3 @@ dependencies = [
  "cc",
  "pkg-config",
 ]
-
-[[patch.unused]]
-name = "geoarrow-array"
-version = "0.7.0"
-source = "git+https://github.com/geoarrow/geoarrow-rs?rev=234c7bd287b3e3caaa9ece9e67e81259347121f8#234c7bd287b3e3caaa9ece9e67e81259347121f8"
-
-[[patch.unused]]
-name = "geoparquet"
-version = "0.7.0"
-source = "git+https://github.com/geoarrow/geoarrow-rs?rev=234c7bd287b3e3caaa9ece9e67e81259347121f8#234c7bd287b3e3caaa9ece9e67e81259347121f8"
