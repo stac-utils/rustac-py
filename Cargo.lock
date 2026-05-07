@@ -2523,9 +2523,9 @@ dependencies = [
 
 [[package]]
 name = "jsonschema"
-version = "0.46.2"
+version = "0.45.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50180452e7808015fe083eae3efcf1ec98b89b45dd8cc204f7b4a6b7b81ea675"
+checksum = "257eb0e588b76827bbddc9e73945a9743693dd2adeaee9da26420f93cfedb798"
 dependencies = [
  "ahash 0.8.12",
  "async-trait",
@@ -2540,7 +2540,7 @@ dependencies = [
  "num-cmp",
  "num-traits",
  "percent-encoding",
- "referencing 0.46.2",
+ "referencing 0.45.1",
  "regex",
  "regex-syntax",
  "reqwest 0.13.2",
@@ -2765,12 +2765,6 @@ name = "memchr"
 version = "2.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f8ca58f447f06ed17d5fc4043ce1b10dd205e060fb3ce5b979b8ed8e59ff3f79"
-
-[[package]]
-name = "micromap"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c2a86d3146ed3995b5913c414f6664344b9617457320782e64f0bb44afd49d74"
 
 [[package]]
 name = "mime"
@@ -3227,7 +3221,8 @@ dependencies = [
 [[package]]
 name = "pgstac"
 version = "0.4.9"
-source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4f10d06324cda9c75ab278007084d60e9b7b2391fcc20778c923f9782549a1dc"
 dependencies = [
  "serde",
  "serde_json",
@@ -3573,7 +3568,8 @@ dependencies = [
 [[package]]
 name = "pyo3-object_store"
 version = "0.9.0"
-source = "git+https://github.com/developmentseed/obstore?rev=9a7017a335ba59b062626b478c001c410093a5c7#9a7017a335ba59b062626b478c001c410093a5c7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b3056dc8a77db5d44d32e7f740db0b01e5b65a43d181487a6917576959c6eb9a"
 dependencies = [
  "async-trait",
  "bytes",
@@ -3871,9 +3867,9 @@ dependencies = [
 
 [[package]]
 name = "referencing"
-version = "0.46.2"
+version = "0.45.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "acb0c66c7b78c1da928bee668b5cc638c678642ff587faff6e6222f797be9d4c"
+checksum = "e2f38748ceca8d0b0013e60f534d94a6e23dfd89fd2a88318fc5a2d04fda1010"
 dependencies = [
  "ahash 0.8.12",
  "async-trait",
@@ -3881,8 +3877,6 @@ dependencies = [
  "futures",
  "getrandom 0.3.4",
  "hashbrown 0.16.1",
- "itoa",
- "micromap",
  "parking_lot",
  "percent-encoding",
  "serde_json",
@@ -4143,7 +4137,8 @@ dependencies = [
 [[package]]
 name = "rustac"
 version = "0.2.9"
-source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cc1f8980fd4799c390d1333c5d0e99ac88a1d86bc99a20193a22ab92721c6788"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -4168,7 +4163,7 @@ dependencies = [
 
 [[package]]
 name = "rustac-py"
-version = "0.9.10"
+version = "0.9.11"
 dependencies = [
  "async-stream",
  "cargo-lock",
@@ -4679,7 +4674,8 @@ checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 [[package]]
 name = "stac"
 version = "0.17.0"
-source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a069e4454aec3e4cf9340d2b2b242764086e23c452f1ff3deff29b30b2bf0b60"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -4715,7 +4711,8 @@ dependencies = [
 [[package]]
 name = "stac-derive"
 version = "0.3.0"
-source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "087057f442c3a980721f249f723db459460ce74221730c9b2115bd63957027ae"
 dependencies = [
  "quote",
  "syn 2.0.117",
@@ -4724,7 +4721,8 @@ dependencies = [
 [[package]]
 name = "stac-duckdb"
 version = "0.3.7"
-source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0581b19784daf1cae918a94f7a57a57d6c35f806385466dad5230c6464a350ac"
 dependencies = [
  "arrow-array",
  "arrow-schema 58.2.0",
@@ -4746,7 +4744,8 @@ dependencies = [
 [[package]]
 name = "stac-io"
 version = "0.2.8"
-source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3548fbaf7475c1f4c7227351f47508baacdd7cb2f0566dab9dcbab1e9239be9e"
 dependencies = [
  "async-stream",
  "bytes",
@@ -4767,7 +4766,8 @@ dependencies = [
 [[package]]
 name = "stac-server"
 version = "0.5.2"
-source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "148771c13adb8fd195268b6450cf258af5ef989c2d88a4b6a7d0c0dd91d0b91d"
 dependencies = [
  "axum",
  "bb8",
@@ -4794,13 +4794,14 @@ dependencies = [
 [[package]]
 name = "stac-validate"
 version = "0.6.8"
-source = "git+https://github.com/stac-utils/rustac#c7b1c6993c7764e39668221c6679de597a6e0285"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aa71a81183c25ed4f427563239be055119bb2f5fe7fcb346019849b7e8142b24"
 dependencies = [
  "async-recursion",
  "async-trait",
  "fluent-uri 0.4.1",
- "jsonschema 0.46.2",
- "referencing 0.46.2",
+ "jsonschema 0.45.1",
+ "referencing 0.45.1",
  "reqwest 0.13.2",
  "serde",
  "serde_json",
