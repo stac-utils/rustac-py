@@ -2,12 +2,18 @@
 name = "rustac-py"
 version = "0.9.11"
 edition = "2024"
+description = "pyo3 bindings for the rustac family of crates"
+license = "MIT OR Apache-2.0"
+categories = ["science", "data-structures"]
+homepage = "https://stac-utils.github.io/rustac-py"
+repository = "https://github.com/stac-utils/rustac-py"
 
 [lib]
 name = "rustac"
 crate-type = ["rlib", "cdylib"]
 
 [features]
+extension-module = ["pyo3/extension-module"]
 duckdb-bundled = ["stac-duckdb/bundled"]
 openssl-vendored = ["dep:openssl"]
 
@@ -22,7 +28,7 @@ geojson = "1.0.0"
 object_store = { version = "0.13.2", features = ["gcp", "aws", "azure", "http"] }
 openssl = { version = "0.10", features = ["vendored"], optional = true }
 parquet = "58.2.0"
-pyo3 = { version = "0.28.3", features = ["extension-module"] }
+pyo3 = "0.28.3"
 pyo3-arrow = "0.17.0"
 pyo3-async-runtimes = { version = "0.28.0", features = [
     "tokio",

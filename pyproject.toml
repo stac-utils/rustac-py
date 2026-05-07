@@ -111,6 +111,7 @@ build-backend = "maturin"
 
 [tool.maturin]
 python-source = "python"
+features = ["extension-module"]
 strip = true
 opt-level = "z"          # TODO compare with "s"
 lto = true
