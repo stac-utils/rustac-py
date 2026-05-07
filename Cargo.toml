@@ -2,11 +2,10 @@
 name = "rustac-py"
 version = "0.9.11"
 edition = "2024"
-publish = false
 
 [lib]
 name = "rustac"
-crate-type = ["cdylib"]
+crate-type = ["rlib", "cdylib"]
 
 [features]
 duckdb-bundled = ["stac-duckdb/bundled"]
@@ -30,14 +29,14 @@ pyo3-async-runtimes = { version = "0.28.0", features = [
     "tokio-runtime",
 ] }
 pyo3-log = "0.13.0"
-pyo3-object_store = { git = "https://github.com/developmentseed/obstore", rev = "9a7017a335ba59b062626b478c001c410093a5c7" }
+pyo3-object_store = "0.9.0"
 pythonize = "0.28.0"
-rustac = { git = "https://github.com/stac-utils/rustac", features = ["pgstac"] }
+rustac = { version = "0.2.9", features = ["pgstac"] }
 serde = "1.0.217"
 serde_json = { version = "1.0.149", features = ["preserve_order"] }
-stac = { git = "https://github.com/stac-utils/rustac", features = ["geoarrow", "geoparquet"] }
-stac-duckdb = { git = "https://github.com/stac-utils/rustac" }
-stac-io = { git = "https://github.com/stac-utils/rustac", features = ["store-all", "geoparquet"] }
+stac = { version = "0.17.0", features = ["geoarrow", "geoparquet"] }
+stac-duckdb = "0.3.7"
+stac-io = { version = "0.2.8", features = ["store-all", "geoparquet"] }
 thiserror = "2.0.18"
 tokio = { version = "1.52.2", features = ["rt-multi-thread"] }
 tracing = "0.1.44"
