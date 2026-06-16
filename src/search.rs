@@ -9,7 +9,8 @@ use pyo3_object_store::AnyObjectStore;
 use serde_json::{Map, Value};
 use stac::api::{Fields, Filter, Items, Search, Sortby, StreamItemsClient};
 use stac::{Bbox, geoparquet::WriterOptions};
-use stac_io::{Format, StacStore, api::Client};
+use stac_io::{Format, StacStore, api::ApiClientBuilder};
+use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::{pin, sync::Mutex};
 
@@ -37,7 +38,7 @@ impl SearchIterator {
 }
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, headers=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn iter_search<'py>(
     py: Python<'py>,
@@ -53,6 +54,7 @@ pub fn iter_search<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
+    headers: Option<HashMap<String, String>>,
     kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Bound<'py, PyAny>> {
     let search = build(
@@ -69,14 +71,15 @@ pub fn iter_search<'py>(
         query,
         kwargs,
     )?;
+    let headers = into_headers(headers);
     pyo3_async_runtimes::tokio::future_into_py(py, async move {
-        let stream = iter_search_api(href, search).await?;
+        let stream = iter_search_api(href, search, headers.as_deref()).await?;
         Ok(SearchIterator(Arc::new(Mutex::new(Box::pin(stream)))))
     })
 }
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, headers=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search<'py>(
     py: Python<'py>,
@@ -93,6 +96,7 @@ pub fn search<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
+    headers: Option<HashMap<String, String>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Bound<'py, PyAny>> {
@@ -110,6 +114,7 @@ pub fn search<'py>(
         query,
         kwargs,
     )?;
+    let headers = into_headers(headers);
     let use_duckdb = use_duckdb
         .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))));
     if use_duckdb {
@@ -119,14 +124,14 @@ pub fn search<'py>(
         })
     } else {
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
-            let value = search_api(href, search, max_items).await?;
+            let value = search_api(href, search, max_items, headers.as_deref()).await?;
             Ok(Json(value.items))
         })
     }
 }
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, headers=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_sync<'py>(
     py: Python<'py>,
@@ -143,6 +148,7 @@ pub fn search_sync<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
+    headers: Option<HashMap<String, String>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Json<Vec<Map<String, Value>>>> {
@@ -160,6 +166,7 @@ pub fn search_sync<'py>(
         query,
         kwargs,
     )?;
+    let headers = into_headers(headers);
     let use_duckdb = use_duckdb
         .unwrap_or_else(|| matches!(Format::infer_from_href(&href), Some(Format::Geoparquet(_))));
     if use_duckdb {
@@ -168,7 +175,7 @@ pub fn search_sync<'py>(
     } else {
         py.detach(|| {
             pyo3_async_runtimes::tokio::get_runtime().block_on(async {
-                let value = search_api(href, search, max_items).await?;
+                let value = search_api(href, search, max_items, headers.as_deref()).await?;
                 Ok(Json(value.items))
             })
         })
@@ -176,7 +183,7 @@ pub fn search_sync<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, format=None, parquet_compression=None, store=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, headers=None, format=None, parquet_compression=None, store=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_to<'py>(
     py: Python<'py>,
@@ -194,6 +201,7 @@ pub fn search_to<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
+    headers: Option<HashMap<String, String>>,
     format: Option<String>,
     parquet_compression: Option<String>,
     store: Option<AnyObjectStore>,
@@ -214,6 +222,7 @@ pub fn search_to<'py>(
         query,
         kwargs,
     )?;
+    let headers = into_headers(headers);
     let mut format = format
         .map(|s| s.parse())
         .transpose()
@@ -252,7 +261,7 @@ pub fn search_to<'py>(
         })
     } else {
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
-            let value = search_api(href, search, max_items).await?;
+            let value = search_api(href, search, max_items, headers.as_deref()).await?;
             let count = value.items.len();
             let value = serde_json::to_value(value).map_err(Error::from)?;
             if let Some(store) = store {
@@ -272,6 +281,11 @@ pub fn search_to<'py>(
     }
 }
 
+/// Converts headers from a Python mapping into a vector of key-value pairs.
+fn into_headers(headers: Option<HashMap<String, String>>) -> Option<Vec<(String, String)>> {
+    headers.map(|headers| headers.into_iter().collect())
+}
+
 fn search_duckdb(
     href: String,
     search: Search,
@@ -285,8 +299,9 @@ async fn search_api(
     href: String,
     search: Search,
     max_items: Option<usize>,
+    headers: Option<&[(String, String)]>,
 ) -> Result<stac::api::ItemCollection> {
-    let stream = iter_search_api(href, search).await?;
+    let stream = iter_search_api(href, search, headers).await?;
     pin!(stream);
     let mut items = if let Some(max_items) = max_items {
         Vec::with_capacity(max_items)
@@ -308,8 +323,13 @@ async fn search_api(
 async fn iter_search_api(
     href: String,
     search: Search,
+    headers: Option<&[(String, String)]>,
 ) -> Result<impl Stream<Item = stac_io::Result<Map<String, Value>>> + 'static> {
-    let client = Client::new(&href)?;
+    let mut builder = ApiClientBuilder::new(&href)?;
+    if let Some(headers) = headers {
+        builder = builder.with_headers(headers)?;
+    }
+    let client = builder.build()?;
     Ok(async_stream::try_stream! {
         let inner = client.search_stream(search).await?;
         futures_util::pin_mut!(inner);
