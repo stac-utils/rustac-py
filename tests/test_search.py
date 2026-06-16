@@ -5,6 +5,7 @@ from typing import Any
 import pyarrow.parquet
 import rustac
 import stac_geoparquet.arrow
+from pytest_httpserver import HTTPServer
 from rustac.store import MemoryStore
 
 
@@ -137,3 +138,44 @@ async def test_search_normalize_datetimes() -> None:
         max_items=1,
     )
     assert len(items) == 1
+
+
+async def test_search_headers(httpserver: HTTPServer) -> None:
+    httpserver.expect_request(
+        "/search", headers={"x-rustac-test": "search"}
+    ).respond_with_json({"features": [], "links": []})
+    await rustac.search(httpserver.url_for("/"), headers={"x-rustac-test": "search"})
+
+
+def test_search_sync_headers(
+    httpserver: HTTPServer,
+) -> None:
+    httpserver.expect_request(
+        "/search", headers={"x-rustac-test": "search"}
+    ).respond_with_json({"features": [], "links": []})
+    rustac.search_sync(httpserver.url_for("/"), headers={"x-rustac-test": "search"})
+
+
+async def test_iter_search_headers(
+    httpserver: HTTPServer,
+) -> None:
+    httpserver.expect_request(
+        "/search", headers={"x-rustac-test": "iter-search"}
+    ).respond_with_json({"features": [], "links": []})
+    await rustac.iter_search(
+        httpserver.url_for("/"), headers={"x-rustac-test": "iter-search"}
+    )
+
+
+async def test_search_to_headers(
+    tmp_path: Path,
+    httpserver: HTTPServer,
+) -> None:
+    httpserver.expect_request(
+        "/search", headers={"x-rustac-test": "search-to"}
+    ).respond_with_json({"features": [], "links": []})
+    await rustac.search_to(
+        str(tmp_path / "out.json"),
+        httpserver.url_for("/"),
+        headers={"x-rustac-test": "search-to"},
+    )
