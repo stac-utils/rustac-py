@@ -1,0 +1,4 @@
+# Fetch a prebuilt libduckdb for the `duckdb` dev-dependency rather than
+# compiling the bundled C++ amalgamation on every cold build.
+[env]
+DUCKDB_DOWNLOAD_LIB = "1"
