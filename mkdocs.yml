@@ -34,7 +34,6 @@ nav:
       - geoparquet: api/geoparquet.md
       - read: api/read.md
       - search: api/search.md
-      - stac: api/stac.md
       - store:
           - api/store/index.md
           - api/store/aws.md
