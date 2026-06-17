@@ -118,7 +118,7 @@ class DuckdbClient:
         sortby: str | list[str | dict[str, str]] | None = None,
         filter: str | dict[str, Any] | None = None,
         query: dict[str, Any] | None = None,
-        fields: str | dict[str, Any] | None = None,
+        fields: str | list[str] | dict[str, Any] | None = None,
         **kwargs: str,
     ) -> list[dict[str, Any]]:
         """Search a stac-geoparquet file with duckdb, returning a list of items.
@@ -159,7 +159,9 @@ class DuckdbClient:
             fields: Fields to include in or exclude from the response,
                 per the [fields extension](https://github.com/stac-api-extensions/fields).
                 Strings are interpreted as a comma-delimited list (e.g.
-                `+properties.datetime,-geometry`); dictionaries as
+                `+properties.datetime,-geometry`); lists as the same
+                `+`/`-` prefixed field names (e.g.
+                `["properties.datetime", "-geometry"]`); dictionaries as
                 `{"include": [...], "exclude": [...]}`.
                 Any `include` or `exclude` arguments override the
                 corresponding values set here.
@@ -185,7 +187,7 @@ class DuckdbClient:
         sortby: str | list[str | dict[str, str]] | None = None,
         filter: str | dict[str, Any] | None = None,
         query: dict[str, Any] | None = None,
-        fields: str | dict[str, Any] | None = None,
+        fields: str | list[str] | dict[str, Any] | None = None,
         **kwargs: str,
     ) -> arro3.core.Table | None:
         """Search a stac-geoparquet file with duckdb, returning an arrow table
@@ -231,7 +233,9 @@ class DuckdbClient:
             fields: Fields to include in or exclude from the response,
                 per the [fields extension](https://github.com/stac-api-extensions/fields).
                 Strings are interpreted as a comma-delimited list (e.g.
-                `+properties.datetime,-geometry`); dictionaries as
+                `+properties.datetime,-geometry`); lists as the same
+                `+`/`-` prefixed field names (e.g.
+                `["properties.datetime", "-geometry"]`); dictionaries as
                 `{"include": [...], "exclude": [...]}`.
                 Any `include` or `exclude` arguments override the
                 corresponding values set here.
@@ -397,7 +401,7 @@ async def search(
     sortby: str | list[str | dict[str, str]] | None = None,
     filter: str | dict[str, Any] | None = None,
     query: dict[str, Any] | None = None,
-    fields: str | dict[str, Any] | None = None,
+    fields: str | list[str] | dict[str, Any] | None = None,
     headers: dict[str, str] | None = None,
     use_duckdb: bool | None = None,
     **kwargs: str,
@@ -445,7 +449,9 @@ async def search(
         fields: Fields to include in or exclude from the response,
             per the [fields extension](https://github.com/stac-api-extensions/fields).
             Strings are interpreted as a comma-delimited list (e.g.
-            `+properties.datetime,-geometry`); dictionaries as
+            `+properties.datetime,-geometry`); lists as the same
+            `+`/`-` prefixed field names (e.g.
+            `["properties.datetime", "-geometry"]`); dictionaries as
             `{"include": [...], "exclude": [...]}`.
             Any `include` or `exclude` arguments override the
             corresponding values set here.
@@ -483,7 +489,7 @@ def search_sync(
     sortby: str | list[str | dict[str, str]] | None = None,
     filter: str | dict[str, Any] | None = None,
     query: dict[str, Any] | None = None,
-    fields: str | dict[str, Any] | None = None,
+    fields: str | list[str] | dict[str, Any] | None = None,
     headers: dict[str, str] | None = None,
     use_duckdb: bool | None = None,
     **kwargs: str,
@@ -531,7 +537,9 @@ def search_sync(
         fields: Fields to include in or exclude from the response,
             per the [fields extension](https://github.com/stac-api-extensions/fields).
             Strings are interpreted as a comma-delimited list (e.g.
-            `+properties.datetime,-geometry`); dictionaries as
+            `+properties.datetime,-geometry`); lists as the same
+            `+`/`-` prefixed field names (e.g.
+            `["properties.datetime", "-geometry"]`); dictionaries as
             `{"include": [...], "exclude": [...]}`.
             Any `include` or `exclude` arguments override the
             corresponding values set here.
@@ -569,7 +577,7 @@ async def iter_search(
     sortby: str | list[str | dict[str, str]] | None = None,
     filter: str | dict[str, Any] | None = None,
     query: dict[str, Any] | None = None,
-    fields: str | dict[str, Any] | None = None,
+    fields: str | list[str] | dict[str, Any] | None = None,
     headers: dict[str, str] | None = None,
     **kwargs: str,
 ) -> AsyncIterator[dict[str, Any]]:
@@ -613,7 +621,9 @@ async def iter_search(
         fields: Fields to include in or exclude from the response,
             per the [fields extension](https://github.com/stac-api-extensions/fields).
             Strings are interpreted as a comma-delimited list (e.g.
-            `+properties.datetime,-geometry`); dictionaries as
+            `+properties.datetime,-geometry`); lists as the same
+            `+`/`-` prefixed field names (e.g.
+            `["properties.datetime", "-geometry"]`); dictionaries as
             `{"include": [...], "exclude": [...]}`.
             Any `include` or `exclude` arguments override the
             corresponding values set here.
@@ -651,7 +661,7 @@ async def search_to(
     sortby: str | list[str | dict[str, str]] | None = None,
     filter: str | dict[str, Any] | None = None,
     query: dict[str, Any] | None = None,
-    fields: str | dict[str, Any] | None = None,
+    fields: str | list[str] | dict[str, Any] | None = None,
     headers: dict[str, str] | None = None,
     format: str | None = None,
     parquet_compression: str | None = None,
@@ -703,7 +713,9 @@ async def search_to(
         fields: Fields to include in or exclude from the response,
             per the [fields extension](https://github.com/stac-api-extensions/fields).
             Strings are interpreted as a comma-delimited list (e.g.
-            `+properties.datetime,-geometry`); dictionaries as
+            `+properties.datetime,-geometry`); lists as the same
+            `+`/`-` prefixed field names (e.g.
+            `["properties.datetime", "-geometry"]`); dictionaries as
             `{"include": [...], "exclude": [...]}`.
             Any `include` or `exclude` arguments override the
             corresponding values set here.

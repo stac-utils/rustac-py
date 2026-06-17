@@ -1,6 +1,6 @@
 use crate::{
     Result,
-    search::{PySortby, StringOrDict, StringOrList},
+    search::{PySortby, StringOrDict, StringOrDictOrList, StringOrList},
 };
 use duckdb::Connection;
 use pyo3::{
@@ -98,7 +98,7 @@ impl DuckdbClient {
         sortby: Option<PySortby<'py>>,
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
-        fields: Option<StringOrDict<'py>>,
+        fields: Option<StringOrDictOrList<'py>>,
         kwargs: Option<Bound<'py, PyDict>>,
     ) -> Result<Bound<'py, PyList>> {
         if max_items.is_some() {
@@ -150,7 +150,7 @@ impl DuckdbClient {
         sortby: Option<PySortby<'py>>,
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
-        fields: Option<StringOrDict<'py>>,
+        fields: Option<StringOrDictOrList<'py>>,
         kwargs: Option<Bound<'py, PyDict>>,
     ) -> Result<Py<PyAny>> {
         let search = crate::search::build(

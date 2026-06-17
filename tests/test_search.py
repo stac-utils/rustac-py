@@ -186,3 +186,10 @@ async def test_search_fields(httpserver: HTTPServer) -> None:
         "/search", json={"fields": {"include": ["foo", "bar"], "exclude": ["baz"]}}
     ).respond_with_json({"features": [], "links": []})
     await rustac.search(httpserver.url_for("/"), fields="foo,bar,-baz")
+
+
+async def test_search_fields_list(httpserver: HTTPServer) -> None:
+    httpserver.expect_request(
+        "/search", json={"fields": {"include": ["foo", "bar"], "exclude": ["baz"]}}
+    ).respond_with_json({"features": [], "links": []})
+    await rustac.search(httpserver.url_for("/"), fields=["foo", "bar", "-baz"])

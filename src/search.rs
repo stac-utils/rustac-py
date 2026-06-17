@@ -54,7 +54,7 @@ pub fn iter_search<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
-    fields: Option<StringOrDict>,
+    fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
     kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Bound<'py, PyAny>> {
@@ -98,7 +98,7 @@ pub fn search<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
-    fields: Option<StringOrDict>,
+    fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
@@ -152,7 +152,7 @@ pub fn search_sync<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
-    fields: Option<StringOrDict>,
+    fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
@@ -207,7 +207,7 @@ pub fn search_to<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
-    fields: Option<StringOrDict>,
+    fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
     format: Option<String>,
     parquet_compression: Option<String>,
@@ -361,7 +361,7 @@ pub fn build<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict<'py>>,
     query: Option<Bound<'py, PyDict>>,
-    fields: Option<StringOrDict<'py>>,
+    fields: Option<StringOrDictOrList<'py>>,
     kwargs: Option<Bound<'py, PyDict>>,
 ) -> PyResult<Search> {
     let mut fields = fields
@@ -455,6 +455,21 @@ pub enum StringOrDict<'py> {
     Dict(Bound<'py, PyDict>),
 }
 
+/// A string or dictionary.
+///
+/// Used for the CQL2 filter argument and for intersects.
+#[derive(Debug, FromPyObject)]
+pub enum StringOrDictOrList<'py> {
+    /// Text
+    String(String),
+
+    /// Json
+    Dict(Bound<'py, PyDict>),
+
+    /// A list.
+    List(Vec<String>),
+}
+
 /// A string or a list.
 ///
 /// Used for collections, ids, etc.
@@ -491,13 +506,16 @@ impl From<StringOrList> for Vec<String> {
     }
 }
 
-impl<'py> TryFrom<StringOrDict<'py>> for Fields {
+impl<'py> TryFrom<StringOrDictOrList<'py>> for Fields {
     type Error = Error;
-    fn try_from(value: StringOrDict) -> Result<Fields> {
+    fn try_from(value: StringOrDictOrList) -> Result<Fields> {
         match value {
-            StringOrDict::String(s) => Ok(s.parse().unwrap()),
-            StringOrDict::Dict(dict) => {
+            StringOrDictOrList::String(s) => Ok(s.parse().unwrap()),
+            StringOrDictOrList::Dict(dict) => {
                 pythonize::depythonize(&dict).map_err(|e| Error::Pythonize(e))
+            }
+            StringOrDictOrList::List(list) => {
+                serde_json::from_value(serde_json::json!(list)).map_err(Error::from)
             }
         }
     }
