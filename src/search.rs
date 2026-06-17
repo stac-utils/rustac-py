@@ -455,9 +455,9 @@ pub enum StringOrDict<'py> {
     Dict(Bound<'py, PyDict>),
 }
 
-/// A string or dictionary.
+/// A string, dictionary, or list.
 ///
-/// Used for the CQL2 filter argument and for intersects.
+/// Used for fields.
 #[derive(Debug, FromPyObject)]
 pub enum StringOrDictOrList<'py> {
     /// Text
