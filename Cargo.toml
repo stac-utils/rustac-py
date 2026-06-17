@@ -9,7 +9,7 @@ homepage = "https://stac-utils.github.io/rustac-py"
 repository = "https://github.com/stac-utils/rustac-py"
 
 [lib]
-name = "rustac"
+name = "rustac_python"
 crate-type = ["rlib", "cdylib"]
 
 [features]
@@ -40,7 +40,7 @@ pythonize = "0.28.0"
 rustac = { version = "0.2.9", features = ["pgstac"] }
 serde = "1.0.217"
 serde_json = { version = "1.0.149", features = ["preserve_order"] }
-stac = { version = "0.17.0", features = ["geoarrow", "geoparquet"] }
+stac = { version = "0.17.1", features = ["geoarrow", "geoparquet"] }
 stac-duckdb = "0.3.7"
 stac-io = { version = "0.2.8", features = ["store-all", "geoparquet"] }
 thiserror = "2.0.18"

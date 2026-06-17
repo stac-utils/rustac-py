@@ -38,7 +38,7 @@ impl SearchIterator {
 }
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, headers=None, **kwargs))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn iter_search<'py>(
     py: Python<'py>,
@@ -54,6 +54,7 @@ pub fn iter_search<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
+    fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
     kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Bound<'py, PyAny>> {
@@ -69,6 +70,7 @@ pub fn iter_search<'py>(
         sortby,
         filter,
         query,
+        fields,
         kwargs,
     )?;
     let headers = into_headers(headers);
@@ -79,7 +81,7 @@ pub fn iter_search<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, headers=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search<'py>(
     py: Python<'py>,
@@ -96,6 +98,7 @@ pub fn search<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
+    fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
@@ -112,6 +115,7 @@ pub fn search<'py>(
         sortby,
         filter,
         query,
+        fields,
         kwargs,
     )?;
     let headers = into_headers(headers);
@@ -131,7 +135,7 @@ pub fn search<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, headers=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_sync<'py>(
     py: Python<'py>,
@@ -148,6 +152,7 @@ pub fn search_sync<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
+    fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
@@ -164,6 +169,7 @@ pub fn search_sync<'py>(
         sortby,
         filter,
         query,
+        fields,
         kwargs,
     )?;
     let headers = into_headers(headers);
@@ -183,7 +189,7 @@ pub fn search_sync<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, headers=None, format=None, parquet_compression=None, store=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, format=None, parquet_compression=None, store=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_to<'py>(
     py: Python<'py>,
@@ -201,6 +207,7 @@ pub fn search_to<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict>,
     query: Option<Bound<'py, PyDict>>,
+    fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
     format: Option<String>,
     parquet_compression: Option<String>,
@@ -220,6 +227,7 @@ pub fn search_to<'py>(
         sortby,
         filter,
         query,
+        fields,
         kwargs,
     )?;
     let headers = into_headers(headers);
@@ -353,9 +361,13 @@ pub fn build<'py>(
     sortby: Option<PySortby<'py>>,
     filter: Option<StringOrDict<'py>>,
     query: Option<Bound<'py, PyDict>>,
+    fields: Option<StringOrDictOrList<'py>>,
     kwargs: Option<Bound<'py, PyDict>>,
 ) -> PyResult<Search> {
-    let mut fields = Fields::default();
+    let mut fields = fields
+        .map(|fields| fields.try_into())
+        .transpose()?
+        .unwrap_or_else(Fields::default);
     if let Some(include) = include {
         fields.include = include.into();
     }
@@ -443,6 +455,21 @@ pub enum StringOrDict<'py> {
     Dict(Bound<'py, PyDict>),
 }
 
+/// A string, dictionary, or list.
+///
+/// Used for fields.
+#[derive(Debug, FromPyObject)]
+pub enum StringOrDictOrList<'py> {
+    /// Text
+    String(String),
+
+    /// Json
+    Dict(Bound<'py, PyDict>),
+
+    /// A list.
+    List(Vec<String>),
+}
+
 /// A string or a list.
 ///
 /// Used for collections, ids, etc.
@@ -475,6 +502,21 @@ impl From<StringOrList> for Vec<String> {
         match value {
             StringOrList::List(list) => list,
             StringOrList::String(s) => vec![s],
+        }
+    }
+}
+
+impl<'py> TryFrom<StringOrDictOrList<'py>> for Fields {
+    type Error = Error;
+    fn try_from(value: StringOrDictOrList) -> Result<Fields> {
+        match value {
+            StringOrDictOrList::String(s) => Ok(s.parse().unwrap()),
+            StringOrDictOrList::Dict(dict) => {
+                pythonize::depythonize(&dict).map_err(|e| Error::Pythonize(e))
+            }
+            StringOrDictOrList::List(list) => {
+                serde_json::from_value(serde_json::json!(list)).map_err(Error::from)
+            }
         }
     }
 }

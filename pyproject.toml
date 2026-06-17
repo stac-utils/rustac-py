@@ -112,6 +112,7 @@ build-backend = "maturin"
 
 [tool.maturin]
 python-source = "python"
+module-name = "rustac.rustac"
 features = ["extension-module"]
 strip = true
 opt-level = "z"          # TODO compare with "s"

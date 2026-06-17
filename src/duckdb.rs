@@ -1,6 +1,6 @@
 use crate::{
     Result,
-    search::{PySortby, StringOrDict, StringOrList},
+    search::{PySortby, StringOrDict, StringOrDictOrList, StringOrList},
 };
 use duckdb::Connection;
 use pyo3::{
@@ -81,7 +81,7 @@ impl DuckdbClient {
         Ok(table.into_py_any(py)?)
     }
 
-    #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, max_items=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]
+    #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, max_items=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, **kwargs))]
     fn search<'py>(
         &self,
         py: Python<'py>,
@@ -98,6 +98,7 @@ impl DuckdbClient {
         sortby: Option<PySortby<'py>>,
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
+        fields: Option<StringOrDictOrList<'py>>,
         kwargs: Option<Bound<'py, PyDict>>,
     ) -> Result<Bound<'py, PyList>> {
         if max_items.is_some() {
@@ -118,6 +119,7 @@ impl DuckdbClient {
             sortby,
             filter,
             query,
+            fields,
             kwargs,
         )?;
         let item_collection = {
@@ -132,7 +134,7 @@ impl DuckdbClient {
         Ok(list)
     }
 
-    #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, **kwargs))]
+    #[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, **kwargs))]
     fn search_to_arrow<'py>(
         &self,
         py: Python<'py>,
@@ -148,6 +150,7 @@ impl DuckdbClient {
         sortby: Option<PySortby<'py>>,
         filter: Option<StringOrDict>,
         query: Option<Bound<'py, PyDict>>,
+        fields: Option<StringOrDictOrList<'py>>,
         kwargs: Option<Bound<'py, PyDict>>,
     ) -> Result<Py<PyAny>> {
         let search = crate::search::build(
@@ -162,6 +165,7 @@ impl DuckdbClient {
             sortby,
             filter,
             query,
+            fields,
             kwargs,
         )?;
         let record_batches = {

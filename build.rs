@@ -2,11 +2,12 @@ use cargo_lock::Lockfile;
 
 fn main() {
     let lockfile = Lockfile::load("Cargo.lock").unwrap();
-    let package = lockfile
+    let sha = lockfile
         .packages
         .into_iter()
         .find(|package| package.name.as_str() == "rustac")
-        .unwrap();
-    let precise = package.source.unwrap().precise().unwrap().to_string();
-    println!("cargo:rustc-env=RUSTAC_SHA={}", precise);
+        .and_then(|package| package.source)
+        .and_then(|source| source.precise().map(ToString::to_string))
+        .unwrap_or_else(|| "local".to_string());
+    println!("cargo:rustc-env=RUSTAC_SHA={}", sha);
 }
