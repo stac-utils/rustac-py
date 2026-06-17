@@ -179,3 +179,10 @@ async def test_search_to_headers(
         httpserver.url_for("/"),
         headers={"x-rustac-test": "search-to"},
     )
+
+
+async def test_search_fields(httpserver: HTTPServer) -> None:
+    httpserver.expect_request(
+        "/search", json={"fields": {"include": ["foo", "bar"], "exclude": ["baz"]}}
+    ).respond_with_json({"features": [], "links": []})
+    await rustac.search(httpserver.url_for("/"), fields="foo,bar,-baz")
