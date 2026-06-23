@@ -33,6 +33,8 @@ impl ApiClient {
         Ok(ApiClient(client))
     }
 
+    #[pyo3(signature = (*, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, **kwargs))]
+    #[allow(clippy::too_many_arguments)]
     pub fn search<'py>(
         &self,
         py: Python<'py>,
@@ -73,6 +75,8 @@ impl ApiClient {
         })
     }
 
+    #[pyo3(signature = (*, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, **kwargs))]
+    #[allow(clippy::too_many_arguments)]
     pub fn search_sync<'py>(
         &self,
         py: Python<'py>,
@@ -115,6 +119,8 @@ impl ApiClient {
         })
     }
 
+    #[pyo3(signature = (*, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, **kwargs))]
+    #[allow(clippy::too_many_arguments)]
     pub fn iter_search<'py>(
         &self,
         py: Python<'py>,
