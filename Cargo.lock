@@ -2928,6 +2928,44 @@ dependencies = [
 
 [[package]]
 name = "object_store"
+version = "0.12.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fbfbfff40aeccab00ec8a910b57ca8ecf4319b335c542f2edcd19dd25a1e2a00"
+dependencies = [
+ "async-trait",
+ "base64",
+ "bytes",
+ "chrono",
+ "form_urlencoded",
+ "futures",
+ "http",
+ "http-body-util",
+ "httparse",
+ "humantime",
+ "hyper",
+ "itertools",
+ "md-5 0.10.6",
+ "parking_lot",
+ "percent-encoding",
+ "quick-xml 0.38.4",
+ "rand 0.9.4",
+ "reqwest 0.12.28",
+ "ring",
+ "rustls-pemfile",
+ "serde",
+ "serde_json",
+ "serde_urlencoded",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "url",
+ "walkdir",
+ "wasm-bindgen-futures",
+ "web-time",
+]
+
+[[package]]
+name = "object_store"
 version = "0.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "622acbc9100d3c10e2ee15804b0caa40e55c933d5aa53814cd520805b7958a49"
@@ -2949,7 +2987,7 @@ dependencies = [
  "md-5 0.10.6",
  "parking_lot",
  "percent-encoding",
- "quick-xml",
+ "quick-xml 0.39.4",
  "rand 0.10.1",
  "reqwest 0.12.28",
  "ring",
@@ -3094,7 +3132,7 @@ dependencies = [
  "num-bigint",
  "num-integer",
  "num-traits",
- "object_store",
+ "object_store 0.13.2",
  "paste",
  "seq-macro",
  "simdutf8",
@@ -3518,9 +3556,9 @@ dependencies = [
 
 [[package]]
 name = "pyo3-object_store"
-version = "0.9.0"
+version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b3056dc8a77db5d44d32e7f740db0b01e5b65a43d181487a6917576959c6eb9a"
+checksum = "6a900d022739373b3ea71fc77bbd237e094b478f71e4b5460c4371c9dedf7457"
 dependencies = [
  "async-trait",
  "bytes",
@@ -3529,7 +3567,7 @@ dependencies = [
  "http",
  "humantime",
  "itertools",
- "object_store",
+ "object_store 0.12.5",
  "percent-encoding",
  "pyo3",
  "pyo3-async-runtimes",
@@ -3546,6 +3584,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b79f670c9626c8b651c0581011b57b6ba6970bb69faf01a7c4c0cfc81c43f95"
 dependencies = [
  "pyo3",
+ "serde",
+]
+
+[[package]]
+name = "quick-xml"
+version = "0.38.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b66c2058c55a409d601666cffe35f04333cf1013010882cec174a7467cd4e21c"
+dependencies = [
+ "memchr",
  "serde",
 ]
 
@@ -4089,9 +4137,9 @@ dependencies = [
 
 [[package]]
 name = "rustac"
-version = "0.2.10"
+version = "0.2.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c856ae269da74768df7875fb69594e2f4bdfec1353e1fb1859010022d2ef8fde"
+checksum = "31cb32bcf1a7e5b7998a7b571d085679ccea2b56846483cd822911fb9b720372"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -4126,7 +4174,7 @@ dependencies = [
  "futures-util",
  "geoarrow-schema",
  "geojson 1.0.0",
- "object_store",
+ "object_store 0.13.2",
  "openssl",
  "parquet",
  "pyo3",
@@ -4213,6 +4261,15 @@ dependencies = [
  "rustls-pki-types",
  "schannel",
  "security-framework",
+]
+
+[[package]]
+name = "rustls-pemfile"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dce314e5fee3f39953d46bb63bb8a46d40c2f8fb7cc5a3b6cab2bde9721d6e50"
+dependencies = [
+ "rustls-pki-types",
 ]
 
 [[package]]
@@ -4707,15 +4764,15 @@ dependencies = [
 
 [[package]]
 name = "stac-io"
-version = "0.2.9"
+version = "0.2.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d2d1901ef3026361a399e44440d295c5e3edafae3c851a16a915d0cc41cb9f5"
+checksum = "ad0d24db8df0aff77da553dc0066f095ea6a67a535513112b702c751365abbea"
 dependencies = [
  "async-stream",
  "bytes",
  "futures",
  "http",
- "object_store",
+ "object_store 0.13.2",
  "parquet",
  "reqwest 0.13.4",
  "serde",
