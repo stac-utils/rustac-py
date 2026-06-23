@@ -1,5 +1,6 @@
 #![warn(unused_crate_dependencies)]
 
+mod api;
 mod arrow;
 mod cli;
 mod collection;
@@ -26,6 +27,7 @@ fn rustac(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
 
     m.add("RustacError", py.get_type::<error::RustacError>())?;
 
+    m.add_class::<api::ApiClient>()?;
     m.add_class::<duckdb::DuckdbClient>()?;
     m.add_class::<geoparquet::GeoparquetWriter>()?;
 
@@ -55,7 +57,7 @@ fn rustac(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     Ok(())
 }
 
-struct Json<T: serde::Serialize>(T);
+pub struct Json<T: serde::Serialize>(T);
 
 impl<'py, T: serde::Serialize> IntoPyObject<'py> for Json<T> {
     type Error = pythonize::PythonizeError;
