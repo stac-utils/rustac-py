@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.12](https://github.com/stac-utils/rustac-py/compare/v0.9.11...v0.9.12) (2026-06-23)
+
+
+### Features
+
+* add ApiClient with get_collection and get_collections ([#305](https://github.com/stac-utils/rustac-py/issues/305)) ([a1db639](https://github.com/stac-utils/rustac-py/commit/a1db63957e0c3c9f030e9b2660c6bf800584aa9b))
+* add fields argument for search ([#301](https://github.com/stac-utils/rustac-py/issues/301)) ([d4788c7](https://github.com/stac-utils/rustac-py/commit/d4788c73083ff1fd661e4528862e1cf954a26cc5)), closes [#300](https://github.com/stac-utils/rustac-py/issues/300)
+* allow headers when searching ([#298](https://github.com/stac-utils/rustac-py/issues/298)) ([fa968f6](https://github.com/stac-utils/rustac-py/commit/fa968f61d0f70361c275945321d1e4ffefcf3de1))
+* publish a crate, as well ([#284](https://github.com/stac-utils/rustac-py/issues/284)) ([b4e5cdf](https://github.com/stac-utils/rustac-py/commit/b4e5cdfe6d06e742d4902cf27a766a898b696902))
+
+
+### Documentation
+
+* fix missing stac page ([#294](https://github.com/stac-utils/rustac-py/issues/294)) ([8bc2bde](https://github.com/stac-utils/rustac-py/commit/8bc2bdedba34644a0b40885c69b902bb41b0c9cd))
+
 ## [0.9.11](https://github.com/stac-utils/rustac-py/compare/v0.9.10...v0.9.11) (2026-05-05)
 
 
