@@ -58,6 +58,93 @@ class GeoparquetWriter:
 class RustacError(Exception):
     """A package-specific exception."""
 
+class ApiClient:
+    """A client for searching a STAC API server."""
+
+    def __init__(self, href: str, *, headers: dict[str, str] | None = None) -> None:
+        """Creates a new STAC API client.
+
+        Args:
+            href: The root href of the STAC API.
+            headers: Additional headers to include in every request to the API.
+        """
+
+    async def search(
+        self,
+        *,
+        intersects: str | dict[str, Any] | None = None,
+        ids: str | list[str] | None = None,
+        collections: str | list[str] | None = None,
+        max_items: int | None = None,
+        limit: int | None = None,
+        bbox: list[float] | None = None,
+        datetime: str | None = None,
+        include: str | list[str] | None = None,
+        exclude: str | list[str] | None = None,
+        sortby: str | list[str | dict[str, str]] | None = None,
+        filter: str | dict[str, Any] | None = None,
+        query: dict[str, Any] | None = None,
+        fields: str | list[str] | dict[str, Any] | None = None,
+        **kwargs: str,
+    ) -> list[dict[str, Any]]:
+        """Searches the API, returning all matching items as a list."""
+
+    def search_sync(
+        self,
+        *,
+        intersects: str | dict[str, Any] | None = None,
+        ids: str | list[str] | None = None,
+        collections: str | list[str] | None = None,
+        max_items: int | None = None,
+        limit: int | None = None,
+        bbox: list[float] | None = None,
+        datetime: str | None = None,
+        include: str | list[str] | None = None,
+        exclude: str | list[str] | None = None,
+        sortby: str | list[str | dict[str, str]] | None = None,
+        filter: str | dict[str, Any] | None = None,
+        query: dict[str, Any] | None = None,
+        fields: str | list[str] | dict[str, Any] | None = None,
+        **kwargs: str,
+    ) -> list[dict[str, Any]]:
+        """Searches the API synchronously, returning all matching items as a list."""
+
+    async def iter_search(
+        self,
+        *,
+        intersects: str | dict[str, Any] | None = None,
+        ids: str | list[str] | None = None,
+        collections: str | list[str] | None = None,
+        limit: int | None = None,
+        bbox: list[float] | None = None,
+        datetime: str | None = None,
+        include: str | list[str] | None = None,
+        exclude: str | list[str] | None = None,
+        sortby: str | list[str | dict[str, str]] | None = None,
+        filter: str | dict[str, Any] | None = None,
+        query: dict[str, Any] | None = None,
+        fields: str | list[str] | dict[str, Any] | None = None,
+        **kwargs: str,
+    ) -> AsyncIterator[dict[str, Any]]:
+        """Searches the API, asynchronously iterating over matching items."""
+
+    async def get_collection(self, id: str) -> dict[str, Any]:
+        """Gets a single collection by id.
+
+        Args:
+            id: The collection id.
+
+        Returns:
+            The STAC collection.
+        """
+
+    async def get_collections(self) -> list[dict[str, Any]]:
+        """Gets all collections from the API.
+
+        Returns:
+            The STAC collections.
+        """
+
 class DuckdbClient:
     """A client for querying stac-geoparquet with DuckDB."""
 

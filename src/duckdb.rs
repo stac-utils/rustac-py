@@ -1,6 +1,6 @@
 use crate::{
     Result,
-    search::{PySortby, StringOrDict, StringOrDictOrList, StringOrList},
+    api::{PySortby, StringOrDict, StringOrDictOrList, StringOrList},
 };
 use duckdb::Connection;
 use pyo3::{
@@ -107,7 +107,7 @@ impl DuckdbClient {
             }
             limit = max_items;
         }
-        let search = crate::search::build(
+        let search = crate::api::build_search(
             intersects,
             ids,
             collections,
@@ -153,7 +153,7 @@ impl DuckdbClient {
         fields: Option<StringOrDictOrList<'py>>,
         kwargs: Option<Bound<'py, PyDict>>,
     ) -> Result<Py<PyAny>> {
-        let search = crate::search::build(
+        let search = crate::api::build_search(
             intersects,
             ids,
             collections,
