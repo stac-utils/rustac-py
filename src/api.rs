@@ -8,7 +8,7 @@ use pyo3::{Bound, PyErr, PyResult, exceptions::PyValueError};
 use serde_json::{Map, Value};
 use stac::Bbox;
 use stac::api::{Fields, Filter, Items, Search, Sortby, StreamItemsClient};
-use stac_io::api::{ApiClientBuilder, Client};
+use stac_io::api::{Client, ClientBuilder};
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::pin;
@@ -25,11 +25,11 @@ impl ApiClient {
     #[new]
     #[pyo3(signature = (href, *, headers=None))]
     pub fn new(href: String, headers: Option<HashMap<String, String>>) -> Result<ApiClient> {
-        let mut builder = ApiClientBuilder::new(&href)?;
+        let mut builder = ClientBuilder::new();
         if let Some(headers) = headers {
-            builder = builder.with_headers(&headers.into_iter().collect::<Vec<_>>())?;
+            builder = builder.default_headers((&headers).try_into()?);
         }
-        let client = builder.build()?;
+        let client = Client::with_client_builder(builder, &href)?;
         Ok(ApiClient(client))
     }
 
