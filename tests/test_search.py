@@ -193,3 +193,20 @@ async def test_search_fields_list(httpserver: HTTPServer) -> None:
         "/search", json={"fields": {"include": ["foo", "bar"], "exclude": ["baz"]}}
     ).respond_with_json({"features": [], "links": []})
     await rustac.search(httpserver.url_for("/"), fields=["foo", "bar", "-baz"])
+
+
+async def test_search_retry(httpserver: HTTPServer) -> None:
+    # https://github.com/stac-utils/rustac-py/issues/296
+    httpserver.expect_ordered_request("/search").respond_with_data(
+        "too many requests", status=429
+    )
+    httpserver.expect_ordered_request("/search").respond_with_json(
+        {"features": [], "links": []}
+    )
+    items = await rustac.search(
+        httpserver.url_for("/"),
+        max_retries_per_request=3,
+        retry_status_codes=[429],
+    )
+    assert items == []
+    assert len(httpserver.log) == 2

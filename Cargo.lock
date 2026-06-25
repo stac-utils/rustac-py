@@ -4173,6 +4173,7 @@ dependencies = [
  "pyo3-log",
  "pyo3-object_store",
  "pythonize",
+ "reqwest 0.13.4",
  "rustac",
  "serde",
  "serde_json",

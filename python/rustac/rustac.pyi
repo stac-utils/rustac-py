@@ -61,12 +61,26 @@ class RustacError(Exception):
 class ApiClient:
     """A client for searching a STAC API server."""
 
-    def __init__(self, href: str, *, headers: dict[str, str] | None = None) -> None:
+    def __init__(
+        self,
+        href: str,
+        *,
+        headers: dict[str, str] | None = None,
+        max_extra_load: float | None = None,
+        max_retries_per_request: int | None = None,
+        retry_status_codes: list[int] | None = None,
+    ) -> None:
         """Creates a new STAC API client.
 
         Args:
             href: The root href of the STAC API.
             headers: Additional headers to include in every request to the API.
+            max_extra_load: The maximum extra load that retries are allowed to
+                add to the server, as a fraction of the request rate. See the
+                [reqwest docs](https://docs.rs/reqwest/latest/reqwest/retry/struct.Builder.html#method.max_extra_load).
+            max_retries_per_request: The maximum number of retries for a single request.
+            retry_status_codes: The HTTP status codes that should trigger a retry
+                (e.g. `[408, 429, 500, 502, 503, 504]`).
         """
 
     async def search(
@@ -490,6 +504,9 @@ async def search(
     query: dict[str, Any] | None = None,
     fields: str | list[str] | dict[str, Any] | None = None,
     headers: dict[str, str] | None = None,
+    max_extra_load: float | None = None,
+    max_retries_per_request: int | None = None,
+    retry_status_codes: list[int] | None = None,
     use_duckdb: bool | None = None,
     **kwargs: str,
 ) -> list[dict[str, Any]]:
@@ -543,6 +560,12 @@ async def search(
             Any `include` or `exclude` arguments override the
             corresponding values set here.
         headers: Additional headers to include in requests to the STAC API.
+        max_extra_load: The maximum extra load that retries are allowed to add
+            to the server, as a fraction of the request rate. See the [reqwest
+            docs](https://docs.rs/reqwest/latest/reqwest/retry/struct.Builder.html#method.max_extra_load).
+        max_retries_per_request: The maximum number of retries for a single request.
+        retry_status_codes: The HTTP status codes that should trigger a retry
+            (e.g. `[408, 429, 500, 502, 503, 504]`).
         use_duckdb: Query with DuckDB. If None and the href has a
             'parquet' or 'geoparquet' extension, will be set to True. Defaults
             to None.
@@ -578,6 +601,9 @@ def search_sync(
     query: dict[str, Any] | None = None,
     fields: str | list[str] | dict[str, Any] | None = None,
     headers: dict[str, str] | None = None,
+    max_extra_load: float | None = None,
+    max_retries_per_request: int | None = None,
+    retry_status_codes: list[int] | None = None,
     use_duckdb: bool | None = None,
     **kwargs: str,
 ) -> list[dict[str, Any]]:
@@ -631,6 +657,12 @@ def search_sync(
             Any `include` or `exclude` arguments override the
             corresponding values set here.
         headers: Additional headers to include in requests to the STAC API.
+        max_extra_load: The maximum extra load that retries are allowed to add
+            to the server, as a fraction of the request rate. See the [reqwest
+            docs](https://docs.rs/reqwest/latest/reqwest/retry/struct.Builder.html#method.max_extra_load).
+        max_retries_per_request: The maximum number of retries for a single request.
+        retry_status_codes: The HTTP status codes that should trigger a retry
+            (e.g. `[408, 429, 500, 502, 503, 504]`).
         use_duckdb: Query with DuckDB. If None and the href has a
             'parquet' or 'geoparquet' extension, will be set to True. Defaults
             to None.
@@ -666,6 +698,9 @@ async def iter_search(
     query: dict[str, Any] | None = None,
     fields: str | list[str] | dict[str, Any] | None = None,
     headers: dict[str, str] | None = None,
+    max_extra_load: float | None = None,
+    max_retries_per_request: int | None = None,
+    retry_status_codes: list[int] | None = None,
     **kwargs: str,
 ) -> AsyncIterator[dict[str, Any]]:
     """
@@ -715,6 +750,12 @@ async def iter_search(
             Any `include` or `exclude` arguments override the
             corresponding values set here.
         headers: Additional headers to include in requests to the STAC API.
+        max_extra_load: The maximum extra load that retries are allowed to add
+            to the server, as a fraction of the request rate. See the [reqwest
+            docs](https://docs.rs/reqwest/latest/reqwest/retry/struct.Builder.html#method.max_extra_load).
+        max_retries_per_request: The maximum number of retries for a single request.
+        retry_status_codes: The HTTP status codes that should trigger a retry
+            (e.g. `[408, 429, 500, 502, 503, 504]`).
         kwargs: Additional parameters to pass in to the search.
 
     Returns:
@@ -750,6 +791,9 @@ async def search_to(
     query: dict[str, Any] | None = None,
     fields: str | list[str] | dict[str, Any] | None = None,
     headers: dict[str, str] | None = None,
+    max_extra_load: float | None = None,
+    max_retries_per_request: int | None = None,
+    retry_status_codes: list[int] | None = None,
     format: str | None = None,
     parquet_compression: str | None = None,
     store: AnyObjectStore | None = None,
@@ -807,6 +851,12 @@ async def search_to(
             Any `include` or `exclude` arguments override the
             corresponding values set here.
         headers: Additional headers to include in requests to the STAC API.
+        max_extra_load: The maximum extra load that retries are allowed to add
+            to the server, as a fraction of the request rate. See the [reqwest
+            docs](https://docs.rs/reqwest/latest/reqwest/retry/struct.Builder.html#method.max_extra_load).
+        max_retries_per_request: The maximum number of retries for a single request.
+        retry_status_codes: The HTTP status codes that should trigger a retry
+            (e.g. `[408, 429, 500, 502, 503, 504]`).
         format: The output format. If none, will be inferred from
             the outfile extension, and if that fails will fall back to compact JSON.
         parquet_compression: If writing stac-geoparquet, sets the compression

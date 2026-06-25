@@ -38,6 +38,7 @@ pyo3-async-runtimes = { version = "0.28.0", features = [
 pyo3-log = "0.13.0"
 pyo3-object_store = "0.9.0"
 pythonize = "0.28.0"
+reqwest = "0.13.4"
 rustac = { version = "0.2.9", features = ["pgstac"] }
 serde = "1.0.217"
 serde_json = { version = "1.0.149", features = ["preserve_order"] }
