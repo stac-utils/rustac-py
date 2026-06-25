@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.13](https://github.com/stac-utils/rustac-py/compare/v0.9.12...v0.9.13) (2026-06-25)
+
+
+### Features
+
+* search retries ([#308](https://github.com/stac-utils/rustac-py/issues/308)) ([7696da6](https://github.com/stac-utils/rustac-py/commit/7696da6f85876427ef454cb8f1f6b8b27ab6cb52)), closes [#296](https://github.com/stac-utils/rustac-py/issues/296)
+
+
+### Bug Fixes
+
+* duckdb datetime searching ([#311](https://github.com/stac-utils/rustac-py/issues/311)) ([254ac09](https://github.com/stac-utils/rustac-py/commit/254ac09ac34be08467a420f2107f7d8dafb11497))
+
 ## [0.9.12](https://github.com/stac-utils/rustac-py/compare/v0.9.11...v0.9.12) (2026-06-23)
 
 
