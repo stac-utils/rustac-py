@@ -12,7 +12,7 @@ use stac_io::{Format, StacStore};
 use std::collections::HashMap;
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, **kwargs))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, max_extra_load=None, max_retries_per_request=None, retry_status_codes=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn iter_search<'py>(
     py: Python<'py>,
@@ -30,9 +30,18 @@ pub fn iter_search<'py>(
     query: Option<Bound<'py, PyDict>>,
     fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
+    max_extra_load: Option<f32>,
+    max_retries_per_request: Option<u32>,
+    retry_status_codes: Option<Vec<u16>>,
     kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Bound<'py, PyAny>> {
-    let client = ApiClient::new(href, headers)?;
+    let client = ApiClient::new(
+        href,
+        headers,
+        max_extra_load,
+        max_retries_per_request,
+        retry_status_codes,
+    )?;
     client.iter_search(
         py,
         intersects,
@@ -52,7 +61,7 @@ pub fn iter_search<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, max_extra_load=None, max_retries_per_request=None, retry_status_codes=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search<'py>(
     py: Python<'py>,
@@ -71,6 +80,9 @@ pub fn search<'py>(
     query: Option<Bound<'py, PyDict>>,
     fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
+    max_extra_load: Option<f32>,
+    max_retries_per_request: Option<u32>,
+    retry_status_codes: Option<Vec<u16>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Bound<'py, PyAny>> {
@@ -97,7 +109,13 @@ pub fn search<'py>(
             Ok(Json(value.items))
         })
     } else {
-        let client = ApiClient::new(href, headers)?;
+        let client = ApiClient::new(
+            href,
+            headers,
+            max_extra_load,
+            max_retries_per_request,
+            retry_status_codes,
+        )?;
         client.search(
             py,
             intersects,
@@ -119,7 +137,7 @@ pub fn search<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, max_extra_load=None, max_retries_per_request=None, retry_status_codes=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_sync<'py>(
     py: Python<'py>,
@@ -138,6 +156,9 @@ pub fn search_sync<'py>(
     query: Option<Bound<'py, PyDict>>,
     fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
+    max_extra_load: Option<f32>,
+    max_retries_per_request: Option<u32>,
+    retry_status_codes: Option<Vec<u16>>,
     use_duckdb: Option<bool>,
     kwargs: Option<Bound<'_, PyDict>>,
 ) -> PyResult<Json<Vec<Map<String, Value>>>> {
@@ -162,7 +183,13 @@ pub fn search_sync<'py>(
         let value = search_duckdb(href, search, max_items)?;
         Ok(Json(value.items))
     } else {
-        let client = ApiClient::new(href, headers)?;
+        let client = ApiClient::new(
+            href,
+            headers,
+            max_extra_load,
+            max_retries_per_request,
+            retry_status_codes,
+        )?;
         client.search_sync(
             py,
             intersects,
@@ -184,7 +211,7 @@ pub fn search_sync<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, format=None, parquet_compression=None, store=None, use_duckdb=None, **kwargs))]
+#[pyo3(signature = (outfile, href, *, intersects=None, ids=None, collections=None, max_items=None, limit=None, bbox=None, datetime=None, include=None, exclude=None, sortby=None, filter=None, query=None, fields=None, headers=None, max_extra_load=None, max_retries_per_request=None, retry_status_codes=None, format=None, parquet_compression=None, store=None, use_duckdb=None, **kwargs))]
 #[allow(clippy::too_many_arguments)]
 pub fn search_to<'py>(
     py: Python<'py>,
@@ -204,6 +231,9 @@ pub fn search_to<'py>(
     query: Option<Bound<'py, PyDict>>,
     fields: Option<StringOrDictOrList>,
     headers: Option<HashMap<String, String>>,
+    max_extra_load: Option<f32>,
+    max_retries_per_request: Option<u32>,
+    retry_status_codes: Option<Vec<u16>>,
     format: Option<String>,
     parquet_compression: Option<String>,
     store: Option<AnyObjectStore>,
@@ -245,7 +275,13 @@ pub fn search_to<'py>(
     let client = if use_duckdb {
         None
     } else {
-        Some(ApiClient::new(href.clone(), headers)?)
+        Some(ApiClient::new(
+            href.clone(),
+            headers,
+            max_extra_load,
+            max_retries_per_request,
+            retry_status_codes,
+        )?)
     };
     pyo3_async_runtimes::tokio::future_into_py(py, async move {
         let value = if let Some(client) = client {

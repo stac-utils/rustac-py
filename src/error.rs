@@ -18,6 +18,9 @@ pub enum Error {
     Geoarrow(#[from] geoarrow_schema::error::GeoArrowError),
 
     #[error(transparent)]
+    Http(#[from] http::Error),
+
+    #[error(transparent)]
     Io(#[from] std::io::Error),
 
     #[error(transparent)]

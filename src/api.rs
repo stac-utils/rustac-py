@@ -8,7 +8,7 @@ use pyo3::{Bound, PyErr, PyResult, exceptions::PyValueError};
 use serde_json::{Map, Value};
 use stac::Bbox;
 use stac::api::{Fields, Filter, Items, Search, Sortby, StreamItemsClient};
-use stac_io::api::{ApiClientBuilder, Client};
+use stac_io::api::{Client, ClientBuilder};
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::pin;
@@ -23,13 +23,42 @@ struct SearchIterator(Arc<Mutex<BoxStream<'static, stac_io::Result<Map<String, V
 #[pymethods]
 impl ApiClient {
     #[new]
-    #[pyo3(signature = (href, *, headers=None))]
-    pub fn new(href: String, headers: Option<HashMap<String, String>>) -> Result<ApiClient> {
-        let mut builder = ApiClientBuilder::new(&href)?;
+    #[pyo3(signature = (href, *, headers=None, max_extra_load=None, max_retries_per_request=None, retry_status_codes=None))]
+    pub fn new(
+        href: String,
+        headers: Option<HashMap<String, String>>,
+        max_extra_load: Option<f32>,
+        max_retries_per_request: Option<u32>,
+        retry_status_codes: Option<Vec<u16>>,
+    ) -> Result<ApiClient> {
+        let mut builder = ClientBuilder::new();
         if let Some(headers) = headers {
-            builder = builder.with_headers(&headers.into_iter().collect::<Vec<_>>())?;
+            builder = builder.default_headers((&headers).try_into()?);
         }
-        let client = builder.build()?;
+        if max_extra_load.is_some()
+            || max_retries_per_request.is_some()
+            || retry_status_codes.is_some()
+        {
+            let mut retry_builder = reqwest::retry::for_host(href.clone());
+            if let Some(max_extra_load) = max_extra_load {
+                retry_builder = retry_builder.max_extra_load(max_extra_load);
+            }
+            if let Some(max_retries_per_request) = max_retries_per_request {
+                retry_builder = retry_builder.max_retries_per_request(max_retries_per_request);
+            }
+            if let Some(retry_status_codes) = retry_status_codes {
+                retry_builder = retry_builder.classify_fn(move |request_response| {
+                    if let Some(status) = request_response.status() {
+                        if retry_status_codes.contains(&status.as_u16()) {
+                            return request_response.retryable();
+                        }
+                    }
+                    request_response.success()
+                });
+            }
+            builder = builder.retry(retry_builder);
+        }
+        let client = Client::with_client_builder(builder, &href)?;
         Ok(ApiClient(client))
     }
 
