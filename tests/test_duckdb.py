@@ -103,10 +103,31 @@ def test_aws_credential_chain(client: DuckdbClient) -> None:
 
 def test_search_union_by_name(client: DuckdbClient) -> None:
     items = client.search("data/*.parquet")
-    assert len(items) == 101
+    assert len(items) == 102
 
 
 def test_max_items_type(client: DuckdbClient) -> None:
     # https://github.com/stac-utils/rustac-py/issues/228
     items = client.search("data/*.parquet", max_items=1)
+    assert len(items) == 1
+
+
+@pytest.mark.parametrize(
+    "datetime",
+    [
+        "2026-04-01",
+        "2026-04-01T00:00:00Z",
+        "2026-04-01T00:00:00.000000Z",
+        "2026-04-01T00:00:00Z/2026-04-01T23:59:59Z",
+        "2026-03-31/2026-04-02",
+        "2026-04-01/2026-04-02",
+        "2026-04-15",
+        "2026-04-15/2026-04-16",
+        "2026-04-01/2026-04-30",
+        "2026-04-01T00:00:00Z/..",
+    ],
+)
+def test_datetime_searching(client: DuckdbClient, datetime: str) -> None:
+    # https://github.com/stac-utils/rustac/issues/1070
+    items = client.search("data/sentinel-1-global-mosaics.parquet", datetime=datetime)
     assert len(items) == 1
