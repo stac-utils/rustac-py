@@ -125,9 +125,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.102"
+version = "1.0.103"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f202df86484c868dbad7eaa557ef785d5c66295e41b460ef922eca0723b842c"
+checksum = "2a4385e2e34eb35d6b3efe798b9eb88096925d87726c0798709bf56d9ed84af3"
 
 [[package]]
 name = "approx"
@@ -4126,9 +4126,9 @@ dependencies = [
 
 [[package]]
 name = "rustac"
-version = "0.2.11"
+version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "31cb32bcf1a7e5b7998a7b571d085679ccea2b56846483cd822911fb9b720372"
+checksum = "dc827340f6b3a7c54997c47943688b6c524f1fa6855d45194c83f225f85ce767"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -4141,7 +4141,7 @@ dependencies = [
  "serde_json",
  "stac",
  "stac-duckdb",
- "stac-io 0.2.10",
+ "stac-io",
  "stac-server",
  "stac-validate",
  "tokio",
@@ -4153,7 +4153,7 @@ dependencies = [
 
 [[package]]
 name = "rustac-py"
-version = "0.9.12"
+version = "0.9.13"
 dependencies = [
  "async-stream",
  "cargo-lock",
@@ -4179,7 +4179,7 @@ dependencies = [
  "serde_json",
  "stac",
  "stac-duckdb",
- "stac-io 0.3.0",
+ "stac-io",
  "thiserror 2.0.18",
  "tokio",
  "tracing",
@@ -4742,28 +4742,6 @@ dependencies = [
  "serde_json",
  "stac",
  "thiserror 2.0.18",
-]
-
-[[package]]
-name = "stac-io"
-version = "0.2.10"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ad0d24db8df0aff77da553dc0066f095ea6a67a535513112b702c751365abbea"
-dependencies = [
- "async-stream",
- "bytes",
- "futures",
- "http",
- "object_store",
- "parquet",
- "reqwest 0.13.4",
- "serde",
- "serde_json",
- "stac",
- "thiserror 2.0.18",
- "tokio",
- "tracing",
- "url",
 ]
 
 [[package]]
