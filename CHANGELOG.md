@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.14](https://github.com/stac-utils/rustac-py/compare/v0.9.13...v0.9.14) (2026-06-29)
+
+
+### Bug Fixes
+
+* materialize store symlink for wheels ([#315](https://github.com/stac-utils/rustac-py/issues/315)) ([8498199](https://github.com/stac-utils/rustac-py/commit/8498199486834257053691aac78a9ff7da7a8740))
+
 ## [0.9.13](https://github.com/stac-utils/rustac-py/compare/v0.9.12...v0.9.13) (2026-06-25)
 
 
