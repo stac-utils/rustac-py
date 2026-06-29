@@ -14,6 +14,8 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      prs: ${{ steps.release-please.outputs.prs }}
     steps:
       - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3
         id: generate-token
@@ -21,5 +23,42 @@ jobs:
           app-id: ${{ vars.RELEASE_BOT_CLIENT_ID }}
           private-key: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
       - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        id: release-please
         with:
           token: ${{ steps.generate-token.outputs.token }}
+
+  update-cargo-lock:
+    runs-on: ubuntu-latest
+    needs: release-please
+    if: ${{ needs.release-please.outputs.prs }}
+    steps:
+      - name: Find the rustac release PR branch
+        id: pr
+        env:
+          PRS: ${{ needs.release-please.outputs.prs }}
+        run: |
+          branch="$(echo "$PRS" | jq -r '.[] | select(.headBranchName == "release-please--branches--main") | .headBranchName')"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+      - if: ${{ steps.pr.outputs.branch != '' }}
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3
+        id: generate-token
+        with:
+          app-id: ${{ vars.RELEASE_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
+      - name: Checkout PR branch
+        if: ${{ steps.pr.outputs.branch != '' }}
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          ref: ${{ steps.pr.outputs.branch }}
+      - name: Update Cargo.lock
+        if: ${{ steps.pr.outputs.branch != '' }}
+        run: cargo update --workspace
+      - name: Commit and push changes
+        if: ${{ steps.pr.outputs.branch != '' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "chore: update Cargo.lock"
+          git push
