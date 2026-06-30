@@ -7,6 +7,7 @@ license = "MIT OR Apache-2.0"
 categories = ["science", "data-structures"]
 homepage = "https://stac-utils.github.io/rustac-py"
 repository = "https://github.com/stac-utils/rustac-py"
+exclude = ["/python", "/tests", "/docs"]
 
 [lib]
 name = "rustac_python"
