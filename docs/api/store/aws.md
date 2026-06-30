@@ -1,6 +1,9 @@
 # AWS S3
 
 ::: rustac.store.S3Store
+    options:
+        inherited_members: true
+        show_bases: false
 ::: rustac.store.S3Config
     options:
         show_if_no_docstring: true
