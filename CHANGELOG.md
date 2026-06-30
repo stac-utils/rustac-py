@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.15](https://github.com/stac-utils/rustac-py/compare/v0.9.14...v0.9.15) (2026-06-30)
+
+
+### Features
+
+* update obstore ([#320](https://github.com/stac-utils/rustac-py/issues/320)) ([322dc39](https://github.com/stac-utils/rustac-py/commit/322dc398a0d4d420131677c4623a5942f05d121d))
+
 ## [0.9.14](https://github.com/stac-utils/rustac-py/compare/v0.9.13...v0.9.14) (2026-06-29)
 
 
