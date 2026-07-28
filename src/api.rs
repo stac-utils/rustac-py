@@ -6,8 +6,8 @@ use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use pyo3::{Bound, PyErr, PyResult, exceptions::PyValueError};
 use serde_json::{Map, Value};
-use stac::Bbox;
 use stac::api::{Fields, Filter, Items, Search, Sortby, StreamItemsClient};
+use stac::{Bbox, Collection};
 use stac_io::api::{Client, ClientBuilder};
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -203,6 +203,20 @@ impl ApiClient {
         })
     }
 
+    pub fn get_collection_sync<'py>(
+        &self,
+        py: Python<'py>,
+        id: String,
+    ) -> PyResult<Json<Option<Collection>>> {
+        let client = self.0.clone();
+        py.detach(|| {
+            pyo3_async_runtimes::tokio::get_runtime().block_on(async {
+                let collection = client.collection(&id).await.map_err(Error::from)?;
+                Ok(Json(collection))
+            })
+        })
+    }
+
     pub fn get_collections<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyAny>> {
         let client = self.0.clone();
         pyo3_async_runtimes::tokio::future_into_py(py, async move {
@@ -214,6 +228,22 @@ impl ApiClient {
                 collections.push(Json(collection));
             }
             Ok(collections)
+        })
+    }
+
+    pub fn get_collections_sync<'py>(&self, py: Python<'py>) -> PyResult<Vec<Json<Collection>>> {
+        let client = self.0.clone();
+        py.detach(|| {
+            pyo3_async_runtimes::tokio::get_runtime().block_on(async {
+                let mut collections = Vec::new();
+                let stream = client.collections().await.map_err(Error::from)?;
+                pin!(stream);
+                while let Some(result) = stream.next().await {
+                    let collection = result.map_err(Error::from)?;
+                    collections.push(Json(collection));
+                }
+                Ok(collections)
+            })
         })
     }
 }
