@@ -152,8 +152,25 @@ class ApiClient:
             The STAC collection.
         """
 
+    def get_collection_sync(self, id: str) -> dict[str, Any]:
+        """Gets a single collection by id, synchronously.
+
+        Args:
+            id: The collection id.
+
+        Returns:
+            The STAC collection.
+        """
+
     async def get_collections(self) -> list[dict[str, Any]]:
         """Gets all collections from the API.
+
+        Returns:
+            The STAC collections.
+        """
+
+    def get_collections_sync(self) -> list[dict[str, Any]]:
+        """Gets all collections from the API, synchronously.
 
         Returns:
             The STAC collections.
