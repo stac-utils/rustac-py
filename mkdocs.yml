@@ -29,7 +29,10 @@ nav:
   - API:
       - api/index.md
       - arrow: api/arrow.md
+      - client: api/client.md
+      - collection: api/collection.md
       - duckdb: api/duckdb.md
+      - exceptions: api/exceptions.md
       - migrate: api/migrate.md
       - geoparquet: api/geoparquet.md
       - read: api/read.md
