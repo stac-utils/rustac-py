@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.16](https://github.com/stac-utils/rustac-py/compare/v0.9.15...v0.9.16) (2026-07-28)
+
+
+### Features
+
+* add get_collection_sync and get_collections_sync ([#332](https://github.com/stac-utils/rustac-py/issues/332)) ([34ee63d](https://github.com/stac-utils/rustac-py/commit/34ee63d3e96cf344cdd89a8bc29c786b751ef680))
+
+
+### Documentation
+
+* add more API docs ([#330](https://github.com/stac-utils/rustac-py/issues/330)) ([60a870e](https://github.com/stac-utils/rustac-py/commit/60a870eecbb1328c01ba083c42454ba163377b4d)), closes [#326](https://github.com/stac-utils/rustac-py/issues/326)
+
 ## [0.9.15](https://github.com/stac-utils/rustac-py/compare/v0.9.14...v0.9.15) (2026-06-30)
 
 
