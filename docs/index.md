@@ -38,13 +38,14 @@ python -m pip install 'rustac[duckdb-extensions]'
 import asyncio
 import rustac
 
-def main() -> None:
+async def main() -> None:
     item = await rustac.read("item.json")
+    print(item["id"])
 
 asyncio.run(main())
 ```
 
-For more, see our [examples](./generated/gallery/index.md).
+For more, see our [notebooks](./notebooks/index.md).
 
 ## Acknowledgements
 

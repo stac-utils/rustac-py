@@ -9,8 +9,18 @@ We appreciates you.
 It's pretty common that a bug in **rustac-py** is actually a bug in **rustac**.
 Knowing which repository to work in can be a little tricky, so don't hesitate to reach out and ask.
 
-Because the two repos are tightly coupled, we use [a configuration file](./cargo/config.toml) to use the current **main** branch of **rustac** for development.
-If this ever is a problem, simply comment out the `[patch]` section in the configuration file.
+We depend on released versions of the **rustac** crates, pinned in [Cargo.toml](https://github.com/stac-utils/rustac-py/blob/main/Cargo.toml).
+To develop against unreleased changes, add a `[patch]` section to `.cargo/config.toml` pointing at a local checkout:
+
+```toml
+[patch.crates-io]
+rustac = { path = "../rustac/crates/cli" }
+stac = { path = "../rustac/crates/core" }
+stac-duckdb = { path = "../rustac/crates/duckdb" }
+stac-io = { path = "../rustac/crates/io" }
+```
+
+Remove the section before opening a pull request.
 
 ## Python environment
 

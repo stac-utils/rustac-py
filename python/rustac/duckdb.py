@@ -32,6 +32,19 @@ class DuckdbClient(_RustDuckdbClient):
         install_extensions: bool = True,
         use_hive_partitioning: bool = False,
     ) -> None:
+        """Creates a new duckdb client.
+
+        Args:
+            extension_directory: A non-standard extension directory to use. If
+                not provided and `rustac-duckdb-extensions` is installed, its
+                bundled extension directory will be used.
+            extensions: A list of extensions to LOAD on client initialization.
+            install_extensions: Whether to install the required extensions on
+                client initialization. Forced to `False` when the bundled
+                extensions are detected.
+            use_hive_partitioning: Whether to use hive partitioning for
+                geoparquet queries.
+        """
         if extension_directory is None:
             detected = _detect_extension_directory()
             if detected is not None:
