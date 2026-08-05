@@ -33,10 +33,13 @@ class GeoparquetWriter:
                 raise an error instead.
             store: The object store to use for the geoparquet file. If not
                 provided, a local object store will be used.
+
+        Returns:
+            A writer, ready for more items.
         """
 
     def add_collection(self, collection: dict[str, Any]) -> None:
-        """Adds a collection to this writer's metadata
+        """Adds a collection to this writer's metadata.
 
         Will warn and overwrite if there's already a collection with the same id.
 
@@ -56,7 +59,7 @@ class GeoparquetWriter:
         """Finishes writing the stac-geoparquet file."""
 
 class RustacError(Exception):
-    """A package-specific exception."""
+    """The exception raised when an error occurs in the underlying Rust code."""
 
 class ApiClient:
     """A client for searching a STAC API server."""
@@ -101,7 +104,53 @@ class ApiClient:
         fields: str | list[str] | dict[str, Any] | None = None,
         **kwargs: str,
     ) -> list[dict[str, Any]]:
-        """Searches the API, returning all matching items as a list."""
+        """Searches the API, returning all matching items as a list.
+
+        Args:
+            intersects: Searches items by performing intersection between their
+                geometry and provided GeoJSON geometry.
+            ids: Array of Item ids to return.
+            collections: Array of one or more Collection IDs that each matching
+                Item must be in.
+            max_items: The maximum number of items to iterate through.
+            limit: The page size returned from the server. Use `max_items` to
+                actually limit the number of items returned from this method.
+            bbox: Requested bounding box.
+            datetime: Single date+time, or a range (`/` separator), formatted to
+                RFC 3339, section 5.6.  Use double dots .. for open date ranges.
+
+                Partial dates are also supported and will be automatically expanded
+                to full RFC 3339 datetime ranges:
+
+                - Year only (e.g., "2023") expands to 2023-01-01T00:00:00Z/2023-12-31T23:59:59Z
+                - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
+                - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
+                - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
+            include: Fields to include in the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
+                for more on the semantics).
+            exclude: Fields to exclude from the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
+                for more on the semantics).
+            sortby: Fields by which to sort results (use `-field` to sort descending).
+            filter: CQL2 filter expression. Strings will be interpreted as
+                cql2-text, dictionaries as cql2-json.
+            query: Additional filtering based on properties.  It is recommended
+                to use filter instead, if possible.
+            fields: Fields to include in or exclude from the response,
+                per the [fields extension](https://github.com/stac-api-extensions/fields).
+                Strings are interpreted as a comma-delimited list (e.g.
+                `+properties.datetime,-geometry`); lists as the same
+                `+`/`-` prefixed field names (e.g.
+                `["properties.datetime", "-geometry"]`); dictionaries as
+                `{"include": [...], "exclude": [...]}`.
+                Any `include` or `exclude` arguments override the
+                corresponding values set here.
+            kwargs: Additional parameters to pass in to the search.
+
+        Returns:
+            The STAC items.
+        """
 
     def search_sync(
         self,
@@ -121,7 +170,53 @@ class ApiClient:
         fields: str | list[str] | dict[str, Any] | None = None,
         **kwargs: str,
     ) -> list[dict[str, Any]]:
-        """Searches the API synchronously, returning all matching items as a list."""
+        """Searches the API synchronously, returning all matching items as a list.
+
+        Args:
+            intersects: Searches items by performing intersection between their
+                geometry and provided GeoJSON geometry.
+            ids: Array of Item ids to return.
+            collections: Array of one or more Collection IDs that each matching
+                Item must be in.
+            max_items: The maximum number of items to iterate through.
+            limit: The page size returned from the server. Use `max_items` to
+                actually limit the number of items returned from this method.
+            bbox: Requested bounding box.
+            datetime: Single date+time, or a range (`/` separator), formatted to
+                RFC 3339, section 5.6.  Use double dots .. for open date ranges.
+
+                Partial dates are also supported and will be automatically expanded
+                to full RFC 3339 datetime ranges:
+
+                - Year only (e.g., "2023") expands to 2023-01-01T00:00:00Z/2023-12-31T23:59:59Z
+                - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
+                - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
+                - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
+            include: Fields to include in the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
+                for more on the semantics).
+            exclude: Fields to exclude from the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
+                for more on the semantics).
+            sortby: Fields by which to sort results (use `-field` to sort descending).
+            filter: CQL2 filter expression. Strings will be interpreted as
+                cql2-text, dictionaries as cql2-json.
+            query: Additional filtering based on properties.  It is recommended
+                to use filter instead, if possible.
+            fields: Fields to include in or exclude from the response,
+                per the [fields extension](https://github.com/stac-api-extensions/fields).
+                Strings are interpreted as a comma-delimited list (e.g.
+                `+properties.datetime,-geometry`); lists as the same
+                `+`/`-` prefixed field names (e.g.
+                `["properties.datetime", "-geometry"]`); dictionaries as
+                `{"include": [...], "exclude": [...]}`.
+                Any `include` or `exclude` arguments override the
+                corresponding values set here.
+            kwargs: Additional parameters to pass in to the search.
+
+        Returns:
+            The STAC items.
+        """
 
     async def iter_search(
         self,
@@ -140,7 +235,55 @@ class ApiClient:
         fields: str | list[str] | dict[str, Any] | None = None,
         **kwargs: str,
     ) -> AsyncIterator[dict[str, Any]]:
-        """Searches the API, asynchronously iterating over matching items."""
+        """Searches the API, asynchronously iterating over matching items.
+
+        Args:
+            intersects: Searches items by performing intersection between their
+                geometry and provided GeoJSON geometry.
+            ids: Array of Item ids to return.
+            collections: Array of one or more Collection IDs that each matching
+                Item must be in.
+            limit: The page size returned from the server.
+            bbox: Requested bounding box.
+            datetime: Single date+time, or a range (`/` separator), formatted to
+                RFC 3339, section 5.6.  Use double dots .. for open date ranges.
+
+                Partial dates are also supported and will be automatically expanded
+                to full RFC 3339 datetime ranges:
+
+                - Year only (e.g., "2023") expands to 2023-01-01T00:00:00Z/2023-12-31T23:59:59Z
+                - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
+                - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
+                - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
+            include: Fields to include in the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
+                for more on the semantics).
+            exclude: Fields to exclude from the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
+                for more on the semantics).
+            sortby: Fields by which to sort results (use `-field` to sort descending).
+            filter: CQL2 filter expression. Strings will be interpreted as
+                cql2-text, dictionaries as cql2-json.
+            query: Additional filtering based on properties.  It is recommended
+                to use filter instead, if possible.
+            fields: Fields to include in or exclude from the response,
+                per the [fields extension](https://github.com/stac-api-extensions/fields).
+                Strings are interpreted as a comma-delimited list (e.g.
+                `+properties.datetime,-geometry`); lists as the same
+                `+`/`-` prefixed field names (e.g.
+                `["properties.datetime", "-geometry"]`); dictionaries as
+                `{"include": [...], "exclude": [...]}`.
+                Any `include` or `exclude` arguments override the
+                corresponding values set here.
+            kwargs: Additional parameters to pass in to the search.
+
+        Returns:
+            An asynchronous iterator over the STAC items.
+
+        Examples:
+            >>> async for item in await client.iter_search(collections="my-collection"):
+            ...     ...
+        """
 
     async def get_collection(self, id: str) -> dict[str, Any]:
         """Gets a single collection by id.
@@ -202,8 +345,11 @@ class DuckdbClient:
         This can be useful for configuring AWS credentials, for example.
 
         Args:
-            sql: The SQL to execute
-            params: The parameters to pass in to the execution
+            sql: The SQL to execute.
+            params: The parameters to pass in to the execution.
+
+        Returns:
+            The number of rows modified by the command.
         """
 
     def query_to_table(
@@ -212,8 +358,8 @@ class DuckdbClient:
         """Run a SQL query and return the results as an arrow table.
 
         Args:
-            sql: The SQL query to execute
-            params: The parameters to pass in to the query
+            sql: The SQL query to execute.
+            params: The parameters to pass in to the query.
 
         Returns:
             An arrow table of the query results.
@@ -249,8 +395,8 @@ class DuckdbClient:
             intersects: Searches items by performing intersection between their
                 geometry and provided GeoJSON geometry.
             limit: The number of items to return.
-            max_items: The number of items to return (included so that we have a
-                similar call API to normal search)
+            max_items: The number of items to return. Included so that this has
+                a similar call signature to [rustac.search][].
             offset: The number of items to skip before returning.
             bbox: Requested bounding box.
             datetime: Single date+time, or a range (`/` separator), formatted to
@@ -263,11 +409,11 @@ class DuckdbClient:
                 - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
                 - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
                 - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
-            include: fields to include in the response (see [the extension
-                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+            include: Fields to include in the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
                 for more on the semantics).
-            exclude: fields to exclude from the response (see [the extension
-                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+            exclude: Fields to exclude from the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
                 for more on the semantics).
             sortby: Fields by which to sort results (use `-field` to sort descending).
             filter: CQL2 filter expression. Strings will be interpreted as
@@ -312,7 +458,7 @@ class DuckdbClient:
         suitable for loading into (e.g.) GeoPandas.
 
         **rustac** must be installed with the `arrow` extra, e.g. `python -m pip
-        *install 'rustac[arrow]'.
+        install 'rustac[arrow]'`.
 
         Because DuckDB has arrow as a core output format, this can be more
         performant than going through a JSON dictionary.
@@ -337,11 +483,11 @@ class DuckdbClient:
                 - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
                 - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
                 - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
-            include: fields to include in the response (see [the extension
-                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+            include: Fields to include in the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
                 for more on the semantics).
-            exclude: fields to exclude from the response (see [the extension
-                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+            exclude: Fields to exclude from the response (see [the extension
+                docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
                 for more on the semantics).
             sortby: Fields by which to sort results (use `-field` to sort descending).
             filter: CQL2 filter expression. Strings will be interpreted as
@@ -360,7 +506,7 @@ class DuckdbClient:
             kwargs: Additional parameters to pass in to the search.
 
         Returns:
-            An arrow table, or none if no records were returned.
+            An arrow table, or None if no records were returned.
 
         Examples:
             >>> table = client.search_to_arrow("data/100-sentinel-2-items.parquet")
@@ -380,7 +526,7 @@ class DuckdbClient:
             href: The stac-geoparquet file to build the collections from.
 
         Returns:
-            A list of STAC Collections
+            A list of STAC collections.
         """
 
 def collection_from_id_and_items(
@@ -391,11 +537,11 @@ def collection_from_id_and_items(
     The extents will be calculated from the items, and the items will be linked.
 
     Args:
-        id: The collection id
-        items: A list of STAC items
+        id: The collection id.
+        items: A list of STAC items.
 
     Returns:
-        A STAC collection
+        A STAC collection.
     """
 
 def migrate(value: dict[str, Any], version: str | None = None) -> dict[str, Any]:
@@ -412,12 +558,12 @@ def migrate(value: dict[str, Any], version: str | None = None) -> dict[str, Any]
     supported versions.
 
     Args:
-        value: The STAC value to migrate
+        value: The STAC value to migrate.
         version: The version to migrate to. If not provided, the
             value will be migrated to the latest stable version.
 
     Returns:
-        The migrated dictionary
+        The migrated dictionary.
 
     Examples:
         >>> with open("examples/simple-item.json") as f:
@@ -437,14 +583,14 @@ async def read(
     Reads STAC from a href.
 
     Args:
-        href: The href to write to
+        href: The href to read from.
         format: The input format. If not provided, will be inferred
             from the href's extension.
-        store: An optional [ObjectStore][]
+        store: An optional [ObjectStore][rustac.store.ObjectStore].
         set_self_link: If True, set the `self` link to the value of `href`.
 
     Returns:
-        The STAC value
+        The STAC value.
 
     Examples:
         >>> item = await rustac.read("item.json")
@@ -461,14 +607,14 @@ def read_sync(
     Reads STAC from a href synchronously.
 
     Args:
-        href: The href to write to
+        href: The href to read from.
         format: The input format. If not provided, will be inferred
             from the href's extension.
-        store: An optional [ObjectStore][]
+        store: An optional [ObjectStore][rustac.store.ObjectStore].
         set_self_link: If True, set the `self` link to the value of `href`.
 
     Returns:
-        The STAC value
+        The STAC value.
 
     Examples:
         >>> item = rustac.read_sync("item.json")
@@ -483,10 +629,10 @@ def from_arrow(
     Requires **rustac** to be installed with the `arrow` extra.
 
     Args:
-        table: The table
+        table: The table to convert.
 
     Returns:
-        The STAC item collection
+        The STAC item collection.
     """
 
 def to_arrow(
@@ -498,10 +644,10 @@ def to_arrow(
     Requires **rustac** to be installed with the `arrow` extra.
 
     Args:
-        items: Either a list of items or a item collection
+        items: Either a list of items or an item collection.
 
     Returns:
-        The table
+        The table.
     """
 
 async def search(
@@ -554,13 +700,11 @@ async def search(
             - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
             - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
             - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
-        include: fields to include in the response (see [the
-            extension
-            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+        include: Fields to include in the response (see [the extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
             for more on the semantics).
-        exclude: fields to exclude from the response (see [the
-            extension
-            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+        exclude: Fields to exclude from the response (see [the extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
             for more on the semantics).
         sortby: Fields by which to sort results (use `-field` to sort descending).
         filter: CQL2 filter expression. Strings
@@ -589,7 +733,7 @@ async def search(
         kwargs: Additional parameters to pass in to the search.
 
     Returns:
-        STAC items
+        The STAC items.
 
     Examples:
         >>> items = await rustac.search(
@@ -651,13 +795,11 @@ def search_sync(
             - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
             - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
             - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
-        include: fields to include in the response (see [the
-            extension
-            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+        include: Fields to include in the response (see [the extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
             for more on the semantics).
-        exclude: fields to exclude from the response (see [the
-            extension
-            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+        exclude: Fields to exclude from the response (see [the extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
             for more on the semantics).
         sortby: Fields by which to sort results (use `-field` to sort descending).
         filter: CQL2 filter expression. Strings
@@ -686,7 +828,7 @@ def search_sync(
         kwargs: Additional parameters to pass in to the search.
 
     Returns:
-        STAC items
+        The STAC items.
 
     Examples:
         >>> items = rustac.search_sync(
@@ -704,7 +846,6 @@ async def iter_search(
     intersects: str | dict[str, Any] | None = None,
     ids: str | list[str] | None = None,
     collections: str | list[str] | None = None,
-    max_items: int | None = None,
     limit: int | None = None,
     bbox: list[float] | None = None,
     datetime: str | None = None,
@@ -744,13 +885,11 @@ async def iter_search(
             - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
             - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
             - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
-        include: fields to include in the response (see [the
-            extension
-            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+        include: Fields to include in the response (see [the extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
             for more on the semantics).
-        exclude: fields to exclude from the response (see [the
-            extension
-            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+        exclude: Fields to exclude from the response (see [the extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
             for more on the semantics).
         sortby: Fields by which to sort results (use `-field` to sort descending).
         filter: CQL2 filter expression. Strings
@@ -776,7 +915,7 @@ async def iter_search(
         kwargs: Additional parameters to pass in to the search.
 
     Returns:
-        An iterator over STAC items
+        An asynchronous iterator over the STAC items.
 
     Examples:
         >>> search = await rustac.iter_search(
@@ -815,13 +954,14 @@ async def search_to(
     parquet_compression: str | None = None,
     store: AnyObjectStore | None = None,
     use_duckdb: bool | None = None,
+    **kwargs: str,
 ) -> int:
     """
     Searches a STAC API server and saves the result to an output file.
 
     Args:
         outfile: The output href. This can be a local file path, or any
-            url scheme supported by [stac::object_store::write].
+            url scheme supported by the object store.
         href: The STAC API to search.
         intersects: Searches items
             by performing intersection between their geometry and provided GeoJSON
@@ -834,7 +974,7 @@ async def search_to(
             `max_items` to actually limit the number of items returned from this
             function.
         bbox: Requested bounding box.
-        datetime: Single date+time, or a range ('/' separator),
+        datetime: Single date+time, or a range (`/` separator),
             formatted to RFC 3339, section 5.6.  Use double dots .. for open
             date ranges.
 
@@ -845,13 +985,11 @@ async def search_to(
             - Year-Month (e.g., "2023-06") expands to 2023-06-01T00:00:00Z/2023-06-30T23:59:59Z
             - ISO 8601 date (e.g., "2023-06-15") expands to 2023-06-15T00:00:00Z/2023-06-15T23:59:59Z
             - Ranges also support partial dates (e.g., "2017/2018", "2017-06/2017-07")
-        include: fields to include in the response (see [the
-            extension
-            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+        include: Fields to include in the response (see [the extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
             for more on the semantics).
-        exclude: fields to exclude from the response (see [the
-            extension
-            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics))
+        exclude: Fields to exclude from the response (see [the extension
+            docs](https://github.com/stac-api-extensions/fields?tab=readme-ov-file#includeexclude-semantics)
             for more on the semantics).
         sortby: Fields by which to sort results (use `-field` to sort descending).
         filter: CQL2 filter expression. Strings
@@ -880,13 +1018,14 @@ async def search_to(
             algorithm.
             https://docs.rs/parquet/latest/parquet/basic/enum.Compression.html
             is a list of what's available.
-        store: An optional [ObjectStore][]
+        store: An optional [ObjectStore][rustac.store.ObjectStore].
         use_duckdb: Query with DuckDB. If None and the href has a
             'parquet' or 'geoparquet' extension, will be set to True. Defaults
             to None.
+        kwargs: Additional parameters to pass in to the search.
 
     Returns:
-        The number of items written
+        The number of items written.
 
     Examples:
         >>> count = await rustac.search_to("out.parquet",
@@ -900,11 +1039,15 @@ async def search_to(
 
 def walk(
     container: dict[str, Any],
+    store: AnyObjectStore | None = None,
 ) -> AsyncIterator[tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]]:
     """Recursively walks a STAC catalog or collection breadth-first.
 
     Args:
         container: A STAC catalog or collection.
+        store: An optional [ObjectStore][rustac.store.ObjectStore] to use when
+            reading the container's children and items. If not provided, one
+            will be inferred from each link's href.
 
     Yields:
         A three-tuple of the container, its children, and its items.
@@ -926,16 +1069,17 @@ async def write(
     Writes STAC to a href.
 
     Args:
-        href: The href to write to
-        value: The value to write. This
-            can be a STAC dictionary or a list of items.
+        href: The href to write to.
+        value: The value to write. This can be a STAC dictionary or a list of
+            items.
         format: The output format to write. If not provided, will be
             inferred from the href's extension.
         parquet_compression: If writing stac-geoparquet, sets the compression
             algorithm.
             https://docs.rs/parquet/latest/parquet/basic/enum.Compression.html
             is a list of what's available.
-        store: The object store to use for writing.
+        store: An optional [ObjectStore][rustac.store.ObjectStore]. If not
+            provided, one will be inferred from the href.
 
     Returns:
         The result of putting data into an object store, e.g. the e_tag and the
@@ -959,16 +1103,17 @@ def write_sync(
     Writes STAC to a href synchronously.
 
     Args:
-        href: The href to write to
-        value: The value to write. This
-            can be a STAC dictionary or a list of items.
+        href: The href to write to.
+        value: The value to write. This can be a STAC dictionary or a list of
+            items.
         format: The output format to write. If not provided, will be
             inferred from the href's extension.
         parquet_compression: If writing stac-geoparquet, sets the compression
             algorithm.
             https://docs.rs/parquet/latest/parquet/basic/enum.Compression.html
             is a list of what's available.
-        store: The object store to use for writing.
+        store: An optional [ObjectStore][rustac.store.ObjectStore]. If not
+            provided, one will be inferred from the href.
 
     Returns:
         The result of putting data into an object store, e.g. the e_tag and the
@@ -980,19 +1125,14 @@ def write_sync(
         >>> rustac.write_sync("items.parquet", items)
     """
 
-def version(
-    name: Literal["stac"]
-    | Literal["stac-api"]
-    | Literal["stac-duckdb"]
-    | Literal["duckdb"]
-    | None = None,
-) -> str | None:
+def version(name: Literal["stac", "stac-duckdb"] | None = None) -> str | None:
     """
-    Returns this package's version, or the version of a upstream.
+    Returns this package's version, or the version of an upstream crate.
 
     Args:
-        name: The name of the upstream version to return. Valid
-            values are "stac", "stac-api", "stac-duckdb", or "duckdb".
+        name: The name of the upstream crate whose version should be returned.
+            Valid values are "stac" and "stac-duckdb". If not provided, this
+            package's own version is returned.
 
     Returns:
         The version, or None if the name is not recognized as an upstream.
@@ -1000,13 +1140,29 @@ def version(
     Examples:
         >>> rustac.version()
         "0.2.0"
-        >>> rustac.version("duckdb")
-        "1.0.0"
+        >>> rustac.version("stac")
+        "0.12.0"
+    """
+
+def main() -> int:
+    """
+    Runs the **rustac** command-line interface.
+
+    This is the entry point for the `rustac` console script, and is not
+    intended to be called directly. It parses arguments from `sys.argv` and
+    exits the process when the command completes.
+
+    Returns:
+        The process exit code, though in practice this function does not
+        return — it exits the process itself.
     """
 
 def sha() -> str:
     """
     Returns the SHA of the underlying rustac crate.
+
+    Returns:
+        The git SHA that the underlying rustac crate was built from.
 
     Examples:
         >>> rustac.sha()
