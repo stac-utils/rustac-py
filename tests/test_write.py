@@ -98,7 +98,7 @@ async def test_geoparquet_writer_collections(
 
 
 async def test_geoparquet_writes_coverage(tmp_path: Path, item: dict[str, Any]) -> None:
-    async with rustac.geoparquet_writer([item], str(tmp_path / "out.parquet")) as w:
+    async with rustac.geoparquet_writer([item], str(tmp_path / "out.parquet")):
         pass
 
     metadata = pyarrow.parquet.read_metadata(tmp_path / "out.parquet")
