@@ -95,3 +95,11 @@ async def test_geoparquet_writer_collections(
     stac_geoparquet_metadata = json.loads(metadata.metadata[b"stac-geoparquet"])
     assert "simple-collection" in stac_geoparquet_metadata["collections"]
     assert "version" in stac_geoparquet_metadata
+
+
+async def test_geoparquet_writes_coverage(tmp_path: Path, item: dict[str, Any]) -> None:
+    async with rustac.geoparquet_writer([item], str(tmp_path / "out.parquet")):
+        pass
+
+    metadata = pyarrow.parquet.read_metadata(tmp_path / "out.parquet")
+    assert "covering" in json.loads(metadata.metadata[b"geo"])["columns"]["geometry"]
