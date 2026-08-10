@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  duckdb-version: "1.5.1"
+  duckdb-version: "1.5.5"
 
 jobs:
   deploy:
