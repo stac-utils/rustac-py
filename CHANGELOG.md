@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.17](https://github.com/stac-utils/rustac-py/compare/v0.9.16...v0.9.17) (2026-08-18)
+
+
+### Bug Fixes
+
+* write covering in geoparquet ([#339](https://github.com/stac-utils/rustac-py/issues/339)) ([03d57ee](https://github.com/stac-utils/rustac-py/commit/03d57ee2c91179761490161463dc79b135bb5458))
+
+
+### Documentation
+
+* fix problems and missing stuff ([#337](https://github.com/stac-utils/rustac-py/issues/337)) ([0c333f2](https://github.com/stac-utils/rustac-py/commit/0c333f2a50faf38dbff8779cd3d1deb0bed40975))
+
 ## [0.9.16](https://github.com/stac-utils/rustac-py/compare/v0.9.15...v0.9.16) (2026-07-28)
 
 
