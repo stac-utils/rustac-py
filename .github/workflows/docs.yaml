@@ -24,8 +24,8 @@ jobs:
         with:
           fetch-depth: 0 # to get gh-pages
           submodules: true
-      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
-      - uses: Swatinem/rust-cache@a45951ff880207c249adf57334cf2e9bd81d6e1e # v2
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+      - uses: Swatinem/rust-cache@f0d9c3887740aee45f6153b24b3a6b815192ec16 # v2
       - name: Install libduckdb
         run: |
           wget https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-linux-amd64.zip
