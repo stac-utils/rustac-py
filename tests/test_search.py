@@ -3,9 +3,11 @@ from pathlib import Path
 from typing import Any
 
 import pyarrow.parquet
+import pytest
 import rustac
 import stac_geoparquet.arrow
 from pytest_httpserver import HTTPServer
+from rustac import RustacError
 from rustac.store import MemoryStore
 
 
@@ -102,22 +104,21 @@ async def test_list_sortby(data: Path) -> None:
 
 async def test_cql(data: Path) -> None:
     # https://github.com/stac-utils/rustac-py/issues/135
-    # But this is no longer a thing
-    # with pytest.raises(RustacError, match="eq is not a valid operator"):
-    await rustac.search(
-        str(data / "100-sentinel-2-items.parquet"),
-        filter={
-            "op": "and",
-            "args": [
-                # eq is cql, not cql2
-                {
-                    "op": "eq",
-                    "args": [{"property": "platform"}, "made-up-platform"],
-                },
-            ],
-        },
-        max_items=1,
-    )
+    with pytest.raises(RustacError, match="eq does not exist"):
+        await rustac.search(
+            str(data / "100-sentinel-2-items.parquet"),
+            filter={
+                "op": "and",
+                "args": [
+                    # eq is cql, not cql2
+                    {
+                        "op": "eq",
+                        "args": [{"property": "platform"}, "made-up-platform"],
+                    },
+                ],
+            },
+            max_items=1,
+        )
 
 
 async def test_iter_search() -> None:
