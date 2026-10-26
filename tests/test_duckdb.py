@@ -131,3 +131,13 @@ def test_datetime_searching(client: DuckdbClient, datetime: str) -> None:
     # https://github.com/stac-utils/rustac/issues/1070
     items = client.search("data/sentinel-1-global-mosaics.parquet", datetime=datetime)
     assert len(items) == 1
+
+
+def test_search_filter_and_fields(client: DuckdbClient) -> None:
+    # https://github.com/stac-utils/rustac-py/issues/361
+    items = client.search(
+        "data/100-sentinel-2-items.parquet",
+        filter='"eo:cloud_cover" < 20',
+        fields="+id",
+    )
+    assert len(items) == 50
