@@ -3954,9 +3954,9 @@ dependencies = [
 
 [[package]]
 name = "rustac"
-version = "0.2.17"
+version = "0.2.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2d27e61ae127909059dca3312ae09526d2dc47e1eaf957f7cafb3cda87f348e7"
+checksum = "0097cd82e9e97f1744f70c01c95f74657058025de66ab47cca33f7ea9545dc91"
 dependencies = [
  "anyhow",
  "async-stream",
