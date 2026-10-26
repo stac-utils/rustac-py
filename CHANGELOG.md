@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.18](https://github.com/stac-utils/rustac-py/compare/v0.9.17...v0.9.18) (2026-10-26)
+
+
+### Bug Fixes
+
+* CLI panic when searching with headers ([#365](https://github.com/stac-utils/rustac-py/issues/365)) ([7d384dd](https://github.com/stac-utils/rustac-py/commit/7d384dd9299a0319de997ca05a3c89f3adf4bf5f)), closes [#359](https://github.com/stac-utils/rustac-py/issues/359)
+* fields and filter for DuckdbClient ([#362](https://github.com/stac-utils/rustac-py/issues/362)) ([b219fb5](https://github.com/stac-utils/rustac-py/commit/b219fb5e83dce4d5dc469adbc7441ce4733572cc)), closes [#361](https://github.com/stac-utils/rustac-py/issues/361)
+
 ## [0.9.17](https://github.com/stac-utils/rustac-py/compare/v0.9.16...v0.9.17) (2026-08-18)
 
 
