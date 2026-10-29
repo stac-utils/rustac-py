@@ -52,13 +52,15 @@ impl DuckdbClient {
     }
 
     #[pyo3(signature = (sql, params = Vec::new()))]
-    fn execute<'py>(&self, sql: String, params: Vec<String>) -> Result<usize> {
-        let client = self
-            .0
-            .lock()
-            .map_err(|err| PyException::new_err(err.to_string()))?;
-        let count = client.execute(&sql, duckdb::params_from_iter(params))?;
-        Ok(count)
+    fn execute<'py>(&self, py: Python<'py>, sql: String, params: Vec<String>) -> Result<usize> {
+        py.detach(|| -> Result<usize> {
+            let client = self
+                .0
+                .lock()
+                .map_err(|err| PyException::new_err(err.to_string()))?;
+            let count = client.execute(&sql, duckdb::params_from_iter(params))?;
+            Ok(count)
+        })
     }
 
     #[pyo3(signature = (sql, params = Vec::new()))]
@@ -68,14 +70,17 @@ impl DuckdbClient {
         sql: String,
         params: Vec<String>,
     ) -> Result<Py<PyAny>> {
-        let client = self
-            .0
-            .lock()
-            .map_err(|err| PyException::new_err(err.to_string()))?;
-        let mut statement = client.prepare(&sql)?;
-        let arrow = statement.query_arrow(duckdb::params_from_iter(params))?;
-        let schema = arrow.get_schema();
-        let record_batches: Vec<_> = arrow.collect();
+        let (record_batches, schema) = py.detach(|| -> Result<_> {
+            let client = self
+                .0
+                .lock()
+                .map_err(|err| PyException::new_err(err.to_string()))?;
+            let mut statement = client.prepare(&sql)?;
+            let arrow = statement.query_arrow(duckdb::params_from_iter(params))?;
+            let schema = arrow.get_schema();
+            let record_batches: Vec<_> = arrow.collect();
+            Ok((record_batches, schema))
+        })?;
         let table = PyTable::try_new(record_batches, schema)?;
         let table = table.to_arro3(py)?;
         Ok(table.into_py_any(py)?)
@@ -122,14 +127,14 @@ impl DuckdbClient {
             fields,
             kwargs,
         )?;
-        let item_collection = {
+        let items = py.detach(|| -> Result<_> {
             let client = self
                 .0
                 .lock()
                 .map_err(|err| PyException::new_err(err.to_string()))?;
-            client.search(&href, search)?
-        };
-        let list = pythonize::pythonize(py, &item_collection.items)?;
+            Ok(client.search(&href, search)?.items)
+        })?;
+        let list = pythonize::pythonize(py, &items)?;
         let list = list.extract()?;
         Ok(list)
     }
@@ -168,7 +173,7 @@ impl DuckdbClient {
             fields,
             kwargs,
         )?;
-        let record_batches = {
+        let record_batches = py.detach(|| -> Result<_> {
             let mut client = self
                 .0
                 .lock()
@@ -177,11 +182,11 @@ impl DuckdbClient {
             let convert_wkb = client.convert_wkb;
             client.convert_wkb = false;
             let result = client
-                .search_to_arrow(&href, search)?
-                .collect::<std::result::Result<Vec<_>, _>>();
+                .search_to_arrow(&href, search)
+                .and_then(|arrow| arrow.collect::<std::result::Result<Vec<_>, _>>());
             client.convert_wkb = convert_wkb;
-            result?
-        };
+            Ok(result?)
+        })?;
         if record_batches.is_empty() {
             Ok(py.None())
         } else {
@@ -193,12 +198,87 @@ impl DuckdbClient {
     }
 
     fn get_collections<'py>(&self, py: Python<'py>, href: String) -> Result<Bound<'py, PyList>> {
-        let client = self
-            .0
-            .lock()
-            .map_err(|err| PyException::new_err(err.to_string()))?;
-        let collections = client.collections(&href)?;
+        let collections = py.detach(|| -> Result<_> {
+            let client = self
+                .0
+                .lock()
+                .map_err(|err| PyException::new_err(err.to_string()))?;
+            Ok(client.collections(&href)?)
+        })?;
         let collections = pythonize::pythonize(py, &collections)?.extract()?;
         Ok(collections)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::{sync::mpsc, thread, time::Duration};
+
+    #[test]
+    fn mutex_wait_allows_python_progress() {
+        Python::initialize();
+        Python::attach(|py| {
+            let native = Client::from(Connection::open_in_memory().unwrap());
+            let client = Py::new(py, DuckdbClient(Mutex::new(native))).unwrap();
+            let borrowed = client.borrow(py);
+            let mutex = &borrowed.0;
+            let (locked_tx, locked_rx) = mpsc::channel();
+            let (release_tx, release_rx) = mpsc::channel();
+
+            thread::scope(|scope| {
+                let holder = scope.spawn(move || {
+                    let guard = mutex.lock().unwrap();
+                    locked_tx.send(()).unwrap();
+                    // Release even on regression, so a failure cannot deadlock the suite.
+                    let progressed = release_rx.recv_timeout(Duration::from_secs(10)).is_ok();
+                    drop(guard);
+                    progressed
+                });
+                locked_rx.recv_timeout(Duration::from_secs(10)).unwrap();
+                let observer = scope.spawn(move || {
+                    Python::attach(|_| {
+                        let _ = release_tx.send(());
+                    });
+                });
+
+                // This thread holds the GIL until execute detaches. The observer must
+                // acquire it before the holder will release the client mutex.
+                let result = client.bind(py).call_method1("execute", ("INVALID SQL",));
+                let progressed = py.detach(|| {
+                    observer.join().unwrap();
+                    holder.join().unwrap()
+                });
+                assert!(progressed, "waiting for the client mutex held the GIL");
+                assert!(result.is_err());
+            });
+            client
+                .bind(py)
+                .call_method1("execute", ("SELECT 1",))
+                .unwrap();
+        });
+    }
+
+    #[test]
+    fn search_to_arrow_error_restores_convert_wkb() {
+        Python::initialize();
+        Python::attach(|py| {
+            for convert_wkb in [true, false] {
+                let mut client = Client::from(Connection::open_in_memory().unwrap());
+                client.convert_wkb = convert_wkb;
+                let client = Py::new(py, DuckdbClient(Mutex::new(client))).unwrap();
+                // The unsupported query extension fails before any file or extension I/O.
+                let kwargs = PyDict::new(py);
+                kwargs.set_item("query", PyDict::new(py)).unwrap();
+                let error = client
+                    .bind(py)
+                    .call_method("search_to_arrow", ("unused.parquet",), Some(&kwargs))
+                    .unwrap_err();
+                assert!(error.to_string().contains("query is not implemented"));
+                // Both WKB and converted geometry produce valid Python results, so
+                // inspect the setting itself rather than a subsequent search result.
+                assert_eq!(client.borrow(py).0.lock().unwrap().convert_wkb, convert_wkb);
+            }
+        });
     }
 }

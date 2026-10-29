@@ -40,6 +40,10 @@ We aim for comprehensive unit testing of this library.
 Please provide tests for any new features, or to demonstrate bugs.
 Draft pull requests with a failing test to demonstrate a bug are much appreciated.
 
+Run `scripts/test` for the Rust unit tests, Python tests, and CLI smoke test.
+To run only the Rust unit tests, use `uv run cargo test --release --locked --lib`.
+Do not enable the `extension-module` feature for Rust tests: the test executable needs to link to Python.
+
 ## Submitting changes
 
 Please open a [pull request](https://docs.github.com/en/pull-requests) with your changes -- make sure to include unit tests.

@@ -2,5 +2,6 @@
 
 set -e
 
+uv run cargo test --release --locked --lib
 uv run pytest "$@"
 uv run rustac translate spec-examples/v1.1.0/simple-item.json tests/out.json && rm tests/out.json
