@@ -4,6 +4,8 @@ set -e
 
 # Rust test executables embed Python and must be able to load its shared library.
 python_lib_dir=$(uv run python -c 'import sys, sysconfig; sys.stdout.write(sysconfig.get_config_var("LIBDIR"))')
+python_home=$(uv run python -c 'import sys; sys.stdout.write(sys.base_prefix)')
+PYTHONHOME="$python_home" \
 LD_LIBRARY_PATH="$python_lib_dir${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" \
 DYLD_LIBRARY_PATH="$python_lib_dir${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}" \
     uv run cargo test --release --locked --lib
