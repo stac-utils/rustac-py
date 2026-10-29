@@ -73,6 +73,7 @@ dev = [
     "ruff>=0.6.9",
     "stac-geoparquet>=0.6.0",
     "uv>=0.4.25",
+    "werkzeug>=3.1.8",
 ]
 docs = [
     "arro3-core>=0.4.5",
