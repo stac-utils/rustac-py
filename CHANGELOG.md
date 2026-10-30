@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.19](https://github.com/stac-utils/rustac-py/compare/v0.9.18...v0.9.19) (2026-10-30)
+
+
+### Bug Fixes
+
+* **duckdb:** release GIL during native operations ([#368](https://github.com/stac-utils/rustac-py/issues/368)) ([2f33912](https://github.com/stac-utils/rustac-py/commit/2f339123a482593f9fcf479c8804b2d14816f1e6))
+
 ## [0.9.18](https://github.com/stac-utils/rustac-py/compare/v0.9.17...v0.9.18) (2026-10-26)
 
 
