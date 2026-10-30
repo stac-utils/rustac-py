@@ -48,6 +48,8 @@ jobs:
             pyproject.toml
             uv.lock
       - uses: Swatinem/rust-cache@c8037a86dde8214a8310e9f54a8fc61ab362aa31 # v2
+        with:
+          key: python-${{ matrix.python-version }}
       - name: Install libduckdb
         run: |
           curl -L -o libduckdb-${{ matrix.os.duckdb-slug }}.zip https://github.com/duckdb/duckdb/releases/download/v${{ env.duckdb-version }}/libduckdb-${{ matrix.os.duckdb-slug }}.zip
