@@ -3981,7 +3981,7 @@ dependencies = [
 
 [[package]]
 name = "rustac-py"
-version = "0.9.18"
+version = "0.9.19"
 dependencies = [
  "async-stream",
  "cargo-lock",
