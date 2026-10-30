@@ -2,5 +2,14 @@
 
 set -e
 
+# Build and run Rust tests against the active Python, even with cached PyO3 builds.
+python_executable=$(uv run python -c 'import sys; sys.stdout.write(sys.executable)')
+python_lib_dir=$(uv run python -c 'import sys, sysconfig; sys.stdout.write(sysconfig.get_config_var("LIBDIR"))')
+python_home=$(uv run python -c 'import sys; sys.stdout.write(sys.base_prefix)')
+PYTHONHOME="$python_home" \
+PYO3_PYTHON="$python_executable" \
+LD_LIBRARY_PATH="$python_lib_dir${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" \
+DYLD_LIBRARY_PATH="$python_lib_dir${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}" \
+    uv run cargo test --release --locked --lib
 uv run pytest "$@"
 uv run rustac translate spec-examples/v1.1.0/simple-item.json tests/out.json && rm tests/out.json

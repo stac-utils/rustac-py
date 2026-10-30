@@ -34,6 +34,11 @@ items = client.search("data.parquet")
 
     This is especially useful in environments where network access is restricted or you want reproducible, hermetic builds.
 
+`execute`, `query_to_table`, `search`, `search_to_arrow`, and `get_collections` are synchronous and
+serialize through a client's single connection. They release the Python GIL during native query
+work, allowing other Python threads to run, but calling them on an asyncio event-loop thread still
+blocks that loop until the method returns. Use a worker thread when calling them from an event loop.
+
 ## API
 
 ::: rustac.DuckdbClient

@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11"
 resolution-markers = [
     "python_full_version >= '3.12'",
@@ -2818,6 +2818,7 @@ wheels = [
 [[package]]
 name = "rustac"
 source = { editable = "." }
+default-groups = ["dev", "docs"]
 
 [package.optional-dependencies]
 arrow = [
@@ -2843,6 +2844,7 @@ dev = [
     { name = "ruff" },
     { name = "stac-geoparquet" },
     { name = "uv" },
+    { name = "werkzeug" },
 ]
 docs = [
     { name = "arro3-core" },
@@ -2886,6 +2888,7 @@ dev = [
     { name = "ruff", specifier = ">=0.6.9" },
     { name = "stac-geoparquet", specifier = ">=0.6.0" },
     { name = "uv", specifier = ">=0.4.25" },
+    { name = "werkzeug", specifier = ">=3.1.8" },
 ]
 docs = [
     { name = "arro3-core", specifier = ">=0.4.5" },

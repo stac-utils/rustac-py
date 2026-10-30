@@ -40,6 +40,16 @@ We aim for comprehensive unit testing of this library.
 Please provide tests for any new features, or to demonstrate bugs.
 Draft pull requests with a failing test to demonstrate a bug are much appreciated.
 
+Run `scripts/test` for the Rust unit tests, Python tests, and CLI smoke test.
+The runner sets `PYO3_PYTHON` to the active interpreter so cached builds cannot select
+a different Python version. It also adds that interpreter's library directory to the
+shared-library search paths, preserving existing paths such as DuckDB's library directory.
+CI keeps separate Rust caches for each Python version.
+To run only the Rust unit tests, set `PYO3_PYTHON` to the active interpreter and use
+`uv run cargo test --release --locked --lib` with Python's library directory on the
+shared-library search path if needed.
+Do not enable the `extension-module` feature for Rust tests: the test executable needs to link to Python.
+
 ## Submitting changes
 
 Please open a [pull request](https://docs.github.com/en/pull-requests) with your changes -- make sure to include unit tests.
